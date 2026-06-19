@@ -1,0 +1,194 @@
+.al-button {
+  --al-button-height: var(--al-comp-button-height);
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  gap: var(--al-space-sm);
+  min-height: var(--al-button-height);
+  padding-inline: var(--al-comp-button-padding-x);
+  border: var(--al-border-width-thin) solid transparent;
+  border-radius: var(--al-comp-button-radius);
+  background-color: var(--al-color-primary);
+  color: var(--al-color-on-primary);
+  font-family: var(--al-text-ui-family);
+  font-size: var(--al-comp-button-font-size);
+  font-weight: var(--al-font-weight-semibold);
+  line-height: var(--al-comp-button-line-height);
+  letter-spacing: 0;
+  text-decoration: none;
+  box-shadow: var(--al-shadow-none);
+  cursor: pointer;
+  transition:
+    background-color var(--al-motion-fast) var(--al-motion-ease-standard),
+    border-color var(--al-motion-fast) var(--al-motion-ease-standard),
+    color var(--al-motion-fast) var(--al-motion-ease-standard),
+    transform var(--al-motion-fast) var(--al-motion-ease-emphasized),
+    opacity var(--al-motion-fast) var(--al-motion-ease-standard);
+}
+
+.al-button:focus-visible {
+  outline: var(--al-border-width-thick) solid var(--al-color-focus);
+  outline-offset: var(--al-space-xs);
+}
+
+.al-button:hover:not(:disabled):not(.is-loading) {
+  opacity: 0.94;
+}
+
+.al-button:active:not(:disabled):not(.is-loading) {
+  transform: scale(var(--al-motion-scale-press));
+}
+
+.al-button:disabled {
+  cursor: not-allowed;
+  background-color: var(--al-neutral-700);
+  border-color: var(--al-neutral-700);
+  color: var(--al-color-on-surface-muted);
+  transform: none;
+  opacity: 1;
+}
+
+.al-button--small {
+  --al-button-height: var(--al-layout-control-height-sm);
+  padding-inline: var(--al-space-md);
+  font-size: var(--al-text-label-size);
+  line-height: var(--al-text-label-line-height);
+}
+
+.al-button--medium {
+  --al-button-height: var(--al-comp-button-height);
+}
+
+.al-button--large {
+  --al-button-height: calc(var(--al-comp-button-height) + var(--al-space-sm));
+  padding-inline: var(--al-space-xl);
+}
+
+.al-button--icon {
+  --al-button-height: var(--al-comp-button-height);
+  width: var(--al-button-height);
+  min-width: var(--al-button-height);
+  padding-inline: 0;
+}
+
+.al-button--primary {
+  background-color: var(--al-color-primary);
+  border-color: var(--al-color-primary);
+  color: var(--al-color-on-primary);
+}
+
+.al-button--secondary {
+  background-color: transparent;
+  border: var(--al-border-width-secondary) solid var(--al-color-secondary-border);
+  color: var(--al-color-on-surface);
+}
+
+.al-button--destructive,
+.al-button--danger {
+  background-color: var(--al-color-danger);
+  border-color: var(--al-color-danger);
+  color: var(--al-color-on-danger);
+}
+
+.al-button--outline {
+  background-color: transparent;
+  border: var(--al-border-width-secondary) solid var(--al-color-secondary-border);
+  color: var(--al-color-on-surface);
+}
+
+.al-button--ghost {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--al-color-on-surface);
+}
+
+.al-button--ghost:hover:not(:disabled):not(.is-loading) {
+  background-color: var(--al-color-surface-variant);
+  opacity: 1;
+}
+
+.al-button--success {
+  background-color: var(--al-color-success);
+  border-color: var(--al-color-success);
+  color: var(--al-color-on-success);
+}
+
+.al-button--radius-sm {
+  border-radius: var(--al-radius-sm);
+}
+
+.al-button--radius-md {
+  border-radius: var(--al-radius-md);
+}
+
+.al-button--radius-lg {
+  border-radius: var(--al-comp-button-radius);
+}
+
+.al-button--radius-pill {
+  border-radius: var(--al-radius-pill);
+}
+
+.al-button__content {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--al-space-sm);
+  transition: opacity var(--al-motion-fast) var(--al-motion-ease-standard);
+}
+
+.al-button.is-loading .al-button__content {
+  opacity: 0;
+}
+
+.al-button__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+}
+
+.al-button__spinner {
+  position: absolute;
+  inset-inline-start: 50%;
+  inset-block-start: 50%;
+  width: var(--al-comp-spinner-size);
+  height: var(--al-comp-spinner-size);
+  border-radius: var(--al-radius-pill);
+  border: var(--al-comp-spinner-stroke) solid color-mix(in srgb, currentColor 12%, transparent);
+  border-top-color: currentColor;
+  transform: translate(-50%, -50%);
+  animation: al-button-spin 0.8s linear infinite;
+}
+
+.al-button__sr {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+@keyframes al-button-spin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .al-button:active:not(:disabled):not(.is-loading) {
+    transform: none;
+  }
+
+  .al-button__spinner {
+    animation: none;
+  }
+}

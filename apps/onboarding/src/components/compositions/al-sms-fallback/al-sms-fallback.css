@@ -1,0 +1,21 @@
+.ob-sms-fallback {
+  text-align: center;
+  width: 100%;
+}
+
+.ob-sms-fallback__link {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--al-color-on-surface);
+  font: inherit;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  cursor: pointer;
+}
+
+.ob-sms-fallback__link:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}

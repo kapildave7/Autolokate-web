@@ -1,0 +1,63 @@
+.al-contact-card {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--al-space-md);
+  padding: 0.8125rem 0.875rem;
+  border: 1px solid var(--al-color-outline);
+  border-radius: var(--al-radius-lg);
+  background: var(--al-neutral-900);
+  transition:
+    transform var(--al-motion-fast) cubic-bezier(0.22, 1, 0.36, 1),
+    border-color var(--al-motion-fast) var(--al-motion-ease-standard),
+    box-shadow var(--al-motion-fast) var(--al-motion-ease-standard);
+}
+
+[data-theme='light'] .al-contact-card {
+  background: var(--al-neutral-0);
+}
+
+.al-contact-card__meta {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.125rem;
+  min-width: 0;
+}
+
+.al-contact-card__name {
+  margin: 0;
+  font-size: var(--al-text-label-size);
+  line-height: var(--al-text-label-line-height);
+  font-weight: 600;
+  color: var(--al-color-on-surface);
+}
+
+.al-contact-card__subtitle {
+  margin: 0;
+  font-size: var(--al-text-caption-size);
+  line-height: var(--al-text-caption-line-height);
+  color: var(--al-color-on-surface-muted);
+}
+
+.al-contact-card__verified {
+  display: flex;
+  align-items: center;
+  gap: var(--al-space-xs);
+  flex-shrink: 0;
+  color: var(--al-color-success);
+}
+
+.al-contact-card__verified-label {
+  margin: 0;
+  font-size: 11px;
+  line-height: 14px;
+  font-weight: 500;
+  color: var(--al-color-success);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .al-contact-card {
+    transition: none;
+  }
+}

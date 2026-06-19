@@ -1,0 +1,32 @@
+{
+  "name": "@autolokate/brand",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./assets/al-logo-dark.svg": "./dist/assets/al-logo-dark.svg",
+    "./assets/al-logo-light.svg": "./dist/assets/al-logo-light.svg",
+    "./assets/al-mark-dark.svg": "./dist/assets/al-mark-dark.svg",
+    "./assets/al-mark-light.svg": "./dist/assets/al-mark-light.svg",
+    "./assets/autolokate_dark.png": "./dist/assets/autolokate_dark.png",
+    "./assets/al-logo-figma-dark.png": "./dist/assets/al-logo-figma-dark.png"
+  },
+  "scripts": {
+    "build": "tsc --build && rm -rf dist/assets && mkdir -p dist/assets && cp src/assets/*.svg dist/assets/ && cp src/assets/*.png dist/assets/",
+    "dev": "tsc --build --watch",
+    "lint": "eslint .",
+    "clean": "rm -rf dist *.tsbuildinfo"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.8",
+    "react": "^19.1.0"
+  },
+  "files": ["dist"]
+}

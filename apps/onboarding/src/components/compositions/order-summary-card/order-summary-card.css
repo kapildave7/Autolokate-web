@@ -1,0 +1,69 @@
+/* Figma R08 — 16px radius, 18px padding, 14px gap, 1px #4A4A4A */
+
+.ob-order-summary-card {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid var(--al-color-outline);
+  border-radius: 16px;
+  background-color: var(--al-color-surface);
+}
+
+.ob-order-summary-card__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+}
+
+.ob-order-summary-card__label {
+  flex: 1;
+  font-size: 15px;
+  line-height: 22px;
+}
+
+.ob-order-summary-card__value {
+  flex-shrink: 0;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 22px;
+}
+
+.ob-order-summary-card__value--promo {
+  color: var(--al-color-success);
+}
+
+.ob-order-summary-card__divider {
+  width: 100%;
+  height: 1px;
+  border: 0;
+  margin: 0;
+  background-color: var(--al-color-outline);
+}
+
+.ob-order-summary-card__total-label {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.ob-order-summary-card__total-value {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+.ob-order-summary-card__gst {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.ob-order-summary-card__row--total {
+  align-items: baseline;
+}

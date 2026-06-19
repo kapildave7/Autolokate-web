@@ -1,0 +1,207 @@
+.al-scene-photo-card {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  aspect-ratio: 1;
+  padding: 12px;
+  border: 1.5px dashed var(--al-color-outline-strong);
+  border-radius: 16px;
+  background: var(--al-color-surface);
+  color: var(--al-color-on-surface-muted);
+  cursor: pointer;
+  overflow: hidden;
+  transition:
+    border-color var(--al-motion-fast) var(--al-motion-ease-standard),
+    transform var(--al-motion-fast) var(--al-motion-ease-emphasized);
+}
+
+.al-scene-photo-card:hover:not(:disabled) {
+  border-color: var(--al-color-on-surface-muted);
+}
+
+.al-scene-photo-card:active:not(:disabled) {
+  transform: scale(var(--al-motion-scale-press));
+}
+
+.al-scene-photo-card:focus-visible {
+  outline: 2px solid var(--al-color-focus);
+  outline-offset: 2px;
+}
+
+.al-scene-photo-card--filled {
+  position: relative;
+  border-style: solid;
+  border-color: var(--al-color-outline);
+  padding: 0;
+  cursor: default;
+  overflow: hidden;
+  flex-shrink: 0;
+  animation: al-scene-photo-fill 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.al-scene-photo-card--filled.al-scene-photo-card--retake {
+  cursor: pointer;
+}
+
+.al-scene-photo-card--filled.al-scene-photo-card--retake:focus-visible {
+  outline: 2px solid var(--al-color-focus);
+  outline-offset: 2px;
+}
+
+.al-scene-photo-card__retake {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: rgba(10, 10, 10, 0.55);
+  color: #ffffff;
+  pointer-events: none;
+}
+
+.al-scene-photo-card--capturing {
+  border-color: var(--al-color-signal-green);
+  border-style: solid;
+}
+
+.al-scene-photo-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--al-color-on-surface-muted);
+}
+
+.al-scene-photo-card__label {
+  margin: 0;
+  font-family: var(--al-text-ui-family);
+  font-size: 13px;
+  font-weight: var(--al-font-weight-medium);
+  line-height: 16px;
+  text-align: center;
+}
+
+.al-scene-photo-card--stacked {
+  aspect-ratio: auto;
+  height: 160px;
+  min-height: 160px;
+  max-height: 160px;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.al-scene-photo-card--label-first {
+  justify-content: center;
+}
+
+.al-scene-photo-card--label-first .al-scene-photo-card__label {
+  order: 0;
+}
+
+.al-scene-photo-card--label-first .al-scene-photo-card__icon {
+  order: 1;
+}
+
+.al-scene-photo-card--stacked .al-scene-photo-card__label {
+  font-size: 15px;
+  font-weight: var(--al-font-weight-medium);
+  line-height: 18px;
+}
+
+.al-scene-photo-card--stacked.al-scene-photo-card--filled .al-scene-photo-card__image {
+  border-radius: 14px;
+}
+
+.al-scene-photo-card--wide {
+  aspect-ratio: 174.5 / 140;
+  min-height: 140px;
+  gap: 8px;
+}
+
+.al-scene-photo-card--wide .al-scene-photo-card__label {
+  font-size: 13px;
+  line-height: 16px;
+}
+
+.al-scene-photo-card--wide.al-scene-photo-card--filled .al-scene-photo-card__image {
+  border-radius: 14px;
+}
+
+.al-scene-photo-card--location.al-scene-photo-card--filled {
+  border-style: solid;
+  border-color: var(--al-color-signal-green, #1fa24a);
+  color: var(--al-color-signal-green, #1fa24a);
+  justify-content: center;
+  padding: 12px 16px;
+}
+
+.al-scene-photo-card__location-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+}
+
+.al-scene-photo-card--location.al-scene-photo-card--filled .al-scene-photo-card__label {
+  font-size: 13px;
+  line-height: 16px;
+  color: var(--al-color-signal-green, #1fa24a);
+}
+
+.al-scene-photo-card__detail {
+  margin: 0;
+  font-family: var(--al-text-ui-family);
+  font-size: 15px;
+  font-weight: var(--al-font-weight-medium);
+  line-height: 18px;
+  text-align: center;
+  color: var(--al-color-on-surface);
+  word-break: break-word;
+}
+
+.al-scene-photo-card__image {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .al-scene-photo-card {
+    transition: none;
+  }
+
+  .al-scene-photo-card:active:not(:disabled) {
+    transform: none;
+  }
+
+  .al-scene-photo-card--filled {
+    animation: none;
+  }
+}
+
+@keyframes al-scene-photo-fill {
+  0% {
+    border-color: var(--al-color-signal-green, #1fa24a);
+    box-shadow: 0 0 0 0 rgba(31, 162, 74, 0.35);
+  }
+
+  100% {
+    border-color: var(--al-color-outline);
+    box-shadow: none;
+  }
+}

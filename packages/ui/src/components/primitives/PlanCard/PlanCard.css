@@ -1,0 +1,191 @@
+.al-plan-card {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--al-comp-plan-card-gap);
+  width: min(100%, var(--al-comp-plan-card-width));
+  padding: var(--al-comp-plan-card-padding-y) var(--al-comp-plan-card-padding-x);
+  border: var(--al-border-width-thin) solid var(--al-color-outline);
+  border-radius: var(--al-comp-plan-card-radius);
+  background-color: var(--al-color-surface);
+  color: var(--al-color-on-surface);
+  text-align: left;
+  transition:
+    border-color var(--al-motion-fast) var(--al-motion-ease-standard),
+    box-shadow var(--al-motion-fast) var(--al-motion-ease-standard),
+    transform var(--al-motion-fast) var(--al-motion-ease-emphasized);
+}
+
+.al-plan-card--interactive {
+  cursor: pointer;
+  border: var(--al-border-width-thin) solid var(--al-color-outline);
+  background-color: var(--al-color-surface);
+  color: var(--al-color-on-surface);
+  font: inherit;
+}
+
+.al-plan-card--interactive:hover:not(:disabled) {
+  border-color: var(--al-color-outline-strong);
+}
+
+.al-plan-card--interactive:active:not(:disabled) {
+  transform: scale(var(--al-motion-scale-press));
+}
+
+.al-plan-card--interactive:focus-visible {
+  outline: var(--al-border-width-thick) solid var(--al-color-focus);
+  outline-offset: var(--al-space-xs);
+}
+
+.al-plan-card--selected {
+  border: 2px solid var(--al-color-success);
+  box-shadow: 0 0 18px rgba(31, 163, 74, 0.28);
+  animation: al-plan-card-select 220ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes al-plan-card-select {
+  from {
+    transform: scale(0.98);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+.al-plan-card__badge {
+  align-self: flex-start;
+  padding: var(--al-space-xs) 0.625rem;
+  border-radius: var(--al-comp-plan-card-radius);
+  background: var(--al-gradient-plan-badge);
+  color: var(--al-color-success);
+  font-family: var(--al-text-ui-family);
+  font-size: var(--al-comp-plan-badge-font-size);
+  font-weight: var(--al-font-weight-semibold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.al-plan-card__name {
+  margin: 0;
+  font-family: var(--al-text-ui-family);
+  font-size: 1.25rem;
+  font-weight: var(--al-font-weight-semibold);
+  line-height: 1.5rem;
+}
+
+.al-plan-card__price {
+  margin: 0;
+  font-family: var(--al-text-ui-family);
+  font-size: 1.875rem;
+  font-weight: var(--al-font-weight-bold);
+  line-height: 2.25rem;
+}
+
+.al-plan-card__includes {
+  align-self: flex-start;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background-color: var(--al-color-surface-variant);
+  color: var(--al-color-on-surface-muted);
+  font-family: var(--al-text-ui-family);
+  font-size: var(--al-comp-plan-includes-font-size);
+  font-weight: var(--al-font-weight-semibold);
+  line-height: 1rem;
+}
+
+.al-plan-card__features {
+  display: flex;
+  flex-direction: column;
+  gap: var(--al-comp-plan-feature-gap);
+  margin: 0;
+  padding: var(--al-space-xs) 0 0;
+  list-style: none;
+}
+
+.al-plan-card__feature {
+  display: flex;
+  align-items: center;
+  gap: var(--al-comp-plan-feature-gap);
+}
+
+.al-plan-card__feature-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 0.9375rem;
+  height: 0.9375rem;
+  color: var(--al-color-success);
+}
+
+.al-plan-card__feature-label {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--al-text-ui-family);
+  font-size: var(--al-text-label-size);
+  font-weight: var(--al-font-weight-regular);
+  line-height: var(--al-text-label-line-height);
+}
+
+.al-plan-card__addon {
+  display: flex;
+  flex-direction: column;
+  gap: var(--al-comp-plan-feature-gap);
+  padding: 0.1875rem 0 0;
+}
+
+.al-plan-card__addon-separator {
+  width: 100%;
+  height: var(--al-border-width-thin);
+  border: 0;
+  margin: 0;
+  background-color: var(--al-color-outline);
+}
+
+.al-plan-card__addon-row {
+  display: flex;
+  align-items: center;
+  gap: var(--al-space-sm);
+}
+
+.al-plan-card__addon-mark {
+  font-family: var(--al-text-ui-family);
+  font-size: 0.9375rem;
+  font-weight: var(--al-font-weight-semibold);
+  line-height: 1.25rem;
+  color: var(--al-signal-amber);
+}
+
+.al-plan-card__addon-label {
+  font-family: var(--al-text-ui-family);
+  font-size: var(--al-comp-plan-includes-font-size);
+  font-weight: var(--al-font-weight-semibold);
+  line-height: 1rem;
+  color: var(--al-signal-amber);
+}
+
+.al-plan-card__selected-mark {
+  position: absolute;
+  top: 0.875rem;
+  right: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--al-comp-plan-selected-icon);
+  height: var(--al-comp-plan-selected-icon);
+  color: var(--al-color-success);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .al-plan-card--interactive:active:not(:disabled) {
+    transform: none;
+  }
+
+  .al-plan-card--selected {
+    animation: none;
+  }
+}

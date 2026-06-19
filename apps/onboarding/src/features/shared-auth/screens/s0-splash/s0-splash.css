@@ -1,0 +1,49 @@
+.ob-splash.al-screen-bg {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100dvh;
+}
+
+.ob-splash.al-screen-bg .al-screen-bg__content {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100dvh;
+  max-width: 24.5625rem;
+  margin-inline: auto;
+  position: relative;
+}
+
+.ob-splash__center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.ob-splash__tagline {
+  font-size: var(--al-text-body-size);
+  line-height: var(--al-text-body-line-height);
+  text-align: center;
+}
+
+.ob-splash__loading {
+  position: absolute;
+  bottom: calc(96px + env(safe-area-inset-bottom, 0px));
+  width: 116px;
+  height: 4px;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--al-color-on-surface) 28%, transparent);
+  overflow: hidden;
+}
+
+.ob-splash__loading-fill {
+  display: block;
+  width: 46px;
+  height: 100%;
+  border-radius: 2px;
+  background: var(--al-color-success);
+}

@@ -1,0 +1,105 @@
+/**
+ * Form input chrome — transparent text selection, neutral autofill, no tap flash.
+ * Imported via theme.css so all apps inherit consistently.
+ */
+
+input,
+textarea,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+input,
+textarea {
+  highlight-color: transparent;
+}
+
+[data-theme='dark'] input,
+[data-theme='dark'] textarea,
+[data-theme='dark'] select {
+  color-scheme: dark;
+}
+
+/* No filled selection blocks inside inputs (WebKit + Firefox) */
+:is(
+  input,
+  textarea,
+  .al-text-field__input,
+  .al-field__input,
+  .al-otp-input__cell,
+  .al-plate-input__value,
+  .ob-promo-code-field__input
+)::selection {
+  background: transparent !important;
+  color: inherit;
+  text-shadow: none;
+}
+
+:is(
+  input,
+  textarea,
+  .al-text-field__input,
+  .al-field__input,
+  .al-otp-input__cell,
+  .al-plate-input__value,
+  .ob-promo-code-field__input
+)::-moz-selection {
+  background: transparent !important;
+  color: inherit;
+  text-shadow: none;
+}
+
+/* TextField / generic field — autofill matches control surface */
+:is(.al-text-field__input, .al-field__input):-webkit-autofill,
+:is(.al-text-field__input, .al-field__input):-webkit-autofill:hover,
+:is(.al-text-field__input, .al-field__input):-webkit-autofill:focus,
+:is(.al-text-field__input, .al-field__input):-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px var(--al-color-surface) inset;
+  box-shadow: 0 0 0 1000px var(--al-color-surface) inset;
+  -webkit-text-fill-color: var(--al-color-on-surface);
+  caret-color: var(--al-color-on-surface);
+  transition: background-color 600000s ease-in-out 0s;
+}
+
+.al-otp-input__cell:-webkit-autofill,
+.al-otp-input__cell:-webkit-autofill:hover,
+.al-otp-input__cell:-webkit-autofill:focus,
+.al-otp-input__cell:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px var(--al-color-surface) inset;
+  box-shadow: 0 0 0 1000px var(--al-color-surface) inset;
+  -webkit-text-fill-color: var(--al-color-on-surface);
+  caret-color: var(--al-color-on-surface);
+  transition: background-color 600000s ease-in-out 0s;
+}
+
+.al-plate-input__value:-webkit-autofill,
+.al-plate-input__value:-webkit-autofill:hover,
+.al-plate-input__value:-webkit-autofill:focus,
+.al-plate-input__value:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px var(--al-color-plate-surface) inset;
+  box-shadow: 0 0 0 1000px var(--al-color-plate-surface) inset;
+  -webkit-text-fill-color: var(--al-color-on-plate);
+  caret-color: var(--al-color-on-plate);
+  transition: background-color 600000s ease-in-out 0s;
+}
+
+.ob-promo-code-field__input:-webkit-autofill,
+.ob-promo-code-field__input:-webkit-autofill:hover,
+.ob-promo-code-field__input:-webkit-autofill:focus,
+.ob-promo-code-field__input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px var(--al-color-surface) inset;
+  box-shadow: 0 0 0 1000px var(--al-color-surface) inset;
+  -webkit-text-fill-color: var(--al-color-on-surface);
+  caret-color: var(--al-color-on-surface);
+  transition: background-color 600000s ease-in-out 0s;
+}
+
+:is(.al-text-field__input, .al-field__input, .al-otp-input__cell, .al-plate-input__value, .ob-promo-code-field__input):is(
+  :-webkit-autofill,
+  :-webkit-autofill:hover,
+  :-webkit-autofill:focus,
+  :-webkit-autofill:active
+)::selection {
+  background: transparent;
+  -webkit-text-fill-color: inherit;
+}

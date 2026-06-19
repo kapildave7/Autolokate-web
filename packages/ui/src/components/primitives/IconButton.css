@@ -1,0 +1,61 @@
+.al-icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--al-layout-touch-target-min);
+  min-height: var(--al-layout-touch-target-min);
+  padding: var(--al-space-sm);
+  border-radius: var(--al-radius-pill);
+  border: calc(var(--al-space-xs) / 4) solid transparent;
+  background-color: transparent;
+  color: var(--al-color-on-surface);
+  cursor: pointer;
+  transition:
+    background-color var(--al-motion-fast) var(--al-motion-ease-standard),
+    color var(--al-motion-fast) var(--al-motion-ease-standard),
+    transform var(--al-motion-fast) var(--al-motion-ease-standard),
+    opacity var(--al-motion-fast) var(--al-motion-ease-standard);
+}
+
+.al-icon-button:focus-visible {
+  outline: calc(var(--al-space-xs) / 2) solid var(--al-color-focus);
+  outline-offset: var(--al-space-xs);
+}
+
+.al-icon-button:hover:not(:disabled) {
+  background-color: var(--al-color-surface-variant);
+  transform: translateY(calc(var(--al-space-xs) * -0.5));
+}
+
+.al-icon-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.al-icon-button--filled {
+  background-color: var(--al-color-surface-variant);
+  border-color: var(--al-color-outline);
+}
+
+.al-icon-button--sm {
+  min-width: var(--al-layout-touch-target-min);
+  min-height: var(--al-layout-touch-target-min);
+}
+
+.al-icon-button--md {
+  min-width: var(--al-layout-touch-target-min);
+  min-height: var(--al-layout-touch-target-min);
+}
+
+.al-icon-button--lg {
+  min-width: calc(var(--al-layout-touch-target-min) + var(--al-space-sm));
+  min-height: calc(var(--al-layout-touch-target-min) + var(--al-space-sm));
+}
+
+.al-icon-button__icon {
+  width: var(--al-space-xl);
+  height: var(--al-space-xl);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

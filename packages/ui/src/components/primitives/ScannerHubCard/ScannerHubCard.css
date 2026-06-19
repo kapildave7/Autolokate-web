@@ -1,0 +1,104 @@
+.al-scanner-hub-card {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 92px;
+  padding: 16px;
+  border: 1px solid var(--al-color-outline);
+  border-radius: 16px;
+  background: var(--al-color-surface);
+  color: var(--al-color-on-surface);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color var(--al-motion-fast) var(--al-motion-ease-standard),
+    background-color var(--al-motion-fast) var(--al-motion-ease-standard),
+    transform var(--al-motion-fast) var(--al-motion-ease-emphasized);
+}
+
+.al-scanner-hub-card:hover {
+  border-color: var(--al-color-outline-strong);
+}
+
+.al-scanner-hub-card:active {
+  transform: scale(var(--al-motion-scale-press));
+}
+
+.al-scanner-hub-card:focus-visible {
+  outline: 2px solid var(--al-color-focus);
+  outline-offset: 2px;
+}
+
+.al-scanner-hub-card--park-me {
+  border-color: var(--al-color-outline);
+}
+
+.al-scanner-hub-card--emergency {
+  border-color: var(--al-color-signal-red-bright);
+  background: rgba(255, 74, 61, 0.12);
+}
+
+.al-scanner-hub-card__icon-tile {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--al-color-surface-variant);
+  color: var(--al-color-on-surface);
+}
+
+.al-scanner-hub-card--emergency .al-scanner-hub-card__icon-tile {
+  background: var(--al-color-signal-red-bright);
+  color: #ffffff;
+}
+
+.al-scanner-hub-card--emergency .al-scanner-hub-card__title {
+  color: var(--al-color-signal-red-bright);
+}
+
+.al-scanner-hub-card--emergency .al-scanner-hub-card__subtitle {
+  color: rgba(255, 74, 61, 0.78);
+}
+
+.al-scanner-hub-card__copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.al-scanner-hub-card__title {
+  margin: 0;
+  font-family: var(--al-text-ui-family);
+  font-size: 17px;
+  font-weight: var(--al-font-weight-semibold);
+  line-height: 21px;
+}
+
+.al-scanner-hub-card__subtitle {
+  margin: 3px 0 0;
+  font-family: var(--al-text-ui-family);
+  font-size: 13px;
+  font-weight: var(--al-font-weight-regular);
+  line-height: 16px;
+  color: var(--al-color-on-surface-muted);
+}
+
+.al-scanner-hub-card__chevron {
+  flex-shrink: 0;
+  color: var(--al-color-on-surface-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .al-scanner-hub-card {
+    transition: none;
+  }
+
+  .al-scanner-hub-card:active {
+    transform: none;
+  }
+}

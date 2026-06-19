@@ -1,0 +1,19 @@
+{
+  "name": "@autolokate/config",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./typescript/base": "./typescript/base.json",
+    "./typescript/library": "./typescript/library.json",
+    "./typescript/vite-app": "./typescript/vite-app.json",
+    "./typescript/css-modules": "./typescript/css-modules.d.ts",
+    "./eslint": "./eslint/index.js",
+    "./prettier": "./prettier/index.js"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "build": "tsc --build",
+    "dev": "tsc --build --watch"
+  }
+}

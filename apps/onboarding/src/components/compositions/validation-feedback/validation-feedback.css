@@ -1,0 +1,31 @@
+/* Figma validation feedback — amber #F5A623, Label 13/18 medium */
+
+.ob-field-validation-error {
+  width: 100%;
+  margin: 0;
+  font-family: var(--al-text-ui-family);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
+  color: var(--al-signal-amber);
+  text-align: start;
+}
+
+.ob-otp-validation-error {
+  width: 100%;
+  margin: 0;
+  font-family: var(--al-text-ui-family);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
+  color: var(--al-signal-amber);
+  text-align: center;
+}
+
+.ob-otp-input-external.al-otp-input {
+  gap: 0;
+}
+
+.ob-otp-input-external .al-otp-input__error {
+  display: none;
+}

@@ -1,0 +1,73 @@
+/* Figma dark frames — full-bleed viewport, no rounded ambient shell */
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+  min-height: 100dvh;
+  background-color: var(--al-color-background);
+}
+
+[data-theme='dark'] .al-screen-bg {
+  background-color: var(--al-color-background);
+}
+
+[data-theme='dark'] .al-screen-bg__tint {
+  inset: 0;
+  inset-inline-start: 0;
+  inset-block-start: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  border-radius: 0;
+  transform: none;
+  opacity: 1;
+  background: radial-gradient(
+    ellipse 120% 80% at 50% 0%,
+    rgba(31, 162, 74, 0.06) 0%,
+    rgba(31, 162, 74, 0) 55%
+  );
+}
+
+[data-theme='dark'] .al-screen-bg--attention .al-screen-bg__tint {
+  background: radial-gradient(
+    ellipse 120% 80% at 50% 0%,
+    rgba(245, 166, 35, 0.06) 0%,
+    rgba(245, 166, 35, 0) 55%
+  );
+}
+
+[data-theme='dark'] .al-screen-bg--emergency .al-screen-bg__tint {
+  background: radial-gradient(
+    ellipse 120% 80% at 50% 0%,
+    rgba(229, 52, 42, 0.06) 0%,
+    rgba(229, 52, 42, 0) 55%
+  );
+}
+
+[data-theme='dark'] .ob-step-chrome-screen.al-screen-bg .al-screen-bg__content,
+[data-theme='dark'] .ob-step-chrome__frame {
+  background-color: transparent;
+}
+
+/* Body copy selection only — inputs use transparent selection in input-reset.css */
+:not(input, textarea)::selection {
+  background: color-mix(in srgb, var(--al-color-focus) 20%, transparent);
+  color: inherit;
+}
+
+:not(input, textarea)::-moz-selection {
+  background: color-mix(in srgb, var(--al-color-focus) 20%, transparent);
+  color: inherit;
+}
+
+/* Light theme — flat viewport, no circular 360° ambient shell */
+[data-theme='light'] .al-screen-bg__tint {
+  display: none;
+}
+
+[data-theme='light'] .al-activation-halo__ambient {
+  display: none;
+}

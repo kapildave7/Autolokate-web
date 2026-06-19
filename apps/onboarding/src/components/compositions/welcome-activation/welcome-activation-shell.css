@@ -1,0 +1,105 @@
+.ob-welcome-shell__frame {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+  padding-inline: 16px;
+}
+
+.ob-welcome-shell__header {
+  gap: 0;
+  padding-block-start: calc(var(--al-space-lg) + env(safe-area-inset-top, 0px));
+}
+
+.ob-welcome-shell--no-back .ob-welcome-shell__body {
+  padding-block-start: calc(var(--al-space-lg) + env(safe-area-inset-top, 0px));
+}
+
+.ob-welcome-shell__body {
+  gap: 20px;
+  padding-block: 20px var(--al-space-md);
+}
+
+.ob-welcome-shell__heading {
+  gap: 8px;
+}
+
+.ob-welcome-shell__description {
+  font-size: var(--al-text-body-size);
+  line-height: var(--al-text-body-line-height);
+}
+
+.ob-welcome-shell__content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ob-welcome-shell__section-label {
+  margin: 0;
+  font-family: var(--al-text-ui-family);
+  font-size: 13px;
+  font-weight: var(--al-font-weight-semibold);
+  line-height: 18px;
+  color: var(--al-color-on-surface-muted);
+}
+
+.ob-welcome-shell__partner-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ob-welcome-shell__partner-section--top-offset {
+  padding-top: 8px;
+}
+
+.ob-welcome-shell__footer {
+  padding-block-end: calc(var(--al-space-lg) + env(safe-area-inset-bottom, 0px));
+}
+
+.ob-welcome-shell__cta--dimmed {
+  opacity: 0.45;
+}
+
+.ob-welcome-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 24px 0 0;
+  text-align: center;
+}
+
+.ob-welcome-error__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  background-color: var(--al-signal-amber);
+  color: var(--al-color-background);
+  font-family: var(--al-text-ui-family);
+  font-size: 28px;
+  font-weight: var(--al-font-weight-bold);
+  line-height: 1;
+}
+
+.ob-welcome-error__title {
+  margin: 0;
+  font-family: var(--al-text-ui-family);
+  font-size: 18px;
+  font-weight: var(--al-font-weight-semibold);
+  line-height: 24px;
+  color: var(--al-color-on-surface);
+}
+
+.ob-welcome-error__message {
+  margin: 0;
+  font-family: var(--al-text-ui-family);
+  font-size: 14px;
+  font-weight: var(--al-font-weight-regular);
+  line-height: 20px;
+  color: var(--al-color-on-surface-muted);
+}

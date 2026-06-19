@@ -1,0 +1,91 @@
+/* Figma 1034:2351 · 1040:2374 — scanner confirmation chip */
+.al-vehicle-confirmation-card {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 14px 16px 12px;
+  border: 1.5px solid transparent;
+  border-radius: 16px;
+  background: #1a1a1a;
+}
+
+.al-vehicle-confirmation-card--protected {
+  border-color: #1fa24a;
+  box-shadow:
+    0 0 0 1px rgba(31, 162, 74, 0.28),
+    0 0 20px rgba(31, 162, 74, 0.1);
+}
+
+.al-vehicle-confirmation-card__body {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 12px;
+  align-items: center;
+}
+
+.al-vehicle-confirmation-card__icon-well {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #4a4a4a;
+  color: #ffffff;
+}
+
+.al-vehicle-confirmation-card__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.al-vehicle-confirmation-card__plate {
+  margin: 0;
+  font-family: var(--al-text-ui-family);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 18px;
+  color: #ffffff;
+}
+
+.al-vehicle-confirmation-card__model {
+  margin: 0;
+  font-family: var(--al-text-ui-family);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16px;
+  color: #8a8a8a;
+}
+
+.al-vehicle-confirmation-card__divider {
+  width: 100%;
+  height: 1px;
+  margin: 12px 0 10px;
+  border: none;
+  background: #4a4a4a;
+}
+
+.al-vehicle-confirmation-card__badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-family: var(--al-text-ui-family);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 16px;
+  color: #1fa24a;
+}
+
+.al-vehicle-confirmation-card__badge-icon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  color: #1fa24a;
+}

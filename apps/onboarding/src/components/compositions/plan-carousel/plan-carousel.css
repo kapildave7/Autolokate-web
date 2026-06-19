@@ -1,0 +1,331 @@
+/* Figma 183:25 / 232:62 — carousel layout_E6XCJG: 366px viewport, 14px gap, 270×340/366 cards */
+
+.ob-plan-carousel {
+  --ob-plan-motion-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ob-plan-motion-ring-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ob-plan-motion-select: 850ms;
+  --ob-plan-motion-ring: 950ms;
+  --ob-plan-motion-check: 420ms;
+  --ob-plan-motion-check-delay: 280ms;
+  --ob-plan-motion-tap: 180ms;
+  --ob-plan-card-slot: 366px;
+  --ob-plan-card-unselected-scale: 0.929; /* 340 / 366 — Figma unselected height in fixed slot */
+
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  min-width: 0;
+  flex-shrink: 0;
+}
+
+/* Figma 366px row + glow headroom — fixed slot prevents vertical jump */
+.ob-plan-carousel__viewport {
+  width: 100%;
+  height: calc(var(--ob-plan-card-slot) + 24px);
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
+.ob-plan-carousel__track {
+  display: flex;
+  align-items: stretch;
+  gap: 14px;
+  min-height: var(--ob-plan-card-slot);
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding-inline: calc((100% - 270px) / 2);
+  scroll-padding-inline: calc((100% - 270px) / 2);
+}
+
+.ob-plan-carousel__track::-webkit-scrollbar {
+  display: none;
+}
+
+.ob-plan-carousel__slide {
+  position: relative;
+  flex: 0 0 270px;
+  width: 270px;
+  height: var(--ob-plan-card-slot);
+  overflow: visible;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  opacity: 0.75;
+  transform: scale(var(--ob-plan-card-unselected-scale));
+  transform-origin: center center;
+  transition:
+    opacity var(--ob-plan-motion-select) var(--ob-plan-motion-ease),
+    transform var(--ob-plan-motion-select) var(--ob-plan-motion-ease);
+}
+
+.ob-plan-carousel__slide--selected {
+  transition: none;
+  animation: ob-plan-slide-select var(--ob-plan-motion-select) var(--ob-plan-motion-ease) forwards;
+}
+
+@keyframes ob-plan-slide-select {
+  0% {
+    opacity: 0.75;
+    transform: scale(var(--ob-plan-card-unselected-scale));
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.ob-plan-carousel__card.al-plan-card {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  min-height: 0;
+  max-height: 100%;
+  padding: 18px 20px;
+  gap: 14px;
+  border: 1px solid var(--al-color-outline);
+  border-radius: 20px;
+  justify-content: center;
+  align-items: stretch;
+  overflow: visible;
+  background-color: var(--al-color-surface);
+  color: var(--al-color-on-surface);
+  transition: transform var(--ob-plan-motion-tap) var(--ob-plan-motion-ease);
+}
+
+/* Figma selectionRing — slow draw on select (309:270); only on slide pseudo, not PlanCard */
+.ob-plan-carousel__slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 2px solid transparent;
+  border-radius: 20px;
+  box-shadow: 0 0 0 rgba(31, 163, 74, 0);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 1;
+  transform: scale(0.975);
+  transition:
+    border-color calc(var(--ob-plan-motion-ring) * 0.65) var(--ob-plan-motion-ring-ease),
+    box-shadow calc(var(--ob-plan-motion-ring) * 0.65) var(--ob-plan-motion-ring-ease),
+    transform calc(var(--ob-plan-motion-ring) * 0.65) var(--ob-plan-motion-ring-ease);
+}
+
+.ob-plan-carousel__slide--selected::after {
+  transition: none;
+  animation: ob-plan-ring-draw var(--ob-plan-motion-ring) var(--ob-plan-motion-ring-ease) forwards;
+}
+
+@keyframes ob-plan-ring-draw {
+  0% {
+    border-color: rgba(31, 163, 74, 0);
+    box-shadow: 0 0 0 rgba(31, 163, 74, 0);
+    transform: scale(0.975);
+  }
+
+  35% {
+    border-color: rgba(31, 163, 74, 0.45);
+    box-shadow: 0 0 6px rgba(31, 163, 74, 0.12);
+  }
+
+  100% {
+    border-color: var(--al-color-success);
+    box-shadow: 0 0 18px rgba(31, 163, 74, 0.28);
+    transform: scale(1);
+  }
+}
+
+.ob-plan-carousel__card.al-plan-card--interactive {
+  transition: transform var(--ob-plan-motion-tap) var(--ob-plan-motion-ease);
+}
+
+.ob-plan-carousel__card.al-plan-card--interactive:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.ob-plan-carousel__card.al-plan-card--selected {
+  border: 1px solid var(--al-color-outline);
+  box-shadow: none;
+  animation: none;
+  transition:
+    border-color calc(var(--ob-plan-motion-ring) * 0.65) var(--ob-plan-motion-ring-ease),
+    transform var(--ob-plan-motion-select) var(--ob-plan-motion-ease);
+}
+
+.ob-plan-carousel__card.al-plan-card--selected::after {
+  content: none;
+}
+
+.ob-plan-carousel__card .al-plan-card__name {
+  flex-shrink: 0;
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.ob-plan-carousel__card .al-plan-card__price {
+  flex-shrink: 0;
+  margin: 0;
+  font-size: 30px;
+  font-weight: 700;
+  /* Figma style_SBKODN — 30px hug, not 36px (keeps Secure in 366px) */
+  line-height: 30px;
+}
+
+.ob-plan-carousel__card .al-plan-card__badge {
+  flex-shrink: 0;
+  align-self: flex-start;
+  margin: 0;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: var(--al-gradient-plan-badge);
+  color: var(--al-color-success);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.ob-plan-carousel__card .al-plan-card__includes {
+  flex-shrink: 0;
+  align-self: flex-start;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background-color: var(--al-color-surface-variant);
+  color: var(--al-color-on-surface-muted);
+  font-size: 12px;
+  font-weight: 600;
+  /* Figma style_ZWZMUN — 12px hug */
+  line-height: 12px;
+}
+
+.ob-plan-carousel__card .al-plan-card__features {
+  flex-shrink: 0;
+  gap: 9px;
+  padding-top: 2px;
+}
+
+.ob-plan-carousel__card .al-plan-card__feature {
+  flex-shrink: 0;
+  /* Figma layout_QS3B02 */
+  align-items: center;
+  gap: 9px;
+}
+
+.ob-plan-carousel__card .al-plan-card__feature-label {
+  font-size: 13px;
+  font-weight: 400;
+  /* Figma style_TBW46C — 13px hug (~15px), not 18px */
+  line-height: 15px;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+}
+
+.ob-plan-carousel__card .al-plan-card__feature-icon {
+  width: 15px;
+  height: 15px;
+}
+
+.ob-plan-carousel__card .al-plan-card__addon {
+  flex-shrink: 0;
+  gap: 9px;
+  padding-top: 3px;
+}
+
+.ob-plan-carousel__card .al-plan-card__addon-row {
+  gap: 8px;
+}
+
+.ob-plan-carousel__card .al-plan-card__addon-mark {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 20px;
+  color: var(--al-signal-amber);
+}
+
+.ob-plan-carousel__card .al-plan-card__addon-label {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 12px;
+  color: var(--al-signal-amber);
+}
+
+.ob-plan-carousel__card .al-plan-card__addon-separator {
+  background-color: var(--al-color-outline);
+}
+
+/* Check icon pop on select */
+.ob-plan-carousel__card .al-plan-card__selected-mark {
+  top: 14px;
+  right: 16px;
+  width: 24px;
+  height: 24px;
+  z-index: 2;
+  transform: scale(0);
+  opacity: 0;
+}
+
+.ob-plan-carousel__card.al-plan-card--selected .al-plan-card__selected-mark {
+  animation: ob-plan-check-pop var(--ob-plan-motion-check) var(--ob-plan-motion-ease)
+    var(--ob-plan-motion-check-delay) forwards;
+}
+
+@keyframes ob-plan-check-pop {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ob-plan-carousel__track {
+    scroll-behavior: auto;
+  }
+
+  .ob-plan-carousel__slide,
+  .ob-plan-carousel__slide::after,
+  .ob-plan-carousel__card.al-plan-card--selected .al-plan-card__selected-mark,
+  .ob-plan-carousel__card.al-plan-card--interactive {
+    transition: none;
+    animation: none;
+  }
+
+  .ob-plan-carousel__slide {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .ob-plan-carousel__slide--selected {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .ob-plan-carousel__slide--selected::after {
+    border-color: var(--al-color-success);
+    transform: scale(1);
+    box-shadow: 0 0 18px rgba(31, 163, 74, 0.28);
+    animation: none;
+  }
+
+  .ob-plan-carousel__card.al-plan-card--interactive:active:not(:disabled) {
+    transform: none;
+  }
+
+  .ob-plan-carousel__card.al-plan-card--selected .al-plan-card__selected-mark {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

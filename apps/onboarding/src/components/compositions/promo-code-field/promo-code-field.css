@@ -1,0 +1,100 @@
+/* Figma R08 — 12px radius, 13px 14px padding, 1px #4A4A4A border */
+
+.ob-promo-code-field {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  padding: 13px 14px;
+  border: 1px solid var(--al-color-outline);
+  border-radius: 12px;
+  background-color: var(--al-color-surface);
+}
+
+.ob-promo-code-field__placeholder {
+  flex: 1;
+  font-size: 15px;
+  line-height: 22px;
+}
+
+.ob-promo-code-field__icon {
+  flex-shrink: 0;
+  color: var(--al-color-success);
+}
+
+.ob-promo-code-field__code {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 22px;
+}
+
+.ob-promo-code-field__action {
+  padding: 0;
+  border: none;
+  background: none;
+  font-family: var(--al-text-ui-family);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 22px;
+  color: var(--al-color-on-surface);
+  cursor: pointer;
+}
+
+.ob-promo-code-field__action--apply {
+  color: var(--al-color-on-surface);
+}
+
+.ob-promo-code-field:not(.ob-promo-code-field--applied) .ob-promo-code-field__action {
+  flex-shrink: 0;
+}
+
+.ob-promo-code-field--applied {
+  border-color: var(--al-signal-green);
+}
+
+.ob-promo-code-field--applied .ob-promo-code-field__action {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--al-color-on-surface-muted);
+}
+
+.ob-promo-code-field-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.ob-promo-code-field--editable {
+  gap: 10px;
+}
+
+.ob-promo-code-field--invalid {
+  border-color: var(--al-signal-amber);
+}
+
+.ob-promo-code-field__input {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--al-color-on-surface);
+  caret-color: var(--al-color-on-surface);
+  -webkit-tap-highlight-color: transparent;
+  font-family: var(--al-text-ui-family);
+  font-size: 15px;
+  line-height: 22px;
+}
+
+.ob-promo-code-field__input::placeholder {
+  color: var(--al-color-on-surface-muted);
+}
+
+.ob-promo-code-field__input:focus {
+  outline: none;
+}

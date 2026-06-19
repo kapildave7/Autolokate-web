@@ -1,0 +1,20 @@
+.ob-legal-reader__header.ob-step-chrome__header {
+  gap: 0;
+}
+
+.ob-legal-reader__body {
+  gap: 22px;
+  padding-inline: 0;
+}
+
+.ob-legal-reader__section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ob-legal-reader__section-heading {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+}

@@ -1,0 +1,17 @@
+.al-container {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: var(--al-space-lg);
+}
+
+.al-container--narrow {
+  max-width: calc(var(--al-space-xxxl) * 16);
+}
+
+.al-container--wide {
+  max-width: calc(var(--al-space-xxxl) * 24);
+}
+
+.al-container--full {
+  max-width: none;
+}

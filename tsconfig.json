@@ -1,0 +1,16 @@
+{
+  "extends": "@autolokate/config/typescript/base.json",
+  "files": [],
+  "references": [
+    { "path": "./packages/config" },
+    { "path": "./packages/design-system" },
+    { "path": "./packages/ui" },
+    { "path": "./packages/icons" },
+    { "path": "./packages/types" },
+    { "path": "./packages/utils" },
+    { "path": "./packages/api-client" },
+    { "path": "./packages/auth" },
+    { "path": "./packages/hooks" },
+    { "path": "./packages/brand" }
+  ]
+}

@@ -1,0 +1,107 @@
+.al-checkbox {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: var(--al-space-sm);
+  color: var(--al-color-on-surface);
+  cursor: pointer;
+}
+
+.al-checkbox__control {
+  position: relative;
+  width: var(--al-layout-touch-target-min);
+  min-width: var(--al-layout-touch-target-min);
+  height: var(--al-layout-touch-target-min);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.al-checkbox__input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  margin: 0;
+  cursor: inherit;
+}
+
+.al-checkbox__box {
+  position: relative;
+  width: 1.375rem;
+  height: 1.375rem;
+  border-radius: var(--al-radius-sm);
+  border: var(--al-border-width-secondary) solid var(--al-color-outline);
+  background-color: var(--al-color-surface);
+  transition:
+    background-color var(--al-motion-fast) var(--al-motion-ease-standard),
+    border-color var(--al-motion-fast) var(--al-motion-ease-standard);
+}
+
+.al-checkbox__box::after {
+  content: '';
+  position: absolute;
+  top: 0.1875rem;
+  left: 0.4375rem;
+  width: 0.3125rem;
+  height: 0.5625rem;
+  border: solid var(--al-brand-white);
+  border-width: 0 1.8px 1.8px 0;
+  transform: rotate(45deg);
+  opacity: 0;
+  transition: opacity var(--al-motion-fast) var(--al-motion-ease-standard);
+}
+
+.al-checkbox__input:checked + .al-checkbox__box {
+  background-color: var(--al-color-success);
+  border-color: var(--al-color-success);
+}
+
+.al-checkbox__input:checked + .al-checkbox__box::after {
+  opacity: 1;
+}
+
+.al-checkbox__input:focus-visible + .al-checkbox__box {
+  outline: var(--al-border-width-thick) solid var(--al-color-focus);
+  outline-offset: var(--al-space-xs);
+}
+
+.al-checkbox__meta {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--al-comp-field-gap);
+  padding-top: 0.4375rem;
+}
+
+.al-checkbox__label {
+  font-family: var(--al-text-ui-family);
+  font-size: var(--al-text-body-size);
+  line-height: var(--al-text-body-line-height);
+}
+
+.al-checkbox__hint {
+  color: var(--al-color-on-surface-muted);
+  font-family: var(--al-text-ui-family);
+  font-size: var(--al-text-label-size);
+  line-height: var(--al-text-label-line-height);
+}
+
+.al-checkbox__error {
+  color: var(--al-color-danger);
+  font-family: var(--al-text-ui-family);
+  font-size: var(--al-text-label-size);
+  line-height: var(--al-text-label-line-height);
+}
+
+.al-checkbox.is-disabled {
+  cursor: not-allowed;
+  color: var(--al-color-on-surface-muted);
+}
+
+.al-checkbox.is-disabled .al-checkbox__box {
+  background-color: var(--al-color-surface-variant);
+  border-color: var(--al-color-outline);
+}
+
+.al-checkbox.is-disabled .al-checkbox__input:checked + .al-checkbox__box {
+  opacity: 0.55;
+}

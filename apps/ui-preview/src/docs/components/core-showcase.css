@@ -1,0 +1,121 @@
+.ds-core-showcase__state-row {
+  flex-wrap: wrap;
+  gap: var(--al-space-xs);
+}
+
+.ds-core-showcase__frame {
+  padding: var(--al-space-lg);
+  border: calc(var(--al-space-xs) / 4) dashed color-mix(in srgb, var(--al-color-outline) 80%, transparent);
+  border-radius: var(--al-radius-lg);
+  background: var(--al-color-background);
+  color: var(--al-color-on-surface);
+  transition:
+    background-color var(--al-motion-normal) var(--al-motion-ease-standard),
+    border-color var(--al-motion-normal) var(--al-motion-ease-standard),
+    color var(--al-motion-normal) var(--al-motion-ease-standard);
+}
+
+.ds-core-showcase__frame--dark {
+  background: var(--al-color-background);
+}
+
+/* Simulated interaction states */
+.ds-core-showcase__frame[data-showcase-state='hover'] .al-button:not(:disabled):not(.is-loading) {
+  opacity: 0.94;
+}
+
+.ds-core-showcase__frame[data-showcase-state='hover'] .al-chip:not(:disabled) {
+  opacity: 0.92;
+}
+
+.ds-core-showcase__frame[data-showcase-state='hover'] .al-quick-action:not(:disabled) {
+  border-color: var(--al-color-outline-strong);
+}
+
+.ds-core-showcase__frame[data-showcase-state='pressed'] .al-button:not(:disabled):not(.is-loading),
+.ds-core-showcase__frame[data-showcase-state='active'] .al-button:not(:disabled):not(.is-loading) {
+  transform: scale(0.97);
+}
+
+.ds-core-showcase__frame[data-showcase-state='pressed'] .al-chip:not(:disabled),
+.ds-core-showcase__frame[data-showcase-state='active'] .al-quick-action:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.ds-core-showcase__frame[data-showcase-state='focus'] .al-field__input,
+.ds-core-showcase__frame[data-showcase-state='focus'] .al-text-field__input,
+.ds-core-showcase__frame[data-showcase-state='focus'] .al-otp-input__cell:first-child,
+.ds-core-showcase__frame[data-showcase-state='focus'] .al-button:first-of-type,
+.ds-core-showcase__frame[data-showcase-state='focus'] .al-chip:first-of-type,
+.ds-core-showcase__frame[data-showcase-state='focus'] .al-checkbox__input,
+.ds-core-showcase__frame[data-showcase-state='focus'] .al-toggle__input,
+.ds-core-showcase__frame[data-showcase-state='focus'] .al-quick-action:first-of-type {
+  outline: none;
+}
+
+.ds-core-showcase__frame[data-showcase-state='focus'] .al-plate-input {
+  outline: var(--al-border-width-thick) solid var(--al-color-focus);
+  outline-offset: var(--al-space-xs);
+}
+
+.ds-core-showcase__frame[data-showcase-state='hover'] .al-plan-card--interactive {
+  border-color: var(--al-color-outline-strong);
+}
+
+.ds-core-showcase__frame[data-showcase-state='focus'] .al-plan-card--interactive {
+  outline: var(--al-border-width-thick) solid var(--al-color-focus);
+  outline-offset: var(--al-space-xs);
+}
+
+.ds-core-showcase__frame[data-showcase-state='pressed'] .al-plan-card--interactive,
+.ds-core-showcase__frame[data-showcase-state='active'] .al-plan-card--interactive {
+  transform: scale(var(--al-motion-scale-press));
+}
+
+.ds-core-showcase__frame[data-showcase-state='selected'] .al-plan-card--interactive {
+  border-color: var(--al-color-on-surface);
+}
+
+.ds-core-showcase__frame[data-showcase-state='focus'] .al-field__input:first-of-type,
+.ds-core-showcase__frame[data-showcase-state='focus'] .al-text-field__control,
+.ds-core-showcase__frame[data-showcase-state='focus'] .al-otp-input__cell:first-child {
+  border-color: var(--al-color-focus);
+}
+
+.ds-core-showcase__frame[data-showcase-state='selected'] .al-chip--neutral:first-of-type {
+  background-color: var(--al-color-primary);
+  color: var(--al-color-on-primary);
+}
+
+.ds-core-showcase__frame[data-showcase-state='selected'] .al-bottom-nav__item:first-of-type {
+  color: var(--al-color-on-surface);
+  background-color: var(--al-color-surface-variant);
+}
+
+.ds-core-showcase__responsive {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: var(--al-space-lg);
+}
+
+.ds-core-showcase__viewport {
+  display: flex;
+  flex-direction: column;
+  gap: var(--al-space-sm);
+  min-width: 0;
+}
+
+.ds-core-showcase__frame--viewport {
+  width: 100%;
+  margin-inline: auto;
+  overflow-x: auto;
+}
+
+.ds-inline-code {
+  font-family: var(--al-text-mono-family);
+  font-size: var(--al-text-caption-size);
+  padding: 0.125rem 0.375rem;
+  border-radius: var(--al-radius-sm);
+  background: var(--al-color-surface-variant);
+  color: var(--al-color-on-surface);
+}

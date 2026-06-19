@@ -1,0 +1,83 @@
+/**
+ * Shared interaction motion — Sprint 4.3
+ * Spring-like easing, GPU-friendly transforms, reduced-motion fallbacks.
+ */
+
+:root {
+  --ob-motion-spring: cubic-bezier(0.22, 1, 0.36, 1);
+  --ob-motion-tap: 180ms;
+  --ob-motion-select: 220ms;
+  --ob-motion-enter: 260ms;
+}
+
+/* Subtle step enter — opacity + 6px translate (not full-screen slide) */
+.ob-step-chrome-screen .ob-step-chrome__frame {
+  animation: ob-step-frame-enter var(--ob-motion-enter) var(--ob-motion-spring) both;
+}
+
+@keyframes ob-step-frame-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Contact / rider list cards — fade up on mount */
+.ob-contact-card-list > .al-contact-card {
+  animation: ob-card-list-enter var(--ob-motion-select) var(--ob-motion-spring) both;
+}
+
+.ob-contact-card-list > .al-contact-card:nth-child(2) {
+  animation-delay: 40ms;
+}
+
+.ob-contact-card-list > .al-contact-card:nth-child(3) {
+  animation-delay: 80ms;
+}
+
+@keyframes ob-card-list-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Loading visual breathe (R04 fetching halo icons — not spinners) */
+.ob-purchase-status-shell__body > .al-icon {
+  animation: ob-loading-breathe 1.8s ease-in-out infinite;
+}
+
+@keyframes ob-loading-breathe {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.88;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ob-step-chrome-screen .ob-step-chrome__frame,
+  .ob-contact-card-list > .al-contact-card,
+  .ob-purchase-status-shell__body > .al-icon {
+    animation: none !important;
+  }
+
+  .ob-step-chrome-screen .ob-step-chrome__frame,
+  .ob-contact-card-list > .al-contact-card {
+    opacity: 1;
+    transform: none;
+  }
+}

@@ -1,0 +1,50 @@
+.al-status-tracker {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.al-status-tracker__vehicle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 60px;
+  padding: 10px 16px;
+  border: 1px solid #4a4a4a;
+  border-radius: 12px;
+  background: #1a1a1a;
+}
+
+.al-status-tracker__vehicle-icon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #4a4a4a;
+  color: #ffffff;
+}
+
+.al-status-tracker__vehicle-copy {
+  min-width: 0;
+}
+
+.al-status-tracker__plate {
+  margin: 0;
+  font-family: var(--al-text-ui-family);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 18px;
+  color: #ffffff;
+}
+
+.al-status-tracker__model {
+  margin: 2px 0 0;
+  font-family: var(--al-text-ui-family);
+  font-size: 13px;
+  line-height: 16px;
+  color: #8a8a8a;
+}

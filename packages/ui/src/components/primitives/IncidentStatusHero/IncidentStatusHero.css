@@ -1,0 +1,43 @@
+.al-incident-status-hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 240px;
+}
+
+.al-incident-status-hero__visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 240px;
+  height: 240px;
+}
+
+.al-incident-status-hero__visual svg {
+  display: block;
+}
+
+.al-incident-status-hero--attention .al-incident-status-hero__visual circle:first-of-type,
+.al-incident-status-hero--attention .al-incident-status-hero__visual g circle {
+  animation: al-incident-hero-halo 2.4s ease-in-out infinite;
+}
+
+@keyframes al-incident-hero-halo {
+  0%,
+  100% {
+    opacity: 0.85;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .al-incident-status-hero__visual,
+  .al-incident-status-hero--attention .al-incident-status-hero__visual circle:first-of-type,
+  .al-incident-status-hero--attention .al-incident-status-hero__visual g circle {
+    animation: none;
+  }
+}

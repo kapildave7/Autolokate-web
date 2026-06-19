@@ -1,0 +1,21 @@
+.ob-trust-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.ob-trust-row--center {
+  justify-content: center;
+}
+
+.ob-trust-row--start {
+  justify-content: flex-start;
+}
+
+.ob-trust-row .al-text {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 500;
+  color: var(--al-color-on-surface-muted);
+}

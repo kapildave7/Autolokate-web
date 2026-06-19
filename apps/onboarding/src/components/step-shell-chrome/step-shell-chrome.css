@@ -1,0 +1,114 @@
+/**
+ * Shared step-shell chrome — Figma 102:268 auth reference.
+ * Back + progress pinned top; body scrolls; CTA pinned bottom.
+ */
+
+.ob-step-chrome__frame {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 24.5625rem;
+  height: 100%;
+  max-height: 100dvh;
+  min-height: 0;
+  margin-inline: auto;
+  padding-inline: 16px;
+  overflow: hidden;
+}
+
+.ob-step-chrome__header {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  gap: 20px;
+  padding-block-start: calc(var(--al-space-lg) + env(safe-area-inset-top, 0px));
+  background-color: var(--al-color-background);
+}
+
+.ob-step-chrome__back.al-icon-button {
+  align-self: flex-start;
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  min-height: 24px;
+  padding: 0;
+}
+
+.ob-step-chrome__progress {
+  width: 100%;
+}
+
+.ob-step-chrome__progress-spacer {
+  width: 100%;
+  height: var(--al-comp-step-track-height);
+  flex-shrink: 0;
+}
+
+.ob-step-chrome__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 20px;
+  min-width: 0;
+  min-height: 0;
+  padding-block: 20px var(--al-space-md);
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.ob-step-chrome__heading {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.ob-step-chrome__footer {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  gap: 10px;
+  padding-block: var(--al-space-sm)
+    calc(var(--al-space-lg) + env(safe-area-inset-bottom, 0px));
+  background-color: var(--al-color-background);
+}
+
+.ob-step-chrome__cta {
+  width: 100%;
+  min-height: 58px;
+  border-radius: 16px;
+}
+
+.ob-step-chrome__cta-helper {
+  text-align: center;
+  width: 100%;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 500;
+  color: var(--al-color-on-surface-muted);
+}
+
+/* Viewport-locked screen bg content used by all step shells */
+.ob-step-chrome-screen.al-screen-bg {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100dvh;
+  max-height: 100dvh;
+  overflow: hidden;
+  color: var(--al-color-on-surface);
+}
+
+.ob-step-chrome-screen.al-screen-bg .al-screen-bg__content {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  max-height: 100dvh;
+  overflow: hidden;
+}

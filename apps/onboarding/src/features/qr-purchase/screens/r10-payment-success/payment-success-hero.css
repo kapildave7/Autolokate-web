@@ -1,0 +1,25 @@
+.ob-purchase-success-hero {
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 15rem;
+  height: 15rem;
+}
+
+/* Lottie — full-screen overlay, scaled from hero center */
+.ob-purchase-success-hero__confetti.ob-confetti-lottie {
+  position: absolute;
+  top: 38%;
+  left: 50%;
+  width: min(100vw, 28rem);
+  height: min(100vh, 36rem);
+  transform: translate(-50%, -50%) scale(1.85);
+  transform-origin: center center;
+}
+
+.ob-purchase-success-hero .ob-purchase-status-halo {
+  position: relative;
+  z-index: 1;
+}

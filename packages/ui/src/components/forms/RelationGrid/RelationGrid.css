@@ -1,0 +1,95 @@
+.al-relation-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--al-space-md);
+}
+
+.al-relation-grid__label {
+  margin: 0;
+  font-size: var(--al-text-label-size);
+  line-height: var(--al-text-label-line-height);
+  font-weight: 600;
+  color: var(--al-color-on-surface);
+}
+
+.al-relation-grid__tiles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.625rem;
+}
+
+.al-relation-grid__tile {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--al-space-sm);
+  width: 100%;
+  min-width: 0;
+  min-height: 5rem;
+  padding: 0.875rem 0.5rem;
+  border: 1px solid var(--al-color-outline);
+  border-radius: 0.875rem;
+  background: var(--al-color-surface-variant);
+  color: var(--al-color-on-surface);
+  cursor: pointer;
+  transition:
+    transform var(--al-motion-fast) cubic-bezier(0.22, 1, 0.36, 1),
+    border-color var(--al-motion-fast) var(--al-motion-ease-standard),
+    box-shadow var(--al-motion-fast) var(--al-motion-ease-standard),
+    background-color var(--al-motion-fast) var(--al-motion-ease-standard),
+    opacity var(--al-motion-fast) var(--al-motion-ease-standard);
+}
+
+.al-relation-grid__tile:hover:not(:disabled):not(.al-relation-grid__tile--selected) {
+  border-color: var(--al-color-outline-strong);
+  transform: translateY(-2px);
+}
+
+.al-relation-grid__tile:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+.al-relation-grid__tile--selected {
+  border-width: 2px;
+  border-color: var(--al-color-success);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--al-color-success) 26%, transparent);
+  animation: al-relation-tile-select 220ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes al-relation-tile-select {
+  from {
+    transform: scale(0.94);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+.al-relation-grid__tile:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.al-relation-grid__tile-label {
+  font-size: var(--al-text-label-size);
+  line-height: var(--al-text-label-line-height);
+  font-weight: 600;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .al-relation-grid__tile {
+    transition: none;
+    animation: none;
+  }
+
+  .al-relation-grid__tile:hover:not(:disabled):not(.al-relation-grid__tile--selected) {
+    transform: none;
+  }
+
+  .al-relation-grid__tile--selected {
+    transform: none;
+  }
+}

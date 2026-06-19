@@ -1,0 +1,44 @@
+.ob-add-contact-row {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.875rem 0;
+  border: 1px dashed var(--al-color-outline);
+  border-radius: var(--al-radius-lg);
+  background: transparent;
+  color: var(--al-color-on-surface);
+  cursor: pointer;
+  transition:
+    transform var(--ob-motion-tap, 180ms) cubic-bezier(0.22, 1, 0.36, 1),
+    border-color var(--al-motion-fast) var(--al-motion-ease-standard),
+    background-color var(--al-motion-fast) var(--al-motion-ease-standard),
+    opacity var(--al-motion-fast) var(--al-motion-ease-standard);
+}
+
+.ob-add-contact-row:hover:not(:disabled) {
+  border-color: var(--al-color-outline-strong);
+  background-color: color-mix(in srgb, var(--al-color-surface-variant) 55%, transparent);
+}
+
+.ob-add-contact-row:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.ob-add-contact-row:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ob-add-contact-row {
+    transition: none;
+  }
+
+  .ob-add-contact-row:active:not(:disabled) {
+    transform: none;
+  }
+}

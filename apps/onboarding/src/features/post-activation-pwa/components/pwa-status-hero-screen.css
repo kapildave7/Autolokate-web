@@ -1,0 +1,39 @@
+.pwa-status-hero-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  flex: 1;
+  justify-content: center;
+  text-align: center;
+  padding: 4px 0 20px;
+}
+
+.pwa-status-hero-screen__visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 188px;
+  margin-bottom: 8px;
+}
+
+.pwa-status-hero-screen__title {
+  margin: 0;
+  max-width: 320px;
+}
+
+.pwa-status-hero-screen__description {
+  margin: 0;
+  max-width: 320px;
+}
+
+.pwa-status-hero-screen__visual .al-incident-status-hero {
+  min-height: 188px;
+}
+
+.pwa-status-hero-screen__visual .al-incident-status-hero__visual {
+  width: 188px;
+  height: 188px;
+}

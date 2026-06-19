@@ -1,0 +1,64 @@
+.ob-dev {
+  display: grid;
+  grid-template-columns: minmax(16rem, 20rem) 1fr;
+  min-height: 100dvh;
+  background: color-mix(in srgb, var(--al-color-surface-variant) 35%, var(--al-color-background));
+}
+
+.ob-dev__panel {
+  padding: var(--al-space-lg);
+  border-inline-end: var(--al-border-width-thin) solid var(--al-color-outline);
+  background: var(--al-color-surface);
+  overflow-y: auto;
+}
+
+.ob-dev__state-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--al-space-xs);
+}
+
+.ob-dev__viewport {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: var(--al-space-lg);
+  overflow: auto;
+}
+
+.ob-dev__frame {
+  width: min(100%, var(--ob-dev-viewport-width, 24.5625rem));
+  flex-shrink: 0;
+}
+
+.ob-dev__reopen {
+  position: fixed;
+  inset-block-start: var(--al-space-md);
+  inset-inline-start: var(--al-space-md);
+  z-index: 10;
+  padding: var(--al-space-sm) var(--al-space-md);
+  border: var(--al-border-width-thin) solid var(--al-color-outline);
+  border-radius: var(--al-radius-md);
+  background: var(--al-color-surface);
+  color: var(--al-color-on-surface);
+  font: inherit;
+  cursor: pointer;
+}
+
+@media (max-width: 48rem) {
+  .ob-dev {
+    grid-template-columns: 1fr;
+  }
+
+  .ob-dev__panel {
+    border-inline-end: 0;
+    border-block-end: var(--al-border-width-thin) solid var(--al-color-outline);
+  }
+}
+
+/* Responsive QA widths */
+@media (max-width: 20rem) {
+  .ob-dev__viewport {
+    padding: 0;
+  }
+}

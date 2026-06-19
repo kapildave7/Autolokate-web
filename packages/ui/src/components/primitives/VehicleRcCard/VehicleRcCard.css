@@ -1,0 +1,118 @@
+.al-vehicle-rc-card {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--al-comp-vehicle-rc-gap);
+  width: 100%;
+  padding: var(--al-comp-vehicle-rc-padding);
+  overflow: hidden;
+  border: var(--al-border-width-thin) solid var(--al-color-outline);
+  border-radius: var(--al-comp-vehicle-rc-radius);
+  background: var(--al-color-surface);
+  color: var(--al-color-on-surface);
+}
+
+[data-theme='light'] .al-vehicle-rc-card {
+  background: var(--al-gradient-vehicle-rc-light);
+  border-color: var(--al-color-outline);
+}
+
+.al-vehicle-rc-card__watermark {
+  position: absolute;
+  inset-inline-end: -3.75rem;
+  inset-block-end: -4.125rem;
+  width: 10.625rem;
+  height: 10.625rem;
+  opacity: 0.05;
+  pointer-events: none;
+  color: var(--al-color-on-surface);
+}
+
+.al-vehicle-rc-card__watermark .al-icon {
+  width: 100%;
+  height: 100%;
+}
+
+.al-vehicle-rc-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--al-space-md);
+}
+
+.al-vehicle-rc-card__title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  min-width: 0;
+}
+
+.al-vehicle-rc-card__badge {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--al-comp-vehicle-rc-badge-size);
+  height: var(--al-comp-vehicle-rc-badge-size);
+  border-radius: var(--al-comp-vehicle-rc-badge-radius);
+  background-color: var(--al-color-surface-variant);
+  color: var(--al-color-on-surface);
+  font-family: var(--al-text-ui-family);
+  font-size: var(--al-text-caption-size);
+  font-weight: var(--al-font-weight-bold);
+  line-height: 1;
+}
+
+.al-vehicle-rc-card__title {
+  font-family: var(--al-text-ui-family);
+  font-size: var(--al-text-label-size);
+  font-weight: var(--al-text-label-weight);
+  line-height: var(--al-text-label-line-height);
+  color: var(--al-color-on-surface-muted);
+}
+
+.al-vehicle-rc-card__status {
+  flex-shrink: 0;
+}
+
+.al-vehicle-rc-card__registration {
+  margin: 0;
+  font-family: var(--al-text-ui-family);
+  font-size: var(--al-comp-vehicle-rc-plate-size);
+  font-weight: var(--al-font-weight-bold);
+  line-height: 2.25rem;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  word-break: break-word;
+}
+
+.al-vehicle-rc-card__divider {
+  width: 100%;
+  height: var(--al-border-width-thin);
+  border: 0;
+  margin: 0;
+  background-color: var(--al-color-outline);
+}
+
+.al-vehicle-rc-card__grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--al-comp-vehicle-rc-row-gap);
+}
+
+.al-vehicle-rc-card__row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--al-comp-vehicle-rc-col-gap);
+}
+
+.al-vehicle-rc-card__field {
+  flex: 1;
+  min-width: 0;
+}
+
+.al-vehicle-rc-card__field .al-readonly-field__value {
+  overflow-wrap: anywhere;
+}

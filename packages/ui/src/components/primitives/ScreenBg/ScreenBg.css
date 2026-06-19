@@ -1,0 +1,50 @@
+.al-screen-bg.pwa-scan-shell {
+  overflow: visible;
+  min-height: 100dvh;
+}
+
+.al-screen-bg {
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+  background-color: var(--al-color-background);
+  color: var(--al-color-on-background);
+  overflow: hidden;
+}
+
+.al-screen-bg__tint {
+  position: absolute;
+  pointer-events: none;
+  inset-inline-start: 50%;
+  inset-block-start: var(--al-comp-screen-bg-tint-offset-y);
+  width: min(110vw, var(--al-comp-screen-bg-tint-size));
+  height: min(110vw, var(--al-comp-screen-bg-tint-size));
+  transform: translateX(-50%);
+  border-radius: 50%;
+}
+
+.al-screen-bg--protected .al-screen-bg__tint {
+  background: var(--al-gradient-ambient-protected);
+}
+
+.al-screen-bg--attention .al-screen-bg__tint {
+  background: var(--al-gradient-ambient-attention);
+}
+
+.al-screen-bg--emergency .al-screen-bg__tint {
+  background: var(--al-gradient-ambient-emergency);
+}
+
+.al-screen-bg__content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  min-height: inherit;
+}
+
+@media (min-width: 48rem) {
+  .al-screen-bg__tint {
+    width: min(90vw, var(--al-comp-screen-bg-tint-size));
+    height: min(90vw, var(--al-comp-screen-bg-tint-size));
+  }
+}

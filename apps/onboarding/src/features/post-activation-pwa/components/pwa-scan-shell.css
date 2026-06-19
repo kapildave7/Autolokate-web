@@ -1,0 +1,107 @@
+.pwa-scan-shell {
+  min-height: 100dvh;
+  background-color: var(--al-color-background);
+}
+
+.pwa-scan-shell__frame {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  width: min(100%, 393px);
+  margin: 0 auto;
+  padding: 0 16px calc(16px + env(safe-area-inset-bottom, 0px));
+  background-color: transparent;
+}
+
+.pwa-scan-shell__header {
+  display: grid;
+  grid-template-columns: 48px 1fr 48px;
+  align-items: center;
+  min-height: 48px;
+  padding-top: max(8px, env(safe-area-inset-top, 0px));
+  background-color: transparent;
+}
+
+.pwa-scan-shell__brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+  min-width: 0;
+}
+
+.pwa-scan-shell__logo-figma {
+  display: block;
+  width: 108px;
+  height: 23px;
+  max-width: min(100%, 160px);
+  object-fit: contain;
+}
+
+[data-theme='light'] .pwa-scan-shell__logo-figma {
+  filter: brightness(0);
+}
+
+.pwa-scan-shell__back-spacer {
+  width: 48px;
+  height: 48px;
+}
+
+[data-theme='light'] .pwa-scan-shell__frame--sticky-footer .pwa-scan-shell__footer {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--al-color-background) 0%, transparent) 0%,
+    color-mix(in srgb, var(--al-color-background) 92%, transparent) 24%
+  );
+}
+
+.pwa-scan-shell__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding-top: 12px;
+  background-color: transparent;
+}
+
+.pwa-scan-shell__frame--sticky-footer {
+  height: 100dvh;
+  max-height: 100dvh;
+  overflow: hidden;
+}
+
+.pwa-scan-shell__frame--sticky-footer .pwa-scan-shell__main {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.pwa-scan-shell__frame--sticky-footer .pwa-scan-shell__footer {
+  flex-shrink: 0;
+  padding-top: 12px;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--al-color-background) 0%, transparent) 0%,
+    color-mix(in srgb, var(--al-color-background) 92%, transparent) 24%
+  );
+}
+
+.pwa-scan-shell__frame--dimmed .pwa-scan-shell__main,
+.pwa-scan-shell__frame--dimmed .pwa-emergency-screen {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.pwa-scan-shell__footer {
+  padding-top: 16px;
+}
+
+.pwa-scan-shell__footer .al-button {
+  width: 100%;
+}
+
+@media (min-width: 320px) and (max-width: 414px) {
+  .pwa-scan-shell__frame {
+    width: 100%;
+  }
+}

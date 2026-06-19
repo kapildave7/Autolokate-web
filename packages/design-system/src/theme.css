@@ -1,0 +1,401 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import './input-reset.css';
+
+/**
+ * Autolokate design tokens as CSS custom properties.
+ * Import once at the app root: import '@autolokate/design-system/theme.css';
+ *
+ * Primitives are theme-independent. Semantic color roles switch per theme.
+ * Set data-theme="dark" | "light" on <html> to override system preference.
+ */
+:root {
+  color-scheme: light dark;
+
+  /* Brand primitives */
+  --al-brand-black: #0a0a0a;
+  --al-brand-white: #ffffff;
+
+  /* Traffic-signal accents */
+  --al-signal-red: #e5342a;
+  --al-signal-red-bright: #ff4a3d;
+  --al-signal-amber: #f5a623;
+  --al-signal-green: #1fa24a;
+
+  /* Figma CC signal aliases — used by promoted PWA components */
+  --al-color-signal-green: var(--al-signal-green);
+  --al-color-signal-amber: var(--al-signal-amber);
+  --al-color-signal-red: var(--al-signal-red);
+  --al-color-signal-red-bright: var(--al-signal-red-bright);
+
+  /* Neutral ramp */
+  --al-neutral-0: #ffffff;
+  --al-neutral-canvas: #f4f6f9;
+  --al-neutral-50: #f5f5f5;
+  --al-neutral-100: #e8e8e8;
+  --al-neutral-plate: #e4e4e8;
+  --al-neutral-300: #c4c4c4;
+  --al-neutral-500: #8a8a8a;
+  --al-neutral-700: #4a4a4a;
+  --al-neutral-900: #1a1a1a;
+  --al-neutral-950: #0a0a0c;
+  --al-neutral-1000: #0a0a0a;
+
+  /* Signature gradients */
+  --al-gradient-canvas: linear-gradient(180deg, #0a0a0a 0%, #141414 100%);
+  --al-gradient-protected: radial-gradient(
+    ellipse at center,
+    rgba(31, 162, 74, 0.12) 0%,
+    rgba(31, 162, 74, 0) 70%
+  );
+  --al-gradient-ambient-protected: radial-gradient(
+    circle at 50% 50%,
+    rgba(31, 162, 74, 0.08) 0%,
+    rgba(31, 162, 74, 0) 100%
+  );
+  --al-gradient-ambient-attention: radial-gradient(
+    circle at 50% 50%,
+    rgba(245, 166, 35, 0.08) 0%,
+    rgba(245, 166, 35, 0) 100%
+  );
+  --al-gradient-ambient-emergency: radial-gradient(
+    circle at 50% 50%,
+    rgba(229, 52, 42, 0.08) 0%,
+    rgba(229, 52, 42, 0) 100%
+  );
+  --al-gradient-emergency: radial-gradient(
+    ellipse at center,
+    rgba(229, 52, 42, 0.18) 0%,
+    rgba(229, 52, 42, 0) 70%
+  );
+  --al-gradient-vehicle-rc-dark: linear-gradient(180deg, #252525 0%, #1a1a1a 100%);
+  --al-gradient-vehicle-rc-light: linear-gradient(180deg, #f5f5f5 0%, #ffffff 100%);
+  --al-gradient-plan-badge: rgba(31, 162, 74, 0.16);
+
+  /* Typography — Inter for all UI roles (Figma Foundations RC2) */
+  --al-font-family-sans: 'Inter', system-ui, sans-serif;
+  --al-font-family-ui: 'Inter', system-ui, sans-serif;
+  --al-font-family-mono: 'Inter', system-ui, sans-serif;
+  --al-text-sans-family: 'Inter', system-ui, sans-serif;
+  --al-text-ui-family: 'Inter', system-ui, sans-serif;
+  --al-text-mono-family: 'Inter', system-ui, sans-serif;
+
+  --al-text-display-size: 2.25rem;
+  --al-text-display-line-height: 2.75rem;
+  --al-text-display-weight: 700;
+  --al-text-display-letter-spacing: -0.02em;
+
+  --al-text-headline-size: 1.75rem;
+  --al-text-headline-line-height: 2.25rem;
+  --al-text-headline-weight: 700;
+  --al-text-headline-letter-spacing: -0.01em;
+
+  --al-text-title-size: 1.375rem;
+  --al-text-title-line-height: 1.75rem;
+  --al-text-title-weight: 600;
+  --al-text-title-letter-spacing: -0.01em;
+
+  --al-text-body-large-size: 1.0625rem;
+  --al-text-body-large-line-height: 1.5rem;
+  --al-text-body-large-weight: 400;
+  --al-text-body-large-letter-spacing: 0em;
+
+  --al-text-body-size: 1rem;
+  --al-text-body-line-height: 1.5rem;
+  --al-text-body-weight: 400;
+  --al-text-body-letter-spacing: 0em;
+
+  --al-text-label-size: 0.8125rem;
+  --al-text-label-line-height: 1.125rem;
+  --al-text-label-weight: 500;
+  --al-text-label-letter-spacing: 0.01em;
+
+  --al-text-caption-size: 0.75rem;
+  --al-text-caption-line-height: 1rem;
+  --al-text-caption-weight: 400;
+  --al-text-caption-letter-spacing: 0.01em;
+
+  --al-text-mono-size: 0.9375rem;
+  --al-text-mono-line-height: 1.375rem;
+  --al-text-mono-weight: 500;
+  --al-text-mono-letter-spacing: 0.02em;
+
+  --al-font-weight-regular: 400;
+  --al-font-weight-medium: 500;
+  --al-font-weight-semibold: 600;
+  --al-font-weight-bold: 700;
+  --al-font-feature-tabular: 'tnum' on, 'lnum' on;
+
+  /* Spacing — 4px rhythm */
+  --al-space-xs: 0.25rem;
+  --al-space-sm: 0.5rem;
+  --al-space-md: 0.75rem;
+  --al-space-lg: 1rem;
+  --al-space-xl: 1.5rem;
+  --al-space-xxl: 2rem;
+  --al-space-xxxl: 3rem;
+
+  /* Radius — Figma sm 8 / md 12 / lg 16 */
+  --al-radius-sm: 0.5rem;
+  --al-radius-md: 0.75rem;
+  --al-radius-lg: 1rem;
+  --al-radius-xl: 1.25rem;
+  --al-radius-control: 0.75rem;
+  --al-radius-pill: 9999px;
+  --al-radius-segment: 0.125rem;
+
+  /* Elevation & glow */
+  --al-elevation-flat: none;
+  --al-elevation-raised: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --al-shadow-nav: 0 10px 28px -4px rgba(0, 0, 0, 0.45);
+  --al-glow-protected: 0 0 26px rgba(31, 162, 74, 0.55);
+  --al-glow-attention: 0 0 26px rgba(245, 166, 35, 0.55);
+  --al-glow-emergency: 0 0 26px rgba(229, 52, 42, 0.6);
+  --al-shadow-none: var(--al-elevation-flat);
+  --al-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.12);
+  --al-shadow-md: var(--al-elevation-raised);
+  --al-shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.35);
+
+  /* Material tiers */
+  --al-material-ultra-thin-blur: 12px;
+  --al-material-ultra-thin-opacity: 0.8;
+  --al-material-thin-blur: 20px;
+  --al-material-thin-opacity: 0.7;
+  --al-material-regular-blur: 30px;
+  --al-material-regular-opacity: 0.64;
+  --al-material-thick-blur: 40px;
+  --al-material-thick-opacity: 0.55;
+
+  /* Borders */
+  --al-border-width-thin: 1px;
+  --al-border-width-thick: 2px;
+  --al-border-width-secondary: 1.5px;
+
+  /* Layout */
+  --al-layout-content-margin: var(--al-space-lg);
+  --al-layout-section-gap: var(--al-space-xl);
+  --al-layout-control-height-sm: 2.25rem;
+  --al-layout-control-height-md: 2.75rem;
+  --al-layout-control-height-lg: 3.625rem;
+  --al-layout-touch-target-min: 3rem;
+  --al-layout-touch-target-sos: 4.5rem;
+  --al-layout-icon-sm: 1.25rem;
+  --al-layout-icon-md: 1.5rem;
+  --al-layout-icon-lg: 1.75rem;
+  --al-layout-icon-hero-min: 6rem;
+  --al-layout-icon-hero-max: 10rem;
+
+  /* Figma component dimensions */
+  --al-comp-button-height: 3.625rem;
+  --al-comp-button-radius: 1rem;
+  --al-comp-button-padding-x: 1.5rem;
+  --al-comp-button-font-size: 1rem;
+  --al-comp-button-line-height: 1.25rem;
+  --al-comp-spinner-size: 1.25rem;
+  --al-comp-spinner-stroke: 2.5px;
+  --al-comp-toggle-width: 2.875rem;
+  --al-comp-toggle-height: 1.75rem;
+  --al-comp-toggle-knob: 1.375rem;
+  --al-comp-chip-padding-y: 0.25rem;
+  --al-comp-chip-padding-x: 0.75rem;
+  --al-comp-chip-gap: 0.5rem;
+  --al-comp-chip-dot: 0.5rem;
+  --al-comp-status-pill-padding-y: 0.25rem;
+  --al-comp-status-pill-padding-x: 0.75rem;
+  --al-comp-bottom-nav-width: 22.0625rem;
+  --al-comp-bottom-nav-height: 4rem;
+  --al-comp-bottom-nav-radius: 1rem;
+  --al-comp-input-height: 3.875rem;
+  --al-comp-text-field-radius: 0.75rem;
+  --al-comp-input-radius: 1rem;
+  --al-comp-otp-cell-height: 3.75rem;
+  --al-comp-otp-gap: 0.625rem;
+  --al-comp-otp-digit-size: 1.375rem;
+  --al-comp-quick-action-width: 6.875rem;
+  --al-comp-quick-action-padding-y: 1rem;
+  --al-comp-quick-action-gap: 0.625rem;
+  --al-comp-step-track-height: 0.375rem;
+  --al-comp-step-segment-height: 0.25rem;
+  --al-comp-step-segment-gap: 0.375rem;
+  --al-comp-field-gap: 0.125rem;
+  --al-comp-avatar-md: 2.875rem;
+  --al-comp-avatar-icon-md: 1.375rem;
+  --al-comp-plate-input-height: 3.875rem;
+  --al-comp-plate-input-radius: 0.75rem;
+  --al-comp-plate-input-padding-left: 1.125rem;
+  --al-comp-plate-digit-size: 1.5rem;
+  --al-comp-plate-divider-width: 0.125rem;
+  --al-comp-plate-divider-height: 1.625rem;
+  --al-comp-plan-card-width: 16.875rem;
+  --al-comp-plan-card-radius: 1.25rem;
+  --al-comp-plan-card-padding-y: 1.125rem;
+  --al-comp-plan-card-padding-x: 1.25rem;
+  --al-comp-plan-card-gap: 0.875rem;
+  --al-comp-plan-feature-gap: 0.5625rem;
+  --al-comp-plan-badge-font-size: 0.6875rem;
+  --al-comp-plan-includes-font-size: 0.75rem;
+  --al-comp-plan-selected-icon: 1.5rem;
+  --al-comp-vehicle-rc-radius: 1rem;
+  --al-comp-vehicle-rc-padding: 1rem;
+  --al-comp-vehicle-rc-gap: 1rem;
+  --al-comp-vehicle-rc-row-gap: 0.8125rem;
+  --al-comp-vehicle-rc-col-gap: 1rem;
+  --al-comp-vehicle-rc-plate-size: 1.8125rem;
+  --al-comp-vehicle-rc-badge-size: 1.875rem;
+  --al-comp-vehicle-rc-badge-radius: 0.4375rem;
+  --al-comp-screen-bg-tint-size: 45rem;
+  --al-comp-screen-bg-tint-offset-y: 7%;
+  --al-shadow-plate: 0 6px 18px -4px rgba(0, 0, 0, 0.35);
+
+  /* Motion */
+  --al-motion-fast: 120ms;
+  --al-motion-standard: 250ms;
+  --al-motion-normal: 250ms;
+  --al-motion-slow: 360ms;
+  --al-motion-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --al-motion-ease-emphasized: cubic-bezier(0.2, 0, 0, 0.9);
+  --al-motion-ease-decelerate: cubic-bezier(0, 0, 0, 1);
+  --al-motion-scale-press: 0.97;
+}
+
+body {
+  font-family: var(--al-text-sans-family);
+}
+
+/* Semantic colors — light theme */
+:root,
+[data-theme='light'] {
+  color-scheme: light;
+
+  --al-color-background: var(--al-neutral-canvas);
+  --al-color-surface: var(--al-neutral-0);
+  --al-color-surface-variant: var(--al-neutral-50);
+  --al-color-on-background: var(--al-neutral-1000);
+  --al-color-on-surface: var(--al-neutral-1000);
+  --al-color-on-surface-muted: var(--al-neutral-500);
+  --al-color-outline: var(--al-neutral-300);
+  --al-color-outline-strong: var(--al-neutral-500);
+  --al-color-pill-surface: var(--al-neutral-50);
+  --al-color-pill-on-surface: var(--al-neutral-1000);
+  --al-color-primary: var(--al-brand-black);
+  --al-color-on-primary: var(--al-brand-white);
+  --al-color-secondary-border: var(--al-neutral-700);
+  --al-color-emergency: var(--al-signal-red);
+  --al-color-on-emergency: var(--al-brand-white);
+  --al-color-success: var(--al-signal-green);
+  --al-color-on-success: var(--al-brand-white);
+  --al-color-warning: var(--al-signal-amber);
+  --al-color-on-warning: var(--al-brand-black);
+  --al-color-danger: var(--al-signal-red);
+  --al-color-on-danger: var(--al-brand-white);
+  --al-color-focus: var(--al-brand-black);
+  --al-color-overlay: rgba(10, 10, 10, 0.48);
+  --al-color-tier-safe: var(--al-signal-amber);
+  --al-color-tier-secure: var(--al-signal-amber);
+  --al-color-tier-shield: var(--al-signal-green);
+  --al-color-tier-shield-plus: var(--al-signal-red);
+  --al-color-plate-surface: var(--al-neutral-plate);
+  --al-color-on-plate: var(--al-neutral-1000);
+}
+
+/* Semantic colors — dark theme (explicit) */
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  --al-color-background: var(--al-neutral-950);
+  --al-color-surface: var(--al-neutral-900);
+  --al-color-surface-variant: var(--al-neutral-700);
+  --al-color-on-background: var(--al-neutral-0);
+  --al-color-on-surface: var(--al-neutral-0);
+  --al-color-on-surface-muted: var(--al-neutral-500);
+  --al-color-outline: var(--al-neutral-700);
+  --al-color-outline-strong: var(--al-neutral-500);
+  --al-color-pill-surface: var(--al-neutral-700);
+  --al-color-pill-on-surface: var(--al-brand-white);
+  --al-color-primary: var(--al-brand-white);
+  --al-color-on-primary: var(--al-brand-black);
+  --al-color-secondary-border: var(--al-neutral-700);
+  --al-color-emergency: var(--al-signal-red-bright);
+  --al-color-on-emergency: var(--al-brand-white);
+  --al-color-success: var(--al-signal-green);
+  --al-color-on-success: var(--al-brand-white);
+  --al-color-warning: var(--al-signal-amber);
+  --al-color-on-warning: var(--al-brand-black);
+  --al-color-danger: var(--al-signal-red-bright);
+  --al-color-on-danger: var(--al-brand-white);
+  --al-color-focus: var(--al-brand-white);
+  --al-color-overlay: rgba(10, 10, 10, 0.64);
+  --al-color-tier-safe: var(--al-signal-amber);
+  --al-color-tier-secure: var(--al-signal-amber);
+  --al-color-tier-shield: var(--al-signal-green);
+  --al-color-tier-shield-plus: var(--al-signal-red-bright);
+  --al-color-plate-surface: var(--al-neutral-plate);
+  --al-color-on-plate: var(--al-neutral-1000);
+}
+
+/* Semantic colors — dark theme (system preference) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+
+    --al-color-background: var(--al-neutral-950);
+    --al-color-surface: var(--al-neutral-900);
+    --al-color-surface-variant: var(--al-neutral-700);
+    --al-color-on-background: var(--al-neutral-0);
+    --al-color-on-surface: var(--al-neutral-0);
+    --al-color-on-surface-muted: var(--al-neutral-500);
+    --al-color-outline: var(--al-neutral-700);
+    --al-color-outline-strong: var(--al-neutral-500);
+    --al-color-pill-surface: var(--al-neutral-700);
+    --al-color-pill-on-surface: var(--al-brand-white);
+    --al-color-primary: var(--al-brand-white);
+    --al-color-on-primary: var(--al-brand-black);
+    --al-color-secondary-border: var(--al-neutral-700);
+    --al-color-emergency: var(--al-signal-red-bright);
+    --al-color-on-emergency: var(--al-brand-white);
+    --al-color-success: var(--al-signal-green);
+    --al-color-on-success: var(--al-brand-white);
+    --al-color-warning: var(--al-signal-amber);
+    --al-color-on-warning: var(--al-brand-black);
+    --al-color-danger: var(--al-signal-red-bright);
+    --al-color-on-danger: var(--al-brand-white);
+    --al-color-focus: var(--al-brand-white);
+    --al-color-overlay: rgba(10, 10, 10, 0.64);
+    --al-color-tier-safe: var(--al-signal-amber);
+    --al-color-tier-secure: var(--al-signal-amber);
+    --al-color-tier-shield: var(--al-signal-green);
+    --al-color-tier-shield-plus: var(--al-signal-red-bright);
+    --al-color-plate-surface: var(--al-neutral-plate);
+    --al-color-on-plate: var(--al-neutral-1000);
+  }
+}
+
+@keyframes al-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes al-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(var(--al-space-md));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes al-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

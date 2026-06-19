@@ -1,0 +1,221 @@
+/* Figma R07 layout_TZPG20 — 16px radius, 15px 16px padding, 12px gap between cards */
+
+.ob-rider-cover-options {
+  --ob-rider-motion-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ob-rider-motion-select: 850ms;
+  --ob-rider-motion-ring: 900ms;
+  --ob-rider-motion-radio: 480ms;
+  --ob-rider-motion-radio-delay: 260ms;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.ob-rider-cover-option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 15px 16px;
+  border: 1px solid var(--al-color-outline);
+  border-radius: 16px;
+  background-color: var(--al-color-surface);
+  color: var(--al-color-on-surface);
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  transform: scale(0.985);
+  transition:
+    transform var(--ob-rider-motion-select) var(--ob-rider-motion-ease),
+    border-color var(--ob-rider-motion-ring) var(--ob-rider-motion-ease);
+}
+
+.ob-rider-cover-option::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 2px solid transparent;
+  border-radius: 16px;
+  box-shadow: 0 0 0 rgba(31, 163, 74, 0);
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.985);
+  transition:
+    opacity var(--ob-rider-motion-ring) var(--ob-rider-motion-ease),
+    border-color var(--ob-rider-motion-ring) var(--ob-rider-motion-ease),
+    box-shadow var(--ob-rider-motion-ring) var(--ob-rider-motion-ease),
+    transform var(--ob-rider-motion-ring) var(--ob-rider-motion-ease);
+}
+
+.ob-rider-cover-option:hover:not(.ob-rider-cover-option--selected) {
+  border-color: var(--al-color-outline-strong);
+  transform: scale(0.99) translateY(-1px);
+}
+
+.ob-rider-cover-option:active:not(.ob-rider-cover-option--selected) {
+  transform: scale(0.975);
+  transition-duration: var(--ob-motion-tap, 180ms);
+}
+
+.ob-rider-cover-option--selected {
+  border-color: var(--al-color-outline);
+  transform: scale(1);
+}
+
+.ob-rider-cover-option--selected::after {
+  opacity: 1;
+  border-color: var(--al-color-success);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--al-color-success) 24%, transparent);
+  transform: scale(1);
+}
+
+.ob-rider-cover-option__radio-slot {
+  position: relative;
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+}
+
+.ob-rider-cover-option__radio--empty {
+  position: absolute;
+  inset: 0;
+  display: block;
+  border: 1.5px solid var(--al-color-outline);
+  border-radius: 50%;
+  opacity: 1;
+  transform: scale(1);
+  transition:
+    opacity var(--ob-rider-motion-radio) var(--ob-rider-motion-ease),
+    transform var(--ob-rider-motion-radio) var(--ob-rider-motion-ease),
+    border-color var(--ob-rider-motion-ring) var(--ob-rider-motion-ease);
+}
+
+.ob-rider-cover-option__radio--check {
+  position: absolute;
+  inset: 0;
+  color: var(--al-color-success);
+  opacity: 0;
+  transform: scale(0.55);
+  transition:
+    opacity var(--ob-rider-motion-radio) var(--ob-rider-motion-ease),
+    transform var(--ob-rider-motion-radio) var(--ob-rider-motion-ease);
+}
+
+.ob-rider-cover-option--selected .ob-rider-cover-option__radio--empty {
+  opacity: 0;
+  transform: scale(0.85);
+  transition-delay: 0ms;
+}
+
+.ob-rider-cover-option--selected .ob-rider-cover-option__radio--check {
+  opacity: 1;
+  transform: scale(1);
+  transition-delay: var(--ob-rider-motion-radio-delay);
+}
+
+.ob-rider-cover-option:not(.ob-rider-cover-option--selected) .ob-rider-cover-option__radio--check {
+  opacity: 0;
+  transform: scale(0.55);
+  transition-delay: 0ms;
+}
+
+.ob-rider-cover-option:not(.ob-rider-cover-option--selected) .ob-rider-cover-option__radio--empty {
+  opacity: 1;
+  transform: scale(1);
+  transition-delay: calc(var(--ob-rider-motion-radio) * 0.45);
+}
+
+.ob-rider-cover-option__icon {
+  flex-shrink: 0;
+  color: var(--al-color-on-surface);
+}
+
+.ob-rider-cover-option__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.ob-rider-cover-option__title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ob-rider-cover-option__title {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.ob-rider-cover-option__discount {
+  padding: 3px 7px;
+  border-radius: 999px;
+  background: rgba(31, 162, 74, 0.16);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.ob-rider-cover-option__subtitle {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--al-color-on-surface-muted);
+}
+
+.ob-rider-cover-option__price-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1px;
+  flex-shrink: 0;
+}
+
+.ob-rider-cover-option__price {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.ob-rider-cover-option__strike {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--al-color-on-surface-muted);
+  text-decoration: line-through;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ob-rider-cover-option,
+  .ob-rider-cover-option::after,
+  .ob-rider-cover-option__radio--empty,
+  .ob-rider-cover-option__radio--check {
+    transition: none;
+  }
+
+  .ob-rider-cover-option--selected::after {
+    opacity: 1;
+    border-color: var(--al-color-success);
+    box-shadow: 0 0 16px color-mix(in srgb, var(--al-color-success) 24%, transparent);
+    transform: scale(1);
+  }
+
+  .ob-rider-cover-option--selected .ob-rider-cover-option__radio--empty {
+    opacity: 0;
+  }
+
+  .ob-rider-cover-option--selected .ob-rider-cover-option__radio--check {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .ob-rider-cover-option:hover:not(.ob-rider-cover-option--selected),
+  .ob-rider-cover-option:active:not(.ob-rider-cover-option--selected) {
+    transform: none;
+  }
+}

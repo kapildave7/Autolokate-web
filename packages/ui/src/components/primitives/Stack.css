@@ -1,0 +1,63 @@
+.al-stack {
+  display: flex;
+}
+
+.al-stack--row {
+  flex-direction: row;
+}
+
+.al-stack--column {
+  flex-direction: column;
+}
+
+.al-stack--align-start {
+  align-items: flex-start;
+}
+
+.al-stack--align-center {
+  align-items: center;
+}
+
+.al-stack--align-stretch {
+  align-items: stretch;
+}
+
+.al-stack--justify-start {
+  justify-content: flex-start;
+}
+
+.al-stack--justify-center {
+  justify-content: center;
+}
+
+.al-stack--justify-between {
+  justify-content: space-between;
+}
+
+.al-stack--gap-xs {
+  gap: var(--al-space-xs);
+}
+
+.al-stack--gap-sm {
+  gap: var(--al-space-sm);
+}
+
+.al-stack--gap-md {
+  gap: var(--al-space-md);
+}
+
+.al-stack--gap-lg {
+  gap: var(--al-space-lg);
+}
+
+.al-stack--gap-xl {
+  gap: var(--al-space-xl);
+}
+
+.al-stack--gap-xxl {
+  gap: var(--al-space-xxl);
+}
+
+.al-stack--gap-xxxl {
+  gap: var(--al-space-xxxl);
+}

@@ -1,0 +1,25 @@
+/* Figma AlOfflineChip — 580:1743 · gray pill #4A4A4A */
+.ob-offline-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: center;
+  padding: 7px 14px 7px 12px;
+  border-radius: 999px;
+  background: var(--al-neutral-700);
+  color: var(--al-color-on-surface);
+}
+
+.ob-offline-chip__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--al-color-warning);
+  flex-shrink: 0;
+}
+
+.ob-offline-chip .al-text {
+  font-size: var(--al-text-label-size);
+  line-height: var(--al-text-label-line-height);
+  font-weight: 500;
+}

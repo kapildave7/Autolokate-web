@@ -1,0 +1,48 @@
+.al-step-progress {
+  display: flex;
+  flex-direction: column;
+  gap: var(--al-space-sm);
+  width: 100%;
+}
+
+.al-step-progress__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--al-space-sm);
+}
+
+.al-step-progress__label {
+  font-size: var(--al-text-label-size);
+  font-weight: var(--al-text-label-weight);
+  line-height: var(--al-text-label-line-height);
+  color: var(--al-color-on-surface);
+}
+
+.al-step-progress__count {
+  font-size: var(--al-text-caption-size);
+  font-weight: var(--al-text-label-weight);
+  line-height: var(--al-text-caption-line-height);
+  color: var(--al-neutral-500);
+  font-feature-settings: var(--al-font-feature-tabular);
+}
+
+.al-step-progress__track {
+  display: flex;
+  align-items: center;
+  gap: var(--al-comp-step-segment-gap);
+  width: 100%;
+  height: var(--al-comp-step-track-height);
+}
+
+.al-step-progress__segment {
+  flex: 1;
+  height: var(--al-comp-step-segment-height);
+  border-radius: var(--al-radius-segment);
+  background-color: var(--al-color-pill-surface);
+  transition: background-color var(--al-motion-standard) var(--al-motion-ease-standard);
+}
+
+.al-step-progress__segment.is-complete {
+  background-color: var(--al-color-on-surface);
+}

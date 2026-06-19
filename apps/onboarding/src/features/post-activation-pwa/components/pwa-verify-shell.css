@@ -1,0 +1,29 @@
+.pwa-verify-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  min-width: 0;
+}
+
+.pwa-verify-shell__intro {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pwa-verify-shell__content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  min-width: 0;
+}
+
+.pwa-verify-shell__content .ob-auth-otp-input {
+  width: 100%;
+}
+
+.pwa-verify-shell__content .ob-auth-otp-status {
+  margin-top: 4px;
+}

@@ -1,0 +1,39 @@
+.al-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--al-comp-chip-gap);
+  padding: var(--al-comp-status-pill-padding-y) var(--al-comp-status-pill-padding-x);
+  border-radius: var(--al-radius-pill);
+  border: var(--al-border-width-thin) solid transparent;
+  background-color: var(--al-color-pill-surface);
+  color: var(--al-color-pill-on-surface);
+  font-family: var(--al-text-ui-family);
+  font-size: var(--al-text-label-size);
+  font-weight: var(--al-text-label-weight);
+  line-height: var(--al-text-label-line-height);
+  white-space: nowrap;
+}
+
+.al-status-pill__dot {
+  width: var(--al-comp-chip-dot);
+  height: var(--al-comp-chip-dot);
+  border-radius: var(--al-radius-pill);
+  flex-shrink: 0;
+}
+
+.al-status-pill--protected .al-status-pill__dot {
+  background-color: var(--al-signal-green);
+}
+
+.al-status-pill--attention .al-status-pill__dot {
+  background-color: var(--al-signal-amber);
+}
+
+.al-status-pill--alert .al-status-pill__dot {
+  background-color: var(--al-signal-red);
+}
+
+.al-status-pill__label {
+  display: inline-flex;
+  align-items: center;
+}

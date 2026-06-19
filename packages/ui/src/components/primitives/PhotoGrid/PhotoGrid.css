@@ -1,0 +1,144 @@
+.al-photo-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.al-photo-grid__cells {
+  display: grid;
+  gap: 12px;
+  width: 100%;
+}
+
+.al-photo-grid__cells--dual {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.al-photo-grid__cells--quad {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.al-photo-grid__cells--stacked {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.al-photo-grid__location {
+  width: 100%;
+  min-height: 120px;
+  border: 1.5px dashed #4a4a4a;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* Figma 1044:2406 review */
+.al-photo-grid--review {
+  gap: 16px;
+}
+
+.al-photo-grid--review-quad {
+  gap: 0;
+}
+
+.al-photo-grid__review-quad {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  width: 100%;
+}
+
+.al-photo-grid__review-quad .al-photo-grid__review-photo {
+  height: 140px;
+}
+
+.al-photo-grid__review-photos {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.al-photo-grid__review-photo {
+  position: relative;
+  width: 100%;
+  height: 160px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.al-photo-grid__review-retake {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: rgba(10, 10, 10, 0.55);
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.al-photo-grid__review-retake:focus-visible {
+  outline: 2px solid var(--al-color-focus);
+  outline-offset: 2px;
+}
+
+.al-photo-grid__review-image {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.al-photo-grid__review-placeholder {
+  position: absolute;
+  inset: 0;
+  display: block;
+  background: linear-gradient(127deg, #424557 0%, #1f2129 74%);
+}
+
+.al-photo-grid__review-map {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 120px;
+  padding: 24px 16px 20px;
+  border-radius: 16px;
+  background: #212b26;
+  overflow: hidden;
+}
+
+.al-photo-grid__review-map-lines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.55;
+  background:
+    linear-gradient(#38453d, #38453d) center 42% / 72% 5px no-repeat,
+    linear-gradient(#38453d, #38453d) 58% center / 5px 58% no-repeat;
+}
+
+.al-photo-grid__review-map-label {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-family: var(--al-text-ui-family);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 16px;
+  color: #ffffff;
+  text-align: center;
+}

@@ -1,0 +1,43 @@
+/* Figma R03 layout_0WPSOR — gap 12, padding-top 4 */
+
+.ob-vahan-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding-block-start: 4px;
+}
+
+.ob-vahan-preview__label {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 500;
+}
+
+.ob-vahan-preview__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ob-vahan-preview__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px 7px 10px;
+  border-radius: 999px;
+  background-color: var(--al-color-pill-surface);
+  color: var(--al-color-pill-on-surface);
+  font-family: var(--al-text-ui-family);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.ob-vahan-preview__chip-icon {
+  flex-shrink: 0;
+  color: var(--al-color-on-surface-muted);
+}

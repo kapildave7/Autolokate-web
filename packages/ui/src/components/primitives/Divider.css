@@ -1,0 +1,16 @@
+.al-divider {
+  border: none;
+  margin: 0;
+  background-color: var(--al-color-outline);
+}
+
+.al-divider--horizontal {
+  width: 100%;
+  height: calc(var(--al-space-xs) / 4);
+}
+
+.al-divider--vertical {
+  width: calc(var(--al-space-xs) / 4);
+  height: 100%;
+  align-self: stretch;
+}

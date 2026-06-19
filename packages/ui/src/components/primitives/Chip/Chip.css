@@ -1,0 +1,77 @@
+.al-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--al-comp-chip-gap);
+  padding: var(--al-comp-chip-padding-y) var(--al-comp-chip-padding-x);
+  border-radius: var(--al-radius-pill);
+  border: var(--al-border-width-thin) solid transparent;
+  background-color: var(--al-color-pill-surface);
+  color: var(--al-color-pill-on-surface);
+  font-family: var(--al-text-ui-family);
+  font-size: var(--al-text-label-size);
+  font-weight: var(--al-text-label-weight);
+  line-height: var(--al-text-label-line-height);
+  white-space: nowrap;
+}
+
+.al-chip--interactive {
+  cursor: pointer;
+  transition:
+    opacity var(--al-motion-fast) var(--al-motion-ease-standard),
+    transform var(--al-motion-fast) var(--al-motion-ease-emphasized);
+}
+
+.al-chip--interactive:hover:not(:disabled) {
+  opacity: 0.92;
+}
+
+.al-chip--interactive:active:not(:disabled) {
+  transform: scale(var(--al-motion-scale-press));
+}
+
+.al-chip--interactive:focus-visible {
+  outline: var(--al-border-width-thick) solid var(--al-color-focus);
+  outline-offset: var(--al-space-xs);
+}
+
+.al-chip__dot {
+  width: var(--al-comp-chip-dot);
+  height: var(--al-comp-chip-dot);
+  border-radius: var(--al-radius-pill);
+  flex-shrink: 0;
+}
+
+.al-chip--green .al-chip__dot {
+  background-color: var(--al-signal-green);
+}
+
+.al-chip--amber .al-chip__dot {
+  background-color: var(--al-signal-amber);
+}
+
+.al-chip--neutral .al-chip__dot {
+  background-color: var(--al-color-on-surface-muted);
+}
+
+.al-chip__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 0.875rem;
+  height: 0.875rem;
+  flex-shrink: 0;
+}
+
+.al-chip__label {
+  display: inline-flex;
+  align-items: center;
+}
+
+.al-chip--selected.al-chip--neutral {
+  background-color: var(--al-color-primary);
+  color: var(--al-color-on-primary);
+}
+
+.al-chip--selected.al-chip--neutral .al-chip__dot {
+  background-color: currentColor;
+}

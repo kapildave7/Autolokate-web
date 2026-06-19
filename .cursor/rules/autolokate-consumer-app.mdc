@@ -1,0 +1,119 @@
+---
+description: Autolokate Consumer App — Figma parity, journey architecture, design system, and animation rules (authoritative project memory)
+alwaysApply: true
+---
+
+# Autolokate Consumer App — Project Memory
+
+This document overrides assumptions. Future work must follow these decisions automatically.
+
+## Product
+
+- **Autolokate Consumer App**
+- **Primary source of truth:** Figma Consumer App Design File
+- Every screen must follow Figma exactly. Pixel parity is the goal.
+- Do not redesign, simplify, or approximate.
+
+## Global Rules
+
+- Figma is always correct. If implementation differs, fix implementation — never change Figma intent.
+- Never invent UX, copy, or layouts.
+- Never replace missing assets with placeholders. Recover original assets from Figma.
+
+## Mobile Preview Rules
+
+Do NOT render fake device chrome: status bar, time, battery, network icons, carrier text, signal indicators, notch overlays. Only application UI.
+
+## Theme Rules
+
+- Theme toggle exists **ONLY** on `/journey` Flow Entry Screen.
+- Never place theme controls inside: Auth, Legal, Purchase, Emergency, Prepaid, B2B2C.
+- Theme selection persists globally. Dark and Light must work everywhere.
+
+## Journey Architecture (Approved — Do Not Modify)
+
+**Purchase:** Auth → Vehicle → Purchase → Payment → Emergency → Completed
+
+**Prepaid:** Landing → Auth → Emergency → Completed
+
+**B2B2C:** Landing → Auth → Emergency → Completed
+
+Do not move, insert, or reorder steps.
+
+## Auth Rules
+
+- Approved flow: Mobile → OTP → Name
+- No splash, no QR scan after auth, no language selector/picker
+- Legal routes must not exist as standalone pages; legal content only in-flow
+- Mobile: 10 digits maximum
+- OTP: `123456` valid, `000000` expired
+- All OTP visuals must match Figma; OTP errors use **amber**, not red
+
+## Purchase Rules
+
+Approved flow: R03, R04, R05, R06, R07, R08, R08b, R08c, R09, R09b, R10, R10b, R10c
+
+- Purchase ends at Payment Success
+- Emergency starts after Payment Success Continue
+- **R14 and R15 are NOT part of purchase** — do not reintroduce
+
+## Emergency Rules
+
+- Payment Success Continue must always open Emergency
+- Emergency contacts are mandatory (at least one required)
+- Plan limits: Safe = 1, Secure = 2, Shield = 3, Shield+ = 3
+- Relationship selector: **3 cards per row**, not 2
+
+## Design System Rules
+
+Always use `@autolokate/ui`, `@autolokate/icons`, `@autolokate/design-system`.
+
+- Do not create duplicate buttons, cards, or inputs
+- If reused 2+ times, consider promotion and document promotions
+
+## Animation Rules
+
+Animations should feel premium. Allowed: spring, fade, elevation, scale, glow, opacity, translate.
+
+- Card, carousel, and relationship selection should animate
+- Buttons should animate
+- Do NOT animate entire screens aggressively
+- Do NOT slide the entire carousel track
+- Center card selection should feel smooth; one card at a time
+
+## Carousel Rules (R06 Plan Carousel)
+
+- Center card is selected
+- Scrolling updates selection, CTA, and price automatically
+- No jumping, layout shift, or snap behavior
+- Smooth momentum
+
+## Input Rules
+
+- Mobile inputs: maximum 10 digits; prevent extra typing
+- Selection styles must match design system
+- No unexpected text-selection background, extra focus borders, duplicate outlines, or unwanted shadows
+
+## Code Quality Rules
+
+No console errors/warnings, React warnings, TypeScript warnings, dead code, orphan routes, broken imports, or missing CSS imports.
+
+Prefer files under 100 lines when practical; do not split unnecessarily. Readability first.
+
+## Figma Parity Rules
+
+Before marking complete, verify against Figma: spacing, padding, radius, typography, copy, icons, SVGs, illustrations, chips, cards, CTAs, halos, gradients, loading/error/success states, responsive behavior, dark and light theme.
+
+Target **100% parity**. Do not claim parity without verification.
+
+## Current Priority
+
+When implementing new work:
+
+1. Preserve existing approved journey architecture
+2. Maintain Figma parity
+3. Maintain design-system consistency
+4. Maintain animation quality
+5. Avoid regressions
+
+Assume these rules remain active unless explicitly replaced.

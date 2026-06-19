@@ -1,0 +1,32 @@
+.al-heading {
+  margin: 0;
+  font-family: var(--al-text-ui-family);
+  color: var(--al-color-on-surface);
+}
+
+.al-heading--h1 {
+  font-size: var(--al-text-display-size);
+  line-height: var(--al-text-display-line-height);
+  font-weight: var(--al-text-display-weight);
+  letter-spacing: var(--al-text-display-letter-spacing);
+}
+
+.al-heading--h2 {
+  font-size: var(--al-text-headline-size);
+  line-height: var(--al-text-headline-line-height);
+  font-weight: var(--al-text-headline-weight);
+  letter-spacing: var(--al-text-headline-letter-spacing);
+}
+
+.al-heading--h3 {
+  font-size: var(--al-text-title-size);
+  line-height: var(--al-text-title-line-height);
+  font-weight: var(--al-text-title-weight);
+  letter-spacing: var(--al-text-title-letter-spacing);
+}
+
+.al-heading--h4 {
+  font-size: var(--al-text-body-large-size);
+  line-height: var(--al-text-body-large-line-height);
+  font-weight: var(--al-text-label-weight);
+}

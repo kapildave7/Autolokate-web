@@ -1,0 +1,23 @@
+.ob-inline-status-banner {
+  padding: var(--al-space-md);
+  border-radius: var(--al-radius-md);
+  color: var(--al-color-on-surface);
+  font-size: var(--al-text-caption-size);
+  line-height: var(--al-text-caption-line-height);
+}
+
+.ob-inline-status-banner--error {
+  background: color-mix(in srgb, var(--al-color-danger) 12%, var(--al-color-surface));
+}
+
+.ob-inline-status-banner--success {
+  background: color-mix(in srgb, var(--al-color-success) 12%, var(--al-color-surface));
+}
+
+.ob-inline-status-banner--warning {
+  background: color-mix(in srgb, var(--al-color-warning) 12%, var(--al-color-surface));
+}
+
+.ob-inline-status-banner--loading {
+  background: color-mix(in srgb, var(--al-color-on-surface) 8%, var(--al-color-surface));
+}
