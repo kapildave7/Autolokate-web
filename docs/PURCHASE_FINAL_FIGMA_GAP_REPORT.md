@@ -3,7 +3,7 @@
 **Date:** 2026-06-18  
 **Source of truth:** Figma · [Autolokate · Consumer App](https://www.figma.com/design/FtHCUnE0HH586PtG5yJyG0/Autolokate-%C2%B7-Consumer-App)  
 **Section:** `167:434` · **Consumer · QR Activation + Purchase · ✅ READY FOR DEV**  
-**Method:** Read-only code audit · route graph trace · session schema review · Figma inventory cross-reference (`docs/PURCHASE_FIGMA_AUDIT.md`, Phase A–C signoff docs)  
+**Method:** Read-only code audit · route graph trace · session schema review · Figma inventory cross-reference (`docs/archive/PURCHASE_FIGMA_AUDIT.md`, Phase A–C signoff docs)  
 **Constraints:** Audit only — no code modified
 
 ---
@@ -424,10 +424,10 @@ R10c ── NOT IN CODE
 | Session types | `apps/onboarding/src/features/qr-purchase/types-checkout.ts` |
 | Demo payment | `apps/onboarding/src/features/qr-purchase/data/purchase-payment-demo.ts` |
 | Dev preview | `apps/onboarding/src/dev/ScreenDevApp.tsx` |
-| Figma inventory | `docs/PURCHASE_FIGMA_AUDIT.md` |
+| Figma inventory (archived) | `docs/archive/PURCHASE_FIGMA_AUDIT.md` |
 | Phase A signoff | `docs/PHASE_A_VISUAL_SIGNOFF.md` |
-| Phase B impl | `docs/PHASE_B_IMPLEMENTATION.md` |
-| Phase C impl | `docs/PHASE_C_IMPLEMENTATION.md` |
+| Phase B impl (archived) | `docs/archive/PHASE_B_IMPLEMENTATION.md` |
+| Phase C impl (archived) | `docs/archive/PHASE_C_IMPLEMENTATION.md` |
 
 ---
 

@@ -2,7 +2,7 @@
 
 **Date:** 2026-06-17  
 **Sprint:** Post-Activation PWA — Final Bug Fix + Interaction Correction  
-**Reference:** `FINAL_UX_POLISH_REPORT.md` + latest screenshot review
+**Reference:** `archive/FINAL_UX_POLISH_REPORT.md` + latest screenshot review
 
 ---
 
@@ -65,9 +65,9 @@ Full set: `docs/audit-screenshots/bugfix/{before,after}/` (30/30)
 
 ---
 
-## Companion reports
+## Companion reports (archived)
 
-- `SOS_INTERACTION_REPORT.md`
-- `DIALOG_RENDERING_REPORT.md`
-- `ANIMATION_REFINEMENT_REPORT.md`
-- `SCREENSHOT_VERIFICATION_REPORT.md`
+- `archive/SOS_INTERACTION_REPORT.md`
+- `archive/DIALOG_RENDERING_REPORT.md`
+- `archive/ANIMATION_REFINEMENT_REPORT.md`
+- `archive/SCREENSHOT_VERIFICATION_REPORT.md`

@@ -2,7 +2,7 @@
 
 **Scope:** R03 · Vehicle Number · R03b inline error · R04 · Fetching Details · R04b · Fetch Failed · R05 · Confirm Vehicle  
 **Figma nodes:** `170:25` · `579:1700` (R03b) · `179:25` · `579:1663` · `170:71`  
-**Date:** 2026-06-17 (updated after icon parity fix — see [`PHASE_A_ICON_PARITY_REPORT.md`](./PHASE_A_ICON_PARITY_REPORT.md))  
+**Date:** 2026-06-17 (updated after icon parity fix — see [`PHASE_A_ICON_PARITY_REPORT.md`](./archive/PHASE_A_ICON_PARITY_REPORT.md))  
 **Constraints honored:** No routing, state transition, or journey logic changes.
 
 ---
@@ -173,4 +173,4 @@ pnpm --filter @autolokate/icons --filter @autolokate/ui --filter @autolokate/onb
 
 # VISUALLY APPROVED
 
-Phase A purchase screens R03–R05 meet Figma visual + **icon** parity at **97% aggregate** with zero open P0/P1 items. Icon audit: [`PHASE_A_ICON_PARITY_REPORT.md`](./PHASE_A_ICON_PARITY_REPORT.md). Phase B (R06+) may proceed.
+Phase A purchase screens R03–R05 meet Figma visual + **icon** parity at **97% aggregate** with zero open P0/P1 items. Icon audit: [`PHASE_A_ICON_PARITY_REPORT.md`](./archive/PHASE_A_ICON_PARITY_REPORT.md). Phase B (R06+) may proceed.

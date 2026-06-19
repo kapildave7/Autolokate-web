@@ -518,7 +518,7 @@ Signoff against the designated Figma source of truth requires architectural real
 
 | Document | Relationship |
 |----------|--------------|
-| [AUTH_FLOW_SIGNOFF.md](./AUTH_FLOW_SIGNOFF.md) | Functional signoff (91/100) — predates Shared-section parity audit |
-| [FIGMA_RC2_PARITY_AUDIT.md](./FIGMA_RC2_PARITY_AUDIT.md) | DS component-level drift (OTP error color) |
-| [SHARED_FLOW_IMPLEMENTATION.md](./SHARED_FLOW_IMPLEMENTATION.md) | Phase 4 implementation notes |
-| [VEHICLE_INFO_AUDIT.md](./VEHICLE_INFO_AUDIT.md) | R02 RC card spec (`170:79`) |
+| [AUTH_FLOW_SIGNOFF.md](./archive/AUTH_FLOW_SIGNOFF.md) | Functional signoff (91/100) — predates Shared-section parity audit |
+| [FIGMA_RC2_PARITY_AUDIT.md](./archive/FIGMA_RC2_PARITY_AUDIT.md) | DS component-level drift (OTP error color) |
+| [SHARED_FLOW_IMPLEMENTATION.md](./archive/SHARED_FLOW_IMPLEMENTATION.md) | Phase 4 implementation notes |
+| [VEHICLE_INFO_AUDIT.md](./archive/VEHICLE_INFO_AUDIT.md) | Vehicle RC display spec (`170:79`) — covers R05/R02 confirm screen |

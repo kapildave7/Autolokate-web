@@ -180,7 +180,7 @@ Overall = flow weights (Purchase 35%, Auth 20%, Emergency 25%, Prepaid 10%, B2B2
 | Sprint 1 assets (halos, relation icons) | Recovered |
 | Not in matrix | S0 Splash · P01–P06 legacy · R14 Permissions · R15 (component only) |
 
-References: [`SCREEN_PARITY_MATRIX.md`](./SCREEN_PARITY_MATRIX.md) · [`CONSUMER_APP_100_PARITY_REPORT.md`](./CONSUMER_APP_100_PARITY_REPORT.md)
+References: [`SCREEN_PARITY_MATRIX.md`](./archive/SCREEN_PARITY_MATRIX.md) · [`CONSUMER_APP_100_PARITY_REPORT.md`](./archive/CONSUMER_APP_100_PARITY_REPORT.md)
 
 ### Build / lint (audit run 2026-06-17)
 
@@ -304,10 +304,10 @@ High priority for production; acceptable for controlled demo with scripts if P0-
 
 | Document | Sprint |
 |----------|--------|
-| [`MISSING_ASSET_RECOVERY_REPORT.md`](./MISSING_ASSET_RECOVERY_REPORT.md) | 1 |
-| [`SCREEN_PARITY_MATRIX.md`](./SCREEN_PARITY_MATRIX.md) | 2 |
-| [`CONSUMER_APP_100_PARITY_REPORT.md`](./CONSUMER_APP_100_PARITY_REPORT.md) | 2 |
-| [`CONSUMER_APP_FINAL_HARDENING_REPORT.md`](./CONSUMER_APP_FINAL_HARDENING_REPORT.md) | 3 |
+| [`MISSING_ASSET_RECOVERY_REPORT.md`](./archive/MISSING_ASSET_RECOVERY_REPORT.md) | 1 |
+| [`SCREEN_PARITY_MATRIX.md`](./archive/SCREEN_PARITY_MATRIX.md) | 2 |
+| [`CONSUMER_APP_100_PARITY_REPORT.md`](./archive/CONSUMER_APP_100_PARITY_REPORT.md) | 2 |
+| [`CONSUMER_APP_FINAL_HARDENING_REPORT.md`](./archive/CONSUMER_APP_FINAL_HARDENING_REPORT.md) | 3 |
 | **This document** | 4 |
 
 ---

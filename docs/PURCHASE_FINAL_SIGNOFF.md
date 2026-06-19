@@ -1,7 +1,10 @@
 # Purchase Final Signoff — Consumer · QR Activation + Purchase
 
-**Date:** 2026-06-17  
-**Scope:** End-to-end audit · Mobile → OTP → Name → R03–R15 → Activation Complete  
+> **⚠️ UPDATED 2026-06-19 — R14/R15 ARCHIVED**
+> This report was written on 2026-06-17 when R14 and R15 were still considered active routes. As of the Purchase Flow Correction (2026-06-18), R14 Permissions and R15 Activation Complete are **archived and must not be restored**. Purchase now terminates at **R10 / R10b / R10c**. All R14/R15 route graph entries, test paths, and session field references below are updated to reflect the current architecture. See `PURCHASE_FINAL_FIGMA_GAP_REPORT.md` for the authoritative current gap analysis.
+
+**Date:** 2026-06-17 (updated 2026-06-19)  
+**Scope:** End-to-end audit · Mobile → OTP → Name → R03–R10 (R14/R15 archived — see banner above)  
 **Method:** Read-only code audit · route graph trace · session schema review · Figma cross-reference (sections `167:434`, Phases A–C docs)  
 **Constraints honored:** No new screens · no architecture changes · no deletions
 
@@ -9,9 +12,9 @@
 
 ## Executive summary
 
-The **active purchase journey (R03–R15)** is fully wired for demo/UI purposes. All four plan tiers reach the expected payment outcome. Session fields persist via `sessionStorage`. No redirect loops or blank screens were found on the primary path.
+The **active purchase journey (R03–R10)** is fully wired for demo/UI purposes. All four plan tiers reach the expected payment outcome. Session fields persist via `sessionStorage`. No redirect loops or blank screens were found on the primary path.
 
-**Two route-guard gaps** allow browser-back / deep-link regression after payment success. Several **Figma branch frames** (R08c, R09b, R10c) and **legacy orphan routes** (P01–P06) remain. R15 terminal behaviour matches Phase C spec (no exit navigation).
+**Two route-guard gaps** allow browser-back / deep-link regression after payment success. Several **Figma branch frames** (R08c, R09b, R10c) and **legacy orphan routes** (P01–P06) remain. R14 and R15 are archived; purchase terminates at R10 / R10b / R10c.
 
 ### Verdict: **FIXES REQUIRED**
 
@@ -39,8 +42,8 @@ Purchase flow is **complete for demo signoff** but **not production-ready** unti
 | Purchase | R09 Processing | `…/r09-processing-payment` | ✅ |
 | Purchase | R10 Success | `…/r10-payment-success` | ✅ |
 | Purchase | R10b Failed | `…/r10b-payment-failed` | ✅ branch |
-| Purchase | R14 Permissions | `…/r14-permissions` | ✅ |
-| Purchase | R15 Activation complete | `…/r15-activation-complete` | ✅ terminal |
+| Purchase | ~~R14 Permissions~~ | ~~`…/r14-permissions`~~ | **ARCHIVED** |
+| Purchase | ~~R15 Activation complete~~ | ~~`…/r15-activation-complete`~~ | **ARCHIVED** |
 
 ### 1.2 Complete transition table
 
@@ -84,25 +87,26 @@ PAYMENT (Phase C)
   r09 ──3s + Safe|Secure|Shield──► r10-payment-success
   r09 ──3s + Shield+──► r10b-payment-failed
   r09 ──guard: not processing──► r08 | r08b
-  r10 ──Continue──► r14-permissions
+  r10 ──Continue──► Emergency (contacts-empty)  [R14/R15 archived]
   r10 ──guard: not success──► r08 | r08b
   r10b ──Retry payment──► r08 | r08b (payment reset)
   r10b ──guard: not failed──► r08 | r08b
 
-PERMISSIONS + TERMINAL
-  r14 ──Allow & continue (all toggles ON)──► r15 (granted)
-  r14 ──Skip──► r15 (skipped)
-  r14 ◄──Back── r10
-  r14 ──guard: not success──► r08 | r08b
-  r15 ──Go to home──► activationComplete=true (stays on R15)
-  r15 ──guard: no granted|skipped──► r14
+[ARCHIVED — do not restore]
+~~PERMISSIONS + TERMINAL~~
+~~r14 ──Allow & continue (all toggles ON)──► r15 (granted)~~
+~~r14 ──Skip──► r15 (skipped)~~
+~~r14 ◄──Back── r10~~
+~~r14 ──guard: not success──► r08 | r08b~~
+~~r15 ──Go to home──► activationComplete=true (stays on R15)~~
+~~r15 ──guard: no granted|skipped──► r14~~
 ```
 
 ### 1.3 Route health checklist
 
 | Check | Result | Notes |
 |-------|--------|-------|
-| No dead ends on happy path | ✅ | R15 terminal is intentional (Phase C spec) |
+| No dead ends on happy path | ✅ | R10 → Emergency (contacts-empty) is terminal for purchase |
 | No blank screens | ✅ | Every route renders a screen component |
 | No redirect loops | ✅ | All guard chains terminate |
 | No unreachable active screens | ✅ | R04b / R08b / R10b reachable via branches |
@@ -116,14 +120,14 @@ PERMISSIONS + TERMINAL
 
 | State | Where implemented | Reachable | Gap |
 |-------|-------------------|-----------|-----|
-| **Success** | R05 confirm · R10 payment · R15 activation | ✅ | — |
+| **Success** | R05 confirm · R10 payment → Emergency | ✅ | — |
 | **Error** | R03b plate not found · R04b Vahan fail · R10b payment fail | ✅ | — |
 | **Loading** | R04 fetching · R09 processing | ✅ | Spinner static (no CSS animation) — P2 |
 | **Retry** | R04b Try again · R10b Retry payment | ✅ | Shield+ retry loops until plan change — expected demo |
-| **Offline** | Auth mobile/OTP · Vahan fetch (`navigator.onLine`) | ✅ partial | **No offline UX on R08–R15 checkout/payment** |
-| **Permission granted** | R14 Allow (all toggles ON) → `permissionOutcome: 'granted'` | ✅ | — |
-| **Permission skipped** | R14 Skip → `permissionOutcome: 'skipped'` | ✅ | — |
-| **Permission denied** | — | ❌ | No native OS denial state; only UI skip/grant |
+| **Offline** | Auth mobile/OTP · Vahan fetch (`navigator.onLine`) | ✅ partial | **No offline UX on R08–R10 checkout/payment** |
+| ~~**Permission granted**~~ | ~~R14 Allow (all toggles ON) → `permissionOutcome: 'granted'`~~ | ARCHIVED | R14 archived |
+| ~~**Permission skipped**~~ | ~~R14 Skip → `permissionOutcome: 'skipped'`~~ | ARCHIVED | R14 archived |
+| ~~**Permission denied**~~ | — | ARCHIVED | R14 archived |
 | **Promo invalid (R08c)** | — | ❌ | Figma frame `579:1748` not built |
 | **Payment confirming (R09b)** | — | ❌ | Figma frame `579:1687` not built |
 | **Payment unconfirmed (R10c)** | — | ❌ | Figma frame `579:1638` not built |
@@ -153,23 +157,23 @@ Assumes demo plate `MH 12 AB 3456`, auth demo credentials, forward-only navigati
 
 | Variant | Path | Expected | Actual |
 |---------|------|----------|--------|
-| Skip rider · no promo | R06 Safe → R07 Skip → R08 Pay → R09 → R10 → R14 Skip → R15 | Activation complete | ✅ |
-| 1 rider · no promo | … → R07 Add 1 → R08 Pay → … → R15 | Activation complete | ✅ |
-| With promo | … → R08 Apply → R08b Pay → … → R15 | Activation complete · total −₹100 | ✅ |
+| Skip rider · no promo | R06 Safe → R07 Skip → R08 Pay → R09 → R10 → Emergency | Payment success → Emergency | ✅ |
+| 1 rider · no promo | … → R07 Add 1 → R08 Pay → … → R10 → Emergency | Payment success → Emergency | ✅ |
+| With promo | … → R08 Apply → R08b Pay → … → R10 → Emergency | Payment success · total −₹100 → Emergency | ✅ |
 
 ### 3.2 Secure (default)
 
 | Variant | Path | Expected | Actual |
 |---------|------|----------|--------|
 | Default bootstrap | R05 resets to Secure · rider 1 | R06 shows Secure selected | ✅ |
-| Skip rider | Same as Safe | R15 · Secure active copy | ✅ |
-| Allow all permissions | R14 all toggles ON → Allow | R15 · `permissionOutcome: granted` | ✅ |
+| Skip rider | Same as Safe | R10 → Emergency | ✅ |
+| ~~Allow all permissions~~ | ~~R14 all toggles ON → Allow~~ | ARCHIVED | R14 archived |
 
 ### 3.3 Shield
 
 | Variant | Path | Expected | Actual |
 |---------|------|----------|--------|
-| Happy path | R06 Shield → R07 → R08 Pay → R09 → R10 → R14 → R15 | Success · dynamic totals | ✅ |
+| Happy path | R06 Shield → R07 → R08 Pay → R09 → R10 → Emergency | Payment success → Emergency | ✅ |
 
 ### 3.4 Shield+ (`selectedPlanId: 'shield-plus'`)
 
@@ -182,12 +186,12 @@ Assumes demo plate `MH 12 AB 3456`, auth demo credentials, forward-only navigati
 
 ### 3.5 Path summary matrix
 
-| Plan | Payment | Permissions skip | Permissions allow | Final screen |
-|------|---------|------------------|-------------------|--------------|
-| Safe | R10 ✅ | R15 ✅ | R15 ✅ | `{Plan} is active` |
-| Secure | R10 ✅ | R15 ✅ | R15 ✅ | `{Plan} is active` |
-| Shield | R10 ✅ | R15 ✅ | R15 ✅ | `{Plan} is active` |
-| Shield+ | R10b ✅ | N/A (blocked) | N/A | Retry or change plan |
+| Plan | Payment | Terminal screen | Final destination |
+|------|---------|-----------------|-------------------|
+| Safe | R10 ✅ | R10 (payment success) | Emergency contacts-empty |
+| Secure | R10 ✅ | R10 (payment success) | Emergency contacts-empty |
+| Shield | R10 ✅ | R10 (payment success) | Emergency contacts-empty |
+| Shield+ | R10b ✅ | R10b (payment failed) | Retry or change plan |
 
 ---
 
@@ -207,9 +211,9 @@ Assumes demo plate `MH 12 AB 3456`, auth demo credentials, forward-only navigati
 | Checkout ready | `purchase.checkoutReady` | R08/R08b Pay | ✅ | ✅ |
 | Payment status | `purchase.paymentStatus` | R09 timer · R10b retry | ✅ | ✅ |
 | Paid amount | `purchase.paidAmountInr` | `startPayment()` | ✅ | ✅ |
-| Permissions | `purchase.permissions.*` | R14 toggles | ✅ | ✅ |
-| Permission outcome | `purchase.permissionOutcome` | R14 Allow/Skip | ✅ | ✅ |
-| Activation complete | `purchase.activationComplete` | R15 CTA | ✅ | ✅ |
+| ~~Permissions~~ | ~~`purchase.permissions.*`~~ | ~~R14 toggles~~ | ARCHIVED | ARCHIVED |
+| ~~Permission outcome~~ | ~~`purchase.permissionOutcome`~~ | ~~R14 Allow/Skip~~ | ARCHIVED | ARCHIVED |
+| ~~Activation complete~~ | ~~`purchase.activationComplete`~~ | ~~R15 CTA~~ | ARCHIVED | ARCHIVED |
 | Vehicle | `session.vehicle.*` | R03–R05 | ✅ | ✅ |
 | Auth | `session.auth.*` | Auth steps | ✅ | ✅ |
 
@@ -218,7 +222,7 @@ Assumes demo plate `MH 12 AB 3456`, auth demo credentials, forward-only navigati
 | Event | Effect |
 |-------|--------|
 | R05 Continue | Full `purchase` object reset (plan → Secure default) |
-| `startPayment()` | Sets processing · clears `permissionOutcome` · `activationComplete: false` |
+| `startPayment()` | Sets processing state |
 | R07 → R08 | Clears promo |
 | R10b Retry | `checkoutReady: false` · `paymentStatus: 'idle'` |
 | `clearJourney()` | Only on `/journey/completed` Start over |
@@ -227,7 +231,7 @@ Assumes demo plate `MH 12 AB 3456`, auth demo credentials, forward-only navigati
 
 | # | Issue | Severity |
 |---|-------|----------|
-| S1 | Re-pay after success resets `permissionOutcome` / `activationComplete` via `startPayment()` | **High** |
+| S1 | Re-pay after success resets payment state via `startPayment()` — post-payment guard missing | **High** |
 | S2 | `phase` React state not persisted — cosmetic only; URL + sessionStorage drive routing | Low |
 | S3 | `updateSession` shallow merge — safe when callers spread nested objects (current code does) | Info |
 
@@ -254,8 +258,8 @@ Rechecked against Figma section `167:434` and Phase A–C signoff docs. No new p
 | R10 | ~95% | `payment-success-halo` SVG approximation |
 | R10b | ~97% | Reuses R04b amber halo pattern |
 | **R09b / R10c** | **0%** | **Not implemented** |
-| R14 | ~95% | Skip link added (journey req.) — not in R14 Figma frame |
-| R15 | ~95% | `activation-complete-halo` shield paths approximated |
+| ~~R14~~ | ARCHIVED | Route archived — do not restore |
+| ~~R15~~ | ARCHIVED | Route archived — do not restore |
 
 ### 5.2 Cross-cutting visual gaps
 
@@ -264,7 +268,7 @@ Rechecked against Figma section `167:434` and Phase A–C signoff docs. No new p
 | No iOS status bar in web shell | P2 accepted | All |
 | Dark card surfaces (`#1A1A1A`) in light theme | P2 | R06–R08 cards |
 | Spinner not animated | P2 | R04, R09 |
-| Halo blur `filter: blur(40px)` approximated in SVG | P2 | R10, R10b, R15 |
+| Halo blur `filter: blur(40px)` approximated in SVG | P2 | R10, R10b |
 | R07 plan context line extra element | P2 | R07–R08 |
 
 ### 5.3 Unimplemented Figma frames (documented, not deleted)
@@ -327,9 +331,9 @@ Rechecked against Figma section `167:434` and Phase A–C signoff docs. No new p
 
 | Item | Issue |
 |------|-------|
-| `EmergencyRoutes` E01 back | Navigates to `p06PaymentSuccess` — not R15 |
+| `EmergencyRoutes` E01 back | Navigates to `p06PaymentSuccess` — should navigate to R10 for purchase flow |
 | P06Route onContinue | `setPhase('emergency')` — only via orphan P06 URL |
-| `/journey/completed` | Not wired from R15 |
+| `/journey/completed` | Not wired from purchase path; enters via emergency completion |
 
 ---
 
@@ -337,14 +341,14 @@ Rechecked against Figma section `167:434` and Phase A–C signoff docs. No new p
 
 | # | Blocker | Impact | Suggested fix (future — not in this audit) |
 |---|---------|--------|---------------------------------------------|
-| **B1** | **R08/R08b lack post-success guard** | Browser back after R10 allows re-pay; corrupts `permissionOutcome` / `activationComplete` | Redirect to R10 or R15 when `paymentStatus === 'success'` |
-| **B2** | **`startPayment()` callable after activation** | Same as B1 — session regression | Guard Pay CTA or route entry |
+| **B1** | **R08/R08b lack post-success guard** | Browser back after R10 allows re-pay; payment session corrupted | Redirect to R10 when `paymentStatus === 'success'` |
+| **B2** | **`startPayment()` callable after payment success** | Same as B1 — session regression | Guard Pay CTA or route entry |
 
 ### Non-blockers (accepted for demo / documented)
 
 | Item | Rationale |
 |------|-----------|
-| R15 no navigation | Phase C explicit requirement |
+| R14/R15 archived | Archived per Purchase Flow Correction 2026-06-18 — do not restore |
 | Demo payment / promo / Vahan | Integration deferred |
 | R08c / R09b / R10c missing | Out of Phase B/C scope |
 | Legacy P01–P06 mounted | Dev/orphan — cleanup later |
@@ -367,9 +371,9 @@ pnpm --filter @autolokate/icons --filter @autolokate/ui --filter @autolokate/onb
 
 | Criterion | Status |
 |-----------|--------|
-| Mobile → OTP → Name → R03–R15 wired | ✅ |
+| Mobile → OTP → Name → R03–R10 wired (R14/R15 archived) | ✅ |
 | All 4 plans reach expected payment outcome | ✅ |
-| Permission grant + skip reach R15 | ✅ |
+| R10 → Emergency handoff wired (contacts-empty) | ✅ |
 | Session fields persist | ✅ |
 | No redirect loops | ✅ |
 | No blank screens on active path | ✅ |
@@ -399,6 +403,6 @@ The Consumer · QR Activation + Purchase journey is **functionally complete for 
 | Path constants | `apps/onboarding/src/journey/purchase/purchase-routing.ts` |
 | Session | `apps/onboarding/src/journey/JourneyContext.tsx` · `persistence.ts` |
 | Demo rules | `vahan-demo.ts` · `purchase-payment-demo.ts` · `auth-flow.validation.ts` |
-| Phase docs | `docs/PHASE_A_*` · `PHASE_B_IMPLEMENTATION.md` · `PHASE_C_IMPLEMENTATION.md` |
-| Figma audit | `docs/PURCHASE_FIGMA_AUDIT.md` |
+| Phase docs (archived) | `docs/archive/PHASE_A_*` · `docs/archive/PHASE_B_IMPLEMENTATION.md` · `docs/archive/PHASE_C_IMPLEMENTATION.md` |
+| Figma audit (archived) | `docs/archive/PURCHASE_FIGMA_AUDIT.md` |
 | Dev preview | `apps/onboarding/src/dev/ScreenDevApp.tsx` |

@@ -109,7 +109,7 @@ Photos route CTA navigated to `parkMeReview`; review route duplicated send UX wi
 - Review route: redirect-only → `Navigate to={parkMePhotos} replace`.
 - Helper copy updates: *"Ready to send to the owner"* when complete.
 
-See `PHOTO_FLOW_SIMPLIFICATION_REPORT.md` for detail.
+See `archive/PHOTO_FLOW_SIMPLIFICATION_REPORT.md` for detail.
 
 ### Screenshots
 | | Path |
@@ -160,7 +160,7 @@ None in code audit. Visual pixel-diff vs Figma export not run.
 
 ## P0-6 — iOS SOS Loader
 
-See dedicated `IOS_SOS_LOADER_REPORT.md`.
+See dedicated `archive/IOS_SOS_LOADER_REPORT.md`.
 
 **Status:** CSS `conic-gradient` progress ring added alongside SVG arc for WebKit compatibility. **Real iOS device verification required.**
 
