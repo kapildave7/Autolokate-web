@@ -23,7 +23,6 @@ import type {
 } from '../../features/shared-auth/types.js';
 import { authJourneyPaths } from '../auth/auth-routing.js';
 import { getAuthFlowBackPath } from '../activation-routing.js';
-import { journeyPaths } from '../constants.js';
 import { useJourney } from '../JourneyContext.js';
 
 function delay(ms: number): Promise<void> {

@@ -3,9 +3,9 @@ import { AlStack } from '@autolokate/ui';
 import {
   AddContactRow,
   EmergencyContactRow,
-} from '../../../../components/compositions/index.js';
-import { FlowStepShell } from '../../../../components/flow-step-shell/index.js';
-import type { PurchasePlanId, PurchaseRiderCount } from '../../../qr-purchase/types-checkout.js';
+} from '@/components/compositions/index.js';
+import { FlowStepShell } from '@/components/flow-step-shell/index.js';
+import type { PurchasePlanId, PurchaseRiderCount } from '@/features/qr-purchase/types-checkout.js';
 import {
   canAddRider,
   getEntitledRiderSlots,

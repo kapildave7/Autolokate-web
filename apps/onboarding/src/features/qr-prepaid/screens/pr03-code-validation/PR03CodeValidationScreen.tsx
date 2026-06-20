@@ -3,8 +3,8 @@ import { AlIcon } from '@autolokate/icons';
 import {
   EmptyStateHero,
   InlineStatusBanner,
-} from '../../../../components/compositions/index.js';
-import { FlowStepShell } from '../../../../components/flow-step-shell/index.js';
+} from '@/components/compositions/index.js';
+import { FlowStepShell } from '@/components/flow-step-shell/index.js';
 import type { PrepaidScreenState } from '../../types.js';
 import { demoActivationCode, prepaidOrgName } from '../../data/activation-data.js';
 

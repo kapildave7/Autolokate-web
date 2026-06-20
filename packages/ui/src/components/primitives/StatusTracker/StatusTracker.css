@@ -11,9 +11,9 @@
   gap: 12px;
   min-height: 60px;
   padding: 10px 16px;
-  border: 1px solid #4a4a4a;
+  border: 1px solid var(--al-color-outline);
   border-radius: 12px;
-  background: #1a1a1a;
+  background: var(--al-color-surface);
 }
 
 .al-status-tracker__vehicle-icon {
@@ -24,8 +24,8 @@
   width: 40px;
   height: 40px;
   border-radius: 12px;
-  background: #4a4a4a;
-  color: #ffffff;
+  background: var(--al-color-surface-variant);
+  color: var(--al-color-on-surface);
 }
 
 .al-status-tracker__vehicle-copy {
@@ -38,7 +38,7 @@
   font-size: 15px;
   font-weight: 600;
   line-height: 18px;
-  color: #ffffff;
+  color: var(--al-color-on-surface);
 }
 
 .al-status-tracker__model {
@@ -46,5 +46,5 @@
   font-family: var(--al-text-ui-family);
   font-size: 13px;
   line-height: 16px;
-  color: #8a8a8a;
+  color: var(--al-color-on-surface-muted);
 }

@@ -39,7 +39,7 @@
 
 .al-dispatch-timeline__glyph-pending {
   box-sizing: border-box;
-  border: 1.5px solid #4a4a4a;
+  border: 1.5px solid var(--al-color-outline);
   border-radius: 999px;
 }
 
@@ -48,7 +48,7 @@
   top: 50%;
   left: 50%;
   border-radius: 999px;
-  background: rgba(245, 166, 35, 0.55);
+  background: color-mix(in srgb, var(--al-color-warning) 55%, transparent);
   opacity: 0.95;
   pointer-events: none;
   transform: translate(-50%, -50%);
@@ -62,8 +62,18 @@
   align-items: center;
   justify-content: center;
   border-radius: 999px;
-  background: #f5a623;
-  box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.28);
+  background: var(--al-color-warning);
+  color: var(--al-color-on-warning);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--al-color-warning) 28%, transparent);
+}
+
+.al-dispatch-timeline__active-glyph-icon {
+  display: block;
+  color: inherit;
+}
+
+.al-dispatch-timeline__active-glyph-icon path {
+  stroke: currentColor;
 }
 
 .al-dispatch-timeline__connector {
@@ -71,13 +81,13 @@
   width: 2px;
   margin: 0;
   border-radius: 1px;
-  background: #4a4a4a;
+  background: var(--al-color-outline);
   transform-origin: top center;
   transform: scaleY(1);
 }
 
 .al-dispatch-timeline__connector--complete {
-  background: #1fa24a;
+  background: var(--al-color-success);
   animation: al-dispatch-connector-fill 0.36s cubic-bezier(0.22, 1, 0.36, 1) both;
   animation-delay: calc(var(--step-index, 0) * 60ms + 80ms);
 }
@@ -117,7 +127,7 @@
   margin: 0;
   font-family: var(--al-text-ui-family);
   font-weight: 600;
-  color: #8a8a8a;
+  color: var(--al-color-on-surface-muted);
   transition: color 0.24s ease;
 }
 
@@ -125,21 +135,21 @@
   margin: 0;
   font-family: var(--al-text-ui-family);
   font-weight: 400;
-  color: #8a8a8a;
+  color: var(--al-color-on-surface-muted);
 }
 
 .al-dispatch-timeline__step--active .al-dispatch-timeline__label,
 .al-dispatch-timeline__step--complete .al-dispatch-timeline__label {
-  color: #ffffff;
+  color: var(--al-color-on-surface);
 }
 
 .al-dispatch-timeline__step--error .al-dispatch-timeline__label {
-  color: #f5a623;
+  color: var(--al-color-warning);
 }
 
 .al-dispatch-timeline__step--active .al-dispatch-timeline__subtitle,
 .al-dispatch-timeline__step--complete .al-dispatch-timeline__subtitle {
-  color: #8a8a8a;
+  color: var(--al-color-on-surface-muted);
 }
 
 .al-dispatch-timeline__step--complete .al-dispatch-timeline__glyph svg {

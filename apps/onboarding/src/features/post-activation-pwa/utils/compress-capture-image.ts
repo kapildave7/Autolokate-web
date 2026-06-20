@@ -29,7 +29,7 @@ export async function compressCaptureImage(file: Blob): Promise<CompressedCaptur
     canvas.height = height;
     const ctx = canvas.getContext('2d');
     if (!ctx) {
-      return readBlobAsDataUrl(file, originalBytes);
+      return await readBlobAsDataUrl(file, originalBytes);
     }
 
     ctx.drawImage(bitmap, 0, 0, width, height);

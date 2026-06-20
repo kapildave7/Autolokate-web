@@ -41,7 +41,7 @@
 
 .al-plan-card--selected {
   border: 2px solid var(--al-color-success);
-  box-shadow: 0 0 18px rgba(31, 163, 74, 0.28);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--al-color-success) 28%, transparent);
   animation: al-plan-card-select 220ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 

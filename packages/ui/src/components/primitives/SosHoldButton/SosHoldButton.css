@@ -25,7 +25,7 @@
   width: 320px;
   height: 320px;
   border-radius: 999px;
-  background: #ff4a3d;
+  background: var(--al-signal-red-bright);
   opacity: 0.3;
   filter: blur(27.5px);
   transform: translate(-50%, -50%);
@@ -49,7 +49,7 @@
   left: 50%;
   width: 228px;
   height: 228px;
-  border: 4px solid #ff4a3d;
+  border: 4px solid var(--al-signal-red-bright);
   border-radius: 999px;
   opacity: 0.55;
   transform: translate(-50%, -50%);
@@ -84,10 +84,12 @@
   width: 228px;
   height: 228px;
   border-radius: 999px;
-  transform: translate(-50%, -50%) rotate(-90deg) translateZ(0);
+  /* conic-gradient 0deg = 12 o'clock; no extra rotation (rotate(-90deg) shifted start to 9 o'clock) */
+  transform: translate(-50%, -50%) translateZ(0);
   background: conic-gradient(
     from 0deg,
-    #ff6b5f var(--sos-hold-progress, 0deg),
+    color-mix(in srgb, var(--al-signal-red-bright) 85%, white) 0deg,
+    color-mix(in srgb, var(--al-signal-red-bright) 85%, white) var(--sos-hold-progress, 0deg),
     transparent var(--sos-hold-progress, 0deg)
   );
   -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 5px), #000 calc(100% - 4px));
@@ -103,23 +105,28 @@
 }
 
 .al-sos-hold--complete .al-sos-hold__progress-ring {
-  background: conic-gradient(from 0deg, #ffffff var(--sos-hold-progress, 360deg), transparent 360deg);
+  background: conic-gradient(
+    from 0deg,
+    var(--al-brand-white) 0deg,
+    var(--al-brand-white) var(--sos-hold-progress, 360deg),
+    transparent var(--sos-hold-progress, 360deg)
+  );
 }
 
 .al-sos-hold__progress-arc {
   fill: none;
-  stroke: #ff4a3d;
+  stroke: var(--al-signal-red-bright);
   stroke-width: 4;
   stroke-linecap: round;
   transition: stroke-dashoffset 60ms linear;
 }
 
 .al-sos-hold--holding .al-sos-hold__progress-arc {
-  stroke: #ff6b5f;
+  stroke: color-mix(in srgb, var(--al-signal-red-bright) 85%, white);
 }
 
 .al-sos-hold--complete .al-sos-hold__progress-arc {
-  stroke: #ffffff;
+  stroke: var(--al-brand-white);
   transition: stroke-dashoffset 0.12s ease-out;
 }
 
@@ -135,8 +142,8 @@
   height: 200px;
   border: none;
   border-radius: 999px;
-  background: #ff4a3d;
-  color: #ffffff;
+  background: var(--al-signal-red-bright);
+  color: var(--al-brand-white);
   font-family: var(--al-text-ui-family);
   font-size: 20px;
   font-weight: 600;
@@ -153,7 +160,7 @@
   appearance: none;
   -webkit-appearance: none;
   transform: translate(-50%, -50%) scale(1);
-  box-shadow: 0 0 0 0 rgba(255, 74, 61, 0.35);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--al-signal-red-bright) 35%, transparent);
   transition:
     transform 0.16s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.2s ease,
@@ -166,22 +173,22 @@
 
 .al-sos-hold__disc:focus:not(:focus-visible) {
   outline: none;
-  box-shadow: 0 0 0 0 rgba(255, 74, 61, 0.35);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--al-signal-red-bright) 35%, transparent);
 }
 
 .al-sos-hold--holding .al-sos-hold__disc {
   transform: translate(-50%, -50%) scale(0.98);
-  box-shadow: 0 0 36px rgba(255, 74, 61, 0.42);
+  box-shadow: 0 0 36px color-mix(in srgb, var(--al-signal-red-bright) 42%, transparent);
 }
 
 .al-sos-hold--holding .al-sos-hold__disc:focus:not(:focus-visible) {
-  box-shadow: 0 0 36px rgba(255, 74, 61, 0.42);
+  box-shadow: 0 0 36px color-mix(in srgb, var(--al-signal-red-bright) 42%, transparent);
 }
 
 .al-sos-hold--complete .al-sos-hold__disc {
   transform: translate(-50%, -50%) scale(1);
-  background: #ff5f54;
-  box-shadow: 0 0 52px rgba(255, 74, 61, 0.55);
+  background: color-mix(in srgb, var(--al-signal-red-bright) 90%, white);
+  box-shadow: 0 0 52px color-mix(in srgb, var(--al-signal-red-bright) 55%, transparent);
 }
 
 .al-sos-hold__disc:active {
@@ -193,7 +200,7 @@
 }
 
 .al-sos-hold__disc:focus-visible {
-  outline: 2px solid #ffffff;
+  outline: 2px solid var(--al-brand-white);
   outline-offset: 4px;
 }
 
@@ -206,7 +213,7 @@
   font-size: 13px;
   font-weight: 400;
   line-height: 16px;
-  color: #8a8a8a;
+  color: var(--al-color-on-surface-muted);
   text-align: center;
   transition: color 0.2s ease, opacity 0.2s ease;
 }

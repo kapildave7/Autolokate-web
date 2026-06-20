@@ -1,9 +1,9 @@
 import { AlIcon } from '@autolokate/icons';
 import { AlAvatar, AlContactCard } from '@autolokate/ui';
 
-import { formatMobileForDisplay } from '../../../features/emergency/data/demo-data.js';
-import { RELATIONSHIP_OPTIONS } from '../../../features/emergency/data/relationships.js';
-import type { EmergencyContact, EmergencyRider } from '../../../features/emergency/types.js';
+import { formatMobileForDisplay } from '@/features/emergency/data/demo-data.js';
+import { CONTACT_RELATIONSHIP_OPTIONS } from '@/features/emergency/data/relationships.js';
+import type { EmergencyContact, EmergencyRider } from '@/features/emergency/types.js';
 
 import './emergency-contact-row.css';
 
@@ -12,7 +12,7 @@ export type EmergencyContactRowProps = {
 };
 
 function getRelationLabel(relation: EmergencyContact['relation']): string {
-  return RELATIONSHIP_OPTIONS.find((option) => option.id === relation)?.label ?? relation;
+  return CONTACT_RELATIONSHIP_OPTIONS.find((option) => option.id === relation)?.label ?? relation;
 }
 
 function getInitials(name: string): string {

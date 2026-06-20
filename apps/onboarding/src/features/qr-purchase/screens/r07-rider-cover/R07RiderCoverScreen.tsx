@@ -1,5 +1,5 @@
-import { AuthStepShell } from '../../../../components/auth-step-shell/index.js';
-import { RiderCoverOptions } from '../../../../components/compositions/rider-cover-options/index.js';
+import { AuthStepShell } from '@/components/auth-step-shell/index.js';
+import { RiderCoverOptions } from '@/components/compositions/rider-cover-options/index.js';
 import type { PurchasePlanId, PurchaseRiderCount } from '../../types-checkout.js';
 import { getRiderCtaLabel } from '../../data/purchase-pricing.js';
 

@@ -1,8 +1,8 @@
 import { AlOtpInput } from '@autolokate/ui';
 
-import { AuthStepShell } from '../../../../components/auth-step-shell/index.js';
-import { useAuthRouteProgress } from '../../../../journey/progress/index.js';
-import { AlSmsFallback } from '../../../../components/compositions/index.js';
+import { AuthStepShell } from '@/components/auth-step-shell/index.js';
+import { useAuthRouteProgress } from '@/journey/progress/index.js';
+import { AlSmsFallback } from '@/components/compositions/index.js';
 import { formatMobileForDisplay } from '../../data/demo-data.js';
 import { isExpiredOtp, isValidOtp, OTP_LENGTH } from '../../auth-flow/auth-flow.validation.js';
 import type { A2OtpScreenProps } from '../../types.js';

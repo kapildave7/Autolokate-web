@@ -1,7 +1,7 @@
 import { AlTextField } from '@autolokate/ui';
 
-import { AuthStepShell } from '../../../../components/auth-step-shell/index.js';
-import { useAuthRouteProgress } from '../../../../journey/progress/index.js';
+import { AuthStepShell } from '@/components/auth-step-shell/index.js';
+import { useAuthRouteProgress } from '@/journey/progress/index.js';
 import type { A3VehicleOwnerScreenProps } from '../../types.js';
 
 /** A3 · Vehicle owner — Figma 174:25 · R02 · Your name */

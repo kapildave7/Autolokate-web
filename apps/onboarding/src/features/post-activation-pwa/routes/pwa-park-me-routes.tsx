@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useCallback, useRef, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { AlIcon } from '@autolokate/icons';
 import {
@@ -34,8 +34,6 @@ import { formatPwaLocationDetail } from '../utils/format-pwa-location.js';
 import { formatReporterModelSummary } from '../utils/pwa-vehicle-utils.js';
 
 import '../styles/pwa-scan.css';
-
-type ParkMePhotoSlot = 'front' | 'rear';
 
 /** 06 · Reporter vehicle plate — Figma 991:2328. */
 export function PwaParkMeVehicleNumberRoute() {
@@ -234,7 +232,13 @@ export function PwaParkMePermissionsRoute() {
   };
 
   return (
-    <PwaScanShell variant="protected" showBack onBack={() => navigate(session.reporterProtected ? pwaScanPaths.parkMeConfirmProtected : pwaScanPaths.parkMeConfirm)}>
+    <PwaScanShell
+      variant="protected"
+      showBack
+      onBack={() => {
+        void navigate(session.reporterProtected ? pwaScanPaths.parkMeConfirmProtected : pwaScanPaths.parkMeConfirm);
+      }}
+    >
       <div className="pwa-scan-permission-backdrop" aria-hidden>
         <AlPhotoGrid
           layout="stacked"
@@ -277,7 +281,7 @@ export function PwaParkMePhotosRoute() {
   const { requestLocation, loading: geoLoading } = useGeolocationCapture();
   useResolveStoredLocationName();
 
-  const handleLocation = async () => {
+  const handleLocation = useCallback(async () => {
     const result = await requestLocation();
     if (result) {
       updateSession({
@@ -285,18 +289,20 @@ export function PwaParkMePhotosRoute() {
         locationName: result.name,
       });
     }
-  };
+  }, [requestLocation, updateSession]);
 
   const hasBothPhotos = Boolean(session.parkMePhotos.front && session.parkMePhotos.rear);
   const hasLocation = Boolean(session.location);
   const canContinue = hasBothPhotos && hasLocation;
+  const autoLocateRef = useRef(false);
 
   useEffect(() => {
-    if (!hasLocation && !geoLoading) {
-      void handleLocation();
+    if (autoLocateRef.current || hasLocation || geoLoading) {
+      return;
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- capture location once on mount
-  }, []);
+    autoLocateRef.current = true;
+    void handleLocation();
+  }, [geoLoading, handleLocation, hasLocation]);
 
   return (
     <PwaScanErrorBoundary routeLabel="park-me/photos">

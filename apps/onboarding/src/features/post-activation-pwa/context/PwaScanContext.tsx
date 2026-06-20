@@ -46,7 +46,7 @@ export function PwaScanProvider({ children }: { children: ReactNode }) {
       return next;
     });
 
-    if (pending.result.ok === false) {
+    if (!pending.result.ok) {
       setStorageError(pending.result.message);
     }
 

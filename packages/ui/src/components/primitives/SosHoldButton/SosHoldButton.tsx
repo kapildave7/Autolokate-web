@@ -13,10 +13,8 @@ function isIosDevice() {
   if (typeof navigator === 'undefined') {
     return false;
   }
-  return (
-    /iPad|iPhone|iPod/.test(navigator.userAgent) ||
-    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
-  );
+  return /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+    (navigator.maxTouchPoints > 1 && /Mac/.test(navigator.userAgent));
 }
 
 function triggerHaptic(pattern: number | number[]) {

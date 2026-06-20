@@ -1,6 +1,6 @@
 import { AlStack, AlText } from '@autolokate/ui';
 
-import { FlowStepShell } from '../../../../components/flow-step-shell/index.js';
+import { FlowStepShell } from '@/components/flow-step-shell/index.js';
 import type { PrepaidScreenState } from '../../types.js';
 import { prepaidOrgName } from '../../data/activation-data.js';
 

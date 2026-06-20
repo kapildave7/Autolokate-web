@@ -10,6 +10,7 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
+      '@': path.resolve(rootDir, 'src'),
       '@autolokate/brand': path.resolve(rootDir, '../../packages/brand/src'),
       '@autolokate/ui': path.resolve(rootDir, '../../packages/ui/src'),
       '@autolokate/design-system': path.resolve(rootDir, '../../packages/design-system/src'),

@@ -122,7 +122,7 @@ export function PwaVehicleFoundRoute() {
   const navigate = useNavigate();
   const { session, updateSession } = usePwaScan();
   const { scannedVehicle } = session;
-  const protectedLabel = scannedVehicle.protected ? 'Protected by Autolokate' : undefined;
+  const footerLabel = scannedVehicle.protected ? 'Protected by Autolokate' : undefined;
 
   return (
     <PwaScanShell variant="protected">
@@ -140,7 +140,7 @@ export function PwaVehicleFoundRoute() {
           className="pwa-scan-vehicle-found__card"
           plate={scannedVehicle.plate}
           model={scannedVehicle.modelSummary}
-          {...(protectedLabel ? { protectedLabel } : {})}
+          {...(footerLabel ? { footerLabel } : {})}
         />
 
         <div className="pwa-scan-hub-section pwa-scan-vehicle-found__hub">
@@ -229,7 +229,7 @@ export function PwaVerifyMobileRoute() {
 /** 04 · Bystander verify — OTP. */
 export function PwaVerifyOtpRoute() {
   const navigate = useNavigate();
-  const { session, updateSession } = usePwaScan();
+  const { session } = usePwaScan();
   const [otp, setOtp] = useState('');
   const [otpState, setOtpState] = useState<AuthOtpState>('default');
   const [otpErrorKind, setOtpErrorKind] = useState<OtpErrorKind | null>(null);

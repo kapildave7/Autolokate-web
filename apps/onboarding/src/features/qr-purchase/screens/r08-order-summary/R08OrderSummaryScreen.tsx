@@ -1,6 +1,6 @@
-import { AuthStepShell } from '../../../../components/auth-step-shell/index.js';
-import { OrderSummaryCard } from '../../../../components/compositions/order-summary-card/index.js';
-import { PromoCodeField } from '../../../../components/compositions/promo-code-field/index.js';
+import { AuthStepShell } from '@/components/auth-step-shell/index.js';
+import { OrderSummaryCard } from '@/components/compositions/order-summary-card/index.js';
+import { PromoCodeField } from '@/components/compositions/promo-code-field/index.js';
 import type { PurchasePlanId, PurchaseRiderCount } from '../../types-checkout.js';
 import { buildOrderSummary } from '../../data/purchase-pricing.js';
 

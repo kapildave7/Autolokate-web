@@ -1,15 +1,15 @@
 import { AlOtpInput } from '@autolokate/ui';
 
-import { FlowStepShell, type FlowStepCaptureProgress } from '../../../../components/flow-step-shell/index.js';
+import { FlowStepShell, type FlowStepCaptureProgress } from '@/components/flow-step-shell/index.js';
 import {
   isExpiredOtp,
   isValidOtp,
   OTP_LENGTH,
-} from '../../../shared-auth/auth-flow/auth-flow.validation.js';
-import { formatMobileForOtpDescription } from '../../data/demo-data.js';
+} from '@/features/shared-auth/auth-flow/auth-flow.validation.js';
+import { formatMobileLocal } from '@/shared/format-mobile.js';
 import type { EmergencyOtpState, EmergencyScreenNavigationProps } from '../../types.js';
 
-import '../../../../components/auth-step-shell/auth-step-shell.css';
+import '@/components/auth-step-shell/auth-step-shell.css';
 import '../../emergency.css';
 
 export type EmergencyOtpScreenProps = EmergencyScreenNavigationProps & {
@@ -78,7 +78,7 @@ export function EmergencyOtpScreen({
       title="Enter their code"
       description={
         <p className="ob-emergency-otp-desc">
-          Sent to them on WhatsApp · {formatMobileForOtpDescription(mobile)}
+          Sent to them on WhatsApp · {formatMobileLocal(mobile)}
           {onChangeNumber ? (
             <>
               {' '}

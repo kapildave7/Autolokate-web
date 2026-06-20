@@ -4,6 +4,7 @@ import './styles/screen-viewport.css';
 
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import { setThemeMode } from '@autolokate/design-system';
 
 import { ScreenDevApp } from './dev/ScreenDevApp.js';
@@ -31,6 +32,12 @@ const isDevPreview = new URLSearchParams(window.location.search).get('dev') === 
 
 createRoot(rootElement).render(
   <StrictMode>
-    {isDevPreview ? <ScreenDevApp /> : <JourneyOrchestrator />}
+    {isDevPreview ? (
+      <BrowserRouter>
+        <ScreenDevApp />
+      </BrowserRouter>
+    ) : (
+      <JourneyOrchestrator />
+    )}
   </StrictMode>,
 );

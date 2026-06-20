@@ -7,14 +7,14 @@ import {
   PlanActivationCardSkeleton,
   WelcomeActivationErrorPanel,
   WelcomeActivationShell,
-} from '../../../../components/compositions/welcome-activation/index.js';
-import { applyLandingEntitlementToSession } from '../../../b2b-shared/apply-landing-entitlement.js';
-import { getWelcomeShellPresentation } from '../../../b2b-shared/get-welcome-shell-presentation.js';
-import { resolveWelcomePlanDisplay } from '../../../b2b-shared/resolve-welcome-plan-display.js';
-import { useWelcomeLanding } from '../../../b2b-shared/use-welcome-landing.js';
-import { journeyPaths } from '../../../../journey/constants.js';
-import { useJourney } from '../../../../journey/JourneyContext.js';
-import { authJourneyPaths } from '../../../../journey/auth/auth-routing.js';
+} from '@/components/compositions/welcome-activation/index.js';
+import { applyLandingEntitlementToSession } from '@/features/b2b-shared/apply-landing-entitlement.js';
+import { getWelcomeShellPresentation } from '@/features/b2b-shared/get-welcome-shell-presentation.js';
+import { resolveWelcomePlanDisplay } from '@/features/b2b-shared/resolve-welcome-plan-display.js';
+import { useWelcomeLanding } from '@/features/b2b-shared/use-welcome-landing.js';
+import { journeyPaths } from '@/journey/constants.js';
+import { useJourney } from '@/journey/JourneyContext.js';
+import { authJourneyPaths } from '@/journey/auth/auth-routing.js';
 import { getDemoPrepaidLandingEntitlement } from '../../data/prepaid-landing-config.js';
 
 const PREPAID_SUCCESS_BODY =

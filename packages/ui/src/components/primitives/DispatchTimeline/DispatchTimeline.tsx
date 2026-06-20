@@ -11,11 +11,6 @@ import type {
 } from './DispatchTimeline.types.js';
 import './DispatchTimeline.css';
 
-const FIGMA_GREEN = '#1FA24A';
-const FIGMA_AMBER = '#F5A623';
-const FIGMA_OUTLINE = '#4A4A4A';
-const FIGMA_MUTED = '#8A8A8A';
-
 const PARK_ME_CONNECTORS = [40, 34, 40, 34, 40];
 /** Figma 871:2151 · 849:321 — 18px glyph + 32px rail = 50px step pitch */
 const SOS_CONNECTORS = [32, 32, 32, 32, 32, 32, 32, 32, 32];
@@ -93,10 +88,16 @@ function ActiveGlyph({
   switch (name) {
     case 'phone':
       return (
-        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden>
+        <svg
+          width={size}
+          height={size}
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden
+          className="al-dispatch-timeline__active-glyph-icon"
+        >
           <path
             d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"
-            stroke="#FFFFFF"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -105,10 +106,16 @@ function ActiveGlyph({
       );
     case 'activity':
       return (
-        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden>
+        <svg
+          width={size}
+          height={size}
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden
+          className="al-dispatch-timeline__active-glyph-icon"
+        >
           <path
             d="M22 12h-4l-3 9L9 3l-3 9H2"
-            stroke="#FFFFFF"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -117,17 +124,22 @@ function ActiveGlyph({
       );
     case 'triangle-alert':
       return (
-        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden>
+        <svg
+          width={size}
+          height={size}
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden
+          className="al-dispatch-timeline__active-glyph-icon"
+        >
           <path
             d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"
-            stroke="#FFFFFF"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
           <path
             d="M12 9v4M12 17h.01"
-            stroke="#FFFFFF"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -137,17 +149,22 @@ function ActiveGlyph({
     case 'shield-check':
     default:
       return (
-        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden>
+        <svg
+          width={size}
+          height={size}
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden
+          className="al-dispatch-timeline__active-glyph-icon"
+        >
           <path
             d="M20 13C20 18 16.5 20.5 12.34 21.95C12.1222 22.0238 11.8855 22.0202 11.67 21.94C7.5 20.5 4 18 4 13V6C4 5.73478 4.10536 5.48043 4.29289 5.29289C4.48043 5.10536 4.73478 5 5 5C7 5 9.5 3.8 11.24 2.28C11.4519 2.09896 11.7214 1.99951 12 1.99951C12.2786 1.99951 12.5481 2.09896 12.76 2.28C14.51 3.81 17 5 19 5C19.2652 5 19.5196 5.10536 19.7071 5.29289C19.8946 5.48043 20 5.73478 20 6V13Z"
-            stroke="#FFFFFF"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
           <path
             d="M9 12L11 14L15 10"
-            stroke="#FFFFFF"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -258,7 +275,7 @@ export function AlDispatchTimeline({
                 className="al-dispatch-timeline__label"
                 style={{
                   fontSize: metrics.labelSize,
-                  lineHeight: `${metrics.labelLine}px`,
+                  lineHeight: `${String(metrics.labelLine)}px`,
                 }}
               >
                 {step.label}
@@ -267,7 +284,7 @@ export function AlDispatchTimeline({
                 className="al-dispatch-timeline__subtitle"
                 style={{
                   fontSize: metrics.subtitleSize,
-                  lineHeight: `${metrics.subtitleLine}px`,
+                  lineHeight: `${String(metrics.subtitleLine)}px`,
                 }}
               >
                 {step.subtitle}
@@ -280,4 +297,3 @@ export function AlDispatchTimeline({
   );
 }
 
-export { FIGMA_GREEN, FIGMA_AMBER, FIGMA_OUTLINE, FIGMA_MUTED };

@@ -31,11 +31,10 @@ export function AlScannedVehicleCard({
   plate,
   model,
   footerLabel,
-  protectedLabel,
   protected: protectedVariant = false,
   className,
 }: AlScannedVehicleCardProps) {
-  const resolvedFooter = footerLabel ?? protectedLabel;
+  const resolvedFooter = footerLabel;
 
   return (
     <article

@@ -1,5 +1,5 @@
-import { AuthStepShell } from '../../../../components/auth-step-shell/index.js';
-import { PlanCarousel } from '../../../../components/compositions/plan-carousel/index.js';
+import { AuthStepShell } from '@/components/auth-step-shell/index.js';
+import { PlanCarousel } from '@/components/compositions/plan-carousel/index.js';
 import type { PurchasePlanId } from '../../types-checkout.js';
 import { getPurchasePlan } from '../../data/purchase-plans.js';
 

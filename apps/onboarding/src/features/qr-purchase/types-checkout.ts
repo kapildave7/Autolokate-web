@@ -11,12 +11,6 @@ export type PurchasePaymentStatus =
   | 'failed'
   | 'unconfirmed';
 
-export type PurchasePermissionId = 'location' | 'crashDetection' | 'notifications';
-
-export type PurchasePermissionOutcome = 'pending' | 'granted' | 'skipped';
-
-export type PurchasePermissionsState = Record<PurchasePermissionId, boolean>;
-
 export type PurchaseCheckoutSession = {
   selectedPlanId?: PurchasePlanId;
   riderCount?: PurchaseRiderCount;
@@ -56,18 +50,4 @@ export type OrderSummaryTotals = {
   totalInr: number;
   gstNote: string;
   payCtaLabel: string;
-};
-
-export type PurchasePermissionDefinition = {
-  id: PurchasePermissionId;
-  title: string;
-  recommended: string;
-  offConsequence: string;
-  icon: 'map-pin' | 'shield-check' | 'bell';
-};
-
-export const DEFAULT_PURCHASE_PERMISSIONS: PurchasePermissionsState = {
-  location: false,
-  crashDetection: false,
-  notifications: false,
 };

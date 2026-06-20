@@ -27,7 +27,7 @@
 .al-photo-grid__location {
   width: 100%;
   min-height: 120px;
-  border: 1.5px dashed #4a4a4a;
+  border: 1.5px dashed var(--al-color-outline);
   border-radius: 16px;
   overflow: hidden;
 }
@@ -80,8 +80,8 @@
   padding: 0;
   border: none;
   border-radius: 999px;
-  background: rgba(10, 10, 10, 0.55);
-  color: #ffffff;
+  background: var(--al-color-overlay);
+  color: var(--al-color-on-emergency);
   cursor: pointer;
 }
 
@@ -102,7 +102,11 @@
   position: absolute;
   inset: 0;
   display: block;
-  background: linear-gradient(127deg, #424557 0%, #1f2129 74%);
+  background: linear-gradient(
+    127deg,
+    color-mix(in srgb, var(--al-color-on-surface) 28%, var(--al-color-surface)) 0%,
+    var(--al-color-surface-variant) 74%
+  );
 }
 
 .al-photo-grid__review-map {
@@ -117,7 +121,7 @@
   min-height: 120px;
   padding: 24px 16px 20px;
   border-radius: 16px;
-  background: #212b26;
+  background: color-mix(in srgb, var(--al-color-success) 14%, var(--al-color-surface));
   overflow: hidden;
 }
 
@@ -127,8 +131,16 @@
   pointer-events: none;
   opacity: 0.55;
   background:
-    linear-gradient(#38453d, #38453d) center 42% / 72% 5px no-repeat,
-    linear-gradient(#38453d, #38453d) 58% center / 5px 58% no-repeat;
+    linear-gradient(
+        color-mix(in srgb, var(--al-color-success) 45%, var(--al-color-outline)),
+        color-mix(in srgb, var(--al-color-success) 45%, var(--al-color-outline))
+      )
+      center 42% / 72% 5px no-repeat,
+    linear-gradient(
+        color-mix(in srgb, var(--al-color-success) 45%, var(--al-color-outline)),
+        color-mix(in srgb, var(--al-color-success) 45%, var(--al-color-outline))
+      )
+      58% center / 5px 58% no-repeat;
 }
 
 .al-photo-grid__review-map-label {
@@ -139,6 +151,18 @@
   font-size: 13px;
   font-weight: 600;
   line-height: 16px;
-  color: #ffffff;
+  color: var(--al-color-on-surface);
   text-align: center;
+}
+
+.al-photo-grid__review-map-pin {
+  position: relative;
+  z-index: 1;
+  display: block;
+  color: var(--al-color-success);
+}
+
+.al-photo-grid__review-map-pin path,
+.al-photo-grid__review-map-pin circle {
+  stroke: currentColor;
 }

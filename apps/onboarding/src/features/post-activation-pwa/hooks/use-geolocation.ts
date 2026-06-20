@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { reverseGeocodeLocation } from '../utils/reverse-geocode.js';
 
@@ -11,15 +11,25 @@ export type GeoResult = {
 export function useGeolocationCapture() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<'denied' | 'unavailable' | null>(null);
+  const mountedRef = useRef(true);
+
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+    };
+  }, []);
 
   const requestLocation = useCallback((): Promise<GeoResult | null> => {
     setLoading(true);
     setError(null);
 
     return new Promise((resolve) => {
-      if (!navigator.geolocation) {
-        setError('unavailable');
-        setLoading(false);
+      if (!('geolocation' in navigator)) {
+        if (mountedRef.current) {
+          setError('unavailable');
+          setLoading(false);
+        }
         resolve(null);
         return;
       }
@@ -32,11 +42,19 @@ export function useGeolocationCapture() {
               lng: position.coords.longitude,
             };
             const name = await reverseGeocodeLocation(point);
+            if (!mountedRef.current) {
+              resolve(null);
+              return;
+            }
             setLoading(false);
             resolve({ ...point, name });
           })();
         },
         (geoError) => {
+          if (!mountedRef.current) {
+            resolve(null);
+            return;
+          }
           setLoading(false);
           setError(geoError.code === geoError.PERMISSION_DENIED ? 'denied' : 'unavailable');
           resolve(null);
@@ -50,9 +68,6 @@ export function useGeolocationCapture() {
 }
 
 export async function requestMediaPermissions(): Promise<boolean> {
-  if (!navigator.mediaDevices?.getUserMedia) {
-    return false;
-  }
   try {
     const stream = await navigator.mediaDevices.getUserMedia({ video: true });
     stream.getTracks().forEach((track) => {

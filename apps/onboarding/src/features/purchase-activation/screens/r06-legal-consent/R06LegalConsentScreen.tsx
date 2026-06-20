@@ -1,8 +1,8 @@
 import { AlCheckbox, AlStack, AlText } from '@autolokate/ui';
 import { AlIcon } from '@autolokate/icons';
 
-import { EmptyStateHero } from '../../../../components/compositions/index.js';
-import { FlowStepShell } from '../../../../components/flow-step-shell/index.js';
+import { EmptyStateHero } from '@/components/compositions/index.js';
+import { FlowStepShell } from '@/components/flow-step-shell/index.js';
 import type { R06LegalConsentScreenProps } from '../../types.js';
 
 export type { R06LegalConsentScreenProps };

@@ -1,7 +1,6 @@
 import { useCallback, useState } from 'react';
 
 import { usePwaScan, type PwaSessionPatch } from '../context/PwaScanContext.js';
-import type { PwaParkMePhotos, PwaSosPhotos } from '../context/pwa-scan-types.js';
 import { useCameraCapture } from './use-camera-capture.js';
 import { logPhotoDiagnostic } from '../utils/pwa-photo-diagnostics.js';
 
@@ -33,14 +32,14 @@ export function usePwaPhotoCapture(routeId: string, field: PhotoField) {
           if (field === 'parkMePhotos') {
             return {
               parkMePhotos: {
-                ...(prev.parkMePhotos as PwaParkMePhotos),
+                ...prev.parkMePhotos,
                 [slot]: result.dataUrl,
               },
             };
           }
           return {
             sosPhotos: {
-              ...(prev.sosPhotos as PwaSosPhotos),
+              ...prev.sosPhotos,
               [slot]: result.dataUrl,
             },
           };

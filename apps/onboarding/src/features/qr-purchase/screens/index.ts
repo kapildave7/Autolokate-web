@@ -12,6 +12,3 @@ export { R09bStillConfirmingScreen } from './r09b-still-confirming/index.js';
 export { R10PaymentSuccessScreen } from './r10-payment-success/index.js';
 export { R10bPaymentFailedScreen } from './r10b-payment-failed/index.js';
 export { R10cPaymentUnconfirmedScreen } from './r10c-payment-unconfirmed/index.js';
-export { R14PermissionsScreen } from './r14-permissions/index.js';
-export { R15ActivationCompleteScreen } from './r15-activation-complete/index.js';
-export { purchaseScreenInventory } from './inventory.js';

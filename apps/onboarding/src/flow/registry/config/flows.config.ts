@@ -1,4 +1,4 @@
-import type { StepId } from '../../../types/flow.js';
+import type { StepId } from '@/types/flow.js';
 
 import type { FlowConfig } from './types.js';
 import { SHARED_PIPELINE_STEP_IDS } from './shared-pipeline.config.js';

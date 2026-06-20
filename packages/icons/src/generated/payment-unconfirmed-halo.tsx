@@ -21,9 +21,9 @@ export function PaymentUnconfirmedHaloIcon({
       {...props}
     >
       <g filter="url(#filter0_f_payment_unconfirmed_halo)">
-        <circle cx="120" cy="120" r="60" fill="#F5A623" fillOpacity="0.3" />
+        <circle cx="120" cy="120" r="60" fill="var(--al-signal-amber)" fillOpacity="0.3" />
       </g>
-      <circle cx="120" cy="120" r="74" stroke="#F5A623" strokeWidth="2" />
+      <circle cx="120" cy="120" r="74" stroke="var(--al-color-warning)" strokeWidth="2" />
       <path
         d="M136.667 105.417H103.334C101.032 105.417 99.167 107.282 99.167 109.583V130.417C99.167 132.718 101.032 134.583 103.334 134.583H136.667C138.968 134.583 140.834 132.718 140.834 130.417V109.583C140.834 107.282 138.968 105.417 136.667 105.417Z"
         stroke="white"

@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { AlLogo } from '@autolokate/brand';
 import { AlScreenBg, AlText } from '@autolokate/ui';
 
-import { useThemeMode } from '../../../../hooks/useThemeMode.js';
+import { useThemeMode } from '@/hooks/useThemeMode.js';
 import type { S0SplashScreenProps } from '../../types.js';
 
 import './s0-splash.css';

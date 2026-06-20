@@ -1,8 +1,8 @@
 import { AlIcon } from '@autolokate/icons';
 
-import { AlOfflineChip, EmptyStateHero } from '../../../../components/compositions/index.js';
-import { FlowStepShell } from '../../../../components/flow-step-shell/index.js';
-import { DEFAULT_PURCHASE_PLAN_ID } from '../../../qr-purchase/data/purchase-plans.js';
+import { AlOfflineChip, EmptyStateHero } from '@/components/compositions/index.js';
+import { FlowStepShell } from '@/components/flow-step-shell/index.js';
+import { DEFAULT_PURCHASE_PLAN_ID } from '@/features/qr-purchase/data/purchase-plans.js';
 import {
   getEntitledRiderSlots,
   getRiderPromptDescription,

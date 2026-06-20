@@ -1,162 +1,200 @@
-# Screen Parity Matrix — Consumer App
+# Screen Parity Matrix
 
-**Sprint:** 2 · Pixel parity  
-**Reference:** [`MISSING_ASSET_RECOVERY_REPORT.md`](./MISSING_ASSET_RECOVERY_REPORT.md) · [Figma screenshot index](./assets/sprint-2-pixel-parity/FIGMA_SCREENSHOT_INDEX.md)  
-**Figma file:** `FtHCUnE0HH586PtG5yJyG0`  
-**Date:** 2026-06-17  
-**Build:** `pnpm --filter @autolokate/onboarding build` ✅
-
-**Scoring:** Dark theme vs Figma frame (primary reference). Light theme scored separately where applicable.  
-**Excluded from score (P2 platform):** Status bar chrome · native safe-area simulator · absolute y=762 CTA vs fluid pinned footer (web).
+**Date:** 2026-06-19  
+**Source of truth:** Figma · Autolokate · Consumer App (`FtHCUnE0HH586PtG5yJyG0`)  
+**Method:** Full Figma API layout audit + source code cross-reference. All 6 active sections audited.  
+**Breakpoints audited:** 393px (Figma spec). Responsive behaviour verified via code review at 320, 360, 375, 390, 393, 414.
 
 ---
 
 ## Summary
 
-| Flow | Screens | Avg dark parity | Avg light parity | At 100% |
-|------|---------|-----------------|------------------|---------|
-| Auth + Legal | 5 | **99%** | **97%** | 4 / 5 |
-| Purchase | 15 | **99%** | **97%** | 14 / 15 |
-| Emergency | 11 | **98%** | **97%** | 9 / 11 |
-| Prepaid | 1 (+2 states) | **97%** | **96%** | 0 / 3* |
-| B2B2C | 2 (+2 states) | **96%** | **96%** | 0 / 4* |
-| **Total implemented** | **32** | **98%** | **97%** | **27 / 32** |
+| Section | Figma frames | Implemented | Parity | Status |
+|---------|-------------|-------------|--------|--------|
+| Shared · Auth + Legal (`91:268`) | 18 | 15 | ~89% | CONDITIONAL |
+| Consumer · Purchase (`167:434`) | 23 | 20 active | ~93% | FIXES REMAINING |
+| Consumer · Emergency + Rider (`371:1275`) | 19 | 19 | ~91% | CONDITIONAL |
+| Consumer · B2B2C (`398:899`) | 4 | 4 | ~95% | SIGNED OFF |
+| Consumer · Prepaid (`411:37`) | 1 | 1 | ~95% | SIGNED OFF |
+| Scanner · PWA (`843:2079`) | 30 | 30 | ~96% | SIGNED OFF (V4) |
 
-\*Prepaid/B2B success frames at 97–96%; loading/error states at 95–96% (see per-screen). *100%* = no remaining visual drift in scored categories.
-
----
-
-## Auth + Legal
-
-| Screen | Route | Figma | Dark | Light | Remaining drift | Screenshot |
-|--------|-------|-------|------|-------|-----------------|------------|
-| A1 · Mobile | `/journey/auth/mobile` | `102:268` | **100%** | **98%** | Light: field border uses token outline vs white stroke | [Figma](https://www.figma.com/design/FtHCUnE0HH586PtG5yJyG0/?node-id=102-268) |
-| A1 · Offline | same + offline state | `557:1606` | **100%** | **98%** | — | [Figma](https://www.figma.com/design/FtHCUnE0HH586PtG5yJyG0/?node-id=557-1606) |
-| A2 · OTP | `/journey/auth/otp` | `103:324` | **99%** | **97%** | DS `AlOtpInput` error token red in light (amber in onboarding override) | [Figma](https://www.figma.com/design/FtHCUnE0HH586PtG5yJyG0/?node-id=103-324) |
-| A3 · Vehicle owner | `/journey/auth/vehicle-owner` | `174:25` | **100%** | **98%** | — | [Figma](https://www.figma.com/design/FtHCUnE0HH586PtG5yJyG0/?node-id=174-25) |
-| L1 · Privacy | `/journey/auth/legal/privacy` | `60:156` | **98%** | **96%** | Reader scroll chrome (web) | [Figma](https://www.figma.com/design/FtHCUnE0HH586PtG5yJyG0/?node-id=60-156) |
-| L2 · Terms | `/journey/auth/legal/terms` | `61:163` | **98%** | **96%** | Reader scroll chrome (web) | [Figma](https://www.figma.com/design/FtHCUnE0HH586PtG5yJyG0/?node-id=61-163) |
-
-### Auth Sprint 2 fixes
-
-- A1 mobile field default border → **2px `#FFFFFF`** (Figma `AlTextField` empty stroke)
-- OTP body gap **24px** (existing `contentGap="otp"`)
-- Error ambient amber tint on auth shell (existing `ob-auth-shell--error`)
+**Total active frames:** 95  
+**Implemented:** 89  
+**Overall parity:** ~93%
 
 ---
 
-## Purchase
+## 1 · Shared Auth + Legal (`91:268`)
 
-| Screen | Route | Figma | Dark | Light | Remaining drift | Screenshot |
-|--------|-------|-------|------|-------|-----------------|------------|
-| R03 · Vehicle number | `/journey/purchase/r03-vehicle` | `170:25` | **100%** | **98%** | — | [Figma](https://www.figma.com/design/FtHCUnE0HH586PtG5yJyG0/?node-id=170-25) |
-| R04 · Fetching | `/journey/purchase/r04-fetching` | `179:25` | **100%** | **98%** | Spinner is DS primitive (matches 60px green ellipse) | [Figma](https://www.figma.com/design/FtHCUnE0HH586PtG5yJyG0/?node-id=179-25) |
-| R04b · Fetch failed | `/journey/purchase/r04b-fetch-failed` | `579:1663` | **100%** | **98%** | — | [Figma](https://www.figma.com/design/FtHCUnE0HH586PtG5yJyG0/?node-id=579-1663) |
-| R05 · Confirm vehicle | `/journey/purchase/r05-confirm` | `170:71` | **100%** | **98%** | — | [Figma](https://www.figma.com/design/FtHCUnE0HH586PtG5yJyG0/?node-id=170-71) |
-| R06 · Choose plan | `/journey/purchase/r06-choose-plan` | `183:25` | **99%** | **97%** | Carousel snap motion (static parity OK) | [Figma](https://www.figma.com/design/FtHCUnE0HH586PtG5yJyG0/?node-id=183-25) |
-| R07 · Rider cover | `/journey/purchase/r07-rider-cover` | `186:25` | **100%** | **98%** | — | [Figma](https://www.figma.com/design/FtHCUnE0HH586PtG5yJyG0/?node-id=186-25) |
-| R08 · Order summary | `/journey/purchase/r08-order-summary` | `190:25` | **100%** | **98%** | — | [Figma](https://www.figma.com/design/FtHCUnE0HH586PtG5yJyG0/?node-id=190-25) |
-| R08b · Promo applied | `/journey/purchase/r08b-promo-applied` | `333:37` | **100%** | **98%** | — | [Figma](https://www.figma.com/design/FtHCUnE0HH586PtG5yJyG0/?node-id=333-37) |
-| R08c · Invalid promo | `/journey/purchase/r08c-invalid-promo` | `579:1748` | **100%** | **98%** | — | [Figma](https://www.figma.com/design/FtHCUnE0HH586PtG5yJyG0/?node-id=579-1748) |
-| R09 · Processing | `/journey/purchase/r09-processing-payment` | `192:25` | **100%** | **98%** | — | [Figma](https://www.figma.com/design/FtHCUnE0HH586PtG5yJyG0/?node-id=192-25) |
-| R09b · Still confirming | `/journey/purchase/r09b-still-confirming` | `579:1687` | **100%** | **98%** | — | [Figma](https://www.figma.com/design/FtHCUnE0HH586PtG5yJyG0/?node-id=579-1687) |
-| R10 · Payment success | `/journey/purchase/r10-payment-success` | `193:25` | **100%** | **98%** | — | [Figma](https://www.figma.com/design/FtHCUnE0HH586PtG5yJyG0/?node-id=193-25) |
-| R10b · Payment failed | `/journey/purchase/r10b-payment-failed` | `194:25` | **100%** | **98%** | — | [Figma](https://www.figma.com/design/FtHCUnE0HH586PtG5yJyG0/?node-id=194-25) |
-| R10c · Unconfirmed | `/journey/purchase/r10c-payment-unconfirmed` | `579:1638` | **100%** | **98%** | — | [Figma](https://www.figma.com/design/FtHCUnE0HH586PtG5yJyG0/?node-id=579-1638) |
-| R15 · Activation complete | component only | `171:25` | **99%** | **97%** | Not in live journey route | [Figma](https://www.figma.com/design/FtHCUnE0HH586PtG5yJyG0/?node-id=171-25) |
+| # | Frame | Node | Code file | Parity | Notes |
+|---|-------|------|-----------|--------|-------|
+| 01 | Splash | `27:98` | — | N/A | Deprecated; `/auth/splash` redirects to mobile |
+| 02 | Mobile · Empty | `102:268` | `A1MobileScreen.tsx` | ✅ 95% | Title, desc, CTA, consent, trust row, offline chip all match |
+| 03 | Mobile · Filled | `44:133` | `A1MobileScreen.tsx` | ✅ 95% | Filled input + consent checked state ✓ |
+| 04 | Mobile · Ready | `102:303` | `A1MobileScreen.tsx` | ✅ 95% | CTA enabled state ✓ |
+| 05 | Mobile · Error | `102:334` | `A1MobileScreen.tsx` | ✅ 94% | Amber tint via `ob-auth-shell--error`, error text ✓ |
+| 06 | Mobile · Offline | `557:1606` | `A1MobileScreen.tsx` | ✅ 93% | AlOfflineChip at top-center, disabled CTA ✓ |
+| 07 | OTP · Default | `103:324` | `A2OtpScreen.tsx` | ✅ 95% | Title, desc+Change, OTP cells, Verify CTA ✓ |
+| 08 | OTP · Typing | `29:100` | `A2OtpScreen.tsx` | ✅ 95% | Partial digits in cells ✓ |
+| 09 | OTP · Verifying | `103:408` | `A2OtpScreen.tsx` | ✅ 96% | Loading CTA ✓ |
+| 10 | OTP · Success | `103:453` | `A2OtpScreen.tsx` | ✅ 95% | Green cell borders, hidden CTA ✓ |
+| 11 | OTP · Error | `103:364` | `A2OtpScreen.tsx` | ✅ 94% | Amber cell borders ✓, error text ✓ |
+| 12 | OTP · Network error | `556:1577` | `A2OtpScreen.tsx` | ✅ 90% | `otpState='network-error'` renders error text + resend ✓ |
+| 13 | OTP · Resend | `130:419` | `A2OtpScreen.tsx` | ✅ 93% | Countdown `Resend code in 0:24` + resend link ✓ |
+| 14 | OTP · Resend failed | `557:1647` | `A2OtpScreen.tsx` | ✅ 90% | Resend-failed text rendered ✓ |
+| 15 | Your name | `798:2073` | `A3VehicleOwnerScreen.tsx` | ✅ 95% | Title "What should we call you?", CTA "Add my name" ✓ |
+| L1 | Privacy Policy | `60:156` | InlineConsentBlock link | ◑ 40% | Renders linked text; no standalone document screen |
+| L2 | Terms & Conditions | `61:163` | InlineConsentBlock link | ◑ 40% | Renders linked text; no standalone document screen |
+| — | Language picker overlay | `677:2071` | — | N/A | Removed — known exception |
 
-### Purchase Sprint 2 fixes
-
-| Fix | Screen | Detail |
-|-----|--------|--------|
-| **R09b footer** | `579:1687` | Primary CTA → centered **Body text link** “Check status” |
-| **R04b Enter manually** | `579:1663` | Secondary **14/600** link above “Try again” · routes to R03 not-found |
-| **Display title** | All status shells | **36/44/700** centered on `PurchaseStatusShell` |
-| **R07 plan context** | `186:25` | Removed extra plan label row not in Figma |
-| **R10c halo** | `579:1638` | Sprint 1 `payment-unconfirmed-halo` (credit card) |
+**Auth parity notes:**
+- Step progress: 3 segments (Mobile=1/3, OTP=2/3, Name=3/3) — intentional, not 5-step Figma count from pre-A1 era
+- L1/L2 are document readers (Figma `scrollBehavior: SCROLLS`) — not implemented as navigable routes; links open external URLs
+- Language picker: intentionally removed per project decision
 
 ---
 
-## Emergency
+## 2 · Consumer · QR Activation + Purchase (`167:434`)
 
-| Screen | Route | Figma | Dark | Light | Remaining drift | Screenshot |
-|--------|-------|-------|------|-------|-----------------|------------|
-| R0 · Rider prompt | `/journey/emergency/rider-prompt` | `375:37` | **98%** | **97%** | Hero Y: scroll shell vs absolute illustration block | [Figma](https://www.figma.com/design/FtHCUnE0HH586PtG5yJyG0/?node-id=375-37) |
-| R0 · Offline | same + offline | `713:2311` | **100%** | **98%** | — | [Figma](https://www.figma.com/design/FtHCUnE0HH586PtG5yJyG0/?node-id=713-2311) |
-| R1 · Rider mobile | `/journey/emergency/rider-mobile` | `374:37` | **100%** | **98%** | — | [Figma](https://www.figma.com/design/FtHCUnE0HH586PtG5yJyG0/?node-id=374-37) |
-| R2 · Rider OTP | `/journey/emergency/rider-otp` | `374:54` | **100%** | **98%** | — | [Figma](https://www.figma.com/design/FtHCUnE0HH586PtG5yJyG0/?node-id=374-54) |
-| R3 · Rider name | `/journey/emergency/rider-name` | `374:71` | **100%** | **98%** | — | [Figma](https://www.figma.com/design/FtHCUnE0HH586PtG5yJyG0/?node-id=374-71) |
-| R4 · Riders summary | `/journey/emergency/riders-summary` | `822:1980` | **100%** | **98%** | — | [Figma](https://www.figma.com/design/FtHCUnE0HH586PtG5yJyG0/?node-id=822-1980) |
-| E0 · Contacts empty | `/journey/emergency/contacts-empty` | `373:37` | **98%** | **97%** | Hero Y: scroll shell vs absolute | [Figma](https://www.figma.com/design/FtHCUnE0HH586PtG5yJyG0/?node-id=373-37) |
-| E1 · Contact mobile | `/journey/emergency/contact-mobile` | `371:1295` | **100%** | **98%** | — | [Figma](https://www.figma.com/design/FtHCUnE0HH586PtG5yJyG0/?node-id=371-1295) |
-| E2 · Contact OTP | `/journey/emergency/contact-otp` | `371:1318` | **100%** | **98%** | — | [Figma](https://www.figma.com/design/FtHCUnE0HH586PtG5yJyG0/?node-id=371-1318) |
-| E3 · Contact name | `/journey/emergency/contact-name` | `371:1276` | **100%** | **98%** | — | [Figma](https://www.figma.com/design/FtHCUnE0HH586PtG5yJyG0/?node-id=371-1276) |
-| E5 · Contacts summary | `/journey/emergency/contacts-summary` | `373:64` | **100%** | **98%** | — | [Figma](https://www.figma.com/design/FtHCUnE0HH586PtG5yJyG0/?node-id=373-64) |
+| # | Frame | Node | Code file | Parity | Notes |
+|---|-------|------|-----------|--------|-------|
+| R03 | Vehicle number | `170:25` | `R03VehicleNumberScreen.tsx` | ✅ 98% | Plate input, trust row, skeleton chips ✓ |
+| R03b | Vehicle not found | `579:1700` | `R03VehicleNumberScreen.tsx` | ✅ 98% | Inline error state on R03 ✓ |
+| R04 | Fetching details | `179:25` | `R04FetchingVehicleScreen.tsx` | ✅ 97% | Centered spinner, no back/CTA ✓ |
+| R04b | Couldn't fetch | `579:1663` | `R04bFetchFailedScreen.tsx` | ✅ 98% | Amber halo, retry ✓ |
+| R05 | Confirm vehicle | `170:71` | `R05ConfirmVehicleScreen.tsx` | ✅ 95% | RC card, "Looks right" CTA ✓ |
+| R06 | Choose plan | `183:25, 243:49/76/103` | `R06ChoosePlanScreen.tsx` | ✅ 94% | 4 plan cards, carousel, dynamic CTA ✓ |
+| R07 | Add rider cover | `186:25` | `R07RiderCoverScreen.tsx` | ✅ 93% | Rider cards, skip link ✓; extra plan-context line (P2) |
+| R08 | Order summary | `190:25` | `R08OrderSummaryScreen.tsx` | ✅ 92% | Summary card, promo field ✓ |
+| R08b | Promo applied | `333:37` | `R08bPromoAppliedScreen.tsx` | ✅ 95% | Discount row, dynamic total ✓ |
+| R08c | Promo invalid | `579:1748` | `R08cInvalidPromoScreen.tsx` | ✅ 93% | Error message + promo field ✓ |
+| R08d | No rider summary | `648:2053` | R08 skip path | ◑ 85% | Promo field shows even in no-rider path (P2 gap) |
+| R09 | Processing payment | `192:25` | `R09ProcessingPaymentScreen.tsx` | ✅ 97% | Spinner, no CTA ✓ |
+| R09b | Still confirming | `579:1687` | `R09bStillConfirmingScreen.tsx` | ✅ 93% | "Check status" CTA ✓ |
+| R10 | Payment success | `193:25` | `R10PaymentSuccessScreen.tsx` | ✅ 95% | Success halo, Continue → Emergency ✓ |
+| R10b | Payment failed | `194:25` | `R10bPaymentFailedScreen.tsx` | ✅ 97% | Amber halo, retry ✓ |
+| R10c | Payment unconfirmed | `579:1638` | `R10cPaymentUnconfirmedScreen.tsx` | ✅ 93% | "Check status" CTA ✓ |
+| R14 | Permissions | `32:132` | Route → redirects to R10 | N/A | Archived — redirect only |
+| R14b | Permissions · one on | `764:2199` | Route → redirects to R10 | N/A | Archived — redirect only |
+| R15 | Activation complete | `171:59` | Route → redirects to R10 | N/A | Archived — redirect only |
+| R01 | Scan sticker | `178:25` | — | N/A | Pre-app QR entry; replaced by Auth entry |
 
-### Emergency Sprint 2 fixes
-
-- Relation grid **8/8 tiles**: added **Relative** (`house`) + **Colleague** (`store`) per Figma `374:71`
-- Sprint 1 icon mappings: heart · smile · ellipsis (Spouse · Friend · Other)
-
----
-
-## Prepaid
-
-| Screen | Route | Figma | Dark | Light | Remaining drift | Screenshot |
-|--------|-------|-------|------|-------|-----------------|------------|
-| Welcome · success | `/journey/prepaid/welcome` | `411:38` | **97%** | **96%** | Status bar P2 | [Figma](https://www.figma.com/design/FtHCUnE0HH586PtG5yJyG0/?node-id=411-38) |
-| Welcome · loading | inline state | `588:1798` | **95%** | **95%** | CSS skeleton vs Figma bars (dimensions match) | [Figma](https://www.figma.com/design/FtHCUnE0HH586PtG5yJyG0/?node-id=588-1798) |
-| Welcome · error | inline state | `588:1850` | **96%** | **96%** | — | [Figma](https://www.figma.com/design/FtHCUnE0HH586PtG5yJyG0/?node-id=588-1850) |
-
-Prior rebuild: [`B2B_PIXEL_REBUILD_REPORT.md`](./B2B_PIXEL_REBUILD_REPORT.md)
-
----
-
-## B2B2C
-
-| Screen | Route | Figma | Dark | Light | Remaining drift | Screenshot |
-|--------|-------|-------|------|-------|-----------------|------------|
-| Partner · plan only | `/journey/b2b2c/welcome` | `386:889` | **96%** | **96%** | Status bar P2 | [Figma](https://www.figma.com/design/FtHCUnE0HH586PtG5yJyG0/?node-id=386-889) |
-| Partner · plan + rider | `/journey/b2b2c/welcome/plan-rider` | `443:37` | **96%** | **96%** | — | [Figma](https://www.figma.com/design/FtHCUnE0HH586PtG5yJyG0/?node-id=443-37) |
-| Loading / Error | inline states | `588:1798` / `588:1850` | **95–96%** | **95–96%** | Same as Prepaid |
+**Purchase parity notes:**
+- R08c, R09b, R10c all implemented since the 2026-06-18 gap report — P0 gaps resolved
+- Post-payment browser-back guards: implemented across R03–R09b via `redirectIfPaymentSucceeded`
+- R10 Continue → Emergency: wired (`setPhase('emergency')`)
+- R08d no-rider path: shows promo field (should hide per Figma `648:2053`) — P2
+- R07 extra plan-context line: present in code but not in Figma frame — P2
 
 ---
 
-## Responsive verification (dark)
+## 3 · Consumer · Emergency + Rider (`371:1275`)
 
-Shell `max-width: 393px` · `padding-inline: 16px` · CTA `min-height: 58px` · `border-radius: 16px`
+| # | Frame | Node | Code file | Parity | Notes |
+|---|-------|------|-----------|--------|-------|
+| E0 | No contacts | `373:37` | `E05ContactsEmptyScreen.tsx` | ✅ 93% | Trust row moved into EmptyStateHero (this session fix) |
+| E1 | Contact mobile | `789:1982` | `E06ContactMobileScreen.tsx` | ✅ 95% | "Their mobile number", Step 1/3, Get OTP ✓ |
+| E2 | Contact OTP | `789:2027` | `E07ContactOtpScreen.tsx` | ✅ 92% | "Enter their code", Step 2/3, Change link right-aligned ✓ |
+| E3 | Contact name + relation | `371:1276` | `E08ContactNameScreen.tsx` | ✅ 92% | Name + relation grid ✓ |
+| E3d | E3 · Disabled | `713:1962` | `E08ContactNameScreen.tsx` | ✅ 90% | Submitting state |
+| E5 | Contacts added | `373:64` | `E09ContactsSummaryScreen.tsx` | ✅ 93% | Summary list, add-more CTA ✓ |
+| E5max | Contacts added · Max | `717:2237` | `E09ContactsSummaryScreen.tsx` | ✅ 92% | Max reached state ✓ |
+| R0 | Rider prompt | `375:37` | `E01RiderPromptScreen.tsx` | ✅ 93% | Title, desc, "Skip for now" ✓ |
+| R0load | Rider prompt · Loading | `713:2264` | `E01RiderPromptScreen.tsx` | ✅ 92% | Disabled CTA, loading state ✓ |
+| R0err | Rider prompt · Error | `713:2288` | `E01RiderPromptScreen.tsx` | ✅ 91% | Error desc, "Try again" CTA ✓ |
+| R0off | Rider prompt · Offline | `713:2311` | `E01RiderPromptScreen.tsx` | ✅ 90% | AlOfflineChip via headerAccessory; offline desc ✓ |
+| R1 | Rider mobile | `789:2064` | `E02RiderMobileScreen.tsx` | ✅ 95% | "Rider's mobile number", Step 1/3 ✓ |
+| R2 | Rider OTP | `789:2109` | `E03RiderOtpScreen.tsx` | ✅ 92% | "Enter their code", Step 2/3, Change ✓ |
+| R3 | Rider name + relation | `374:71` | `E04RiderNameScreen.tsx` | ✅ 92% | Name + relation grid ✓ |
+| R3d | R3 · Disabled | `713:2021` | `E04RiderNameScreen.tsx` | ✅ 90% | Submitting state |
+| R3sub | R3 · Submitting | `719:2084` | `E04RiderNameScreen.tsx` | ✅ 90% | Loading state |
+| R3err | R3 · Error | `719:2143` | `E04RiderNameScreen.tsx` | ✅ 90% | Error message ✓ |
+| R4 | Riders added | `822:1980` | `E10RidersSummaryScreen.tsx` | ✅ 93% | Summary list ✓ |
+| R4max | Riders added · Max | `824:2014` | `E10RidersSummaryScreen.tsx` | ✅ 92% | Max reached state ✓ |
 
-| Width | Result | Notes |
-|-------|--------|-------|
-| **320** | ✅ Pass | Status body padding reduces (`purchase-status-shell` @ 20rem) |
-| **360** | ✅ Pass | No horizontal overflow |
-| **375** | ✅ Pass | Reference emergency QA width |
-| **390** | ✅ Pass | — |
-| **393** | ✅ Pass | Figma frame width |
-| **414** | ✅ Pass | Content capped at 393; gutters expand |
-
-Verified via token audit + prior B2B responsive captures in [`docs/assets/b2b-pixel-rebuild/`](./assets/b2b-pixel-rebuild/).
+**Emergency parity notes:**
+- E0 trust row: repositioned (this session) — now appears grouped with hero illustration per Figma
+- E2/R2 Change link: right-aligned via `justify-content: space-between` in `.ob-emergency-otp-desc` ✓
+- OTP description layout: Figma shows Change as absolute overlay; code uses flex row — acceptable web adaptation
+- R0 offline: `headerAccessory` renders chip at top-center, matching Figma overlay position ✓
 
 ---
 
-## Not in matrix
+## 4 · Consumer · QR Activation — B2B2C (`398:899`)
 
-| Item | Reason |
-|------|--------|
-| S0 Splash `27:98` | Not implemented in journey |
-| P01–P06 legacy purchase | Orphan dev routes · deprecated |
-| R14 Permissions | Component exists · no journey route |
-| Flow Hub / Home | Internal QA · no Figma consumer frame |
+| # | Frame | Node | Code file | Parity | Notes |
+|---|-------|------|-----------|--------|-------|
+| — | Partner welcome · plan only | `386:889` | `PartnerWelcomeScreen.tsx` (variant=plan-only) | ✅ 95% | Title, desc, section label, plan card, CTA ✓ |
+| — | Partner welcome · plan + rider | `443:37` | `PartnerWelcomeScreen.tsx` (variant=plan-rider) | ✅ 95% | Rider row in plan card ✓ |
+| — | Partner welcome · Loading | `588:1798` | `PartnerWelcomeScreen.tsx` (viewState=loading) | ✅ 93% | Skeleton partner + plan cards ✓ |
+| — | Partner welcome · Error | `588:1850` | `PartnerWelcomeScreen.tsx` (viewState=error) | ✅ 92% | Error panel, "Try again" CTA ✓ |
 
 ---
 
-## Sign-off threshold
+## 5 · Consumer · QR Activation — Prepaid (`411:37`)
 
-| Criterion | Target | Result |
-|-----------|--------|--------|
-| Implemented journey screens at **≥98%** dark | All | ✅ **32/32** |
-| Zero wrong icons/halos/copy (P0) | All flows | ✅ |
-| Responsive 320–414 | All shells | ✅ |
-| Light theme ≥95% | All flows | ✅ **97% avg** |
+| # | Frame | Node | Code file | Parity | Notes |
+|---|-------|------|-----------|--------|-------|
+| — | Pre-paid welcome | `411:38` | `PrepaidWelcomeScreen.tsx` | ✅ 95% | "Covered by" label, "Included" price, correct desc ✓ |
 
-**Matrix status:** Sprint 2 complete for all implemented consumer journey screens.
+---
+
+## 6 · Scanner · QR Scan — Post-Activation PWA (`843:2079`)
+
+All 30 frames signed off in `POST_ACTIVATION_FINAL_SIGNOFF_V4.md`. CSS token fix applied this session.
+
+| # | Frame | Node | Parity | Notes |
+|---|-------|------|--------|-------|
+| 01 | Loading | `928:2252` | ✅ 96% | Wordmark header, spinner ✓ |
+| 02 | Vehicle found | `843:2080` | ✅ 96% | AlScannedVehicleCard ✓ |
+| 03 | Verify · Mobile | `978:2294` | ✅ 95% | PwaVerifyShell, mobile field ✓ |
+| 04 | Verify · OTP | `978:2319` | ✅ 95% | OTP input ✓ |
+| 05 | Verify · Name | `978:2334` | ✅ 95% | Name field ✓ |
+| 06 | Park Me · Vehicle number | `991:2328` | ✅ 95% | Plate input ✓ |
+| 07 | Park Me · Looking up | `1038:2370` | ✅ 96% | Spinner ✓ |
+| 08 | Park Me · Confirm vehicle | `1034:2351` | ✅ 95% | AlVehicleConfirmationCard ✓ |
+| 08b | Park Me · Confirm · Consumer | `1040:2374` | ✅ 94% | Consumer variant ✓ |
+| 09a | Park Me · Allow camera + location | `1049:2422` | ✅ 94% | Permission prompt ✓ |
+| 09 | Park Me · Take two photos | `847:278` | ✅ 95% | AlPhotoGrid ✓ |
+| 09b | Park Me · Photos captured | `1044:2406` | ✅ 95% | Success state ✓ |
+| 10 | Park Me · Status · checking | `982:2339` | ✅ 95% | AlStatusTracker checking ✓ |
+| 11 | Park Me · Status · calling | `983:2349` | ✅ 95% | AlStatusTracker calling ✓ |
+| 12 | Park Me · Status · resolved | `983:2410` | ✅ 96% | AlStatusTracker resolved ✓ |
+| 13 | Park Me · Photo not clear | `984:2380` | ✅ 94% | Retake prompt ✓ |
+| 14 | Emergency · SOS | `848:278` | ✅ 97% | AlSosHoldButton, location chip (tokens fixed) ✓ |
+| 14b | Emergency · SOS · holding | `1092:2499` | ✅ 96% | Hold progress ✓ |
+| 14c | Emergency · SOS · allow location | `1110:2471` | ✅ 94% | Permission overlay ✓ |
+| 14d | Emergency · SOS · leave confirm | `1113:2486` | ✅ 94% | Confirm sheet ✓ |
+| 15 | Emergency · Add scene photo | `928:2267` | ✅ 95% | AlScenePhotoCard ✓ |
+| 15b | Emergency · Scene photos captured | `1148:2509` | ✅ 95% | Captured state ✓ |
+| 16 | Emergency · Location unavailable | `875:2189` | ✅ 93% | Offline fallback ✓ |
+| 17 | Emergency · Sending alert | `1177:2545` | ✅ 96% | AlDispatchTimeline sending ✓ |
+| 18 | Emergency · Couldn't send | `875:2215` | ✅ 93% | Error state ✓ |
+| 19 | Emergency · Help on the way · received | `849:321` | ✅ 96% | AlIncidentStatusHero received ✓ |
+| 20 | Emergency · Help on the way · dispatched | `870:2145` | ✅ 96% | AlIncidentStatusHero dispatched ✓ |
+| 21 | Emergency · Incident resolved | `871:2151` | ✅ 97% | Resolved state ✓ |
+| 22 | Emergency · Alert cancelled | `876:2208` | ✅ 95% | Cancelled state ✓ |
+| 23 | Emergency · Contacts alerted · no location | `1150:2527` | ✅ 93% | No-location variant ✓ |
+
+---
+
+## Remaining Drift Summary
+
+| Priority | Area | Issue |
+|----------|------|-------|
+| P2 | Purchase R07 | Extra plan-context line above rider cards not in Figma `186:25` |
+| P2 | Purchase R08d | No-rider summary still shows promo field; Figma `648:2053` hides it |
+| P2 | Auth L1/L2 | Legal document screens not implemented as full routes (linked text only) |
+| P2 | All | Fluid footer (web adaptation) vs Figma absolute CTA y=762 — accepted |
+| P2 | Purchase R06 | Web scroll-snap vs Figma carousel drag — accepted web adaptation |
+
+---
+
+**Final verdict:** REMAINING DRIFT (P2 items only — no P0/P1 blockers outstanding)
+
+All P0 blockers from prior reports have been resolved:
+- ✅ R08c, R09b, R10c implemented
+- ✅ Post-payment back guards implemented
+- ✅ R10 Continue → Emergency wired
+- ✅ PWA SOS CSS tokens fixed
+- ✅ E0 trust row repositioned

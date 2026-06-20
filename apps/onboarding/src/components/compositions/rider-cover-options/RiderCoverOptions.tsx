@@ -1,7 +1,7 @@
 import { AlIcon } from '@autolokate/icons';
 
-import type { PurchaseRiderCount } from '../../../features/qr-purchase/types-checkout.js';
-import { formatInr, getRiderPrice } from '../../../features/qr-purchase/data/purchase-pricing.js';
+import type { PurchaseRiderCount } from '@/features/qr-purchase/types-checkout.js';
+import { formatInr, getRiderPrice } from '@/features/qr-purchase/data/purchase-pricing.js';
 
 import './rider-cover-options.css';
 

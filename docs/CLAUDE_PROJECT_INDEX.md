@@ -466,30 +466,25 @@ Per project rule: if a component appears in 2+ places it must live in `@autoloka
 
 ## 15. Active Document References
 
-All superseded reports have been moved to `docs/archive/`. Only the documents below are current.
+Long-term source-of-truth documents live in **`docs/`** root. All intermediate audit, parity, recovery, and signoff reports are in **`docs/archive/`**.
 
-**Primary audit documents (2026-06-19 — supersede all prior signoff docs):**
+| Document | Role |
+|----------|------|
+| `PROJECT_STATUS.md` | Current status — this file |
+| `VISUAL_TRUTH_MATRIX_V2.md` | Visual verification matrix — **PIXEL PERFECT VERIFIED** |
+| `FINAL_THEME_SIGNOFF.md` | Theme parity signoff |
+| `FINAL_PRODUCTION_READINESS.md` | Production readiness |
+| `CLAUDE_PROJECT_INDEX.md` | Architecture index — this file |
+| `memory/MEMORY.md` | Agent memory + doc map |
 
-| Document | Area | Date | Verdict |
-|----------|------|------|---------|
-| `PROJECT_STATUS.md` | All areas | 2026-06-19 | Single source of truth |
-| `SCREEN_PARITY_MATRIX.md` | All screens | 2026-06-19 | 95 frames × parity status |
-| `FIGMA_PARITY_RECONSTRUCTION_REPORT.md` | All flows | 2026-06-19 | No P0/P1 remaining |
-| `COMPONENT_PARITY_AUDIT.md` | All components | 2026-06-19 | All verified |
-| `TOKEN_COMPLIANCE_REPORT.md` | CSS tokens | 2026-06-19 | 0 hardcoded colours |
+**Visual evidence (post-consolidation):**
 
-**Historical signoff documents:**
+| Path | Contents |
+|------|----------|
+| `docs/visual-truth/samples/` | 10 representative 393px PNG |
+| `docs/visual-truth/completed/` | Completed screen before/after + Figma |
+| `docs/archive/visual-truth-metadata/` | capture-manifest, measurements JSON |
 
-| Document | Area | Date | Status |
-|----------|------|------|--------|
-| `AUTH_FIGMA_PARITY_SIGNOFF.md` | Auth | 2026-06-17 | Superseded by SCREEN_PARITY_MATRIX |
-| `PURCHASE_FINAL_SIGNOFF.md` | Purchase | 2026-06-17 | Superseded — P0s now resolved |
-| `PURCHASE_FINAL_FIGMA_GAP_REPORT.md` | Purchase gaps | 2026-06-18 | **Stale** — see SCREEN_PARITY_MATRIX |
-| `PHASE_A_VISUAL_SIGNOFF.md` | Purchase R03–R05 | 2026-06-17 | Still valid |
-| `R06_CAROUSEL_FINAL_REPORT.md` | Purchase R06 | — | Still valid |
-| `EMERGENCY_FINAL_SIGNOFF.md` | Emergency | 2026-06-18 | Partially superseded |
-| `POST_ACTIVATION_FINAL_SIGNOFF_V4.md` | PWA | — | SIGNED OFF — still valid |
-| `CONSUMER_APP_FINAL_SIGNOFF.md` | Overall app | 2026-06-17 | Historical |
-| `THEMING.md` | Design system | — | Living reference |
+**Historical reports:** `docs/archive/` (185+ files, including prior signoffs, audits, and `THEMING.md`)
 
-> Superseded reports: `docs/archive/` (110+ files)
+> Re-run captures: `apps/onboarding/scripts/recapture-completed-screens.mjs` (Completed only) or `visual-truth-capture.mjs` (full matrix)

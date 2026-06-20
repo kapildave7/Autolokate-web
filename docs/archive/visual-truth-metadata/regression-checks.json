@@ -1,0 +1,382 @@
+[
+  {
+    "screen": "a1-empty",
+    "theme": "dark",
+    "figma": "102:268",
+    "measured": {
+      "back": {
+        "x": 16,
+        "y": 22,
+        "w": 24,
+        "h": 48,
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(255, 255, 255)",
+        "overflow": "visible",
+        "clip": "none"
+      },
+      "checkbox": {
+        "x": 3,
+        "y": 281,
+        "w": 48,
+        "h": 48,
+        "clippedLeft": true
+      },
+      "input": null,
+      "inputFocused": null,
+      "footer": null,
+      "cta": null,
+      "addRider": null,
+      "sosDisc": null,
+      "locationChip": null,
+      "timeline": null,
+      "title": null
+    },
+    "drift": [
+      {
+        "field": "checkboxClipping",
+        "measured": 3,
+        "figma": ">=16",
+        "severity": "P0"
+      }
+    ]
+  },
+  {
+    "screen": "a1-empty",
+    "theme": "light",
+    "figma": "102:268",
+    "measured": {
+      "back": {
+        "x": 16,
+        "y": 22,
+        "w": 24,
+        "h": 48,
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 10, 10)",
+        "overflow": "visible",
+        "clip": "none"
+      },
+      "checkbox": {
+        "x": 3,
+        "y": 281,
+        "w": 48,
+        "h": 48,
+        "clippedLeft": true
+      },
+      "input": null,
+      "inputFocused": null,
+      "footer": null,
+      "cta": null,
+      "addRider": null,
+      "sosDisc": null,
+      "locationChip": null,
+      "timeline": null,
+      "title": null
+    },
+    "drift": [
+      {
+        "field": "checkboxClipping",
+        "measured": 3,
+        "figma": ">=16",
+        "severity": "P0"
+      }
+    ]
+  },
+  {
+    "screen": "a2-typing",
+    "theme": "dark",
+    "figma": "29:100",
+    "measured": {
+      "back": {
+        "x": 16,
+        "y": 22,
+        "w": 24,
+        "h": 48,
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(255, 255, 255)",
+        "overflow": "visible",
+        "clip": "none"
+      },
+      "checkbox": null,
+      "input": null,
+      "inputFocused": null,
+      "footer": null,
+      "cta": null,
+      "addRider": null,
+      "sosDisc": null,
+      "locationChip": null,
+      "timeline": null,
+      "title": null
+    },
+    "drift": []
+  },
+  {
+    "screen": "a2-typing",
+    "theme": "light",
+    "figma": "29:100",
+    "measured": {
+      "back": {
+        "x": 16,
+        "y": 22,
+        "w": 24,
+        "h": 48,
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 10, 10)",
+        "overflow": "visible",
+        "clip": "none"
+      },
+      "checkbox": null,
+      "input": null,
+      "inputFocused": null,
+      "footer": null,
+      "cta": null,
+      "addRider": null,
+      "sosDisc": null,
+      "locationChip": null,
+      "timeline": null,
+      "title": null
+    },
+    "drift": []
+  },
+  {
+    "screen": "r08",
+    "theme": "dark",
+    "figma": "190:25",
+    "measured": {
+      "back": {
+        "x": 16,
+        "y": 22,
+        "w": 24,
+        "h": 48,
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(255, 255, 255)",
+        "overflow": "visible",
+        "clip": "none"
+      },
+      "checkbox": null,
+      "input": null,
+      "inputFocused": null,
+      "footer": null,
+      "cta": null,
+      "addRider": null,
+      "sosDisc": null,
+      "locationChip": null,
+      "timeline": null,
+      "title": null
+    },
+    "drift": []
+  },
+  {
+    "screen": "r08",
+    "theme": "light",
+    "figma": "190:25",
+    "measured": {
+      "back": {
+        "x": 16,
+        "y": 22,
+        "w": 24,
+        "h": 48,
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 10, 10)",
+        "overflow": "visible",
+        "clip": "none"
+      },
+      "checkbox": null,
+      "input": null,
+      "inputFocused": null,
+      "footer": null,
+      "cta": null,
+      "addRider": null,
+      "sosDisc": null,
+      "locationChip": null,
+      "timeline": null,
+      "title": null
+    },
+    "drift": []
+  },
+  {
+    "screen": "e10-default",
+    "theme": "dark",
+    "figma": "822:1980",
+    "measured": {
+      "back": null,
+      "checkbox": null,
+      "input": null,
+      "inputFocused": null,
+      "footer": {
+        "x": 16,
+        "y": 818,
+        "w": 361,
+        "h": 82,
+        "bg": "rgb(10, 10, 12)",
+        "color": "rgb(255, 255, 255)",
+        "overflow": "visible",
+        "clip": "none"
+      },
+      "cta": {
+        "x": 16,
+        "y": 826,
+        "w": 361,
+        "h": 58,
+        "bg": "rgb(255, 255, 255)",
+        "color": "rgb(10, 10, 10)",
+        "overflow": "visible",
+        "clip": "none"
+      },
+      "addRider": {
+        "x": 16,
+        "y": 290,
+        "w": 361,
+        "h": 48,
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(255, 255, 255)",
+        "overflow": "visible",
+        "clip": "none"
+      },
+      "sosDisc": null,
+      "locationChip": null,
+      "timeline": null,
+      "title": null
+    },
+    "drift": []
+  },
+  {
+    "screen": "e10-default",
+    "theme": "light",
+    "figma": "822:1980",
+    "measured": {
+      "back": null,
+      "checkbox": null,
+      "input": null,
+      "inputFocused": null,
+      "footer": {
+        "x": 16,
+        "y": 818,
+        "w": 361,
+        "h": 82,
+        "bg": "rgb(244, 246, 249)",
+        "color": "rgb(10, 10, 10)",
+        "overflow": "visible",
+        "clip": "none"
+      },
+      "cta": {
+        "x": 16,
+        "y": 826,
+        "w": 361,
+        "h": 58,
+        "bg": "rgb(10, 10, 10)",
+        "color": "rgb(255, 255, 255)",
+        "overflow": "visible",
+        "clip": "none"
+      },
+      "addRider": {
+        "x": 16,
+        "y": 290,
+        "w": 361,
+        "h": 48,
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 10, 10)",
+        "overflow": "visible",
+        "clip": "none"
+      },
+      "sosDisc": null,
+      "locationChip": null,
+      "timeline": null,
+      "title": null
+    },
+    "drift": []
+  },
+  {
+    "screen": "pwa-sos",
+    "theme": "dark",
+    "figma": "848:278",
+    "measured": {
+      "back": {
+        "x": 16,
+        "y": 22,
+        "w": 24,
+        "h": 48,
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(255, 255, 255)",
+        "overflow": "visible",
+        "clip": "none"
+      },
+      "checkbox": null,
+      "input": null,
+      "inputFocused": null,
+      "footer": null,
+      "cta": null,
+      "addRider": null,
+      "sosDisc": {
+        "w": 361,
+        "h": 272
+      },
+      "locationChip": {
+        "x": 105,
+        "y": 568,
+        "w": 182,
+        "h": 46,
+        "bg": "rgb(26, 26, 26)",
+        "color": "rgb(255, 255, 255)",
+        "overflow": "visible",
+        "clip": "none"
+      },
+      "timeline": null,
+      "title": null
+    },
+    "drift": [
+      {
+        "field": "sosDisc",
+        "measured": 361,
+        "figma": 200,
+        "severity": "P2"
+      }
+    ]
+  },
+  {
+    "screen": "pwa-sos",
+    "theme": "light",
+    "figma": "848:278",
+    "measured": {
+      "back": {
+        "x": 16,
+        "y": 22,
+        "w": 24,
+        "h": 48,
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 10, 10)",
+        "overflow": "visible",
+        "clip": "none"
+      },
+      "checkbox": null,
+      "input": null,
+      "inputFocused": null,
+      "footer": null,
+      "cta": null,
+      "addRider": null,
+      "sosDisc": {
+        "w": 361,
+        "h": 272
+      },
+      "locationChip": {
+        "x": 105,
+        "y": 568,
+        "w": 182,
+        "h": 46,
+        "bg": "rgb(255, 255, 255)",
+        "color": "rgb(10, 10, 10)",
+        "overflow": "visible",
+        "clip": "none"
+      },
+      "timeline": null,
+      "title": null
+    },
+    "drift": [
+      {
+        "field": "sosDisc",
+        "measured": 361,
+        "figma": 200,
+        "severity": "P2"
+      }
+    ]
+  }
+]

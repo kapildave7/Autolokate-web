@@ -1,8 +1,8 @@
 import { AlIcon } from '@autolokate/icons';
 import { AlVehicleRcCard } from '@autolokate/ui';
 
-import { EmptyStateHero } from '../../../../components/compositions/index.js';
-import { FlowStepShell } from '../../../../components/flow-step-shell/index.js';
+import { EmptyStateHero } from '@/components/compositions/index.js';
+import { FlowStepShell } from '@/components/flow-step-shell/index.js';
 import type { PurchaseActivationScreenProps } from '../../types.js';
 import { demoPlate, demoVehicleFields } from '../../data/demo-data.js';
 

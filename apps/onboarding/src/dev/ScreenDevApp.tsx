@@ -1,26 +1,25 @@
-import { useMemo, useState, type ReactElement } from 'react';
+import { useEffect, useMemo, useState, type ReactElement } from 'react';
 import { setThemeMode } from '@autolokate/design-system';
 import { AlButton, AlHeading, AlStack, AlText } from '@autolokate/ui';
 
-import type { PrepaidScreenState } from '../features/qr-prepaid/types.js';
-import { PR01PrepaidEntryScreen } from '../features/qr-prepaid/screens/pr01-prepaid-entry/index.js';
-import { PR02ActivationCodeScreen } from '../features/qr-prepaid/screens/pr02-activation-code/index.js';
-import { PR03CodeValidationScreen } from '../features/qr-prepaid/screens/pr03-code-validation/index.js';
-import { QrScanScreen } from '../features/qr-activation/screens/index.js';
-import { demoMobileDisplay, demoOtp } from '../features/shared-auth/data/demo-data.js';
+import type { PrepaidScreenState } from '@/features/qr-prepaid/types.js';
+import { PR01PrepaidEntryScreen } from '@/features/qr-prepaid/screens/pr01-prepaid-entry/index.js';
+import { PR02ActivationCodeScreen } from '@/features/qr-prepaid/screens/pr02-activation-code/index.js';
+import { PR03CodeValidationScreen } from '@/features/qr-prepaid/screens/pr03-code-validation/index.js';
+import { demoMobileDisplay, demoOtp } from '@/features/shared-auth/data/demo-data.js';
 import {
   A1MobileScreen,
   A2OtpScreen,
   A3VehicleOwnerScreen,
   S0SplashScreen,
-} from '../features/shared-auth/screens/index.js';
-import { L1PrivacyPolicyScreen } from '../features/shared-legal/screens/l1-privacy-policy/index.js';
-import { L2TermsConditionsScreen } from '../features/shared-legal/screens/l2-terms-conditions/index.js';
-import type { AuthMobileState, AuthOtpState } from '../features/shared-auth/types.js';
-import { R01VehicleNumberScreen } from '../features/purchase-activation/screens/r01-vehicle-number/index.js';
-import { R02VehicleDetailsScreen } from '../features/purchase-activation/screens/r02-vehicle-details/index.js';
-import { R05AccountCreationScreen } from '../features/purchase-activation/screens/r05-account-creation/index.js';
-import { R06LegalConsentScreen } from '../features/purchase-activation/screens/r06-legal-consent/index.js';
+} from '@/features/shared-auth/screens/index.js';
+import { L1PrivacyPolicyScreen } from '@/features/shared-legal/screens/l1-privacy-policy/index.js';
+import { L2TermsConditionsScreen } from '@/features/shared-legal/screens/l2-terms-conditions/index.js';
+import type { AuthMobileState, AuthOtpState } from '@/features/shared-auth/types.js';
+import { R01VehicleNumberScreen } from '@/features/purchase-activation/screens/r01-vehicle-number/index.js';
+import { R02VehicleDetailsScreen } from '@/features/purchase-activation/screens/r02-vehicle-details/index.js';
+import { R05AccountCreationScreen } from '@/features/purchase-activation/screens/r05-account-creation/index.js';
+import { R06LegalConsentScreen } from '@/features/purchase-activation/screens/r06-legal-consent/index.js';
 import {
   E01RiderPromptScreen,
   E02RiderMobileScreen,
@@ -32,37 +31,34 @@ import {
   E08ContactNameScreen,
   E09ContactsSummaryScreen,
   E10RidersSummaryScreen,
-} from '../features/emergency/screens/index.js';
-import type { PurchaseScreenState } from '../features/qr-purchase/types.js';
-import { P01PlanSelectionScreen } from '../features/qr-purchase/screens/p01-plan-selection/index.js';
-import { P02PlanDetailsScreen } from '../features/qr-purchase/screens/p02-plan-details/index.js';
-import { P03RiderSelectionScreen } from '../features/qr-purchase/screens/p03-rider-selection/index.js';
-import { P04CheckoutSummaryScreen } from '../features/qr-purchase/screens/p04-checkout-summary/index.js';
-import { P05PaymentProcessingScreen } from '../features/qr-purchase/screens/p05-payment-processing/index.js';
-import { P06PaymentSuccessScreen } from '../features/qr-purchase/screens/p06-payment-success/index.js';
-import { R03VehicleNumberScreen } from '../features/qr-purchase/screens/r03-vehicle-number/index.js';
-import { R04FetchingVehicleScreen } from '../features/qr-purchase/screens/r04-fetching-vehicle/index.js';
-import { R04bFetchFailedScreen } from '../features/qr-purchase/screens/r04b-fetch-failed/index.js';
-import { R05ConfirmVehicleScreen } from '../features/qr-purchase/screens/r05-confirm-vehicle/index.js';
-import { R08OrderSummaryScreen } from '../features/qr-purchase/screens/r08-order-summary/index.js';
-import { R08bPromoAppliedScreen } from '../features/qr-purchase/screens/r08b-promo-applied/index.js';
-import { R06ChoosePlanScreen } from '../features/qr-purchase/screens/r06-choose-plan/index.js';
-import { DEFAULT_PURCHASE_PLAN_ID } from '../features/qr-purchase/data/purchase-plans.js';
-import type { PurchasePlanId } from '../features/qr-purchase/types-checkout.js';
-import { R07RiderCoverScreen } from '../features/qr-purchase/screens/r07-rider-cover/index.js';
-import { R09ProcessingPaymentScreen } from '../features/qr-purchase/screens/r09-processing-payment/index.js';
-import { R10PaymentSuccessScreen } from '../features/qr-purchase/screens/r10-payment-success/index.js';
-import { R10bPaymentFailedScreen } from '../features/qr-purchase/screens/r10b-payment-failed/index.js';
-import { R14PermissionsScreen } from '../features/qr-purchase/screens/r14-permissions/index.js';
-import { R15ActivationCompleteScreen } from '../features/qr-purchase/screens/r15-activation-complete/index.js';
-import { DEFAULT_PURCHASE_PERMISSIONS } from '../features/qr-purchase/types-checkout.js';
-import type { PurchaseVehiclePlateState } from '../features/qr-purchase/types-vehicle.js';
-import { demoPlate } from '../features/purchase-activation/data/demo-data.js';
-import type { ScreenViewState } from '../types/flow.js';
+} from '@/features/emergency/screens/index.js';
+import { R03VehicleNumberScreen } from '@/features/qr-purchase/screens/r03-vehicle-number/index.js';
+import { R04FetchingVehicleScreen } from '@/features/qr-purchase/screens/r04-fetching-vehicle/index.js';
+import { R04bFetchFailedScreen } from '@/features/qr-purchase/screens/r04b-fetch-failed/index.js';
+import { R05ConfirmVehicleScreen } from '@/features/qr-purchase/screens/r05-confirm-vehicle/index.js';
+import { R08OrderSummaryScreen } from '@/features/qr-purchase/screens/r08-order-summary/index.js';
+import { R08bPromoAppliedScreen } from '@/features/qr-purchase/screens/r08b-promo-applied/index.js';
+import { R08cInvalidPromoScreen } from '@/features/qr-purchase/screens/r08c-invalid-promo/index.js';
+import { R06ChoosePlanScreen } from '@/features/qr-purchase/screens/r06-choose-plan/index.js';
+import { DEFAULT_PURCHASE_PLAN_ID } from '@/features/qr-purchase/data/purchase-plans.js';
+import type { PurchasePlanId } from '@/features/qr-purchase/types-checkout.js';
+import { R07RiderCoverScreen } from '@/features/qr-purchase/screens/r07-rider-cover/index.js';
+import { R09ProcessingPaymentScreen } from '@/features/qr-purchase/screens/r09-processing-payment/index.js';
+import { R09bStillConfirmingScreen } from '@/features/qr-purchase/screens/r09b-still-confirming/index.js';
+import { R10PaymentSuccessScreen } from '@/features/qr-purchase/screens/r10-payment-success/index.js';
+import { R10bPaymentFailedScreen } from '@/features/qr-purchase/screens/r10b-payment-failed/index.js';
+import { R10cPaymentUnconfirmedScreen } from '@/features/qr-purchase/screens/r10c-payment-unconfirmed/index.js';
+import { PrepaidWelcomeScreen } from '@/features/qr-prepaid/screens/prepaid-welcome/index.js';
+import { PartnerWelcomeScreen } from '@/features/qr-b2b2c/screens/partner-welcome/index.js';
+import { DevCompletedPreview } from '@/dev/DevCompletedPreview.js';
+import { JourneyProvider } from '@/journey/JourneyContext.js';
+import type { PurchaseVehiclePlateState } from '@/features/qr-purchase/types-vehicle.js';
+import { demoPlate } from '@/features/purchase-activation/data/demo-data.js';
+import type { ScreenViewState } from '@/types/flow.js';
 
 const demoMobile = demoMobileDisplay;
 
-import '../styles/dev-preview.css';
+import '@/styles/dev-preview.css';
 
 type SharedDevScreen = {
   id: string;
@@ -99,13 +95,6 @@ type PurchaseStatusDevScreen = {
   render: () => ReactElement;
 };
 
-type PurchaseDevScreen = {
-  id: string;
-  label: string;
-  group: 'purchase';
-  render: (state: PurchaseScreenState) => ReactElement;
-};
-
 type PrepaidDevScreen = {
   id: string;
   label: string;
@@ -119,8 +108,15 @@ type EmergencyDevScreen = {
   id: string;
   label: string;
   group: 'emergency';
-  states: readonly EmergencyDevState[];
-  render: (state: EmergencyDevState) => ReactElement;
+  states: readonly string[];
+  render: (state: string) => ReactElement;
+};
+
+type FlowDevScreen = {
+  id: string;
+  label: string;
+  group: 'b2b2c' | 'completed' | 'prepaid-welcome';
+  render: () => ReactElement;
 };
 
 const emergencySummaryContact = {
@@ -284,16 +280,17 @@ const emergencyScreens: EmergencyDevScreen[] = [
     id: 'e10',
     label: 'E10 · R4 Riders summary',
     group: 'emergency',
-    states: ['default', 'error'],
+    states: ['default', 'max'],
     render: (state) => (
       <E10RidersSummaryScreen
         planId="secure"
         purchasedRiderSlots={2}
         riders={
-          state === 'error'
+          state === 'max'
             ? [emergencyRider, { ...emergencyRider, name: 'Sneha Sharma', mobile: '9876543211' }]
             : [emergencyRider]
         }
+        onAddAnother={() => undefined}
       />
     ),
   },
@@ -421,12 +418,6 @@ const sharedAuthScreens: SharedAuthStateScreen[] = [
     render: () => <A3VehicleOwnerScreen nameValue="Kapil Sharma" nameState="filled" />,
   },
   {
-    id: 'qr-scan',
-    label: 'R01 · Scan sticker (pre-auth · not in journey)',
-    group: 'shared',
-    render: () => <QrScanScreen />,
-  },
-  {
     id: 'l1',
     label: 'L1 · Privacy Policy',
     group: 'shared',
@@ -532,6 +523,20 @@ const purchasePhaseBScreens: PurchaseStatusDevScreen[] = [
       <R08bPromoAppliedScreen selectedPlanId="secure" riderCount={1} promoCode="FRIEND50" />
     ),
   },
+  {
+    id: 'r08c',
+    label: 'R08c · Invalid promo',
+    group: 'purchase',
+    render: () => (
+      <R08cInvalidPromoScreen
+        selectedPlanId="secure"
+        riderCount={1}
+        promoCode="BADCODE"
+        onPromoCodeChange={() => undefined}
+        onApplyPromo={() => undefined}
+      />
+    ),
+  },
 ];
 
 const purchasePhaseCScreens: PurchaseStatusDevScreen[] = [
@@ -540,6 +545,12 @@ const purchasePhaseCScreens: PurchaseStatusDevScreen[] = [
     label: 'R09 · Processing payment',
     group: 'purchase',
     render: () => <R09ProcessingPaymentScreen />,
+  },
+  {
+    id: 'r09b',
+    label: 'R09b · Still confirming',
+    group: 'purchase',
+    render: () => <R09bStillConfirmingScreen onCheckStatus={() => undefined} />,
   },
   {
     id: 'r10',
@@ -553,78 +564,38 @@ const purchasePhaseCScreens: PurchaseStatusDevScreen[] = [
     group: 'purchase',
     render: () => <R10bPaymentFailedScreen />,
   },
-];
-
-/** Archived purchase screens — kept for component preview, not in active journey. */
-const archivedPurchaseScreens: PurchaseStatusDevScreen[] = [
   {
-    id: 'r14',
-    label: 'R14 · Permissions (archived)',
+    id: 'r10c',
+    label: 'R10c · Payment unconfirmed',
     group: 'purchase',
-    render: () => (
-      <R14PermissionsScreen
-        permissions={{ ...DEFAULT_PURCHASE_PERMISSIONS }}
-        onTogglePermission={() => undefined}
-      />
-    ),
-  },
-  {
-    id: 'r14b',
-    label: 'R14b · Permissions · all on (archived)',
-    group: 'purchase',
-    render: () => (
-      <R14PermissionsScreen
-        permissions={{ location: true, crashDetection: true, notifications: true }}
-        onTogglePermission={() => undefined}
-      />
-    ),
-  },
-  {
-    id: 'r15',
-    label: 'R15 · Activation complete (archived)',
-    group: 'purchase',
-    render: () => (
-      <R15ActivationCompleteScreen selectedPlanId="secure" plate="MH 12 AB 3456" />
-    ),
+    render: () => <R10cPaymentUnconfirmedScreen onCheckStatus={() => undefined} />,
   },
 ];
 
-const purchaseScreens: PurchaseDevScreen[] = [
+const flowScreens: FlowDevScreen[] = [
   {
-    id: 'p01',
-    label: 'P01 · Plan Selection',
-    group: 'purchase',
-    render: (state) => <P01PlanSelectionScreen state={state} />,
+    id: 'prepaid-welcome',
+    label: 'Prepaid · Welcome',
+    group: 'prepaid-welcome',
+    render: () => <PrepaidWelcomeScreen />,
   },
   {
-    id: 'p02',
-    label: 'P02 · Plan Details',
-    group: 'purchase',
-    render: (state) => <P02PlanDetailsScreen state={state} />,
+    id: 'b2b2c-plan-only',
+    label: 'B2B2C · Plan only',
+    group: 'b2b2c',
+    render: () => <PartnerWelcomeScreen variant="plan-only" />,
   },
   {
-    id: 'p03',
-    label: 'P03 · Rider Selection',
-    group: 'purchase',
-    render: (state) => <P03RiderSelectionScreen state={state} />,
+    id: 'b2b2c-plan-rider',
+    label: 'B2B2C · Plan + rider',
+    group: 'b2b2c',
+    render: () => <PartnerWelcomeScreen variant="plan-rider" />,
   },
   {
-    id: 'p04',
-    label: 'P04 · Checkout Summary',
-    group: 'purchase',
-    render: (state) => <P04CheckoutSummaryScreen state={state} />,
-  },
-  {
-    id: 'p05',
-    label: 'P05 · Payment Processing',
-    group: 'purchase',
-    render: (state) => <P05PaymentProcessingScreen state={state} />,
-  },
-  {
-    id: 'p06',
-    label: 'P06 · Payment Success',
-    group: 'purchase',
-    render: (state) => <P06PaymentSuccessScreen state={state} />,
+    id: 'completed',
+    label: 'Journey · Completed',
+    group: 'completed',
+    render: () => <DevCompletedPreview />,
   },
 ];
 
@@ -651,30 +622,60 @@ const prepaidScreens: PrepaidDevScreen[] = [
 
 const sharedStates: ScreenViewState[] = ['default', 'loading', 'error', 'empty', 'success'];
 const purchaseVehicleStates: PurchaseVehiclePlateState[] = ['empty', 'filled', 'error', 'loading'];
-const purchaseStates: PurchaseScreenState[] = ['default', 'loading', 'error', 'success'];
 const r06PlanStates: PurchasePlanId[] = ['safe', 'secure', 'shield', 'shield-plus'];
 const prepaidStates: PrepaidScreenState[] = ['default', 'loading', 'error', 'success'];
 const emergencyStates: EmergencyDevState[] = ['default', 'error', 'offline', 'loading', 'network-error'];
 
-const viewportWidths = [320, 360, 375, 390, 414] as const;
+const viewportWidths = [320, 360, 375, 390, 393, 414] as const;
 const THEME_KEY = 'al-onboarding-theme';
+
+function DevFlowFrame({ children }: { children: ReactElement }) {
+  return <JourneyProvider initialPhase="activation">{children}</JourneyProvider>;
+}
+
+function readCaptureParams() {
+  const params = new URLSearchParams(window.location.search);
+  const width = Number(params.get('width'));
+  const theme = params.get('theme');
+  return {
+    captureMode: params.get('capture') === '1',
+    screen: params.get('screen'),
+    state: params.get('state'),
+    width: viewportWidths.includes(width as (typeof viewportWidths)[number]) ? width : null,
+    theme: theme === 'light' || theme === 'dark' ? theme : null,
+  };
+}
 
 const allSharedSidebarScreens = [...sharedAuthScreens, ...deprecatedPurchaseScreens];
 
 const defaultSharedScreen = allSharedSidebarScreens[0] as SharedAuthStateScreen;
 
 export function ScreenDevApp() {
-  const [activeScreen, setActiveScreen] = useState('s0');
-  const [activeState, setActiveState] = useState<string>('default');
-  const [viewportWidth, setViewportWidth] = useState<number>(390);
-  const [showChrome, setShowChrome] = useState(true);
+  const initialParams = useMemo(() => readCaptureParams(), []);
+  const [activeScreen, setActiveScreen] = useState(initialParams.screen ?? 's0');
+  const [activeState, setActiveState] = useState<string>(initialParams.state ?? 'default');
+  const [viewportWidth, setViewportWidth] = useState<number>(initialParams.width ?? 390);
+  const [showChrome, setShowChrome] = useState(!initialParams.captureMode);
   const [themeMode, setThemeModeState] = useState<'light' | 'dark'>(() => {
+    if (initialParams.theme === 'light' || initialParams.theme === 'dark') {
+      return initialParams.theme;
+    }
     const stored = window.localStorage.getItem(THEME_KEY);
     if (stored === 'light' || stored === 'dark') {
       return stored;
     }
     return document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
   });
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', themeMode);
+    window.localStorage.setItem(THEME_KEY, themeMode);
+    document.body.dataset.devCaptureReady = 'true';
+    document.body.dataset.devScreen = activeScreen;
+    document.body.dataset.devState = activeState;
+    document.body.dataset.devTheme = themeMode;
+    document.body.dataset.devWidth = String(viewportWidth);
+  }, [activeScreen, activeState, themeMode, viewportWidth]);
 
   const toggleTheme = () => {
     const next = themeMode === 'dark' ? 'light' : 'dark';
@@ -686,11 +687,10 @@ export function ScreenDevApp() {
 
   const isPrepaid = activeScreen.startsWith('pr');
   const isEmergency = activeScreen.startsWith('e');
+  const isFlowScreen = flowScreens.some((screen) => screen.id === activeScreen);
   const isPurchasePhaseA = ['r03', 'r04', 'r04b', 'r05'].includes(activeScreen);
-  const isPurchasePhaseB = ['r06-plan', 'r07', 'r08', 'r08b'].includes(activeScreen);
-  const isPurchasePhaseC = ['r09', 'r10', 'r10b'].includes(activeScreen);
-  const isPurchaseArchived = ['r14', 'r14b', 'r15'].includes(activeScreen);
-  const isPurchaseLegacy = activeScreen.startsWith('p') && !isPrepaid;
+  const isPurchasePhaseB = ['r06-plan', 'r07', 'r08', 'r08b', 'r08c'].includes(activeScreen);
+  const isPurchasePhaseC = ['r09', 'r09b', 'r10', 'r10b', 'r10c'].includes(activeScreen);
   const isSharedAuthFrame =
     activeScreen.startsWith('s0') ||
     activeScreen.startsWith('a1') ||
@@ -701,10 +701,9 @@ export function ScreenDevApp() {
   const purchasePhaseAEntry = purchasePhaseAScreens.find((screen) => screen.id === activeScreen);
   const purchasePhaseBEntry = purchasePhaseBScreens.find((screen) => screen.id === activeScreen);
   const purchasePhaseCEntry = purchasePhaseCScreens.find((screen) => screen.id === activeScreen);
-  const purchaseArchivedEntry = archivedPurchaseScreens.find((screen) => screen.id === activeScreen);
-  const purchaseEntry = purchaseScreens.find((screen) => screen.id === activeScreen);
   const prepaidEntry = prepaidScreens.find((screen) => screen.id === activeScreen);
   const emergencyEntry = emergencyScreens.find((screen) => screen.id === activeScreen);
+  const flowEntry = flowScreens.find((screen) => screen.id === activeScreen);
   const stateOptions = isEmergency
     ? (emergencyEntry?.states ?? emergencyStates)
     : activeScreen === 'r06-plan'
@@ -713,11 +712,9 @@ export function ScreenDevApp() {
       ? prepaidStates
       : isPurchasePhaseA && activeScreen === 'r03'
         ? purchaseVehicleStates
-        : isPurchaseLegacy
-          ? purchaseStates
-          : isSharedAuthFrame
-            ? []
-            : sharedStates;
+        : isSharedAuthFrame
+          ? []
+          : sharedStates;
 
   const resolvedSharedState = useMemo((): ScreenViewState => {
     if (sharedStates.includes(activeState as ScreenViewState)) {
@@ -733,13 +730,6 @@ export function ScreenDevApp() {
     return 'empty';
   }, [activeState]);
 
-  const resolvedPurchaseState = useMemo((): PurchaseScreenState => {
-    if (purchaseStates.includes(activeState as PurchaseScreenState)) {
-      return activeState as PurchaseScreenState;
-    }
-    return 'default';
-  }, [activeState]);
-
   const resolvedPrepaidState = useMemo((): PrepaidScreenState => {
     if (prepaidStates.includes(activeState as PrepaidScreenState)) {
       return activeState as PrepaidScreenState;
@@ -747,12 +737,12 @@ export function ScreenDevApp() {
     return 'default';
   }, [activeState]);
 
-  const resolvedEmergencyState = useMemo((): EmergencyDevState => {
-    if (emergencyStates.includes(activeState as EmergencyDevState)) {
-      return activeState as EmergencyDevState;
+  const resolvedEmergencyState = useMemo((): string => {
+    if (emergencyEntry?.states.includes(activeState)) {
+      return activeState;
     }
     return 'default';
-  }, [activeState]);
+  }, [activeState, emergencyEntry?.states]);
 
   const resolvedR06PlanId = useMemo((): PurchasePlanId => {
     if (r06PlanStates.includes(activeState as PurchasePlanId)) {
@@ -764,12 +754,42 @@ export function ScreenDevApp() {
   const activeStateMatches = (state: string) =>
     resolvedSharedState === state ||
     resolvedPurchaseVehicleState === state ||
-    resolvedPurchaseState === state ||
     resolvedPrepaidState === state ||
     resolvedEmergencyState === state;
 
+  const frameContent =
+    isEmergency && emergencyEntry
+      ? emergencyEntry.render(resolvedEmergencyState)
+      : isFlowScreen && flowEntry
+        ? <DevFlowFrame>{flowEntry.render()}</DevFlowFrame>
+        : isPrepaid && prepaidEntry
+          ? prepaidEntry.render(resolvedPrepaidState)
+          : isPurchasePhaseA && purchasePhaseAEntry
+            ? purchasePhaseAEntry.id === 'r03'
+              ? purchasePhaseAEntry.render(resolvedPurchaseVehicleState)
+              : purchasePhaseAEntry.render()
+            : isPurchasePhaseB && purchasePhaseBEntry
+              ? purchasePhaseBEntry.id === 'r06-plan'
+                ? (
+                    <R06ChoosePlanScreen
+                      selectedPlanId={resolvedR06PlanId}
+                      onSelectPlan={(planId) => {
+                        setActiveState(planId);
+                      }}
+                      showBack={false}
+                    />
+                  )
+                : purchasePhaseBEntry.render()
+              : isPurchasePhaseC && purchasePhaseCEntry
+                ? purchasePhaseCEntry.render()
+                : sharedAuthEntry
+                  ? sharedAuthEntry.render('default')
+                  : deprecatedEntry
+                    ? deprecatedEntry.render()
+                    : defaultSharedScreen.render('default');
+
   return (
-    <div className="ob-dev">
+    <div className={initialParams.captureMode ? 'ob-dev ob-dev--capture' : 'ob-dev'}>
       {showChrome ? (
         <aside className="ob-dev__panel">
           <AlStack gap="md">
@@ -823,7 +843,7 @@ export function ScreenDevApp() {
                 </AlButton>
               ))}
             </AlStack>
-            <AlText variant="label">Purchase · Phase B (R06–R08b)</AlText>
+            <AlText variant="label">Purchase · Phase B (R06–R08c)</AlText>
             <AlStack gap="xs">
               {purchasePhaseBScreens.map((screen) => (
                 <AlButton
@@ -839,7 +859,7 @@ export function ScreenDevApp() {
                 </AlButton>
               ))}
             </AlStack>
-            <AlText variant="label">Purchase · Phase C (R09–R10 · terminal)</AlText>
+            <AlText variant="label">Purchase · Phase C (R09–R10c)</AlText>
             <AlStack gap="xs">
               {purchasePhaseCScreens.map((screen) => (
                 <AlButton
@@ -854,38 +874,6 @@ export function ScreenDevApp() {
                   {screen.label}
                 </AlButton>
               ))}
-            </AlStack>
-            <AlText variant="label">Purchase · Archived (not in journey)</AlText>
-            <AlStack gap="xs">
-              {archivedPurchaseScreens.map((screen) => (
-                <AlButton
-                  key={screen.id}
-                  size="sm"
-                  variant={activeScreen === screen.id ? 'primary' : 'secondary'}
-                  onClick={() => {
-                    setActiveScreen(screen.id);
-                    setActiveState('default');
-                  }}
-                >
-                  {screen.label}
-                </AlButton>
-              ))}
-            </AlStack>
-            <AlText variant="label">Purchase (Phase 5 legacy)</AlText>
-            <AlStack gap="xs">
-              {purchaseScreens.map((screen) => (
-                  <AlButton
-                    key={screen.id}
-                    size="sm"
-                    variant={activeScreen === screen.id ? 'primary' : 'secondary'}
-                    onClick={() => {
-                      setActiveScreen(screen.id);
-                      setActiveState('default');
-                    }}
-                  >
-                    {screen.label}
-                  </AlButton>
-                ))}
             </AlStack>
             <AlText variant="label">Prepaid (Phase 7)</AlText>
             <AlStack gap="xs">
@@ -902,6 +890,22 @@ export function ScreenDevApp() {
                     {screen.label}
                   </AlButton>
                 ))}
+            </AlStack>
+            <AlText variant="label">B2B2C · Prepaid welcome · Completed</AlText>
+            <AlStack gap="xs">
+              {flowScreens.map((screen) => (
+                <AlButton
+                  key={screen.id}
+                  size="sm"
+                  variant={activeScreen === screen.id ? 'primary' : 'secondary'}
+                  onClick={() => {
+                    setActiveScreen(screen.id);
+                    setActiveState('default');
+                  }}
+                >
+                  {screen.label}
+                </AlButton>
+              ))}
             </AlStack>
             <AlText variant="label">Emergency (Phase 11b)</AlText>
             <AlStack gap="xs">
@@ -1004,38 +1008,8 @@ export function ScreenDevApp() {
         className="ob-dev__viewport"
         style={{ ['--ob-dev-viewport-width' as string]: `${String(viewportWidth)}px` }}
       >
-        <div className="ob-dev__frame">
-          {isEmergency && emergencyEntry
-            ? emergencyEntry.render(resolvedEmergencyState)
-            : isPrepaid && prepaidEntry
-              ? prepaidEntry.render(resolvedPrepaidState)
-              : isPurchasePhaseA && purchasePhaseAEntry
-                ? purchasePhaseAEntry.id === 'r03'
-                  ? purchasePhaseAEntry.render(resolvedPurchaseVehicleState)
-                  : purchasePhaseAEntry.render()
-                : isPurchasePhaseB && purchasePhaseBEntry
-                  ? purchasePhaseBEntry.id === 'r06-plan'
-                    ? (
-                        <R06ChoosePlanScreen
-                          selectedPlanId={resolvedR06PlanId}
-                          onSelectPlan={(planId) => {
-                            setActiveState(planId);
-                          }}
-                          showBack={false}
-                        />
-                      )
-                    : purchasePhaseBEntry.render()
-                : isPurchasePhaseC && purchasePhaseCEntry
-                  ? purchasePhaseCEntry.render()
-                : isPurchaseArchived && purchaseArchivedEntry
-                  ? purchaseArchivedEntry.render()
-                : isPurchaseLegacy && purchaseEntry
-                  ? purchaseEntry.render(resolvedPurchaseState)
-                : sharedAuthEntry
-                  ? sharedAuthEntry.render('default')
-                  : deprecatedEntry
-                    ? deprecatedEntry.render()
-                    : defaultSharedScreen.render('default')}
+        <div className="ob-dev__frame" data-dev-frame>
+          {frameContent}
         </div>
       </div>
     </div>

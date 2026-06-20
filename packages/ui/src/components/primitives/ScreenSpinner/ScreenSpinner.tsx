@@ -33,7 +33,7 @@ export function AlScreenSpinner({
       )}
       width={dimension}
       height={dimension}
-      viewBox={`0 0 ${dimension} ${dimension}`}
+      viewBox={`0 0 ${String(dimension)} ${String(dimension)}`}
       role="status"
       aria-label={ariaLabel}
     >
@@ -55,8 +55,8 @@ export function AlScreenSpinner({
             fill="none"
             strokeWidth={strokeWidth}
             strokeLinecap="round"
-            strokeDasharray={`${circumference * 0.72} ${circumference * 0.28}`}
-            transform={`rotate(-90 ${center} ${center})`}
+            strokeDasharray={`${String(circumference * 0.72)} ${String(circumference * 0.28)}`}
+            transform={`rotate(-90 ${String(center)} ${String(center)})`}
           />
         </>
       ) : (

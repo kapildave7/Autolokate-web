@@ -10,11 +10,13 @@ export * from './providers/index.js';
 export * from './router/index.js';
 export * from './types/index.js';
 
+/** @deprecated Purchase activation — dev preview only */
 export { R01VehicleNumberScreen } from './features/shared-auth/screens/r01-vehicle-number/index.js';
+/** @deprecated Purchase activation — dev preview only */
 export { R02VehicleDetailsScreen } from './features/shared-auth/screens/r02-vehicle-details/index.js';
-export { R03MobileNumberScreen } from './features/shared-auth/screens/r03-mobile-number/index.js';
-export { R04OtpVerificationScreen } from './features/shared-auth/screens/r04-otp-verification/index.js';
+/** @deprecated Purchase activation — dev preview only */
 export { R05AccountCreationScreen } from './features/shared-auth/screens/r05-account-creation/index.js';
+/** @deprecated Purchase activation — dev preview only */
 export { R06LegalConsentScreen } from './features/shared-legal/screens/r06-legal-consent/index.js';
 
 export {

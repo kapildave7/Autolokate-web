@@ -63,6 +63,10 @@ export function PwaSosRoute() {
   const [holding, setHolding] = useState(false);
   const [holdStartAt, setHoldStartAt] = useState<number | null>(null);
   const engagedRef = useRef(false);
+  const holdingRef = useRef(holding);
+  const holdStartAtRef = useRef(holdStartAt);
+  holdingRef.current = holding;
+  holdStartAtRef.current = holdStartAt;
   const progress = useHoldProgressFrom(holdStartAt, holding, PWA_SOS_HOLD_MS);
   const { requestLocation } = useGeolocationCapture();
 
@@ -72,13 +76,13 @@ export function PwaSosRoute() {
     }
 
     const timer = window.setTimeout(() => {
-      if (!holding || holdStartAt === null || engagedRef.current) {
+      if (!holdingRef.current || holdStartAtRef.current === null || engagedRef.current) {
         return;
       }
       engagedRef.current = true;
       void navigate(pwaScanPaths.sosHolding, {
         replace: true,
-        state: { holdStartAt } satisfies PwaSosHoldNavigationState,
+        state: { holdStartAt: holdStartAtRef.current } satisfies PwaSosHoldNavigationState,
       });
     }, PWA_SOS_HOLD_ENGAGE_MS);
 

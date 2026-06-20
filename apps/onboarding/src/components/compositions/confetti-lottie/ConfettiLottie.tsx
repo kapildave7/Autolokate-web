@@ -1,7 +1,7 @@
 import Lottie from 'lottie-react';
 import { useSyncExternalStore } from 'react';
 
-import confettiAnimation from '../../../assets/lottie/confetti-celebration.json';
+import confettiAnimation from '@/assets/lottie/confetti-celebration.json';
 import './confetti-lottie.css';
 
 function subscribeReducedMotion(onStoreChange: () => void) {

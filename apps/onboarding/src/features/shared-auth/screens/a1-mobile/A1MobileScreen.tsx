@@ -1,12 +1,12 @@
 import { AlTextField } from '@autolokate/ui';
 
-import { AuthStepShell } from '../../../../components/auth-step-shell/index.js';
-import { useAuthRouteProgress } from '../../../../journey/progress/index.js';
+import { AuthStepShell } from '@/components/auth-step-shell/index.js';
+import { useAuthRouteProgress } from '@/journey/progress/index.js';
 import {
   AlOfflineChip,
   InlineConsentBlock,
   TrustRow,
-} from '../../../../components/compositions/index.js';
+} from '@/components/compositions/index.js';
 import { formatMobileForDisplay } from '../../data/demo-data.js';
 import { MOBILE_INPUT_DISPLAY_MAX } from '../../auth-flow/auth-flow.validation.js';
 import type { A1MobileScreenProps } from '../../types.js';

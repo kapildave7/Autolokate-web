@@ -90,12 +90,20 @@ export function getActivationCompleteTitle(planId: PurchasePlanId): string {
   return `${plan.name} is active`;
 }
 
-export function getActivationCompleteDescription(plate: string, planId: PurchasePlanId): string {
+/** Figma 171:59 — "{plate} is now protected by {plan}. Crash detection is live" */
+export function getActivationCompleteSubtitle(
+  planId: PurchasePlanId,
+  plateDisplay?: string,
+): string {
   const plan = getPurchasePlan(planId);
-  return `${plate} is now protected by ${plan.name}. Crash detection is live`;
+  if (plateDisplay) {
+    return `${plateDisplay} is now protected by ${plan.name}. Crash detection is live`;
+  }
+  return `Your vehicle is now protected by ${plan.name}. Crash detection is live`;
 }
 
-export function getActivationChipLabel(planId: PurchasePlanId): string {
+/** Figma 171:59 AlChip/Green — "{plan} · active" */
+export function getActivationCompleteChipLabel(planId: PurchasePlanId): string {
   const plan = getPurchasePlan(planId);
   return `${plan.name} · active`;
 }

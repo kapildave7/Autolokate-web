@@ -21,19 +21,19 @@ export function PaymentSuccessHaloIcon({
       {...props}
     >
       <g filter="url(#filter0_f_payment_success_halo)">
-        <circle cx="120" cy="120" r="60" fill="#1FA24A" fillOpacity="0.3" />
+        <circle cx="120" cy="120" r="60" fill="var(--al-signal-green)" fillOpacity="0.3" />
       </g>
-      <circle cx="120" cy="120" r="74" stroke="#1FA24A" strokeWidth="2" />
+      <circle cx="120" cy="120" r="74" stroke="var(--al-color-success)" strokeWidth="2" />
       <path
         d="M120 140.833C131.506 140.833 140.834 131.506 140.834 120C140.834 108.494 131.506 99.1666 120 99.1666C108.494 99.1666 99.167 108.494 99.167 120C99.167 131.506 108.494 140.833 120 140.833Z"
-        stroke="#1FA24A"
+        stroke="var(--al-color-success)"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M109.5 120L116.5 127.5L132 112"
-        stroke="#1FA24A"
+        stroke="var(--al-color-success)"
         strokeWidth="3.5"
         strokeLinecap="round"
         strokeLinejoin="round"

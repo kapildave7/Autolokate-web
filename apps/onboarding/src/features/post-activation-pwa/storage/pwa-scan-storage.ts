@@ -18,7 +18,10 @@ function hydrateSession(raw: Partial<PwaScanSession>): PwaScanSession {
       modelSummary: raw.scannedVehicle?.modelSummary ?? PWA_SCANNED_MODEL,
       protected: raw.scannedVehicle?.protected ?? true,
       planLabel: raw.scannedVehicle?.planLabel ?? PWA_SCANNED_PLAN,
-      fields: raw.scannedVehicle?.fields?.length ? raw.scannedVehicle.fields : pwaScannedVehicleFields,
+      fields:
+        raw.scannedVehicle?.fields && raw.scannedVehicle.fields.length > 0
+          ? raw.scannedVehicle.fields
+          : pwaScannedVehicleFields,
     },
     parkMePhotos: { ...base.parkMePhotos, ...raw.parkMePhotos },
     sosPhotos: { ...base.sosPhotos, ...raw.sosPhotos },

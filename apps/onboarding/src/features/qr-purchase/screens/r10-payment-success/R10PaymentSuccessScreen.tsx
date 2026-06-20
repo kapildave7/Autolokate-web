@@ -1,7 +1,7 @@
 import { AlIcon } from '@autolokate/icons';
 
-import { ConfettiLottie } from '../../../../components/compositions/confetti-lottie/index.js';
-import { PurchaseStatusShell } from '../../../../components/compositions/purchase-status-shell/index.js';
+import { ConfettiLottie } from '@/components/compositions/confetti-lottie/index.js';
+import { PurchaseStatusShell } from '@/components/compositions/purchase-status-shell/index.js';
 import type { PurchasePlanId } from '../../types-checkout.js';
 import { getPaymentSuccessDescription } from '../../data/purchase-pricing.js';
 

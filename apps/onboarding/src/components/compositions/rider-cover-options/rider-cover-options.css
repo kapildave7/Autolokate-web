@@ -156,7 +156,7 @@
 .ob-rider-cover-option__discount {
   padding: 3px 7px;
   border-radius: 999px;
-  background: rgba(31, 162, 74, 0.16);
+  background: color-mix(in srgb, var(--al-color-success) 16%, transparent);
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.04em;

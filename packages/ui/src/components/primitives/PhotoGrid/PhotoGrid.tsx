@@ -46,7 +46,6 @@ export function AlPhotoGrid({
   locationLabel,
   className,
   locationCapture,
-  locationPreview,
 }: AlPhotoGridProps) {
   if (layout === 'review-quad') {
     return (
@@ -70,15 +69,21 @@ export function AlPhotoGrid({
         </div>
         <div className="al-photo-grid__review-map">
           <span className="al-photo-grid__review-map-lines" aria-hidden />
-          <svg width={26} height={26} viewBox="0 0 24 24" fill="none" aria-hidden>
+          <svg
+            width={26}
+            height={26}
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden
+            className="al-photo-grid__review-map-pin"
+          >
             <path
               d="M12 21s7-4.35 7-10a7 7 0 10-14 0c0 5.65 7 10 7 10z"
-              stroke="#FFFFFF"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
-            <circle cx={12} cy={11} r={2.5} stroke="#FFFFFF" strokeWidth="2" />
+            <circle cx={12} cy={11} r={2.5} strokeWidth="2" />
           </svg>
           <p className="al-photo-grid__review-map-label">{locationLabel ?? 'Location captured'}</p>
         </div>
@@ -149,7 +154,6 @@ export function AlPhotoGrid({
           </button>
         ) : null}
       </div>
-      {locationPreview ? <div className="al-photo-grid__location">{locationPreview}</div> : null}
     </div>
   );
 }

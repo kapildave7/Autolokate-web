@@ -63,8 +63,8 @@
   width: 32px;
   height: 32px;
   border-radius: 999px;
-  background: rgba(10, 10, 10, 0.55);
-  color: #ffffff;
+  background: var(--al-color-overlay);
+  color: var(--al-color-on-emergency);
   pointer-events: none;
 }
 
@@ -137,8 +137,8 @@
 
 .al-scene-photo-card--location.al-scene-photo-card--filled {
   border-style: solid;
-  border-color: var(--al-color-signal-green, #1fa24a);
-  color: var(--al-color-signal-green, #1fa24a);
+  border-color: var(--al-color-success);
+  color: var(--al-color-success);
   justify-content: center;
   padding: 12px 16px;
 }
@@ -154,7 +154,7 @@
 .al-scene-photo-card--location.al-scene-photo-card--filled .al-scene-photo-card__label {
   font-size: 13px;
   line-height: 16px;
-  color: var(--al-color-signal-green, #1fa24a);
+  color: var(--al-color-success);
 }
 
 .al-scene-photo-card__detail {
@@ -196,8 +196,8 @@
 
 @keyframes al-scene-photo-fill {
   0% {
-    border-color: var(--al-color-signal-green, #1fa24a);
-    box-shadow: 0 0 0 0 rgba(31, 162, 74, 0.35);
+    border-color: var(--al-color-success);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--al-color-success) 35%, transparent);
   }
 
   100% {

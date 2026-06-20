@@ -118,7 +118,7 @@
 .ob-plan-carousel__card.al-plan-card--interactive:focus-visible,
 .ob-plan-carousel__card.al-plan-card--selected {
   border: 2px solid var(--al-color-success);
-  box-shadow: 0 0 18px rgba(31, 162, 74, 0.28);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--al-color-success) 28%, transparent);
   outline: none;
   animation: none;
   transition: transform var(--ob-plan-motion-tap) var(--ob-plan-motion-ease);
@@ -280,7 +280,7 @@
   .ob-plan-carousel__card.al-plan-card--interactive:focus-visible,
   .ob-plan-carousel__card.al-plan-card--selected {
     border: 2px solid var(--al-color-success);
-    box-shadow: 0 0 18px rgba(31, 162, 74, 0.28);
+    box-shadow: 0 0 18px color-mix(in srgb, var(--al-color-success) 28%, transparent);
   }
 
   .ob-plan-carousel__card.al-plan-card--interactive:active:not(:disabled) {

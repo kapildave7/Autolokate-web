@@ -45,6 +45,27 @@
   cursor: pointer;
 }
 
+.ob-dev--capture {
+  grid-template-columns: 1fr;
+}
+
+.ob-dev--capture .ob-dev__panel,
+.ob-dev--capture .ob-dev__reopen {
+  display: none;
+}
+
+.ob-dev--capture .ob-dev__viewport {
+  align-items: stretch;
+  justify-content: center;
+  min-height: 100dvh;
+  padding: 0;
+}
+
+.ob-dev--capture .ob-dev__frame {
+  width: min(100%, var(--ob-dev-viewport-width, 24.5625rem));
+  margin-inline: auto;
+}
+
 @media (max-width: 48rem) {
   .ob-dev {
     grid-template-columns: 1fr;

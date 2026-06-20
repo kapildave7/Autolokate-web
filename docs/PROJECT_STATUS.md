@@ -1,7 +1,7 @@
 # Autolokate Onboarding — Project Status
 
-**Last updated:** 2026-06-20 (Release Candidate Verification — Zero Regression Pass complete. 9-phase audit. 2 bugs fixed. VERDICT: PRODUCTION READY — demo mode)  
-**Source of truth priority:** Figma → screenshots → audit reports → implementation reports
+**Last updated:** 2026-06-20 (Docs consolidation — PIXEL PERFECT VERIFIED)  
+**Source of truth priority:** Figma → `VISUAL_TRUTH_MATRIX_V2.md` → `FINAL_THEME_SIGNOFF.md` → `FINAL_PRODUCTION_READINESS.md` → `docs/archive/` (historical)
 
 ---
 
@@ -163,20 +163,19 @@ All future work defaults to **visual refinement and Figma parity**. Do not redes
 
 ---
 
-## Latest Active Reports
+## Latest Active Documents
 
-| Area | Document | Date | Verdict |
-|------|----------|------|---------|
-| **RC Verification** | `RC_VERIFICATION_REPORT.md` | **2026-06-20** | **PRODUCTION READY — demo mode** |
-| **Final Release** | `FINAL_RELEASE_REPORT.md` | **2026-06-20** | **GO — pending API wiring** |
-| **Back Navigation** | `BACK_NAVIGATION_AUDIT.md` | **2026-06-20** | **PASS — 2 bugs fixed** |
-| **State Coverage** | `STATE_COVERAGE_MATRIX.md` | **2026-06-20** | **PASS — all states present** |
-| **Figma Verification** | `FIGMA_VERIFICATION_REPORT.md` | **2026-06-20** | **PASS — all screens PIXEL PERFECT** |
-| **UI Breakage** | `UI_BREAKAGE_REPORT.md` | **2026-06-20** | **PASS — no blocking issues** |
-| **API Readiness** | `API_READINESS_REPORT.md` | **2026-06-20** | **3 SWAPPABLE · 6 COUPLED (documented)** |
-| Full app verification | `FULL_APP_VERIFICATION_REPORT.md` | 2026-06-20 | Superseded by RC_VERIFICATION_REPORT |
-| Full audit | `SCREEN_PARITY_MATRIX.md` | 2026-06-19 | ~93% parity, no P0/P1 |
-| Design system | `THEMING.md` | — | Living reference |
+| Document | Purpose |
+|----------|---------|
+| `VISUAL_TRUTH_MATRIX_V2.md` | **Visual source of truth** — PIXEL PERFECT VERIFIED (1308 captures) |
+| `FINAL_THEME_SIGNOFF.md` | Dark + light theme signoff |
+| `FINAL_PRODUCTION_READINESS.md` | Production readiness verdict |
+| `CLAUDE_PROJECT_INDEX.md` | Route maps, architecture, component inventory |
+| `memory/MEMORY.md` | Agent memory index + doc locations |
+
+Historical audit, parity, and signoff reports: **`docs/archive/`** (185+ files)
+
+Visual evidence samples: **`docs/visual-truth/samples/`** (10 PNG) · Completed reconstruction: **`docs/visual-truth/completed/`**
 
 ---
 
@@ -204,7 +203,7 @@ All future work defaults to **visual refinement and Figma parity**. Do not redes
 | LOW | Codebase | PurchaseStepShell, HomeScreen, EmergencyPlaceholderScreen, QrScanRoute — orphan files |
 | LOW | Icons | RetakeIcon inline in packages/ui — should be in @autolokate/icons pipeline |
 
-→ Full details: `FINAL_RELEASE_REPORT.md` · Full issue list: `memory/project-open-issues.md`
+→ Open issues and decisions: `memory/MEMORY.md` · Full architecture: `CLAUDE_PROJECT_INDEX.md`
 
 ---
 

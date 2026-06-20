@@ -6,11 +6,13 @@
   padding: 16px;
   border: none;
   border-radius: 16px;
-  background: #1a1a1a;
+  background: var(--al-color-surface);
 }
 
 .al-scanned-vehicle-card--protected {
-  box-shadow: 0 0 0 1px rgba(31, 162, 74, 0.35), 0 0 24px rgba(31, 162, 74, 0.12);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--al-color-success) 35%, transparent),
+    0 0 24px color-mix(in srgb, var(--al-color-success) 12%, transparent);
 }
 
 .al-scanned-vehicle-card__header {
@@ -27,8 +29,8 @@
   width: 44px;
   height: 44px;
   border-radius: 12px;
-  background: #4a4a4a;
-  color: #ffffff;
+  background: var(--al-color-surface-variant);
+  color: var(--al-color-on-surface);
 }
 
 .al-scanned-vehicle-card__copy {
@@ -45,7 +47,7 @@
   font-size: 18px;
   font-weight: 700;
   line-height: 22px;
-  color: #ffffff;
+  color: var(--al-color-on-surface);
 }
 
 .al-scanned-vehicle-card__model {
@@ -54,7 +56,7 @@
   font-size: 13px;
   font-weight: 400;
   line-height: 16px;
-  color: #8a8a8a;
+  color: var(--al-color-on-surface-muted);
 }
 
 .al-scanned-vehicle-card__divider {
@@ -62,7 +64,7 @@
   height: 1px;
   margin: 8px 0 0;
   border: none;
-  background: #4a4a4a;
+  background: var(--al-color-outline);
 }
 
 .al-scanned-vehicle-card__shield {
@@ -74,11 +76,11 @@
   font-size: 13px;
   font-weight: 600;
   line-height: 16px;
-  color: #1fa24a;
+  color: var(--al-color-success);
 }
 
 .al-scanned-vehicle-card__shield-icon {
   display: flex;
   flex-shrink: 0;
-  color: #1fa24a;
+  color: var(--al-color-success);
 }

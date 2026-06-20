@@ -21,6 +21,7 @@
   font-weight: 600;
   line-height: 34px;
   letter-spacing: 0;
+  color: var(--al-color-on-surface);
 }
 
 .pwa-emergency-screen__subtitle {
@@ -28,7 +29,7 @@
   font-size: 15px;
   font-weight: 400;
   line-height: 18px;
-  color: #8a8a8a;
+  color: var(--al-color-on-surface-muted);
 }
 
 /* Subtitle ends y=170 → ring top y=296 → 126px */
@@ -60,14 +61,14 @@
   gap: 8px;
   margin: 0;
   padding: 14px 16px;
-  border: 1.5px solid #4a4a4a;
+  border: 1.5px solid var(--al-color-outline);
   border-radius: 16px;
-  background: #1a1a1a;
+  background: var(--al-color-surface);
   font-family: var(--al-text-ui-family);
   font-size: 13px;
   font-weight: 500;
   line-height: 16px;
-  color: #ffffff;
+  color: var(--al-color-on-surface);
   cursor: pointer;
   max-width: 100%;
 }
@@ -91,6 +92,6 @@
   font-size: 14px;
   font-weight: 500;
   line-height: 17px;
-  color: #ffffff;
+  color: var(--al-color-on-surface);
   cursor: pointer;
 }

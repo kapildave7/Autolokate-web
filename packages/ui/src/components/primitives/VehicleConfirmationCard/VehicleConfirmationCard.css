@@ -7,12 +7,12 @@
   padding: 16px 16px 8px;
   border: none;
   border-radius: 16px;
-  background: #1a1a1a;
+  background: var(--al-color-surface);
 }
 
 .al-vehicle-confirmation-card--protected {
-  border: 1px solid #1fa24a;
-  box-shadow: 0 0 24px rgba(31, 163, 74, 0.22);
+  border: 1px solid var(--al-color-success);
+  box-shadow: 0 0 24px color-mix(in srgb, var(--al-color-success) 22%, transparent);
 }
 
 .al-vehicle-confirmation-card__body {
@@ -29,8 +29,8 @@
   width: 44px;
   height: 44px;
   border-radius: 12px;
-  background: #4a4a4a;
-  color: #ffffff;
+  background: var(--al-color-surface-variant);
+  color: var(--al-color-on-surface);
 }
 
 .al-vehicle-confirmation-card__copy {
@@ -46,7 +46,7 @@
   font-size: 18px;
   font-weight: 700;
   line-height: 22px;
-  color: #ffffff;
+  color: var(--al-color-on-surface);
 }
 
 .al-vehicle-confirmation-card__model {
@@ -55,7 +55,7 @@
   font-size: 13px;
   font-weight: 400;
   line-height: 16px;
-  color: #8a8a8a;
+  color: var(--al-color-on-surface-muted);
 }
 
 .al-vehicle-confirmation-card__divider {
@@ -63,7 +63,7 @@
   height: 1px;
   margin: 8px 0 0;
   border: none;
-  background: #4a4a4a;
+  background: var(--al-color-outline);
 }
 
 .al-vehicle-confirmation-card__badge {
@@ -75,7 +75,7 @@
   font-size: 13px;
   font-weight: 600;
   line-height: 16px;
-  color: #1fa24a;
+  color: var(--al-color-success);
 }
 
 .al-vehicle-confirmation-card__badge-icon {
@@ -85,5 +85,5 @@
   justify-content: center;
   width: 16px;
   height: 16px;
-  color: #1fa24a;
+  color: var(--al-color-success);
 }

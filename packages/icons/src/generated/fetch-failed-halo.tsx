@@ -21,9 +21,9 @@ export function FetchFailedHaloIcon({
       {...props}
     >
       <g filter="url(#filter0_f_fetch_failed_halo)">
-        <circle cx="120" cy="120" r="60" fill="#F5A623" fillOpacity="0.3" />
+        <circle cx="120" cy="120" r="60" fill="var(--al-signal-amber)" fillOpacity="0.3" />
       </g>
-      <circle cx="120" cy="120" r="74" stroke="#F5A623" strokeWidth="2" />
+      <circle cx="120" cy="120" r="74" stroke="var(--al-color-warning)" strokeWidth="2" />
       <path
         d="M120 140.833C131.506 140.833 140.833 131.506 140.833 120C140.833 108.494 131.506 99.1666 120 99.1666C108.494 99.1666 99.1667 108.494 99.1667 120C99.1667 131.506 108.494 140.833 120 140.833Z"
         stroke="white"

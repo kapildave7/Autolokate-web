@@ -1,0 +1,302 @@
+[
+  {
+    "target": "r07",
+    "theme": "dark",
+    "route": "http://127.0.0.1:5199/?dev=1&capture=1&screen=r07&state=default&width=393",
+    "figmaNode": "186:25",
+    "measured": {
+      "back": {
+        "x": 16,
+        "y": 22,
+        "width": 24,
+        "height": 48,
+        "color": "rgb(255, 255, 255)",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "fontSize": "13.3333px",
+        "textAlign": "center"
+      },
+      "primaryButton": {
+        "x": 16,
+        "y": 826,
+        "width": 361,
+        "height": 58,
+        "color": "rgb(10, 10, 10)",
+        "backgroundColor": "rgb(255, 255, 255)",
+        "fontSize": "16px",
+        "textAlign": "center"
+      },
+      "checkbox": null,
+      "addRiderRow": null,
+      "locationChip": null,
+      "frameWidth": 393
+    },
+    "drift": []
+  },
+  {
+    "target": "r07",
+    "theme": "light",
+    "route": "http://127.0.0.1:5199/?dev=1&capture=1&screen=r07&state=default&width=393",
+    "figmaNode": "186:25",
+    "measured": {
+      "back": {
+        "x": 16,
+        "y": 22,
+        "width": 24,
+        "height": 48,
+        "color": "rgb(10, 10, 10)",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "fontSize": "13.3333px",
+        "textAlign": "center"
+      },
+      "primaryButton": {
+        "x": 16,
+        "y": 826,
+        "width": 361,
+        "height": 58,
+        "color": "rgb(255, 255, 255)",
+        "backgroundColor": "rgb(10, 10, 10)",
+        "fontSize": "16px",
+        "textAlign": "center"
+      },
+      "checkbox": null,
+      "addRiderRow": null,
+      "locationChip": null,
+      "frameWidth": 393
+    },
+    "drift": []
+  },
+  {
+    "target": "e10-default",
+    "theme": "dark",
+    "route": "http://127.0.0.1:5199/?dev=1&capture=1&screen=e10&state=default&width=393",
+    "figmaNode": "822:1980",
+    "measured": {
+      "back": {
+        "x": 16,
+        "y": 22,
+        "width": 24,
+        "height": 48,
+        "color": "rgb(255, 255, 255)",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "fontSize": "13.3333px",
+        "textAlign": "center"
+      },
+      "primaryButton": {
+        "x": 16,
+        "y": 826,
+        "width": 361,
+        "height": 58,
+        "color": "rgb(10, 10, 10)",
+        "backgroundColor": "rgb(255, 255, 255)",
+        "fontSize": "16px",
+        "textAlign": "center"
+      },
+      "checkbox": null,
+      "addRiderRow": {
+        "x": 16,
+        "y": 290,
+        "width": 361,
+        "height": 48,
+        "color": "rgb(255, 255, 255)",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "fontSize": "13.3333px",
+        "textAlign": "center"
+      },
+      "locationChip": null,
+      "frameWidth": 393
+    },
+    "drift": []
+  },
+  {
+    "target": "e10-default",
+    "theme": "light",
+    "route": "http://127.0.0.1:5199/?dev=1&capture=1&screen=e10&state=default&width=393",
+    "figmaNode": "822:1980",
+    "measured": {
+      "back": {
+        "x": 16,
+        "y": 22,
+        "width": 24,
+        "height": 48,
+        "color": "rgb(10, 10, 10)",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "fontSize": "13.3333px",
+        "textAlign": "center"
+      },
+      "primaryButton": {
+        "x": 16,
+        "y": 826,
+        "width": 361,
+        "height": 58,
+        "color": "rgb(255, 255, 255)",
+        "backgroundColor": "rgb(10, 10, 10)",
+        "fontSize": "16px",
+        "textAlign": "center"
+      },
+      "checkbox": null,
+      "addRiderRow": {
+        "x": 16,
+        "y": 290,
+        "width": 361,
+        "height": 48,
+        "color": "rgb(10, 10, 10)",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "fontSize": "13.3333px",
+        "textAlign": "center"
+      },
+      "locationChip": null,
+      "frameWidth": 393
+    },
+    "drift": []
+  },
+  {
+    "target": "a1-empty",
+    "theme": "dark",
+    "route": "http://127.0.0.1:5199/?dev=1&capture=1&screen=a1-empty&state=default&width=393",
+    "figmaNode": "102:268",
+    "measured": {
+      "back": {
+        "x": 16,
+        "y": 22,
+        "width": 24,
+        "height": 48,
+        "color": "rgb(255, 255, 255)",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "fontSize": "13.3333px",
+        "textAlign": "center"
+      },
+      "primaryButton": {
+        "x": 16,
+        "y": 826,
+        "width": 361,
+        "height": 58,
+        "color": "rgb(138, 138, 138)",
+        "backgroundColor": "rgb(74, 74, 74)",
+        "fontSize": "16px",
+        "textAlign": "center"
+      },
+      "checkbox": {
+        "x": 3,
+        "y": 281,
+        "width": 48,
+        "height": 48,
+        "color": "rgb(138, 138, 138)",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "fontSize": "16px",
+        "textAlign": "start"
+      },
+      "addRiderRow": null,
+      "locationChip": null,
+      "frameWidth": 393
+    },
+    "drift": []
+  },
+  {
+    "target": "a1-empty",
+    "theme": "light",
+    "route": "http://127.0.0.1:5199/?dev=1&capture=1&screen=a1-empty&state=default&width=393",
+    "figmaNode": "102:268",
+    "measured": {
+      "back": {
+        "x": 16,
+        "y": 22,
+        "width": 24,
+        "height": 48,
+        "color": "rgb(10, 10, 10)",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "fontSize": "13.3333px",
+        "textAlign": "center"
+      },
+      "primaryButton": {
+        "x": 16,
+        "y": 826,
+        "width": 361,
+        "height": 58,
+        "color": "rgb(138, 138, 138)",
+        "backgroundColor": "rgb(74, 74, 74)",
+        "fontSize": "16px",
+        "textAlign": "center"
+      },
+      "checkbox": {
+        "x": 3,
+        "y": 281,
+        "width": 48,
+        "height": 48,
+        "color": "rgb(138, 138, 138)",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "fontSize": "16px",
+        "textAlign": "start"
+      },
+      "addRiderRow": null,
+      "locationChip": null,
+      "frameWidth": 393
+    },
+    "drift": []
+  },
+  {
+    "target": "pwa-sos",
+    "theme": "dark",
+    "route": "http://127.0.0.1:5199/pwa/scan/sos",
+    "figmaNode": "848:278",
+    "measured": {
+      "back": {
+        "x": 16,
+        "y": 22,
+        "width": 24,
+        "height": 48,
+        "color": "rgb(255, 255, 255)",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "fontSize": "13.3333px",
+        "textAlign": "center"
+      },
+      "primaryButton": null,
+      "checkbox": null,
+      "addRiderRow": null,
+      "locationChip": {
+        "x": 105,
+        "y": 568,
+        "width": 182,
+        "height": 46,
+        "color": "rgb(255, 255, 255)",
+        "backgroundColor": "rgb(26, 26, 26)",
+        "fontSize": "13px",
+        "textAlign": "center"
+      },
+      "frameWidth": 393
+    },
+    "drift": []
+  },
+  {
+    "target": "pwa-sos",
+    "theme": "light",
+    "route": "http://127.0.0.1:5199/pwa/scan/sos",
+    "figmaNode": "848:278",
+    "measured": {
+      "back": {
+        "x": 16,
+        "y": 22,
+        "width": 24,
+        "height": 48,
+        "color": "rgb(10, 10, 10)",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "fontSize": "13.3333px",
+        "textAlign": "center"
+      },
+      "primaryButton": null,
+      "checkbox": null,
+      "addRiderRow": null,
+      "locationChip": {
+        "x": 105,
+        "y": 568,
+        "width": 182,
+        "height": 46,
+        "color": "rgb(10, 10, 10)",
+        "backgroundColor": "rgb(255, 255, 255)",
+        "fontSize": "13px",
+        "textAlign": "center"
+      },
+      "frameWidth": 393
+    },
+    "drift": []
+  }
+]

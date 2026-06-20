@@ -3,10 +3,9 @@ import { AlRelationGrid } from '@autolokate/ui';
 
 import {
   CONTACT_RELATIONSHIP_OPTIONS,
-  RELATIONSHIP_OPTIONS,
   type RelationshipOption,
-} from '../../../features/emergency/data/relationships.js';
-import type { RelationshipId } from '../../../features/emergency/types.js';
+} from '@/features/emergency/data/relationships.js';
+import type { RelationshipId } from '@/features/emergency/types.js';
 
 export type RelationshipSelectorProps = {
   value?: RelationshipId;
@@ -21,10 +20,9 @@ export function RelationshipSelector({
   value,
   onChange,
   disabled = false,
-  variant = 'contact',
+  variant: _variant = 'contact',
 }: RelationshipSelectorProps) {
-  const options: readonly RelationshipOption[] =
-    variant === 'full' ? RELATIONSHIP_OPTIONS : CONTACT_RELATIONSHIP_OPTIONS;
+  const options: readonly RelationshipOption[] = CONTACT_RELATIONSHIP_OPTIONS;
 
   return (
     <AlRelationGrid
