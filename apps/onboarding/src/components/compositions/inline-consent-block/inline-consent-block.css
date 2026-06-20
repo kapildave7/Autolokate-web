@@ -3,7 +3,7 @@
 /* Figma 102:277 — 48px tap column + 12px gap + 16/22 copy; checkbox aligns to first line */
 .ob-inline-consent {
   display: grid;
-  grid-template-columns: 38px minmax(0, 1fr);
+  grid-template-columns: 36px minmax(0, 1fr);
   column-gap: 10px;
   align-items: start;
   width: 100%;

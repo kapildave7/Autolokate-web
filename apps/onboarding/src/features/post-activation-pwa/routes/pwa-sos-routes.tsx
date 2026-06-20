@@ -308,6 +308,7 @@ export function PwaSosScenePhotosRoute() {
   const filledCount = (Object.keys(session.sosPhotos) as SosPhotoSlot[]).filter(
     (slot) => session.sosPhotos[slot],
   ).length;
+  const hasPhotos = filledCount > 0;
   const prevFilledCountRef = useRef(filledCount);
 
   useEffect(() => {
@@ -340,7 +341,7 @@ export function PwaSosScenePhotosRoute() {
                 void navigate(pwaScanPaths.sosSending);
               }}
             >
-              Send without photos
+              {hasPhotos ? 'Continue' : 'Send without photos'}
             </AlButton>
           }
         >
