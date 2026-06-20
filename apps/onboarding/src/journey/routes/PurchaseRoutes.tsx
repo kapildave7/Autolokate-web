@@ -164,6 +164,8 @@ function startPayment(
   });
 
   patchPurchase({
+    selectedPlanId: params.planId,
+    riderCount: params.riderCount,
     checkoutReady: true,
     paymentStatus: 'processing',
     paidAmountInr: summary.totalInr,
@@ -318,8 +320,12 @@ function R04Route() {
 
 function R04bRoute() {
   const navigate = useNavigate();
-  const { session, updateSession } = useJourney();
+  const { session, purchase, updateSession } = usePurchaseCheckout();
   const vehicle = session.vehicle ?? {};
+
+  useEffect(() => {
+    redirectIfPaymentSucceeded(navigate, purchase);
+  }, [navigate, purchase]);
 
   return (
     <R04bFetchFailedScreen
@@ -729,10 +735,17 @@ function R10Route() {
       paidAmountInr={paidAmountInr}
       onContinue={() => {
         setPhase('emergency');
+        const purchaseSession = session.purchase ?? {};
         updateSession({
           emergency: {
             ...session.emergency,
-            riderSkipped: true,
+            riderSkipped: false,
+          },
+          purchase: {
+            ...purchaseSession,
+            riderCount:
+              purchaseSession.riderCount ??
+              (purchaseSession.selectedPlanId ? 1 : 0),
           },
         });
         void navigate(getPurchasePostPaymentEmergencyPath(), { replace: true });
@@ -764,6 +777,10 @@ function R10bRoute() {
   return (
     <R10bPaymentFailedScreen
       onBack={() => {
+        patchPurchase({
+          checkoutReady: false,
+          paymentStatus: 'idle',
+        });
         void navigate(orderSummaryPath);
       }}
       onRetry={() => {
@@ -796,6 +813,10 @@ function R10cRoute() {
 
   return (
     <R10cPaymentUnconfirmedScreen
+      onBack={() => {
+        patchPurchase({ paymentStatus: 'processing' });
+        void navigate(purchaseJourneyPaths.r09ProcessingPayment);
+      }}
       onCheckStatus={() => {
         const outcome = resolveConfirmingPaymentOutcome(planId);
         if (outcome === 'success') {

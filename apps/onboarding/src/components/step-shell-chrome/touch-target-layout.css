@@ -1,0 +1,40 @@
+/**
+ * Global shell layout — Figma Frame 102:270 / 170:27.
+ * Single 16px content column. No negative-margin bleed (clips in scroll shells).
+ */
+
+:root {
+  --ob-shell-gutter: 16px;
+  --ob-shell-section-gap: 20px;
+  --ob-shell-heading-gap: 8px;
+  --ob-shell-header-stack-gap: 20px;
+  /* Status bar 44px + 22px gap → main column at y:66 */
+  --ob-shell-header-top: 22px;
+  --ob-shell-content-width: min(100%, 24.5625rem);
+}
+
+/* Figma: 24×24 icon at content gutter (x:16) — same X as headline */
+.ob-shell-back.al-icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 24px;
+  height: 48px;
+  min-width: 24px;
+  min-height: 48px;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  background-color: transparent;
+}
+
+.ob-shell-back.al-icon-button:hover:not(:disabled),
+.ob-shell-back.al-icon-button:active:not(:disabled) {
+  background-color: transparent;
+  transform: none;
+}
+
+.ob-shell-back.al-icon-button .al-icon-button__icon {
+  width: 24px;
+  height: 24px;
+}

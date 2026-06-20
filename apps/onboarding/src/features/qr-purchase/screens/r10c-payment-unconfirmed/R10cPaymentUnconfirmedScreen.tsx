@@ -4,13 +4,21 @@ import { PurchaseStatusShell } from '../../../../components/compositions/purchas
 
 export type R10cPaymentUnconfirmedScreenProps = {
   onCheckStatus?: () => void;
+  onBack?: () => void;
+  showBack?: boolean;
 };
 
 /** R10c · Payment unconfirmed — Figma 579:1638 */
-export function R10cPaymentUnconfirmedScreen({ onCheckStatus }: R10cPaymentUnconfirmedScreenProps) {
+export function R10cPaymentUnconfirmedScreen({
+  onCheckStatus,
+  onBack,
+  showBack = true,
+}: R10cPaymentUnconfirmedScreenProps) {
   return (
     <PurchaseStatusShell
       ambient="attention"
+      showBack={showBack}
+      onBack={onBack}
       title="We couldn't confirm your payment"
       description="If money was deducted, don't pay again. We'll verify and update you on WhatsApp within a few minutes"
       visual={

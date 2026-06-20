@@ -9,7 +9,7 @@ export type EmergencyNameFormState = 'default' | 'disabled' | 'submitting' | 'er
 
 export type EmergencyMobileState = 'default' | 'error' | 'offline';
 
-export type EmergencyOtpState = 'default' | 'error' | 'verifying' | 'network-error';
+export type EmergencyOtpState = 'default' | 'error' | 'verifying' | 'network-error' | 'success';
 
 export type RelationshipId =
   | 'spouse'

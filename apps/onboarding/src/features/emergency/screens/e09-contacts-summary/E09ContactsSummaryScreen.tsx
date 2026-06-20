@@ -14,13 +14,15 @@ import {
 } from '../../emergency-limits.js';
 import type { EmergencyContact, EmergencyScreenNavigationProps } from '../../types.js';
 
+import '../../emergency.css';
+
 export type E09ContactsSummaryScreenProps = EmergencyScreenNavigationProps & {
   contacts: EmergencyContact[];
   planId: PurchasePlanId;
   onAddAnother?: () => void;
 };
 
-/** E5 · Contacts summary — Figma 373:64 · 717:2237 */
+/** E5 · Contacts summary — Figma 373:64 · 717:2237 (contacts only; riders follow via R0–R4) */
 export function E09ContactsSummaryScreen({
   contacts,
   planId,
@@ -31,8 +33,8 @@ export function E09ContactsSummaryScreen({
 }: E09ContactsSummaryScreenProps) {
   const count = contacts.length;
   const { maxEmergencyContacts, minEmergencyContacts } = getEmergencyPlanLimits(planId);
-  const canAddMore = canAddEmergencyContact(count, planId);
-  const isMaxReached = count >= maxEmergencyContacts;
+  const canAddMoreContacts = canAddEmergencyContact(count, planId);
+  const isContactsMaxReached = count >= maxEmergencyContacts;
 
   return (
     <FlowStepShell
@@ -47,15 +49,17 @@ export function E09ContactsSummaryScreen({
       onBack={onBack}
       onContinue={onContinue}
     >
-      <AlStack gap="md" className="ob-contact-card-list">
-        {contacts.map((contact) => (
-          <EmergencyContactRow key={`${contact.mobile}-${contact.name}`} contact={contact} />
-        ))}
-        {canAddMore ? (
-          <AddContactRow onClick={onAddAnother} disabled={!onAddAnother} />
-        ) : isMaxReached ? (
-          <p className="ob-emergency-max-message">{getContactsMaxReachedMessage(planId)}</p>
-        ) : null}
+      <AlStack gap="lg" className="ob-contact-summary">
+        <AlStack gap="md" className="ob-contact-card-list">
+          {contacts.map((contact) => (
+            <EmergencyContactRow key={`${contact.mobile}-${contact.name}`} contact={contact} />
+          ))}
+          {canAddMoreContacts ? (
+            <AddContactRow onClick={onAddAnother} disabled={!onAddAnother} />
+          ) : isContactsMaxReached ? (
+            <p className="ob-emergency-max-message">{getContactsMaxReachedMessage(planId)}</p>
+          ) : null}
+        </AlStack>
       </AlStack>
     </FlowStepShell>
   );

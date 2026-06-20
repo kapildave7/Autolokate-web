@@ -309,7 +309,7 @@ export function PwaSosScenePhotosRoute() {
           }
         >
           <PwaFade className="pwa-scan-screen pwa-scan-scene-photos-screen" immediate>
-            <AlHeading variant="h1">Add photos of the scene</AlHeading>
+            <AlHeading variant="h2">Add photos of the scene</AlHeading>
             <AlText tone="muted">Optional. Clear photos help responders reach you faster.</AlText>
             <AlPhotoGrid
               layout="quad"
@@ -367,7 +367,7 @@ export function PwaSosScenePhotosCapturedRoute() {
         >
           <PwaFade className="pwa-scan-screen pwa-scan-scene-photos-screen" immediate>
             <div className="pwa-scan-screen__intro">
-              <AlHeading variant="h1">Check and send</AlHeading>
+              <AlHeading variant="h2">Check and send</AlHeading>
               <AlText tone="muted">Photos captured. Retake any side if needed.</AlText>
             </div>
             <AlPhotoGrid
@@ -465,7 +465,7 @@ export function PwaSosSendingRoute() {
         <div className="pwa-scan-sos-sending__aura">
           <AlScreenSpinner size="lg" animated tone="emergency" aria-label="Sending your alert" />
         </div>
-        <AlHeading variant="h1">Sending your alert</AlHeading>
+        <AlHeading variant="h2">Sending your alert</AlHeading>
         <AlText tone="muted">
           Sharing your photo, location and the vehicle with emergency services.
         </AlText>
@@ -525,7 +525,7 @@ export function PwaSosHelpReceivedRoute() {
     >
       <PwaFade className="pwa-scan-screen pwa-scan-status-timeline-screen">
         <div className="pwa-scan-screen__intro">
-          <AlHeading variant="h1">Help is on the way</AlHeading>
+          <AlHeading variant="h2">Help is on the way</AlHeading>
           <AlText tone="muted">Autolokate is handling it. Live updates below.</AlText>
         </div>
         <AlStatusTracker
@@ -564,7 +564,7 @@ export function PwaSosHelpDispatchedRoute() {
     >
       <PwaFade className="pwa-scan-screen pwa-scan-status-timeline-screen">
         <div className="pwa-scan-screen__intro">
-          <AlHeading variant="h1">Help is on the way</AlHeading>
+          <AlHeading variant="h2">Help is on the way</AlHeading>
           <AlText tone="muted">Ambulance dispatched. Live updates below.</AlText>
         </div>
         <AlStatusTracker
@@ -604,7 +604,7 @@ export function PwaSosResolvedRoute() {
     >
       <PwaFade className="pwa-scan-screen pwa-scan-status-timeline-screen">
         <div className="pwa-scan-screen__intro">
-          <AlHeading variant="h1">Incident resolved</AlHeading>
+          <AlHeading variant="h2">Incident resolved</AlHeading>
           <AlText tone="muted">Help arrived. Thank you for stepping in.</AlText>
         </div>
         <AlStatusTracker
@@ -672,7 +672,7 @@ export function PwaSosContactsOnlyRoute() {
     >
       <PwaFade className="pwa-scan-screen pwa-scan-status-timeline-screen">
         <div className="pwa-scan-screen__intro">
-          <AlHeading variant="h1">Alerting their contacts</AlHeading>
+          <AlHeading variant="h2">Alerting their contacts</AlHeading>
           <AlText tone="muted">
             No location yet, so we&apos;re reaching the owner&apos;s contacts by call and message
           </AlText>

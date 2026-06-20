@@ -5,6 +5,13 @@
   width: 100%;
 }
 
+/* Figma trust row — shield-check matches caption #8A8A8A */
+.ob-trust-row__icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--al-color-on-surface-muted);
+}
+
 .ob-trust-row--center {
   justify-content: center;
 }

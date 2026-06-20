@@ -27,7 +27,7 @@ export function PwaVerifyShell({
     <PwaScanShell showBack={showBack} onBack={onBack} footer={footer}>
       <div className="pwa-verify-shell">
         <div className="pwa-verify-shell__intro">
-          <AlHeading variant="h1">{title}</AlHeading>
+          <AlHeading variant="h2">{title}</AlHeading>
           {description ? (
             typeof description === 'string' ? (
               <AlText tone="muted">{description}</AlText>

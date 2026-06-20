@@ -49,7 +49,7 @@ export function WelcomeActivationShell({
               label="Go back"
               onClick={onBack}
               disabled={!onBack}
-              className="ob-step-chrome__back"
+              className="ob-step-chrome__back ob-shell-back"
             />
           </header>
         ) : null}

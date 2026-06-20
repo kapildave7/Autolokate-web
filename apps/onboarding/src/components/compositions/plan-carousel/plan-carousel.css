@@ -98,49 +98,13 @@
   transition: transform var(--ob-plan-motion-tap) var(--ob-plan-motion-ease);
 }
 
-/* Figma selectionRing — slow draw on select (309:270); only on slide pseudo, not PlanCard */
+/* Selection ring lives on the card border — no delayed ::after draw (avoids grey flash) */
 .ob-plan-carousel__slide::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border: 2px solid transparent;
-  border-radius: 20px;
-  box-shadow: 0 0 0 rgba(31, 163, 74, 0);
-  pointer-events: none;
-  z-index: 1;
-  opacity: 1;
-  transform: scale(0.975);
-  transition:
-    border-color calc(var(--ob-plan-motion-ring) * 0.65) var(--ob-plan-motion-ring-ease),
-    box-shadow calc(var(--ob-plan-motion-ring) * 0.65) var(--ob-plan-motion-ring-ease),
-    transform calc(var(--ob-plan-motion-ring) * 0.65) var(--ob-plan-motion-ring-ease);
-}
-
-.ob-plan-carousel__slide--selected::after {
-  transition: none;
-  animation: ob-plan-ring-draw var(--ob-plan-motion-ring) var(--ob-plan-motion-ring-ease) forwards;
-}
-
-@keyframes ob-plan-ring-draw {
-  0% {
-    border-color: rgba(31, 163, 74, 0);
-    box-shadow: 0 0 0 rgba(31, 163, 74, 0);
-    transform: scale(0.975);
-  }
-
-  35% {
-    border-color: rgba(31, 163, 74, 0.45);
-    box-shadow: 0 0 6px rgba(31, 163, 74, 0.12);
-  }
-
-  100% {
-    border-color: var(--al-color-success);
-    box-shadow: 0 0 18px rgba(31, 163, 74, 0.28);
-    transform: scale(1);
-  }
+  content: none;
 }
 
 .ob-plan-carousel__card.al-plan-card--interactive {
+  cursor: pointer;
   transition: transform var(--ob-plan-motion-tap) var(--ob-plan-motion-ease);
 }
 
@@ -148,17 +112,16 @@
   transform: scale(0.98);
 }
 
+/* Figma 309:270 — 2px #1FA24A on hover, press, focus, and selected (instant, no grey flash) */
+.ob-plan-carousel__card.al-plan-card--interactive:hover:not(:disabled),
+.ob-plan-carousel__card.al-plan-card--interactive:active:not(:disabled),
+.ob-plan-carousel__card.al-plan-card--interactive:focus-visible,
 .ob-plan-carousel__card.al-plan-card--selected {
-  border: 1px solid var(--al-color-outline);
-  box-shadow: none;
+  border: 2px solid var(--al-color-success);
+  box-shadow: 0 0 18px rgba(31, 162, 74, 0.28);
+  outline: none;
   animation: none;
-  transition:
-    border-color calc(var(--ob-plan-motion-ring) * 0.65) var(--ob-plan-motion-ring-ease),
-    transform var(--ob-plan-motion-select) var(--ob-plan-motion-ease);
-}
-
-.ob-plan-carousel__card.al-plan-card--selected::after {
-  content: none;
+  transition: transform var(--ob-plan-motion-tap) var(--ob-plan-motion-ease);
 }
 
 .ob-plan-carousel__card .al-plan-card__name {
@@ -296,7 +259,6 @@
   }
 
   .ob-plan-carousel__slide,
-  .ob-plan-carousel__slide::after,
   .ob-plan-carousel__card.al-plan-card--selected .al-plan-card__selected-mark,
   .ob-plan-carousel__card.al-plan-card--interactive {
     transition: none;
@@ -313,11 +275,12 @@
     transform: scale(1);
   }
 
-  .ob-plan-carousel__slide--selected::after {
-    border-color: var(--al-color-success);
-    transform: scale(1);
-    box-shadow: 0 0 18px rgba(31, 163, 74, 0.28);
-    animation: none;
+  .ob-plan-carousel__card.al-plan-card--interactive:hover:not(:disabled),
+  .ob-plan-carousel__card.al-plan-card--interactive:active:not(:disabled),
+  .ob-plan-carousel__card.al-plan-card--interactive:focus-visible,
+  .ob-plan-carousel__card.al-plan-card--selected {
+    border: 2px solid var(--al-color-success);
+    box-shadow: 0 0 18px rgba(31, 162, 74, 0.28);
   }
 
   .ob-plan-carousel__card.al-plan-card--interactive:active:not(:disabled) {

@@ -37,7 +37,7 @@
 }
 
 .al-plate-input__value::placeholder {
-  color: #8c8f94;
+  color: var(--al-neutral-plate-placeholder);
 }
 
 .al-plate-input:focus-within {
@@ -50,14 +50,6 @@
 
 .al-plate-input__value:focus-visible {
   outline: none;
-}
-
-.al-plate-input__divider {
-  flex-shrink: 0;
-  width: var(--al-comp-plate-divider-width);
-  height: var(--al-comp-plate-divider-height);
-  border-radius: var(--al-radius-segment);
-  background-color: var(--al-color-success);
 }
 
 .al-plate-input--error {

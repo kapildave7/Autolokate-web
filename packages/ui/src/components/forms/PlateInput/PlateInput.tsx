@@ -39,7 +39,6 @@ export function AlPlateInput({
           }
           readOnly={!onChange}
         />
-        <span className="al-plate-input__divider" aria-hidden />
       </div>
     </div>
   );

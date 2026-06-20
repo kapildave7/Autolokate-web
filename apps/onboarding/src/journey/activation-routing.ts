@@ -114,6 +114,18 @@ export function getEmergencyHandoffPath(
   return emergencyJourneyPaths.riderPrompt;
 }
 
+export function getAuthFlowBackPath(flow: ActivationFlowId | null): string {
+  if (flow === 'prepaid') {
+    return prepaidJourneyPaths.welcome;
+  }
+
+  if (flow === 'b2b2c') {
+    return b2b2cJourneyPaths.welcome;
+  }
+
+  return journeyPaths.root;
+}
+
 export function getCompletedPath(): string {
   return journeyPaths.completed;
 }

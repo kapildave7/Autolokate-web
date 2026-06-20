@@ -1,9 +1,11 @@
-import { AlInput } from '@autolokate/ui';
+import { AlTextField } from '@autolokate/ui';
 
 import { FormFieldStack, RelationshipSelector } from '../../../../components/compositions/index.js';
 import { FlowStepShell } from '../../../../components/flow-step-shell/index.js';
-import { demoContactName } from '../../data/demo-data.js';
 import type { EmergencyNameFormState, EmergencyScreenNavigationProps, RelationshipId } from '../../types.js';
+
+import '../../../../components/auth-step-shell/auth-step-shell.css';
+import '../../emergency.css';
 
 export type E08ContactNameScreenProps = EmergencyScreenNavigationProps & {
   nameValue?: string;
@@ -15,7 +17,7 @@ export type E08ContactNameScreenProps = EmergencyScreenNavigationProps & {
 
 /** E3 · Contact name — Figma 371:1276 */
 export function E08ContactNameScreen({
-  nameValue,
+  nameValue = '',
   onNameChange,
   relation,
   onRelationChange,
@@ -24,10 +26,11 @@ export function E08ContactNameScreen({
   onBack,
   showBack = true,
 }: E08ContactNameScreenProps) {
-  const interactive = nameValue !== undefined && onNameChange !== undefined;
+  const interactive = onNameChange !== undefined;
   const isSubmitting = formState === 'submitting';
   const isError = formState === 'error';
-  const isInvalid = interactive && (!nameValue.trim() || !relation);
+  const hasName = nameValue.trim().length > 0;
+  const isInvalid = interactive && (!hasName || !relation);
   const showDisabledHelper = isInvalid && !isSubmitting && !isError;
 
   return (
@@ -52,10 +55,12 @@ export function E08ContactNameScreen({
       onBack={onBack}
       onContinue={onContinue}
     >
-      <FormFieldStack>
-        <AlInput
-          value={interactive ? nameValue : undefined}
-          defaultValue={interactive ? undefined : demoContactName}
+      <FormFieldStack className="ob-emergency-name-form">
+        <AlTextField
+          className="ob-auth-name-field"
+          prefix=""
+          aria-label="Contact name"
+          value={nameValue}
           onChange={
             onNameChange
               ? (event) => {
@@ -66,6 +71,7 @@ export function E08ContactNameScreen({
           disabled={!interactive || isSubmitting}
         />
         <RelationshipSelector
+          variant="contact"
           value={relation}
           onChange={onRelationChange}
           disabled={!interactive || isSubmitting}

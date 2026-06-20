@@ -45,6 +45,21 @@
   background-color: var(--al-signal-green);
 }
 
+/* Figma 331:39 verified tag — surface-variant pill, green circle-check glyph */
+.al-chip--green:has(.al-chip__icon) {
+  background-color: var(--al-color-surface-variant);
+  color: var(--al-color-on-surface);
+}
+
+.al-chip--green:has(.al-chip__icon) .al-chip__icon {
+  color: var(--al-signal-green);
+}
+
+.al-chip--green:has(.al-chip__icon) .al-chip__icon svg path {
+  stroke: var(--al-signal-green);
+  stroke-width: 2px;
+}
+
 .al-chip--amber .al-chip__dot {
   background-color: var(--al-signal-amber);
 }

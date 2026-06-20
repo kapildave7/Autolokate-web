@@ -6,6 +6,8 @@ import { demoMobileDisplay } from '../../../shared-auth/data/demo-data.js';
 import { MOBILE_INPUT_DISPLAY_MAX } from '../../../shared-auth/auth-flow/auth-flow.validation.js';
 import type { EmergencyMobileState, EmergencyScreenNavigationProps } from '../../types.js';
 
+import '../../../../components/auth-step-shell/auth-step-shell.css';
+
 export type E06ContactMobileScreenProps = EmergencyScreenNavigationProps & {
   mobileState?: EmergencyMobileState;
   mobileValue?: string;
@@ -24,6 +26,8 @@ export function E06ContactMobileScreen({
   const isError = mobileState === 'error';
   const isOffline = mobileState === 'offline';
   const interactive = mobileValue !== undefined && onMobileChange !== undefined;
+  const resolvedMobile = interactive ? mobileValue : demoMobileDisplay;
+  const hasMobile = resolvedMobile.replace(/\D/g, '').length > 0;
 
   return (
     <FlowStepShell
@@ -32,7 +36,7 @@ export function E06ContactMobileScreen({
       title="Their mobile number"
       description="We’ll send them a code on WhatsApp. Enter it here to confirm."
       footerLabel="Get OTP"
-      footerDisabled={isOffline || (interactive && !mobileValue.trim())}
+      footerDisabled={isOffline || (interactive && !hasMobile)}
       captureProgress={{ step: 1, total: 3 }}
       showBack={showBack}
       onBack={onBack}
@@ -40,7 +44,8 @@ export function E06ContactMobileScreen({
     >
       <FormFieldStack>
         <AlTextField
-          label="Mobile number"
+          className="ob-auth-mobile-field"
+          aria-label="Mobile number"
           value={interactive ? mobileValue : undefined}
           defaultValue={interactive ? undefined : demoMobileDisplay}
           onChange={
@@ -51,9 +56,9 @@ export function E06ContactMobileScreen({
               : undefined
           }
           prefix="+91"
+          placeholder="Mobile number"
           state={isError ? 'error' : 'default'}
           aria-describedby={isError ? 'e06-mobile-error' : undefined}
-          helperText={isOffline ? 'No internet connection' : undefined}
           disabled={isOffline}
           inputMode="numeric"
           autoComplete="tel"
@@ -62,6 +67,11 @@ export function E06ContactMobileScreen({
         {isError ? (
           <p id="e06-mobile-error" className="ob-field-validation-error" role="alert">
             Enter a valid 10-digit mobile number.
+          </p>
+        ) : null}
+        {isOffline ? (
+          <p className="ob-field-validation-error" role="status">
+            No internet connection
           </p>
         ) : null}
       </FormFieldStack>

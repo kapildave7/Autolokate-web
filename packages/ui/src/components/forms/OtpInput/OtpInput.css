@@ -27,7 +27,7 @@
   text-align: center;
   padding: 0;
   border-radius: var(--al-comp-text-field-radius);
-  border: var(--al-border-width-thin) solid var(--al-color-outline);
+  border: 1px solid var(--al-color-outline);
   background-color: var(--al-color-surface);
   color: var(--al-color-on-surface);
   font-family: var(--al-text-ui-family);
@@ -41,13 +41,18 @@
     background-color var(--al-motion-fast) var(--al-motion-ease-standard);
 }
 
-.al-otp-input__cell:hover:not(:disabled) {
-  border-color: var(--al-color-outline-strong);
+/* Active border only after the user enters a digit in this cell — not on focus alone */
+.al-otp-input__cell--has-value {
+  border-width: 2px;
+  border-color: var(--al-color-on-surface);
 }
 
 .al-otp-input__cell:focus {
   outline: none;
-  border: var(--al-border-width-thick) solid var(--al-color-focus);
+}
+
+.al-otp-input__cell:hover:not(:disabled):not(:focus) {
+  border-color: var(--al-color-outline);
 }
 
 .al-otp-input__cell:disabled {
@@ -98,14 +103,6 @@
 
 .al-otp-input--success .al-otp-input__cells {
   opacity: 1;
-}
-
-.al-otp-input--filled .al-otp-input__cell {
-  border: var(--al-border-width-thick) solid var(--al-color-outline-strong);
-}
-
-.al-otp-input--filled .al-otp-input__cell:focus {
-  border: var(--al-border-width-thick) solid var(--al-color-focus);
 }
 
 .al-otp-input.is-loading .al-otp-input__cells {

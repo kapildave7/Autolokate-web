@@ -3,8 +3,7 @@ import { AlText } from '@autolokate/ui';
 
 import { EmptyStateHero } from '../../../../components/compositions/index.js';
 import { FlowStepShell } from '../../../../components/flow-step-shell/index.js';
-import { DEFAULT_PURCHASE_PLAN_ID } from '../../../qr-purchase/data/purchase-plans.js';
-import { getContactsEmptyDescription } from '../../emergency-limits.js';
+import { E0_CONTACTS_EMPTY_DESCRIPTION } from '../../emergency-limits.js';
 import type { EmergencyScreenNavigationProps } from '../../types.js';
 
 import '../../emergency.css';
@@ -13,11 +12,9 @@ export type E05ContactsEmptyScreenProps = EmergencyScreenNavigationProps & {
   description?: string;
 };
 
-const defaultContactsDescription = getContactsEmptyDescription(DEFAULT_PURCHASE_PLAN_ID);
-
 /** E0 · No contacts — Figma 373:37 */
 export function E05ContactsEmptyScreen({
-  description = defaultContactsDescription,
+  description = E0_CONTACTS_EMPTY_DESCRIPTION,
   onContinue,
   onBack,
   showBack = true,
@@ -37,20 +34,23 @@ export function E05ContactsEmptyScreen({
       onContinue={onContinue}
       footerSecondaryLabel={footerSecondaryLabel}
       onFooterSecondary={onFooterSecondary}
+      footerSecondaryFirst
     >
-      <EmptyStateHero
-        icon={
-          <div className="ob-emergency-hero-icon">
-            <AlIcon name="users" size={48} aria-hidden />
-          </div>
-        }
-        message="No contacts yet"
-      />
-      <div className="ob-emergency-trust-row">
-        <AlIcon name="shield-check" size={16} aria-hidden />
-        <AlText variant="caption" tone="muted">
-          Encrypted · only used to reach them in a crash
-        </AlText>
+      <div className="ob-emergency-empty-state">
+        <EmptyStateHero
+          icon={
+            <div className="ob-emergency-hero-icon">
+              <AlIcon name="users" size={48} aria-hidden />
+            </div>
+          }
+          message={<p className="ob-emergency-hero-message">No contacts yet</p>}
+        />
+        <div className="ob-emergency-trust-row">
+          <AlIcon name="shield-check" size={16} aria-hidden />
+          <AlText tone="muted" className="ob-emergency-trust-row__text">
+            Encrypted · only used to reach them in a crash
+          </AlText>
+        </div>
       </div>
     </FlowStepShell>
   );

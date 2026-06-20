@@ -77,12 +77,29 @@
   flex-shrink: 0;
 }
 
+/* Figma 331:39 — 4×12 pad, 8 gap, 14px circle-check #1FA24A, white label */
+.al-vehicle-rc-card__status.al-chip--green {
+  padding: 4px 12px;
+  gap: 8px;
+}
+
+.al-vehicle-rc-card__status.al-chip--green .al-chip__icon {
+  width: 14px;
+  height: 14px;
+  color: var(--al-signal-green);
+}
+
+.al-vehicle-rc-card__status.al-chip--green .al-chip__icon svg path {
+  stroke: var(--al-signal-green);
+  stroke-width: 2px;
+}
+
 .al-vehicle-rc-card__registration {
   margin: 0;
   font-family: var(--al-text-ui-family);
   font-size: var(--al-comp-vehicle-rc-plate-size);
   font-weight: var(--al-font-weight-bold);
-  line-height: 2.25rem;
+  line-height: 1;
   letter-spacing: 0.01em;
   text-transform: uppercase;
   word-break: break-word;
@@ -114,5 +131,8 @@
 }
 
 .al-vehicle-rc-card__field .al-readonly-field__value {
+  font-size: var(--al-text-body-size);
+  font-weight: 600;
+  line-height: var(--al-text-body-line-height);
   overflow-wrap: anywhere;
 }

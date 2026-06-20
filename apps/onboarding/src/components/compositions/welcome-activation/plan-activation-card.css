@@ -24,7 +24,7 @@
   font-family: var(--al-text-ui-family);
   font-size: 13px;
   font-weight: var(--al-font-weight-medium);
-  line-height: 18px;
+  line-height: 16px;
   color: var(--al-color-on-surface-muted);
 }
 
@@ -93,7 +93,7 @@
   font-family: var(--al-text-ui-family);
   font-size: 12px;
   font-weight: var(--al-font-weight-semibold);
-  line-height: 16px;
+  line-height: 15px;
 }
 
 .ob-plan-activation__features {
@@ -112,7 +112,7 @@
   font-family: var(--al-text-ui-family);
   font-size: 13px;
   font-weight: var(--al-font-weight-regular);
-  line-height: 18px;
+  line-height: 16px;
   color: var(--al-color-on-surface);
 }
 
@@ -155,7 +155,7 @@
   font-family: var(--al-text-ui-family);
   font-size: 13px;
   font-weight: var(--al-font-weight-semibold);
-  line-height: 18px;
+  line-height: 16px;
   color: var(--al-color-on-surface);
 }
 

@@ -216,7 +216,9 @@
 }
 
 .ob-auth-otp-input.al-otp-input--error .al-otp-input__cell,
-.ob-auth-otp-input.al-otp-input--error .al-otp-input__cell:focus {
+.ob-auth-otp-input.al-otp-input--error .al-otp-input__cell:focus,
+.ob-auth-otp-input.al-otp-input--error .al-otp-input__cell--has-value {
+  border-width: 2px;
   border-color: var(--al-signal-amber);
 }
 
@@ -231,16 +233,29 @@
   min-height: 62px;
   padding-inline: 16px;
   gap: 12px;
-  border-width: 2px;
   border-radius: 12px;
-  border-color: var(--al-color-on-surface);
+  border-width: 1px;
+  border-color: var(--al-color-outline);
   background-color: var(--al-color-surface);
 }
 
-.ob-auth-mobile-field .al-text-field__control:focus-within {
-  border-color: var(--al-color-focus);
-  outline: none;
-  box-shadow: none;
+.ob-auth-mobile-field .al-text-field__control:focus-within,
+.ob-auth-mobile-field .al-text-field__control:has(.al-text-field__input:not(:placeholder-shown)) {
+  border-width: 1px;
+  border-color: var(--al-color-outline);
+}
+
+.ob-auth-mobile-field.al-text-field--filled .al-text-field__control,
+.ob-auth-mobile-field.al-text-field--filled .al-text-field__control:focus-within,
+.ob-auth-mobile-field.al-text-field--filled
+  .al-text-field__control:has(.al-text-field__input:not(:placeholder-shown)) {
+  border-width: 2px;
+  border-color: var(--al-color-on-surface);
+}
+
+.ob-auth-mobile-field.al-text-field--error .al-text-field__control {
+  border-color: var(--al-color-warning);
+  border-width: 2px;
 }
 
 .ob-auth-mobile-field .al-text-field__prefix {
@@ -272,6 +287,7 @@
 
 .ob-auth-shell__body--mobile .ob-inline-consent {
   flex-shrink: 0;
+  overflow: visible;
 }
 
 .ob-auth-mobile-field.al-text-field {
@@ -284,16 +300,25 @@
 
 .ob-auth-name-field .al-text-field__control {
   min-height: 62px;
-  border-width: 1px;
-  border-color: var(--al-neutral-700);
   border-radius: 16px;
+  border-width: 1px;
+  border-color: var(--al-color-outline);
   box-shadow: none;
+  background-color: var(--al-color-surface);
 }
 
-.ob-auth-name-field .al-text-field__control:focus-within {
-  border-color: var(--al-color-outline-strong);
-  outline: none;
-  box-shadow: none;
+.ob-auth-name-field .al-text-field__control:focus-within,
+.ob-auth-name-field .al-text-field__control:has(.al-text-field__input:not(:placeholder-shown)) {
+  border-width: 1px;
+  border-color: var(--al-color-outline);
+}
+
+.ob-auth-name-field.al-text-field--filled .al-text-field__control,
+.ob-auth-name-field.al-text-field--filled .al-text-field__control:focus-within,
+.ob-auth-name-field.al-text-field--filled
+  .al-text-field__control:has(.al-text-field__input:not(:placeholder-shown)) {
+  border-width: 2px;
+  border-color: var(--al-color-on-surface);
 }
 
 .ob-auth-name-field .al-text-field__input {
@@ -308,7 +333,7 @@
   margin: 0;
   font-size: var(--al-text-body-size);
   line-height: var(--al-text-body-line-height);
-  color: var(--al-color-on-surface-muted);
+  color: var(--al-color-on-surface);
 }
 
 .ob-auth-otp-desc .al-text {

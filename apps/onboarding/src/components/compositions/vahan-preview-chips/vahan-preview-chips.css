@@ -1,4 +1,4 @@
-/* Figma R03 layout_0WPSOR — gap 12, padding-top 4 */
+/* Figma R03 170:34 — layout_0WPSOR: padding-top 4, gap 12 */
 
 .ob-vahan-preview {
   display: flex;
@@ -8,12 +8,15 @@
   padding-block-start: 4px;
 }
 
-.ob-vahan-preview__label {
+/* Figma 170:35 — Label 13/18 w500 #8A8A8A */
+.ob-vahan-preview__label.al-text {
   font-size: 13px;
   line-height: 18px;
   font-weight: 500;
+  color: var(--al-color-on-surface-muted);
 }
 
+/* Figma 170:36 — row wrap, gap 8 */
 .ob-vahan-preview__chips {
   display: flex;
   flex-wrap: wrap;
@@ -23,20 +26,32 @@
   list-style: none;
 }
 
+/* Figma EL-444f2f0a — dark #1A1A1A pill; light inverts via surface tokens */
 .ob-vahan-preview__chip {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   padding: 7px 12px 7px 10px;
+  border: 1px solid transparent;
   border-radius: 999px;
-  background-color: var(--al-color-pill-surface);
-  color: var(--al-color-pill-on-surface);
+  background-color: var(--al-color-surface);
   font-family: var(--al-text-ui-family);
   font-size: 13px;
   font-weight: 500;
   line-height: 18px;
 }
 
+[data-theme='light'] .ob-vahan-preview__chip {
+  background-color: var(--al-neutral-0);
+  border-color: var(--al-color-outline);
+}
+
+/* Figma 170:39 — on-surface label (white dark / black light) */
+.ob-vahan-preview__chip-label {
+  color: var(--al-color-on-surface);
+}
+
+/* Figma EL-5d6f9cfb — 10×7 check, stroke #8A8A8A */
 .ob-vahan-preview__chip-icon {
   flex-shrink: 0;
   color: var(--al-color-on-surface-muted);

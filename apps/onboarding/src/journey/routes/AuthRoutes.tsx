@@ -22,6 +22,7 @@ import type {
   AuthVehicleOwnerState,
 } from '../../features/shared-auth/types.js';
 import { authJourneyPaths } from '../auth/auth-routing.js';
+import { getAuthFlowBackPath } from '../activation-routing.js';
 import { journeyPaths } from '../constants.js';
 import { useJourney } from '../JourneyContext.js';
 
@@ -43,7 +44,7 @@ function AuthSegmentBootstrap({ children }: { children: ReactNode }) {
 
 function MobileRoute() {
   const navigate = useNavigate();
-  const { session, updateSession } = useJourney();
+  const { session, updateSession, selectedFlow } = useJourney();
   const auth = session.auth ?? {};
 
   const [mobile, setMobile] = useState(auth.mobileDisplay ?? '');
@@ -139,7 +140,7 @@ function MobileRoute() {
         void navigate(authJourneyPaths.terms);
       }}
       onBack={() => {
-        void navigate(journeyPaths.root);
+        void navigate(getAuthFlowBackPath(selectedFlow));
       }}
       onContinue={() => {
         void handleContinue();

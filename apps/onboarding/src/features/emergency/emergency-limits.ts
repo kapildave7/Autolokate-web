@@ -1,5 +1,6 @@
 import { DEFAULT_PURCHASE_PLAN_ID } from '../qr-purchase/data/purchase-plans.js';
 import type { PurchasePlanId, PurchaseRiderCount } from '../qr-purchase/types-checkout.js';
+import type { ActivationFlowId } from '../../journey/types.js';
 
 export type EmergencyPlanLimits = {
   /** Maximum emergency contacts allowed for the purchased plan. */
@@ -74,6 +75,43 @@ export function canAddRider(
   return entitled > 0 && currentRiderCount < entitled;
 }
 
+/** True when purchased rider slots remain unfilled and user has not skipped R0. */
+export function needsRiderSetup(
+  planId: PurchasePlanId | undefined,
+  purchasedRiderSlots: PurchaseRiderCount | undefined,
+  currentRiderCount: number,
+  riderSkipped?: boolean,
+): boolean {
+  if (riderSkipped) {
+    return false;
+  }
+  return canAddRider(currentRiderCount, planId, purchasedRiderSlots);
+}
+
+/**
+ * Purchase post-payment may carry stale `riderSkipped` from legacy R10 handoff.
+ * Prepaid/B2B2C explicit R0 skip must still suppress riders on E5.
+ */
+export function getContactsSummaryRiderContext(
+  planId: PurchasePlanId | undefined,
+  purchasedRiderSlots: PurchaseRiderCount | undefined,
+  currentRiderCount: number,
+  riderSkipped: boolean | undefined,
+  flow: ActivationFlowId | null,
+): {
+  ridersOwed: boolean;
+  shouldEnterRiderFlowOnContinue: boolean;
+} {
+  const entitledSlots = getEntitledRiderSlots(planId, purchasedRiderSlots);
+  const ridersOwed = entitledSlots > 0 && currentRiderCount < entitledSlots;
+  const blockedBySkip = Boolean(riderSkipped) && flow !== 'purchase';
+
+  return {
+    ridersOwed,
+    shouldEnterRiderFlowOnContinue: ridersOwed && !blockedBySkip,
+  };
+}
+
 export function getRiderPromptDescription(entitledRiderSlots: number): string {
   if (entitledRiderSlots <= 1) {
     return 'You’ve already paid for 1 rider’s cover. Add their name now, or finish later from your profile.';
@@ -99,6 +137,10 @@ export function getRidersMaxReachedMessage(
   const entitled = getEntitledRiderSlots(planId, purchasedRiderSlots);
   return `You’ve added the maximum ${String(entitled)} riders`;
 }
+
+/** Figma 373:37 — E0 empty state description. */
+export const E0_CONTACTS_EMPTY_DESCRIPTION =
+  'Add 1–3 people we’ll alert if you’re in a crash.';
 
 export function getContactsEmptyDescription(planId: PurchasePlanId | undefined): string {
   const { maxEmergencyContacts } = getEmergencyPlanLimits(planId);

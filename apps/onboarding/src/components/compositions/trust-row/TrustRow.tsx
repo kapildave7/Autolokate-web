@@ -16,7 +16,9 @@ export function TrustRow({
 }: TrustRowProps) {
   return (
     <div className={`ob-trust-row ob-trust-row--${align}`}>
-      <AlIcon name="shield-check" size={16} aria-hidden />
+      <span className="ob-trust-row__icon" aria-hidden>
+        <AlIcon name="shield-check" size={16} />
+      </span>
       <AlText variant="caption" tone="muted">
         {text}
       </AlText>

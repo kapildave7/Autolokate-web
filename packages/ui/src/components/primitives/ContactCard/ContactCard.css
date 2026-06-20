@@ -31,6 +31,9 @@
   line-height: var(--al-text-label-line-height);
   font-weight: 600;
   color: var(--al-color-on-surface);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .al-contact-card__subtitle {
@@ -38,6 +41,9 @@
   font-size: var(--al-text-caption-size);
   line-height: var(--al-text-caption-line-height);
   color: var(--al-color-on-surface-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .al-contact-card__verified {

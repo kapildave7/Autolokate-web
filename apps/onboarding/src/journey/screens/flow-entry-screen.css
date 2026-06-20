@@ -1,14 +1,17 @@
+@import '../../components/step-shell-chrome/touch-target-layout.css';
+
 .ob-flow-entry {
   position: relative;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 24.5625rem;
+  max-width: var(--ob-shell-content-width, 24.5625rem);
   min-height: 100dvh;
   margin-inline: auto;
-  padding: calc(var(--al-space-lg) + env(safe-area-inset-top, 0px)) 16px
-    calc(var(--al-space-lg) + env(safe-area-inset-bottom, 0px));
+  padding: calc(var(--ob-shell-header-top, 22px) + env(safe-area-inset-top, 0px))
+    var(--ob-shell-gutter, 16px)
+    calc(var(--ob-shell-gutter, 16px) + env(safe-area-inset-bottom, 0px));
 }
 
 .ob-flow-entry__theme-toggle {
@@ -38,8 +41,17 @@
 .ob-flow-entry__heading {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--ob-shell-heading-gap, 8px);
   padding-inline-end: 8.5rem;
+  text-align: start;
+}
+
+.ob-flow-entry__heading .al-heading--h2 {
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-align: start;
 }
 
 .ob-flow-entry__description {

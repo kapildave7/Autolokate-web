@@ -69,7 +69,7 @@
 }
 
 .al-text--muted {
-  color: color-mix(in srgb, var(--al-color-on-surface) 72%, var(--al-color-surface));
+  color: var(--al-color-on-surface-muted);
 }
 
 .al-text--on-primary {

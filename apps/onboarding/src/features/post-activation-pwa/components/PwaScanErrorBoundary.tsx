@@ -47,7 +47,7 @@ export class PwaScanErrorBoundary extends Component<
 
     return (
       <div className="pwa-scan-error-fallback" role="alert">
-        <AlHeading variant="h1">Something went wrong</AlHeading>
+        <AlHeading variant="h2">Something went wrong</AlHeading>
         <AlText tone="muted">
           The screen could not load after your photo was captured. Your session is still active — try
           again or go back.

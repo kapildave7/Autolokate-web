@@ -23,7 +23,7 @@ export function VahanPreviewChips() {
         {VAHAN_PREVIEW_LABELS.map((label) => (
           <li key={label} className="ob-vahan-preview__chip">
             <AlIcon name="check" size={10} className="ob-vahan-preview__chip-icon" aria-hidden />
-            <span>{label}</span>
+            <span className="ob-vahan-preview__chip-label">{label}</span>
           </li>
         ))}
       </ul>

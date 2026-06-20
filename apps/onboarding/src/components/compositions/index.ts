@@ -19,10 +19,6 @@ export type {
   InlineStatusBannerProps,
   InlineStatusBannerVariant,
 } from './inline-status-banner/InlineStatusBanner.js';
-export { LanguagePickerSheet } from './language-picker-sheet/LanguagePickerSheet.js';
-export type { LanguagePickerSheetProps, LanguageOption } from './language-picker-sheet/LanguagePickerSheet.js';
-export { LanguageSwitcher } from './language-switcher/LanguageSwitcher.js';
-export type { LanguageSwitcherProps } from './language-switcher/LanguageSwitcher.js';
 export { TrustRow } from './trust-row/TrustRow.js';
 export type { TrustRowProps } from './trust-row/TrustRow.js';
 export { VahanPreviewChips } from './vahan-preview-chips/index.js';

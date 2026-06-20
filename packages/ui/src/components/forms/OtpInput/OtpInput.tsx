@@ -61,7 +61,11 @@ export function AlOtpInput({
             ref={(node) => {
               inputsRef.current[index] = node;
             }}
-            className={cn('al-otp-input__cell', isSuccess && 'al-otp-input__cell--success')}
+            className={cn(
+              'al-otp-input__cell',
+              digit.length > 0 && 'al-otp-input__cell--has-value',
+              isSuccess && 'al-otp-input__cell--success',
+            )}
             type="text"
             inputMode="numeric"
             autoComplete={index === 0 ? 'one-time-code' : 'off'}

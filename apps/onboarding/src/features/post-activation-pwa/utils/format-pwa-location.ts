@@ -10,7 +10,7 @@ export function formatPwaLocationLabel(
     return 'Location unavailable';
   }
   if (!location) {
-    return 'Share your location';
+    return 'Turn on location';
   }
   if (locationName) {
     return locationName;

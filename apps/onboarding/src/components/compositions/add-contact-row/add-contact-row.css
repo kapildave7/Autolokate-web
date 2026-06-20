@@ -19,6 +19,12 @@
     opacity var(--al-motion-fast) var(--al-motion-ease-standard);
 }
 
+.ob-add-contact-row .al-text {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 17px;
+}
+
 .ob-add-contact-row:hover:not(:disabled) {
   border-color: var(--al-color-outline-strong);
   background-color: color-mix(in srgb, var(--al-color-surface-variant) 55%, transparent);

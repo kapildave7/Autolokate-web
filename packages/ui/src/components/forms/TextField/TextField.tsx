@@ -24,6 +24,8 @@ export function AlTextField({
   const isError = state === 'error' || Boolean(errorText);
   const isSuccess = state === 'success' && !isError;
   const isDisabled = state === 'disabled' || Boolean(disabled);
+  const isFilled =
+    String(props.value ?? props.defaultValue ?? '').trim().length > 0;
   const describedBy = isError ? errorId : helperText ? hintId : undefined;
 
   return (
@@ -33,6 +35,7 @@ export function AlTextField({
         isError && 'al-text-field--error',
         isSuccess && 'al-text-field--success',
         isDisabled && 'al-text-field--disabled',
+        isFilled && 'al-text-field--filled',
         loading && 'is-loading',
         className,
       )}

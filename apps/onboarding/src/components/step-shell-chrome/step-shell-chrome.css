@@ -1,7 +1,10 @@
 /**
  * Shared step-shell chrome — Figma 102:268 auth reference.
  * Back + progress pinned top; body scrolls; CTA pinned bottom.
+ * All text/CTA align to --ob-shell-gutter (16px).
  */
+
+@import './touch-target-layout.css';
 
 .ob-step-chrome__frame {
   position: relative;
@@ -9,31 +12,29 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 24.5625rem;
+  max-width: var(--ob-shell-content-width);
   height: 100%;
   max-height: 100dvh;
   min-height: 0;
   margin-inline: auto;
-  padding-inline: 16px;
-  overflow: hidden;
+  padding-inline: var(--ob-shell-gutter);
+  overflow-x: visible;
+  overflow-y: hidden;
 }
 
 .ob-step-chrome__header {
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
-  gap: 20px;
-  padding-block-start: calc(var(--al-space-lg) + env(safe-area-inset-top, 0px));
+  gap: var(--ob-shell-header-stack-gap);
+  padding-block-start: calc(var(--ob-shell-header-top) + env(safe-area-inset-top, 0px));
+  overflow: visible;
   background-color: var(--al-color-background);
 }
 
+/* Figma back — see touch-target-layout.css `.ob-shell-back` */
 .ob-step-chrome__back.al-icon-button {
   align-self: flex-start;
-  width: 24px;
-  height: 24px;
-  min-width: 24px;
-  min-height: 24px;
-  padding: 0;
 }
 
 .ob-step-chrome__progress {
@@ -50,11 +51,11 @@
   display: flex;
   flex-direction: column;
   flex: 1;
-  gap: 20px;
+  gap: var(--ob-shell-section-gap);
   min-width: 0;
   min-height: 0;
-  padding-block: 20px var(--al-space-md);
-  overflow-x: hidden;
+  padding-block: var(--ob-shell-section-gap) var(--al-space-md);
+  overflow-x: visible;
   overflow-y: auto;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
@@ -63,8 +64,36 @@
 .ob-step-chrome__heading {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--ob-shell-heading-gap);
   width: 100%;
+  text-align: start;
+}
+
+.ob-step-chrome__heading .al-heading--h2 {
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-align: start;
+}
+
+.ob-step-chrome__heading .al-text,
+.ob-step-chrome__heading .ob-auth-shell__description,
+.ob-step-chrome__heading .ob-shell__description,
+.ob-step-chrome__heading .ob-welcome-shell__description {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-align: start;
+}
+
+/* Figma Body — 16/24/400 #8A8A8A */
+.ob-step-chrome__heading .ob-auth-shell__description,
+.ob-step-chrome__heading .ob-shell__description,
+.ob-step-chrome__heading .ob-welcome-shell__description,
+.ob-step-chrome__heading .al-text.al-text--muted {
+  color: var(--al-color-on-surface-muted);
 }
 
 .ob-step-chrome__footer {
@@ -92,7 +121,6 @@
   color: var(--al-color-on-surface-muted);
 }
 
-/* Viewport-locked screen bg content used by all step shells */
 .ob-step-chrome-screen.al-screen-bg {
   box-sizing: border-box;
   width: 100%;

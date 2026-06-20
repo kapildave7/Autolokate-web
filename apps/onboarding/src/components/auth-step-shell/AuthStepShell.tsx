@@ -91,7 +91,7 @@ export function AuthStepShell({
             label="Go back"
             onClick={onBack}
             disabled={!showBack || !onBack}
-            className="ob-step-chrome__back ob-auth-shell__back"
+            className="ob-step-chrome__back ob-auth-shell__back ob-shell-back"
           />
           {headerAccessory ? (
             <div className="ob-auth-shell__header-accessory">{headerAccessory}</div>

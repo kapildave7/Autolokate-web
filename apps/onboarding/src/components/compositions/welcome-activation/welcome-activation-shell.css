@@ -3,7 +3,6 @@
   flex-direction: column;
   min-height: 0;
   height: 100%;
-  padding-inline: 16px;
 }
 
 .ob-welcome-shell__header {
@@ -40,7 +39,7 @@
   font-family: var(--al-text-ui-family);
   font-size: 13px;
   font-weight: var(--al-font-weight-semibold);
-  line-height: 18px;
+  line-height: 16px;
   color: var(--al-color-on-surface-muted);
 }
 
@@ -91,7 +90,7 @@
   font-family: var(--al-text-ui-family);
   font-size: 18px;
   font-weight: var(--al-font-weight-semibold);
-  line-height: 24px;
+  line-height: 22px;
   color: var(--al-color-on-surface);
 }
 
@@ -100,6 +99,6 @@
   font-family: var(--al-text-ui-family);
   font-size: 14px;
   font-weight: var(--al-font-weight-regular);
-  line-height: 20px;
+  line-height: 17px;
   color: var(--al-color-on-surface-muted);
 }

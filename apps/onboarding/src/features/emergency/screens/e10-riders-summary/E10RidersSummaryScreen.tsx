@@ -18,6 +18,7 @@ export type E10RidersSummaryScreenProps = EmergencyScreenNavigationProps & {
   riders: EmergencyRider[];
   planId: PurchasePlanId;
   purchasedRiderSlots: PurchaseRiderCount;
+  footerDisabled?: boolean;
   onAddAnother?: () => void;
 };
 
@@ -26,6 +27,7 @@ export function E10RidersSummaryScreen({
   riders,
   planId,
   purchasedRiderSlots,
+  footerDisabled = false,
   onAddAnother,
   onContinue,
   onBack,
@@ -43,6 +45,7 @@ export function E10RidersSummaryScreen({
       title="Riders"
       description={getRidersSummaryDescription(count, planId, purchasedRiderSlots)}
       footerLabel="Continue"
+      footerDisabled={footerDisabled}
       hideProgress
       showBack={showBack}
       onBack={onBack}

@@ -8,14 +8,15 @@ export type RelationshipOption = {
   icon: AlIconName;
 };
 
-/** Figma E3 / R3 relation tiles — icons mapped to available DS icon set. */
-export const RELATIONSHIP_OPTIONS: readonly RelationshipOption[] = [
+/** Figma E3 / R3 — 6 tiles (Spouse through Relative). */
+export const CONTACT_RELATIONSHIP_OPTIONS: readonly RelationshipOption[] = [
   { id: 'spouse', label: 'Spouse', icon: 'heart' },
   { id: 'parent', label: 'Parent', icon: 'user' },
   { id: 'child', label: 'Child', icon: 'circle-user' },
   { id: 'sibling', label: 'Sibling', icon: 'users' },
   { id: 'friend', label: 'Friend', icon: 'smile' },
   { id: 'relative', label: 'Relative', icon: 'house' },
-  { id: 'colleague', label: 'Colleague', icon: 'store' },
-  { id: 'other', label: 'Other', icon: 'ellipsis' },
 ] as const;
+
+/** @deprecated Use CONTACT_RELATIONSHIP_OPTIONS — Colleague/Other removed per product. */
+export const RELATIONSHIP_OPTIONS: readonly RelationshipOption[] = CONTACT_RELATIONSHIP_OPTIONS;

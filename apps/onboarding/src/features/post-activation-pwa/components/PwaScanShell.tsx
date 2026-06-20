@@ -48,7 +48,7 @@ export function PwaScanShell({
               icon={<AlIcon name="arrow-left" size={24} aria-hidden />}
               label="Go back"
               onClick={onBack}
-              className="pwa-scan-shell__back"
+              className="pwa-scan-shell__back ob-shell-back"
             />
           ) : (
             <span className="pwa-scan-shell__back-spacer" aria-hidden />

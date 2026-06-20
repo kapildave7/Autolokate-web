@@ -1,10 +1,15 @@
-import { AlOtpInput, AlText } from '@autolokate/ui';
+import { AlOtpInput } from '@autolokate/ui';
 
 import { FlowStepShell, type FlowStepCaptureProgress } from '../../../../components/flow-step-shell/index.js';
-import { OTP_LENGTH } from '../../../shared-auth/auth-flow/auth-flow.validation.js';
+import {
+  isExpiredOtp,
+  isValidOtp,
+  OTP_LENGTH,
+} from '../../../shared-auth/auth-flow/auth-flow.validation.js';
 import { formatMobileForOtpDescription } from '../../data/demo-data.js';
 import type { EmergencyOtpState, EmergencyScreenNavigationProps } from '../../types.js';
 
+import '../../../../components/auth-step-shell/auth-step-shell.css';
 import '../../emergency.css';
 
 export type EmergencyOtpScreenProps = EmergencyScreenNavigationProps & {
@@ -37,14 +42,25 @@ export function EmergencyOtpScreen({
   showBack = true,
 }: EmergencyOtpScreenProps) {
   const verifying = otpState === 'verifying';
-  const isWrongOrExpired = otpState === 'error' || otpErrorKind !== null;
+  const isSuccess = otpState === 'success';
   const isNetworkError = otpState === 'network-error';
-  const canResend = Boolean(onResendOtp) && resendCooldownSeconds === 0 && !verifying;
+  const isWrong =
+    otpState === 'error' || otpErrorKind === 'wrong' || otpErrorKind === 'expired';
+  const isComplete = otpValue.length === OTP_LENGTH;
+  const isAutoExpired = isComplete && isExpiredOtp(otpValue);
+  const isAutoWrong = isComplete && !isValidOtp(otpValue) && !isExpiredOtp(otpValue);
+  const canResend = Boolean(onResendOtp) && resendCooldownSeconds === 0 && !verifying && !isSuccess;
+
+  const otpInputState = isSuccess
+    ? 'success'
+    : isWrong || isNetworkError || isAutoExpired || isAutoWrong
+      ? 'error'
+      : 'empty';
 
   const errorText =
-    otpErrorKind === 'expired'
+    otpErrorKind === 'expired' || isAutoExpired
       ? 'This code has expired. Request a new OTP.'
-      : isWrongOrExpired
+      : isWrong || isAutoWrong
         ? 'Incorrect code. Try again.'
         : isNetworkError
           ? 'Couldn’t reach the server. Tap Verify to retry.'
@@ -61,20 +77,22 @@ export function EmergencyOtpScreen({
       step={step}
       title="Enter their code"
       description={
-        <div className="ob-emergency-otp-desc">
-          <AlText tone="muted" as="span" className="ob-emergency-otp-desc__text">
-            Sent to them on WhatsApp · {formatMobileForOtpDescription(mobile)}
-          </AlText>
+        <p className="ob-emergency-otp-desc">
+          Sent to them on WhatsApp · {formatMobileForOtpDescription(mobile)}
           {onChangeNumber ? (
-            <button type="button" className="ob-emergency-otp-desc__change" onClick={onChangeNumber}>
-              Change
-            </button>
+            <>
+              {' '}
+              <button type="button" className="ob-emergency-otp-desc__change" onClick={onChangeNumber}>
+                Change
+              </button>
+            </>
           ) : null}
-        </div>
+        </p>
       }
       footerLabel="Verify"
       footerLoading={verifying}
-      footerDisabled={verifying || otpValue.length < OTP_LENGTH}
+      footerDisabled={isSuccess || verifying || otpValue.length < OTP_LENGTH}
+      hideFooter={isSuccess}
       captureProgress={captureProgress}
       bodyGap="otp"
       showBack={showBack}
@@ -82,19 +100,16 @@ export function EmergencyOtpScreen({
       onContinue={onContinue}
     >
       <AlOtpInput
-        className="ob-otp-input-external"
+        className="ob-auth-otp-input"
         length={OTP_LENGTH}
-        label="One-time password"
         value={otpValue}
         onChange={onOtpChange ?? (() => undefined)}
-        state={
-          isWrongOrExpired || isNetworkError ? 'error' : otpValue.length === OTP_LENGTH ? 'filled' : 'empty'
-        }
+        state={otpInputState}
         loading={verifying}
-        disabled={verifying}
+        disabled={verifying || isSuccess}
       />
       <div className="ob-emergency-otp-status">
-        {errorText ? (
+        {errorText && (isWrong || isNetworkError || isAutoWrong || isAutoExpired) ? (
           <p className="ob-otp-validation-error" role="alert">
             {errorText}
           </p>
@@ -104,9 +119,7 @@ export function EmergencyOtpScreen({
             Resend code
           </button>
         ) : resendCountdown ? (
-          <AlText variant="caption" tone="muted">
-            {resendCountdown}
-          </AlText>
+          <p className="ob-auth-otp-countdown">{resendCountdown}</p>
         ) : null}
       </div>
     </FlowStepShell>

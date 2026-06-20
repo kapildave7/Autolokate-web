@@ -12,12 +12,46 @@
 
 .pwa-scan-screen > .al-heading + .al-text {
   margin-top: -12px;
+  font-size: 15px;
+  line-height: 18px;
+}
+
+.pwa-scan-form-screen > .al-heading + .al-text {
+  font-size: var(--al-text-body-size);
+  line-height: var(--al-text-body-line-height);
+}
+
+.pwa-scan-scene-photos-screen .pwa-scan-screen__intro .al-text {
+  font-size: 15px;
+  line-height: 18px;
 }
 
 .pwa-scan-screen__intro {
   display: flex;
   flex-direction: column;
   gap: 4px;
+}
+
+.pwa-scan-confirm-screen {
+  gap: 21px;
+}
+
+.pwa-scan-confirm-screen .pwa-scan-screen__intro {
+  gap: 8px;
+}
+
+.pwa-scan-confirm-screen .pwa-scan-screen__intro .al-heading {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 34px;
+  letter-spacing: 0;
+}
+
+.pwa-scan-confirm-screen .pwa-scan-screen__intro .al-text {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19px;
+  color: #8a8a8a;
 }
 
 .pwa-scan-form-screen {
@@ -104,6 +138,10 @@
   padding-bottom: 24px;
 }
 
+.pwa-scan-sos-sending .al-heading {
+  line-height: 44px;
+}
+
 .pwa-scan-sos-sending__aura {
   position: relative;
   display: flex;
@@ -118,7 +156,7 @@
   position: absolute;
   inset: 0;
   border-radius: 999px;
-  background: #ff4a3d;
+  background: var(--al-signal-red-bright);
   opacity: 0.18;
   filter: blur(24px);
   animation: pwa-sos-sending-aura 2.2s ease-in-out infinite;
@@ -141,17 +179,27 @@
   gap: 16px;
 }
 
+.pwa-scan-status-timeline-screen .pwa-scan-screen__intro {
+  gap: 8px;
+}
+
+.pwa-scan-status-timeline-screen .pwa-scan-screen__intro .al-heading {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 34px;
+  letter-spacing: 0;
+}
+
+.pwa-scan-status-timeline-screen .pwa-scan-screen__intro .al-text {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 18px;
+  color: #8a8a8a;
+}
+
 .pwa-scan-status-timeline-screen .al-status-tracker,
 .pwa-scan-status-timeline-screen .al-dispatch-timeline {
   overflow: visible;
-}
-
-.pwa-scan-confirm-screen {
-  gap: 16px;
-}
-
-.pwa-scan-confirm-screen > .al-heading + .al-text {
-  margin-top: -12px;
 }
 
 .pwa-scan-footer-stack {
@@ -200,6 +248,48 @@
 
 .pwa-scan-screen__description {
   margin: 0;
+  line-height: 19px;
+}
+
+/** 02 · Vehicle found — Figma 843:2080 */
+.pwa-scan-vehicle-found {
+  gap: 20px;
+}
+
+.pwa-scan-vehicle-found .pwa-scan-screen__intro {
+  gap: 8px;
+}
+
+.pwa-scan-vehicle-found__title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 34px;
+  letter-spacing: 0;
+}
+
+.pwa-scan-vehicle-found__description {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #8a8a8a;
+}
+
+.pwa-scan-vehicle-found__hub {
+  gap: 16px;
+}
+
+.pwa-scan-vehicle-found__hub-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: 0;
+}
+
+.pwa-scan-vehicle-found .pwa-scan-hub-cards {
+  gap: 20px;
 }
 
 .pwa-scan-vehicle-card {
@@ -225,6 +315,12 @@
   width: 100%;
 }
 
+.pwa-scan-hub-section .al-heading {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 22px;
+}
+
 .pwa-scan-hub-cards {
   display: flex;
   flex-direction: column;
@@ -245,6 +341,7 @@
 
 .pwa-scan-status-body__title {
   margin: 0;
+  line-height: 44px;
 }
 
 .pwa-scan-status-body__description {
@@ -277,14 +374,14 @@
   gap: 8px;
   margin: 0;
   padding: 14px 16px;
-  border: 1.5px solid #4a4a4a;
+  border: 1.5px solid var(--al-color-outline);
   border-radius: 16px;
-  background: #1a1a1a;
+  background: var(--al-color-surface);
   font-family: var(--al-text-ui-family);
   font-size: 13px;
   font-weight: 500;
   line-height: 16px;
-  color: #ffffff;
+  color: var(--al-color-on-surface);
   cursor: pointer;
 }
 
@@ -299,7 +396,7 @@
   font-family: var(--al-text-ui-family);
   font-size: 14px;
   font-weight: 500;
-  line-height: 18px;
+  line-height: 17px;
   color: var(--al-color-on-surface);
   cursor: pointer;
 }

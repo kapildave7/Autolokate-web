@@ -22,6 +22,7 @@
 .pwa-status-hero-screen__title {
   margin: 0;
   max-width: 320px;
+  line-height: 44px;
 }
 
 .pwa-status-hero-screen__description {

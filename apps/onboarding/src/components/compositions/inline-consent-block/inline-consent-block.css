@@ -1,33 +1,34 @@
+@import '../../step-shell-chrome/touch-target-layout.css';
+
+/* Figma 102:277 — row, padding-top 8, gap 12, checkbox 22×22 + 16/22 copy */
 .ob-inline-consent {
   display: flex;
+  flex-direction: row;
   align-items: flex-start;
   gap: 12px;
   width: 100%;
   padding-top: 8px;
+  overflow: visible;
 }
 
-.ob-inline-consent__checkbox {
+/* Visual slot 22×22 at content gutter; tap target 48×48 centered (Figma hotspot 634:2049) */
+.ob-inline-consent__checkbox-slot {
+  position: relative;
   flex-shrink: 0;
   width: 22px;
-  margin: 0;
-  gap: 0;
-}
-
-.ob-inline-consent__checkbox .al-checkbox__meta {
-  display: none;
-}
-
-.ob-inline-consent__checkbox .al-checkbox__control {
-  width: 22px;
-  min-width: 22px;
   height: 22px;
-  margin: 0;
+  overflow: visible;
 }
 
-.ob-inline-consent__checkbox .al-checkbox__box {
-  width: 22px;
-  height: 22px;
-  border-radius: 8px;
+.ob-inline-consent__checkbox-slot .ob-inline-consent__checkbox {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  margin: 0;
+  transform: translate(-50%, -50%);
 }
 
 .ob-inline-consent__copy {
@@ -39,6 +40,7 @@
   font-size: 16px;
   font-weight: 500;
   line-height: 22px;
+  text-align: start;
 }
 
 .ob-inline-consent__link {

@@ -70,7 +70,7 @@ export function PwaParkMeVehicleNumberRoute() {
       }
     >
       <PwaFade className="pwa-scan-screen pwa-scan-form-screen">
-        <AlHeading variant="h1">Your vehicle number</AlHeading>
+        <AlHeading variant="h2">Your vehicle number</AlHeading>
         <AlText tone="muted">The car that&apos;s blocked. We&apos;ll share it with the owner.</AlText>
         <AlPlateInput
           value={session.reporterPlate}
@@ -126,7 +126,7 @@ export function PwaParkMeLookingUpRoute() {
     <PwaScanShell variant="protected">
       <PwaFade className="pwa-scan-status-body">
         <AlScreenSpinner size="lg" animated aria-label={PWA_PARK_ME_LOOKUP_COPY.title} />
-        <AlHeading variant="h1" className="pwa-scan-status-body__title">
+        <AlHeading variant="h2" className="pwa-scan-status-body__title">
           {PWA_PARK_ME_LOOKUP_COPY.title}
         </AlHeading>
         <AlText tone="muted" align="center" className="pwa-scan-status-body__description">
@@ -163,7 +163,7 @@ export function PwaParkMeConfirmRoute() {
     >
       <PwaFade className="pwa-scan-screen pwa-scan-confirm-screen">
         <div className="pwa-scan-screen__intro">
-          <AlHeading variant="h1">Is this your vehicle?</AlHeading>
+          <AlHeading variant="h2">Is this your vehicle?</AlHeading>
           <AlText tone="muted">We found these details. Confirm it&apos;s right.</AlText>
         </div>
         <AlVehicleConfirmationCard
@@ -188,6 +188,7 @@ export function PwaParkMeConfirmProtectedRoute() {
     <PwaScanShell
       variant="protected"
       showBack
+      stickyFooter
       onBack={() => {
         void navigate(pwaScanPaths.parkMeVehicleNumber);
       }}
@@ -204,7 +205,7 @@ export function PwaParkMeConfirmProtectedRoute() {
     >
       <PwaFade className="pwa-scan-screen pwa-scan-confirm-screen">
         <div className="pwa-scan-screen__intro">
-          <AlHeading variant="h1">Is this your vehicle?</AlHeading>
+          <AlHeading variant="h2">Is this your vehicle?</AlHeading>
           <AlText tone="muted">Good news, it&apos;s protected by Autolokate.</AlText>
         </div>
         <AlVehicleConfirmationCard
@@ -222,7 +223,7 @@ export function PwaParkMeConfirmProtectedRoute() {
 /** 09a · Camera & location permission sheet. */
 export function PwaParkMePermissionsRoute() {
   const navigate = useNavigate();
-  const { updateSession } = usePwaScan();
+  const { session, updateSession } = usePwaScan();
   const [sheetOpen, setSheetOpen] = useState(true);
 
   const handleAllow = async () => {
@@ -233,7 +234,7 @@ export function PwaParkMePermissionsRoute() {
   };
 
   return (
-    <PwaScanShell variant="protected" showBack onBack={() => navigate(pwaScanPaths.parkMeConfirm)}>
+    <PwaScanShell variant="protected" showBack onBack={() => navigate(session.reporterProtected ? pwaScanPaths.parkMeConfirmProtected : pwaScanPaths.parkMeConfirm)}>
       <div className="pwa-scan-permission-backdrop" aria-hidden>
         <AlPhotoGrid
           layout="stacked"
@@ -331,7 +332,7 @@ export function PwaParkMePhotosRoute() {
           }
         >
           <PwaFade className="pwa-scan-screen" immediate>
-            <AlHeading variant="h1">Add photos and location</AlHeading>
+            <AlHeading variant="h2">Add photos and location</AlHeading>
             <AlText tone="muted">Camera only. Your location helps the owner find the spot.</AlText>
             <AlPhotoGrid
               layout="stacked"
@@ -404,7 +405,7 @@ export function PwaParkMeStatusCheckingRoute() {
     <PwaScanShell variant="protected">
       <PwaFade className="pwa-scan-screen pwa-scan-status-timeline-screen">
         <div className="pwa-scan-screen__intro">
-          <AlHeading variant="h1">Reaching the owner</AlHeading>
+          <AlHeading variant="h2">Reaching the owner</AlHeading>
           <AlText tone="muted">Your report is in. Live updates appear below.</AlText>
         </div>
         <AlStatusTracker
@@ -438,7 +439,7 @@ export function PwaParkMeStatusCallingRoute() {
     <PwaScanShell variant="protected">
       <PwaFade className="pwa-scan-screen pwa-scan-status-timeline-screen">
         <div className="pwa-scan-screen__intro">
-          <AlHeading variant="h1">Calling the owner</AlHeading>
+          <AlHeading variant="h2">Calling the owner</AlHeading>
           <AlText tone="muted">We confirmed your photo. Reaching the owner now.</AlText>
         </div>
         <AlStatusTracker
@@ -477,7 +478,7 @@ export function PwaParkMeStatusResolvedRoute() {
     >
       <PwaFade className="pwa-scan-screen pwa-scan-status-timeline-screen">
         <div className="pwa-scan-screen__intro">
-          <AlHeading variant="h1">Owner notified</AlHeading>
+          <AlHeading variant="h2">Owner notified</AlHeading>
           <AlText tone="muted">We reached the owner and asked them to move the vehicle.</AlText>
         </div>
         <AlStatusTracker
@@ -519,7 +520,7 @@ export function PwaParkMePhotoNotClearRoute() {
         >
           <PwaFade className="pwa-scan-screen pwa-scan-status-timeline-screen" immediate>
         <div className="pwa-scan-screen__intro">
-          <AlHeading variant="h1">Photo wasn&apos;t clear</AlHeading>
+          <AlHeading variant="h2">Photo wasn&apos;t clear</AlHeading>
           <AlText tone="muted">One of your photos was unclear. Please retake it.</AlText>
         </div>
         <AlStatusTracker

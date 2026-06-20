@@ -12,11 +12,11 @@ export function LegalReaderHeader({ onBack, showBack = true }: LegalReaderHeader
   return (
     <header className="ob-step-chrome__header ob-legal-reader__header">
       <AlIconButton
-        icon={<AlIcon name="arrow-left" size={20} aria-hidden />}
+        icon={<AlIcon name="arrow-left" size={24} aria-hidden />}
         label="Go back"
         onClick={onBack}
         disabled={!showBack || !onBack}
-        className="ob-step-chrome__back ob-legal-reader__back"
+        className="ob-step-chrome__back ob-legal-reader__back ob-shell-back"
       />
     </header>
   );

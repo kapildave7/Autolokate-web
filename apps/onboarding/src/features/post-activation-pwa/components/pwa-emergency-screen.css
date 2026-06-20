@@ -1,44 +1,64 @@
+/* Figma 848:278 — absolute y-band spacing translated to flex rhythm */
 .pwa-emergency-screen {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: 20px;
   width: 100%;
   flex: 1;
+  min-height: 0;
 }
 
 .pwa-emergency-screen__intro {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
 .pwa-emergency-screen__title {
   margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 34px;
+  letter-spacing: 0;
 }
 
 .pwa-emergency-screen__subtitle {
   margin: 0;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 18px;
+  color: #8a8a8a;
 }
 
-.pwa-emergency-screen__hold {
-  margin-top: 8px;
+/* Subtitle ends y=170 → ring top y=296 → 126px */
+.pwa-emergency-screen__hold-zone {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 126px;
 }
 
-[data-theme='light'] .pwa-emergency-screen .al-sos-hold__hint {
-  color: #4a4a4a;
+.pwa-emergency-screen__hold.al-sos-hold {
+  width: 100%;
+  padding-top: 0;
 }
 
-[data-theme='light'] .pwa-emergency-screen .al-sos-hold--holding .al-sos-hold__hint {
-  color: #0a0a0a;
+.pwa-emergency-screen__footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  margin-top: 28px;
 }
 
 .pwa-emergency-screen__location-chip {
   display: inline-flex;
-  align-self: center;
   align-items: center;
   gap: 8px;
-  margin: 8px 0 0;
+  margin: 0;
   padding: 14px 16px;
   border: 1.5px solid #4a4a4a;
   border-radius: 16px;
@@ -54,22 +74,23 @@
 
 .pwa-emergency-screen__location-chip span {
   word-break: break-word;
-  text-align: center;
+  text-align: left;
 }
 
+/* Chip bottom y=640 → call top y=700 → 60px */
 .pwa-emergency-screen__call-fallback {
   display: inline-flex;
-  align-self: center;
   align-items: center;
   gap: 8px;
-  margin: 0;
+  flex-shrink: 0;
+  margin: 60px 0 calc(32px + env(safe-area-inset-bottom, 0px));
   padding: 8px;
   border: none;
   background: transparent;
   font-family: var(--al-text-ui-family);
   font-size: 14px;
   font-weight: 500;
-  line-height: 18px;
-  color: var(--al-color-on-surface);
+  line-height: 17px;
+  color: #ffffff;
   cursor: pointer;
 }

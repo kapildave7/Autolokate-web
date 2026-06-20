@@ -26,6 +26,7 @@ export const neutral = {
   '--al-neutral-50': '#F5F5F5',
   '--al-neutral-100': '#E8E8E8',
   '--al-neutral-plate': '#E4E4E8',
+  '--al-neutral-plate-placeholder': '#8C8F94',
   '--al-neutral-300': '#C4C4C4',
   '--al-neutral-500': '#8A8A8A',
   '--al-neutral-700': '#4A4A4A',

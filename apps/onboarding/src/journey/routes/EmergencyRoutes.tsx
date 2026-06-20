@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useState, type ReactNode } from 'react';
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 
 import {
@@ -18,7 +18,7 @@ import { shouldSimulateRiderPromptLoadFailure } from '../../features/emergency/d
 import {
   canAddEmergencyContact,
   canAddRider,
-  getContactsEmptyDescription,
+  getContactsSummaryRiderContext,
   getEntitledRiderSlots,
   getRiderPromptDescription,
   shouldEnterRiderPrompt,
@@ -174,10 +174,8 @@ function R0Route() {
       return;
     }
 
-    const entitlementKnown = hasRiderEntitlementInPurchaseSession(purchase);
-    if (entitlementKnown && loadAttempt === 0) {
+    if (hasRiderEntitlementInPurchaseSession(purchase) && loadAttempt === 0) {
       setViewState('default');
-      patchEmergency({ riderPromptLoadFailed: false });
       return;
     }
 
@@ -188,7 +186,6 @@ function R0Route() {
         setViewState('error');
         return;
       }
-      patchEmergency({ riderPromptLoadFailed: false });
       setViewState('default');
     }, RIDER_LOAD_MS);
 
@@ -199,9 +196,9 @@ function R0Route() {
     emergency.riderPromptLoadFailed,
     isOnline,
     loadAttempt,
-    patchEmergency,
     planId,
-    purchase,
+    purchase?.riderCount,
+    purchase?.selectedPlanId,
     riderCount,
   ]);
 
@@ -222,10 +219,13 @@ function R0Route() {
           setLoadAttempt((attempt) => attempt + 1);
           return;
         }
-        if (viewState !== 'default') {
+        if (viewState === 'offline' || viewState === 'loading') {
           return;
         }
-        patchEmergency({ riderSkipped: false });
+        patchEmergency({
+          riderSkipped: false,
+          rider: emergency.rider ?? { mobile: '', name: '', relation: 'spouse' },
+        });
         void navigate(emergencyJourneyPaths.riderMobile);
       }}
       onFooterSecondary={() => {
@@ -294,9 +294,9 @@ function R2Route() {
   const { emergency, patchEmergency } = useEmergencySession();
   const mobile = emergency.rider?.mobile ?? '';
   const [otp, setOtp] = useState('');
-  const [otpState, setOtpState] = useState<'default' | 'error' | 'verifying' | 'network-error'>(
-    'default',
-  );
+  const [otpState, setOtpState] = useState<
+    'default' | 'error' | 'verifying' | 'network-error' | 'success'
+  >('default');
   const [otpErrorKind, setOtpErrorKind] = useState<'wrong' | 'expired' | null>(null);
   const [resendCooldownSeconds, setResendCooldownSeconds] = useState(RESEND_COOLDOWN_SECONDS);
   const isOnline = useOnlineState();
@@ -313,36 +313,42 @@ function R2Route() {
     };
   }, [resendCooldownSeconds]);
 
-  const verifyOtp = useCallback(() => {
-    if (!isOnline) {
-      setOtpState('network-error');
-      return;
-    }
-    if (otp.length < OTP_LENGTH) {
-      setOtpState('error');
-      setOtpErrorKind('wrong');
-      return;
-    }
-    if (isExpiredOtp(otp)) {
-      setOtpState('error');
-      setOtpErrorKind('expired');
-      return;
-    }
-    if (!isValidOtp(otp)) {
-      setOtpState('error');
-      setOtpErrorKind('wrong');
-      return;
-    }
-    setOtpState('verifying');
-    window.setTimeout(() => {
-      patchEmergency({
-        rider: emergency.rider
-          ? { ...emergency.rider, mobile }
-          : { mobile, name: '', relation: 'spouse' },
-      });
-      void navigate(emergencyJourneyPaths.riderName);
-    }, VERIFY_OTP_MS);
-  }, [emergency.rider, isOnline, mobile, navigate, otp, patchEmergency]);
+  const verifyOtp = useCallback(
+    (code = otp) => {
+      if (!isOnline) {
+        setOtpState('network-error');
+        return;
+      }
+      if (code.length < OTP_LENGTH) {
+        setOtpState('error');
+        setOtpErrorKind('wrong');
+        return;
+      }
+      if (isExpiredOtp(code)) {
+        setOtpState('error');
+        setOtpErrorKind('expired');
+        return;
+      }
+      if (!isValidOtp(code)) {
+        setOtpState('error');
+        setOtpErrorKind('wrong');
+        return;
+      }
+      setOtpState('verifying');
+      window.setTimeout(() => {
+        setOtpState('success');
+        patchEmergency({
+          rider: emergency.rider
+            ? { ...emergency.rider, mobile }
+            : { mobile, name: '', relation: 'spouse' },
+        });
+        window.setTimeout(() => {
+          void navigate(emergencyJourneyPaths.riderName);
+        }, 400);
+      }, VERIFY_OTP_MS);
+    },
+    [emergency.rider, isOnline, mobile, navigate, otp, patchEmergency],
+  );
 
   return (
     <E03RiderOtpScreen
@@ -351,6 +357,22 @@ function R2Route() {
       otpValue={otp}
       onOtpChange={(value) => {
         setOtp(value);
+        if (value.length === OTP_LENGTH) {
+          if (isExpiredOtp(value)) {
+            setOtpErrorKind('expired');
+            setOtpState('error');
+            return;
+          }
+          if (!isValidOtp(value)) {
+            setOtpErrorKind('wrong');
+            setOtpState('error');
+            return;
+          }
+          if (otpState !== 'verifying' && otpState !== 'success') {
+            verifyOtp(value);
+          }
+          return;
+        }
         if (otpState === 'error' || otpState === 'network-error') {
           setOtpState('default');
           setOtpErrorKind(null);
@@ -379,7 +401,9 @@ function R3Route() {
   const { emergency, patchEmergency } = useEmergencySession();
   const isOnline = useOnlineState();
   const [name, setName] = useState(emergency.rider?.name ?? '');
-  const [relation, setRelation] = useState<RelationshipId | undefined>(emergency.rider?.relation);
+  const [relation, setRelation] = useState<RelationshipId | undefined>(
+    emergency.rider?.relation ?? 'spouse',
+  );
   const [formState, setFormState] = useState<EmergencyNameFormState>('default');
 
   return (
@@ -421,9 +445,11 @@ function R3Route() {
 
 function R4Route() {
   const navigate = useNavigate();
+  const { setPhase } = useJourney();
   const { emergency, patchEmergency } = useEmergencySession();
   const { planId, riderCount } = useEmergencyFoundation();
   const riders = emergency.riders ?? (emergency.rider ? [emergency.rider] : []);
+  const contacts = emergency.contacts ?? [];
 
   if (riders.length === 0) {
     return <Navigate to={emergencyJourneyPaths.riderName} replace />;
@@ -451,6 +477,11 @@ function R4Route() {
         void navigate(emergencyJourneyPaths.riderMobile);
       }}
       onContinue={() => {
+        if (contacts.length > 0) {
+          setPhase('completed');
+          void navigate(getCompletedPath());
+          return;
+        }
         void navigate(emergencyJourneyPaths.contactsEmpty);
       }}
     />
@@ -465,8 +496,12 @@ function E0Route() {
 
   return (
     <E05ContactsEmptyScreen
-      description={getContactsEmptyDescription(planId)}
       onBack={() => {
+        const contactCount = emergency.contacts?.length ?? 0;
+        if (selectedFlow === 'purchase' && contactCount === 0) {
+          void navigate(getEmergencyFlowBackPath(selectedFlow, session));
+          return;
+        }
         if (emergency.riderSkipped) {
           void navigate(getEmergencyFlowBackPath(selectedFlow, session));
           return;
@@ -565,9 +600,9 @@ function E2Route() {
   const { emergency, patchEmergency } = useEmergencySession();
   const mobile = emergency.contactDraft?.mobile ?? '';
   const [otp, setOtp] = useState('');
-  const [otpState, setOtpState] = useState<'default' | 'error' | 'verifying' | 'network-error'>(
-    'default',
-  );
+  const [otpState, setOtpState] = useState<
+    'default' | 'error' | 'verifying' | 'network-error' | 'success'
+  >('default');
   const [otpErrorKind, setOtpErrorKind] = useState<'wrong' | 'expired' | null>(null);
   const [resendCooldownSeconds, setResendCooldownSeconds] = useState(RESEND_COOLDOWN_SECONDS);
   const isOnline = useOnlineState();
@@ -584,38 +619,44 @@ function E2Route() {
     };
   }, [resendCooldownSeconds]);
 
-  const verifyOtp = useCallback(() => {
-    if (!isOnline) {
-      setOtpState('network-error');
-      return;
-    }
-    if (otp.length < OTP_LENGTH) {
-      setOtpState('error');
-      setOtpErrorKind('wrong');
-      return;
-    }
-    if (isExpiredOtp(otp)) {
-      setOtpState('error');
-      setOtpErrorKind('expired');
-      return;
-    }
-    if (!isValidOtp(otp)) {
-      setOtpState('error');
-      setOtpErrorKind('wrong');
-      return;
-    }
-    setOtpState('verifying');
-    window.setTimeout(() => {
-      patchEmergency({
-        contactDraft: {
-          ...emergency.contactDraft,
-          mobile,
-          otpVerified: true,
-        },
-      });
-      void navigate(emergencyJourneyPaths.contactName);
-    }, VERIFY_OTP_MS);
-  }, [emergency.contactDraft, isOnline, mobile, navigate, otp, patchEmergency]);
+  const verifyOtp = useCallback(
+    (code = otp) => {
+      if (!isOnline) {
+        setOtpState('network-error');
+        return;
+      }
+      if (code.length < OTP_LENGTH) {
+        setOtpState('error');
+        setOtpErrorKind('wrong');
+        return;
+      }
+      if (isExpiredOtp(code)) {
+        setOtpState('error');
+        setOtpErrorKind('expired');
+        return;
+      }
+      if (!isValidOtp(code)) {
+        setOtpState('error');
+        setOtpErrorKind('wrong');
+        return;
+      }
+      setOtpState('verifying');
+      window.setTimeout(() => {
+        setOtpState('success');
+        patchEmergency({
+          contactDraft: {
+            ...emergency.contactDraft,
+            mobile,
+            otpVerified: true,
+          },
+        });
+        window.setTimeout(() => {
+          void navigate(emergencyJourneyPaths.contactName);
+        }, 400);
+      }, VERIFY_OTP_MS);
+    },
+    [emergency.contactDraft, isOnline, mobile, navigate, otp, patchEmergency],
+  );
 
   return (
     <E07ContactOtpScreen
@@ -624,6 +665,22 @@ function E2Route() {
       otpValue={otp}
       onOtpChange={(value) => {
         setOtp(value);
+        if (value.length === OTP_LENGTH) {
+          if (isExpiredOtp(value)) {
+            setOtpErrorKind('expired');
+            setOtpState('error');
+            return;
+          }
+          if (!isValidOtp(value)) {
+            setOtpErrorKind('wrong');
+            setOtpState('error');
+            return;
+          }
+          if (otpState !== 'verifying' && otpState !== 'success') {
+            verifyOtp(value);
+          }
+          return;
+        }
         if (otpState === 'error' || otpState === 'network-error') {
           setOtpState('default');
           setOtpErrorKind(null);
@@ -653,7 +710,7 @@ function E3Route() {
   const isOnline = useOnlineState();
   const draft = emergency.contactDraft;
   const [name, setName] = useState(draft?.name ?? '');
-  const [relation, setRelation] = useState<RelationshipId | undefined>(draft?.relation);
+  const [relation, setRelation] = useState<RelationshipId | undefined>(draft?.relation ?? 'spouse');
   const [formState, setFormState] = useState<EmergencyNameFormState>('default');
 
   return (
@@ -706,10 +763,45 @@ function E3Route() {
 
 function E5Route() {
   const navigate = useNavigate();
-  const { setPhase } = useJourney();
+  const { setPhase, selectedFlow } = useJourney();
   const { emergency, patchEmergency } = useEmergencySession();
-  const { planId } = useEmergencyFoundation();
+  const { planId, riderCount } = useEmergencyFoundation();
   const contacts = emergency.contacts ?? [];
+  const riders = emergency.riders ?? (emergency.rider ? [emergency.rider] : []);
+  const riderContext = getContactsSummaryRiderContext(
+    planId,
+    riderCount,
+    riders.length,
+    emergency.riderSkipped,
+    selectedFlow,
+  );
+
+  useLayoutEffect(() => {
+    if (selectedFlow === 'purchase' && emergency.riderSkipped && riderContext.ridersOwed) {
+      patchEmergency({ riderSkipped: false });
+    }
+  }, [
+    emergency.riderSkipped,
+    patchEmergency,
+    riderContext.ridersOwed,
+    selectedFlow,
+  ]);
+
+  const goToRiderSetup = () => {
+    patchEmergency({ riderSkipped: false });
+    if (riders.length === 0) {
+      void navigate(emergencyJourneyPaths.riderPrompt);
+      return;
+    }
+    patchEmergency({
+      rider: {
+        mobile: '',
+        name: '',
+        relation: 'spouse',
+      },
+    });
+    void navigate(emergencyJourneyPaths.riderMobile);
+  };
 
   return (
     <E09ContactsSummaryScreen
@@ -726,6 +818,10 @@ function E5Route() {
         void navigate(emergencyJourneyPaths.contactMobile);
       }}
       onContinue={() => {
+        if (riderContext.shouldEnterRiderFlowOnContinue) {
+          goToRiderSetup();
+          return;
+        }
         setPhase('completed');
         void navigate(getCompletedPath());
       }}

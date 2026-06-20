@@ -26,37 +26,41 @@
 }
 
 .al-checkbox__box {
+  box-sizing: border-box;
   position: relative;
-  width: 1.375rem;
-  height: 1.375rem;
-  border-radius: var(--al-radius-sm);
-  border: var(--al-border-width-secondary) solid var(--al-color-outline);
-  background-color: var(--al-color-surface);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 8px;
+  border: 1.5px solid var(--al-color-outline);
+  background-color: transparent;
   transition:
     background-color var(--al-motion-fast) var(--al-motion-ease-standard),
     border-color var(--al-motion-fast) var(--al-motion-ease-standard);
 }
 
-.al-checkbox__box::after {
-  content: '';
+/* Figma 81:23 — check path in 22×22 viewBox, centered over green fill */
+.al-checkbox__mark {
   position: absolute;
-  top: 0.1875rem;
-  left: 0.4375rem;
-  width: 0.3125rem;
-  height: 0.5625rem;
-  border: solid var(--al-brand-white);
-  border-width: 0 1.8px 1.8px 0;
-  transform: rotate(45deg);
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: var(--al-brand-white);
   opacity: 0;
+  pointer-events: none;
   transition: opacity var(--al-motion-fast) var(--al-motion-ease-standard);
 }
 
+/* Figma 81:23 AlCheckbox/On — solid #1FA24A fill, no visible border */
 .al-checkbox__input:checked + .al-checkbox__box {
-  background-color: var(--al-color-success);
-  border-color: var(--al-color-success);
+  background-color: var(--al-signal-green);
+  border-color: var(--al-signal-green);
 }
 
-.al-checkbox__input:checked + .al-checkbox__box::after {
+.al-checkbox__input:checked + .al-checkbox__box .al-checkbox__mark {
   opacity: 1;
 }
 
@@ -104,4 +108,37 @@
 
 .al-checkbox.is-disabled .al-checkbox__input:checked + .al-checkbox__box {
   opacity: 0.55;
+}
+
+.al-checkbox.is-disabled .al-checkbox__input:checked + .al-checkbox__box .al-checkbox__mark {
+  opacity: 1;
+}
+
+.al-checkbox--icon-only {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  min-width: 48px;
+  height: 48px;
+}
+
+.al-checkbox--icon-only .al-checkbox__control {
+  width: 48px;
+  min-width: 48px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+}
+
+.al-checkbox__error--icon-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

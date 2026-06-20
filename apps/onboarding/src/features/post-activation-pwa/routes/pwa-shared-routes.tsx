@@ -62,7 +62,7 @@ export function PwaLoadingRoute() {
     <PwaScanShell variant="protected">
       <PwaFade className="pwa-scan-status-body">
         <AlScreenSpinner size="lg" animated aria-label={PWA_LOADING_COPY.title} />
-        <AlHeading variant="h1" className="pwa-scan-status-body__title">
+        <AlHeading variant="h2" className="pwa-scan-status-body__title">
           {PWA_LOADING_COPY.title}
         </AlHeading>
         <AlText tone="muted" align="center" className="pwa-scan-status-body__description">
@@ -126,24 +126,27 @@ export function PwaVehicleFoundRoute() {
 
   return (
     <PwaScanShell variant="protected">
-      <PwaFade className="pwa-scan-screen">
+      <PwaFade className="pwa-scan-screen pwa-scan-vehicle-found">
         <div className="pwa-scan-screen__intro">
-          <AlHeading variant="h1" className="pwa-scan-screen__heading">
+          <AlHeading variant="h2" className="pwa-scan-vehicle-found__title">
             You scanned this vehicle
           </AlHeading>
-          <AlText tone="muted" className="pwa-scan-screen__description">
+          <AlText tone="muted" className="pwa-scan-vehicle-found__description">
             We&apos;ll reach the owner or get help fast.
           </AlText>
         </div>
 
         <AlScannedVehicleCard
+          className="pwa-scan-vehicle-found__card"
           plate={scannedVehicle.plate}
           model={scannedVehicle.modelSummary}
           {...(protectedLabel ? { protectedLabel } : {})}
         />
 
-        <div className="pwa-scan-hub-section">
-          <AlHeading variant="h2">What do you need?</AlHeading>
+        <div className="pwa-scan-hub-section pwa-scan-vehicle-found__hub">
+          <AlHeading variant="h2" className="pwa-scan-vehicle-found__hub-title">
+            What do you need?
+          </AlHeading>
           <div className="pwa-scan-hub-cards">
             <PwaSpringPress>
               <AlScannerHubCard

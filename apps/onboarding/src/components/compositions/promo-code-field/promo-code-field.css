@@ -1,4 +1,4 @@
-/* Figma R08 — 12px radius, 13px 14px padding, 1px #4A4A4A border */
+/* Figma R08 — 12px radius, 13px 14px padding, 1px #4A4A4A border, text 15px/18px */
 
 .ob-promo-code-field {
   box-sizing: border-box;
@@ -17,7 +17,7 @@
 .ob-promo-code-field__placeholder {
   flex: 1;
   font-size: 15px;
-  line-height: 22px;
+  line-height: 18px;
 }
 
 .ob-promo-code-field__icon {
@@ -29,7 +29,7 @@
   flex: 1;
   font-size: 15px;
   font-weight: 600;
-  line-height: 22px;
+  line-height: 18px;
 }
 
 .ob-promo-code-field__action {
@@ -39,7 +39,7 @@
   font-family: var(--al-text-ui-family);
   font-size: 15px;
   font-weight: 600;
-  line-height: 22px;
+  line-height: 18px;
   color: var(--al-color-on-surface);
   cursor: pointer;
 }
@@ -59,6 +59,7 @@
 .ob-promo-code-field--applied .ob-promo-code-field__action {
   font-size: 13px;
   font-weight: 400;
+  line-height: 16px;
   color: var(--al-color-on-surface-muted);
 }
 
@@ -88,7 +89,7 @@
   -webkit-tap-highlight-color: transparent;
   font-family: var(--al-text-ui-family);
   font-size: 15px;
-  line-height: 22px;
+  line-height: 18px;
 }
 
 .ob-promo-code-field__input::placeholder {

@@ -129,6 +129,12 @@
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .al-toggle.is-loading .al-toggle__input:checked + .al-toggle__track::before {
+    animation: none;
+  }
+}
+
 .al-toggle--bare {
   width: auto;
 }

@@ -2,7 +2,7 @@
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
   width: 100%;
   min-height: 92px;
   padding: 16px;
@@ -33,7 +33,8 @@
 }
 
 .al-scanner-hub-card--park-me {
-  border-color: var(--al-color-outline);
+  border-color: #4a4a4a;
+  background: #1a1a1a;
 }
 
 .al-scanner-hub-card--emergency {
@@ -49,8 +50,8 @@
   width: 44px;
   height: 44px;
   border-radius: 12px;
-  background: var(--al-color-surface-variant);
-  color: var(--al-color-on-surface);
+  background: #4a4a4a;
+  color: #ffffff;
 }
 
 .al-scanner-hub-card--emergency .al-scanner-hub-card__icon-tile {
@@ -62,8 +63,8 @@
   color: var(--al-color-signal-red-bright);
 }
 
-.al-scanner-hub-card--emergency .al-scanner-hub-card__subtitle {
-  color: rgba(255, 74, 61, 0.78);
+.al-scanner-hub-card--emergency .al-scanner-hub-card__chevron {
+  color: var(--al-color-signal-red-bright);
 }
 
 .al-scanner-hub-card__copy {
@@ -83,9 +84,9 @@
   margin: 3px 0 0;
   font-family: var(--al-text-ui-family);
   font-size: 13px;
-  font-weight: var(--al-font-weight-regular);
+  font-weight: 400;
   line-height: 16px;
-  color: var(--al-color-on-surface-muted);
+  color: #8a8a8a;
 }
 
 .al-scanner-hub-card__chevron {

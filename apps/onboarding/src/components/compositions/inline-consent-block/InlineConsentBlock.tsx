@@ -24,15 +24,18 @@ export function InlineConsentBlock({
 
   return (
     <div className="ob-inline-consent">
-      <AlCheckbox
-        className="ob-inline-consent__checkbox"
-        label={isBystander ? 'Consent to be contacted and Terms' : 'Consent to Privacy Policy and Terms'}
-        checked={checked}
-        disabled={disabled}
-        onChange={(event) => {
-          onChange(event.target.checked);
-        }}
-      />
+      <div className="ob-inline-consent__checkbox-slot">
+        <AlCheckbox
+          className="ob-inline-consent__checkbox"
+          layout="icon-only"
+          label={isBystander ? 'Consent to be contacted and Terms' : 'Consent to Privacy Policy and Terms'}
+          checked={checked}
+          disabled={disabled}
+          onChange={(event) => {
+            onChange(event.target.checked);
+          }}
+        />
+      </div>
       <p className="ob-inline-consent__copy">
         {isBystander ? (
           <>

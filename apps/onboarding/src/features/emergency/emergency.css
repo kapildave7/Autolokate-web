@@ -9,43 +9,81 @@
   color: var(--al-color-on-surface);
 }
 
+/* Figma 373:37 — "No contacts yet" 600/15px/lh=18.2 #8a8a8a */
+.ob-emergency-hero-message {
+  margin: 0;
+  font-family: var(--al-text-ui-family);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 18px;
+  color: var(--al-color-on-surface-muted);
+  text-align: center;
+}
+
 .ob-emergency-trust-row {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--al-space-sm);
-  margin-block-start: auto;
-}
-
-/* Figma R2/E2 — description row + Change link (789:2109) */
-.ob-emergency-otp-desc {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--al-space-sm);
+  gap: 6px;
+  max-width: 22.5625rem;
   width: 100%;
 }
 
-.ob-emergency-otp-desc__text {
+/* Figma 584:1780 — shield-check #8A8A8A, trust caption 500/13/lh=18 */
+.ob-emergency-trust-row > svg {
+  flex-shrink: 0;
+  color: var(--al-color-on-surface-muted);
+}
+
+.ob-emergency-trust-row__text {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.ob-emergency-empty-state {
+  display: flex;
   flex: 1;
-  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.ob-emergency-empty-state .ob-state-panel {
+  flex: none;
+  padding-block: 0;
+  padding-block-start: 2.5rem;
+}
+
+.ob-emergency-empty-state .ob-emergency-trust-row {
+  margin-block-start: 26px;
+}
+
+/* Figma R2/E2 — description + Change inline (789:2109) */
+.ob-emergency-otp-desc {
+  margin: 0;
+  width: 100%;
   font-size: var(--al-text-body-size);
   line-height: var(--al-text-body-line-height);
+  color: var(--al-color-on-surface-muted);
 }
 
 .ob-emergency-otp-desc__change {
-  flex-shrink: 0;
+  display: inline;
   padding: 0;
+  margin-inline-start: 0.25em;
   border: none;
   background: none;
   color: var(--al-color-on-surface);
   font-family: var(--al-text-ui-family);
-  font-size: var(--al-text-body-size);
+  font-size: inherit;
   font-weight: 400;
-  line-height: var(--al-text-body-line-height);
+  line-height: inherit;
   text-decoration: underline;
   text-underline-offset: 0.15em;
   cursor: pointer;
+  vertical-align: baseline;
 }
 
 .ob-emergency-otp-status {
@@ -74,4 +112,35 @@
 .ob-emergency-otp-resend-link:disabled {
   cursor: not-allowed;
   opacity: 0.55;
+}
+
+/* Figma E3 371:1276 — name form + 6-tile relation grid */
+.ob-emergency-name-form {
+  gap: 20px;
+}
+
+.ob-emergency-name-form .ob-relationship-selector.al-relation-grid {
+  gap: 12px;
+}
+
+.ob-emergency-name-form .ob-relationship-selector .al-relation-grid__label {
+  font-size: 15px;
+  line-height: 18px;
+  font-weight: 600;
+}
+
+.ob-emergency-name-form .ob-relationship-selector .al-relation-grid__tile {
+  min-height: 5rem;
+  padding: 14px 8px;
+  gap: 8px;
+  border-radius: 14px;
+  background: var(--al-color-surface);
+}
+
+.ob-emergency-name-form .ob-relationship-selector .al-relation-grid__tile--selected {
+  box-shadow: none;
+}
+
+.ob-contact-summary {
+  width: 100%;
 }

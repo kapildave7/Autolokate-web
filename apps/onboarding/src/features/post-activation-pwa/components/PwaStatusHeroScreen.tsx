@@ -36,7 +36,7 @@ export function PwaStatusHeroScreen({
       <PwaFade className="pwa-status-hero-screen">
         <PwaHeroReveal className="pwa-status-hero-screen__visual">{visual}</PwaHeroReveal>
         <PwaRevealItem index={1}>
-          <AlHeading variant="h1" className="pwa-status-hero-screen__title">
+          <AlHeading variant="h2" className="pwa-status-hero-screen__title">
             {title}
           </AlHeading>
         </PwaRevealItem>

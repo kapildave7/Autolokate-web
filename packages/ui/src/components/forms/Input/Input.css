@@ -23,7 +23,7 @@
   min-height: var(--al-comp-input-height);
   padding: 0 var(--al-space-lg);
   border-radius: var(--al-comp-input-radius);
-  border: var(--al-border-width-thin) solid var(--al-color-outline);
+  border: 1.5px solid var(--al-color-outline);
   background-color: var(--al-color-surface);
   color: var(--al-color-on-surface);
   caret-color: var(--al-color-on-surface);
@@ -35,6 +35,12 @@
     border-color var(--al-motion-fast) var(--al-motion-ease-standard),
     border-width var(--al-motion-fast) var(--al-motion-ease-standard),
     background-color var(--al-motion-fast) var(--al-motion-ease-standard);
+}
+
+.al-field__input:not(:placeholder-shown),
+.al-field__input:focus {
+  border-width: 2px;
+  border-color: var(--al-color-on-surface);
 }
 
 .al-field__trailing {
@@ -57,7 +63,6 @@
 
 .al-field__input:focus {
   outline: none;
-  border: var(--al-border-width-thick) solid var(--al-color-focus);
 }
 
 .al-field__input:disabled {

@@ -46,37 +46,41 @@ export function PwaEmergencyScreen({
     <PwaScanShell variant="emergency" showBack={showBack} onBack={onBack} dimmed={Boolean(overlay)}>
       <PwaFade className="pwa-emergency-screen">
         <PwaRevealItem index={0} className="pwa-emergency-screen__intro">
-          <AlHeading variant="h1" className="pwa-emergency-screen__title">
+          <AlHeading variant="h2" className="pwa-emergency-screen__title">
             {title}
           </AlHeading>
           <AlText tone="muted" className="pwa-emergency-screen__subtitle">
             {subtitle}
           </AlText>
         </PwaRevealItem>
-        <AlSosHoldButton className="pwa-emergency-screen__hold" {...holdButton} />
-        {showLocationChip ? (
-          <button
-            type="button"
-            className="pwa-emergency-screen__location-chip"
-            onClick={onLocationChip}
-          >
-            <AlIcon name="map-pin" size={16} aria-hidden />
-            <span>{locationLabel}</span>
-            {!session.location ? <AlIcon name="chevron-right" size={16} aria-hidden /> : null}
-          </button>
-        ) : null}
-        {showCall112 ? (
-          <button
-            type="button"
-            className="pwa-emergency-screen__call-fallback"
-            onClick={() => {
-              window.location.href = 'tel:112';
-            }}
-          >
-            <AlIcon name="phone" size={16} aria-hidden />
-            Or call 112 directly
-          </button>
-        ) : null}
+        <div className="pwa-emergency-screen__hold-zone">
+          <AlSosHoldButton className="pwa-emergency-screen__hold" {...holdButton} />
+        </div>
+        <div className="pwa-emergency-screen__footer">
+          {showLocationChip ? (
+            <button
+              type="button"
+              className="pwa-emergency-screen__location-chip"
+              onClick={onLocationChip}
+            >
+              <AlIcon name="map-pin" size={16} aria-hidden />
+              <span>{locationLabel}</span>
+              {!session.location ? <AlIcon name="chevron-right" size={16} aria-hidden /> : null}
+            </button>
+          ) : null}
+          {showCall112 ? (
+            <button
+              type="button"
+              className="pwa-emergency-screen__call-fallback"
+              onClick={() => {
+                window.location.href = 'tel:112';
+              }}
+            >
+              <AlIcon name="phone" size={16} aria-hidden />
+              Or call 112 directly
+            </button>
+          ) : null}
+        </div>
       </PwaFade>
       {overlay}
     </PwaScanShell>

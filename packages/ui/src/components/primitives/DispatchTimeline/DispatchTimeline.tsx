@@ -1,6 +1,7 @@
 import type { CSSProperties } from 'react';
 
 import { cn } from '../../../utils/cn.js';
+import { CircleCheckIconGlyph } from '../icons/CircleCheckIconGlyph.js';
 
 import type {
   AlDispatchTimelineActiveGlyph,
@@ -16,7 +17,8 @@ const FIGMA_OUTLINE = '#4A4A4A';
 const FIGMA_MUTED = '#8A8A8A';
 
 const PARK_ME_CONNECTORS = [40, 34, 40, 34, 40];
-const SOS_CONNECTORS = [16, 16, 18, 18, 18, 18, 18, 18, 18];
+/** Figma 871:2151 · 849:321 — 18px glyph + 32px rail = 50px step pitch */
+const SOS_CONNECTORS = [32, 32, 32, 32, 32, 32, 32, 32, 32];
 const CONTACTS_CONNECTORS = [32, 32];
 
 function variantMetrics(variant: AlDispatchTimelineVariant) {
@@ -32,7 +34,7 @@ function variantMetrics(variant: AlDispatchTimelineVariant) {
       subtitleSize: 12,
       subtitleLine: 15,
       copyGap: 2,
-      stepMinHeight: 34,
+      stepMinHeight: 50,
     };
   }
 
@@ -78,24 +80,7 @@ function defaultConnectorHeight(variant: AlDispatchTimelineVariant, index: numbe
 }
 
 function CompleteGlyph({ size }: { size: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path
-        d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-        stroke={FIGMA_GREEN}
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M9 12L11 14L15 10"
-        stroke={FIGMA_GREEN}
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
+  return <CircleCheckIconGlyph size={size} />;
 }
 
 function ActiveGlyph({

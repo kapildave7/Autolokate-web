@@ -1,5 +1,5 @@
 .ob-shell__description {
-  text-transform: lowercase;
+  text-transform: none;
 }
 
 .ob-shell--emergency .ob-shell__description {
@@ -54,10 +54,6 @@
   color: var(--al-color-on-surface-muted);
 }
 
-.ob-shell__cta-secondary {
-  width: 100%;
-}
-
 .ob-shell__footer-secondary-link {
   width: 100%;
   min-height: 3rem;
@@ -68,11 +64,15 @@
   font-family: var(--al-text-ui-family);
   font-size: 14px;
   font-weight: 500;
-  line-height: 20px;
+  line-height: 17px;
   text-decoration: underline;
   text-underline-offset: 0.15em;
   text-align: center;
   cursor: pointer;
+}
+
+.ob-shell__footer--secondary-first {
+  gap: 18px;
 }
 
 .ob-shell--capture .ob-step-chrome__header {
@@ -90,7 +90,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: var(--al-space-md);
+  gap: 14px;
   padding-block: var(--al-space-xxl);
   text-align: center;
 }
@@ -115,7 +115,7 @@
 .ob-legal-copy .al-text {
   font-size: var(--al-text-body-size);
   line-height: var(--al-text-body-line-height);
-  color: color-mix(in srgb, var(--al-color-on-surface) 78%, var(--al-color-surface));
+  color: var(--al-color-on-surface-muted);
 }
 
 .ob-legal-copy a {

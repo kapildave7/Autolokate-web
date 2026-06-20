@@ -165,6 +165,7 @@
 
 .ob-rider-cover-option__subtitle {
   font-size: 13px;
+  font-weight: 500;
   line-height: 18px;
   color: var(--al-color-on-surface-muted);
 }

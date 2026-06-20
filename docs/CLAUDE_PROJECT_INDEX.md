@@ -392,24 +392,31 @@ Per project rule: if a component appears in 2+ places it must live in `@autoloka
 
 ## 11. Current Implementation Status
 
-### Signoff status per area (as of 2026-06-19)
+### Signoff status per area (as of 2026-06-19 — full reconstruction audit)
 
 | Area | Status | Notes |
 |------|--------|-------|
-| Auth (A1–A3) | CONDITIONAL | Functional; OTP screen pixel drift from Figma |
-| Purchase (R03–R10) | FIXES REQUIRED | Demo-complete; post-payment guards needed |
-| Emergency (E01–E10) | CONDITIONAL | Functional; OTP layout + R0 offline copy drift |
-| Prepaid | Active | Welcome screen wired; routes functional |
-| B2B2C | Active | Welcome screen (plan-only + plan-rider); routes functional |
-| Post-Activation PWA | V4 Signoff | All 30 frames wired; see `POST_ACTIVATION_FINAL_SIGNOFF_V4.md` |
+| Auth (A1–A3) | CONDITIONAL (~89%) | All verified correct this session; L1/L2 legal routes P2 only |
+| Purchase (R03–R10c) | CONDITIONAL (~93%) | All P0s resolved; R07/R08d cosmetic P2 gaps remain |
+| Emergency (E01–E10) | CONDITIONAL (~91%) | E0 trust row fixed; all 19 frames wired; P2 gaps only |
+| B2B2C | ~95% parity | 4 frames verified correct (plan-only, plan-rider, loading, error) |
+| Prepaid | ~95% parity | 1 frame verified correct |
+| Post-Activation PWA | V4 Signoff (~96%) | All 30 frames wired; CSS tokens fixed (C1) |
 
-### Known implementation gaps (from audit docs)
+### P0 gaps resolved this session (2026-06-19)
 
-1. **Auth:** OTP screen (A2) pixel drift vs Figma `91:268` — title/description layout, resend copy, SMS fallback states
-2. **Emergency:** R0 offline chip placement, OTP layout drift (R2/E2), E0 trust-row vertical position
-3. **Purchase:** Post-payment browser-back guards missing; R08c/R09b/R10c branch frames exist but some guards incomplete
+- ✅ R08c / R09b / R10c — implemented and mounted in PurchaseRoutes
+- ✅ Post-payment back guards — `redirectIfPaymentSucceeded` active R03–R09b
+- ✅ R10 Continue → Emergency wired (`setPhase('emergency')`)
+- ✅ PWA SOS CSS — 5 hardcoded hex colours replaced with design tokens
+- ✅ E0 trust row — moved inside EmptyStateHero children for correct centred grouping
+
+### Remaining gaps (P2 — non-blocking)
+
+1. **Auth:** L1/L2 legal screens not full routes — linked text only (known exception)
+2. **Purchase:** R07 extra plan-context line; R08d no-rider path shows promo field
+3. **Emergency:** E2/R2 Change link — flex row adaptation (vs Figma absolute) — accepted
 4. **Legacy orphan routes:** P01–P06 screens exist in `qr-purchase/screens/p01–p06` but are not in the active route graph
-5. **Deprecated shared routes:** `/shared/r01–r06` redirects now unused
 
 ---
 
@@ -461,21 +468,28 @@ Per project rule: if a component appears in 2+ places it must live in `@autoloka
 
 All superseded reports have been moved to `docs/archive/`. Only the documents below are current.
 
+**Primary audit documents (2026-06-19 — supersede all prior signoff docs):**
+
 | Document | Area | Date | Verdict |
 |----------|------|------|---------|
 | `PROJECT_STATUS.md` | All areas | 2026-06-19 | Single source of truth |
-| `AUTH_FIGMA_PARITY_SIGNOFF.md` | Auth | 2026-06-17 | CONDITIONAL |
-| `PURCHASE_FINAL_SIGNOFF.md` | Purchase overall | 2026-06-17 | FIXES REQUIRED |
-| `PURCHASE_FINAL_FIGMA_GAP_REPORT.md` | Purchase gaps | 2026-06-18 | Open gaps listed |
-| `PHASE_A_VISUAL_SIGNOFF.md` | Purchase R03–R05 | 2026-06-17 | Signed off |
-| `R06_CAROUSEL_FINAL_REPORT.md` | Purchase R06 | — | ~94% parity |
-| `EMERGENCY_FINAL_SIGNOFF.md` | Emergency | 2026-06-18 | CONDITIONAL |
-| `POST_ACTIVATION_FINAL_SIGNOFF_V4.md` | PWA | — | SIGNED OFF |
-| `CONSUMER_APP_FINAL_SIGNOFF.md` | Overall app | 2026-06-17 | Sprint 4 |
-| `ICON_ALIGNMENT_FINAL_REPORT.md` | Icons | 2026-06-17 | Final pass |
-| `FIGMA_FINAL_QA_REPORT.md` | Figma QA | 2026-06-17 | Final QA |
-| `FINAL_BUGFIX_REPORT.md` | Bugfixes | 2026-06-17 | Post-activation final |
-| `P0_FINAL_BUGFIX_REPORT.md` | P0 bugfixes | 2026-06-17 | Post-activation P0 |
+| `SCREEN_PARITY_MATRIX.md` | All screens | 2026-06-19 | 95 frames × parity status |
+| `FIGMA_PARITY_RECONSTRUCTION_REPORT.md` | All flows | 2026-06-19 | No P0/P1 remaining |
+| `COMPONENT_PARITY_AUDIT.md` | All components | 2026-06-19 | All verified |
+| `TOKEN_COMPLIANCE_REPORT.md` | CSS tokens | 2026-06-19 | 0 hardcoded colours |
+
+**Historical signoff documents:**
+
+| Document | Area | Date | Status |
+|----------|------|------|--------|
+| `AUTH_FIGMA_PARITY_SIGNOFF.md` | Auth | 2026-06-17 | Superseded by SCREEN_PARITY_MATRIX |
+| `PURCHASE_FINAL_SIGNOFF.md` | Purchase | 2026-06-17 | Superseded — P0s now resolved |
+| `PURCHASE_FINAL_FIGMA_GAP_REPORT.md` | Purchase gaps | 2026-06-18 | **Stale** — see SCREEN_PARITY_MATRIX |
+| `PHASE_A_VISUAL_SIGNOFF.md` | Purchase R03–R05 | 2026-06-17 | Still valid |
+| `R06_CAROUSEL_FINAL_REPORT.md` | Purchase R06 | — | Still valid |
+| `EMERGENCY_FINAL_SIGNOFF.md` | Emergency | 2026-06-18 | Partially superseded |
+| `POST_ACTIVATION_FINAL_SIGNOFF_V4.md` | PWA | — | SIGNED OFF — still valid |
+| `CONSUMER_APP_FINAL_SIGNOFF.md` | Overall app | 2026-06-17 | Historical |
 | `THEMING.md` | Design system | — | Living reference |
 
-> Superseded reports: `docs/archive/` (110 files)
+> Superseded reports: `docs/archive/` (110+ files)
