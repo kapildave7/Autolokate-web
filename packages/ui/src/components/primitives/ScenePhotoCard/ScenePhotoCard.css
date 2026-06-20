@@ -73,6 +73,31 @@
   border-style: solid;
 }
 
+.al-scene-photo-card--loading {
+  border-style: solid;
+  border-color: var(--al-color-outline);
+  cursor: wait;
+}
+
+.al-scene-photo-card--loading:disabled {
+  opacity: 1;
+}
+
+.al-scene-photo-card__loading-spinner {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid color-mix(in srgb, var(--al-color-on-surface) 12%, transparent);
+  border-top-color: var(--al-color-on-surface);
+  animation: al-scene-photo-spinner 0.8s linear infinite;
+}
+
+@keyframes al-scene-photo-spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .al-scene-photo-card__icon {
   display: flex;
   align-items: center;
@@ -190,6 +215,10 @@
   }
 
   .al-scene-photo-card--filled {
+    animation: none;
+  }
+
+  .al-scene-photo-card__loading-spinner {
     animation: none;
   }
 }

@@ -21,7 +21,15 @@
 }
 
 .al-otp-input__cell {
-  flex: 1;
+  box-sizing: border-box;
+  flex: 0 0
+    calc(
+      (100% - ((var(--al-otp-count, 6) - 1) * var(--al-comp-otp-gap))) / var(--al-otp-count, 6)
+    );
+  width: calc(
+    (100% - ((var(--al-otp-count, 6) - 1) * var(--al-comp-otp-gap))) / var(--al-otp-count, 6)
+  );
+  max-width: var(--al-comp-otp-cell-height);
   min-width: 0;
   height: var(--al-comp-otp-cell-height);
   text-align: center;
@@ -48,10 +56,10 @@
   border-color: var(--al-color-on-surface);
 }
 
-/* Partial entry — filled cells that are not focused stay neutral */
+/* Cells with a digit use active border (Figma filled state) */
 .al-otp-input__cell--has-value:not(:focus) {
-  border-width: 1px;
-  border-color: var(--al-color-outline);
+  border-width: 2px;
+  border-color: var(--al-color-on-surface);
 }
 
 /* Complete entry — all cells use filled border */

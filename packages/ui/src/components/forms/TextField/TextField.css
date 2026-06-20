@@ -11,6 +11,11 @@
   font-weight: var(--al-text-label-weight);
   line-height: var(--al-text-label-line-height);
   color: var(--al-color-on-surface-muted);
+  transition: color var(--al-motion-fast) var(--al-motion-ease-standard);
+}
+
+.al-text-field:focus-within .al-text-field__label {
+  color: var(--al-color-on-surface);
 }
 
 .al-text-field__control {
@@ -32,8 +37,6 @@
     opacity var(--al-motion-fast) var(--al-motion-ease-standard);
 }
 
-.al-text-field__control:has(.al-text-field__input:not(:placeholder-shown)),
-.al-text-field--filled .al-text-field__control,
 .al-text-field__control:focus-within {
   border-width: 2px;
   border-color: var(--al-color-on-surface);

@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { AlIcon } from '@autolokate/icons';
 import {
   AlButton,
@@ -44,6 +44,68 @@ export type AuthStepShellProps = {
 /** Figma 102:268 / 103:324 — single 16px column, 20px (mobile) or 24px (otp) gaps. */
 const AUTH_FALLBACK_PROGRESS_STEP = 1;
 
+type PlanFooterCtaLabelProps = {
+  label: string;
+  motionKey: string;
+};
+
+type PlanCtaPhase = 'idle' | 'exit' | 'enter';
+
+/** R06 — sequential CTA copy swap (out fully, then in) — no overlapping ghost text. */
+function PlanFooterCtaLabel({ label, motionKey }: PlanFooterCtaLabelProps) {
+  const [display, setDisplay] = useState({ label, motionKey });
+  const [phase, setPhase] = useState<PlanCtaPhase>('idle');
+  const targetRef = useRef({ label, motionKey });
+  targetRef.current = { label, motionKey };
+
+  useEffect(() => {
+    const target = targetRef.current;
+    if (target.motionKey === display.motionKey && target.label === display.label) {
+      return;
+    }
+    if (phase === 'idle') {
+      setPhase('exit');
+    }
+  }, [display.label, display.motionKey, label, motionKey, phase]);
+
+  const handleAnimationEnd = () => {
+    if (phase === 'exit') {
+      setDisplay(targetRef.current);
+      setPhase('enter');
+      return;
+    }
+
+    if (phase === 'enter') {
+      const target = targetRef.current;
+      if (target.motionKey !== display.motionKey || target.label !== display.label) {
+        setPhase('exit');
+        return;
+      }
+      setPhase('idle');
+    }
+  };
+
+  const motionClass =
+    phase === 'exit'
+      ? ' ob-auth-shell__cta-label--exit'
+      : phase === 'enter'
+        ? ' ob-auth-shell__cta-label--enter'
+        : '';
+
+  return (
+    <span aria-live="polite">
+      <span key={`pulse-${display.motionKey}`} className="ob-auth-shell__cta-motion">
+        <span
+          className={`ob-auth-shell__cta-label${motionClass}`}
+          onAnimationEnd={phase === 'idle' ? undefined : handleAnimationEnd}
+        >
+          {display.label}
+        </span>
+      </span>
+    </span>
+  );
+}
+
 export function AuthStepShell({
   progressConfig,
   title,
@@ -85,7 +147,9 @@ export function AuthStepShell({
       className={`ob-step-chrome-screen ob-auth-shell${variant === 'error' ? ' ob-auth-shell--error' : ''}${shellClassName ? ` ${shellClassName}` : ''}`}
     >
       <div className="ob-step-chrome__frame ob-auth-shell__frame">
-        <header className="ob-step-chrome__header ob-auth-shell__header">
+        <header
+          className={`ob-step-chrome__header ob-auth-shell__header${resolvedProgress ? '' : ' ob-step-chrome__header--compact'}`}
+        >
           <AlIconButton
             icon={<AlIcon name="arrow-left" size={24} aria-hidden />}
             label="Go back"
@@ -104,9 +168,7 @@ export function AuthStepShell({
               showCount={false}
               className="ob-step-chrome__progress ob-auth-shell__progress"
             />
-          ) : (
-            <div className="ob-step-chrome__progress-spacer" aria-hidden />
-          )}
+          ) : null}
         </header>
 
         <div className={`ob-step-chrome__body ob-auth-shell__body ob-auth-shell__body--${contentGap}`}>
@@ -133,14 +195,17 @@ export function AuthStepShell({
               </AlText>
             ) : null}
             <AlButton
-              key={footerCtaKey}
               variant="primary"
               className="ob-step-chrome__cta ob-auth-shell__cta"
               loading={footerLoading}
               disabled={footerDisabled || footerLoading}
               onClick={onContinue}
             >
-              <span className="ob-auth-shell__cta-label">{footerLabel}</span>
+              {footerCtaKey ? (
+                <PlanFooterCtaLabel label={footerLabel} motionKey={footerCtaKey} />
+              ) : (
+                <span className="ob-auth-shell__cta-label">{footerLabel}</span>
+              )}
             </AlButton>
           </footer>
         )}

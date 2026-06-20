@@ -2,22 +2,17 @@ import { AlButton, AlHeading, AlStack, AlText } from '@autolokate/ui';
 import { useNavigate } from 'react-router-dom';
 
 import { flowLabels, journeyPaths } from '../constants.js';
+import { ACTIVATION_FLOW_ENTRIES, dispatchPlatformFlow } from '../../platform/index.js';
 import { useJourney } from '../JourneyContext.js';
-import { selectActivationFlow } from '../navigation/select-activation-flow.js';
-import type { ActivationFlowId } from '../types.js';
 
 import '../journey.css';
-
-const flowHubCards: { flow: ActivationFlowId; label: string }[] = [
-  { flow: 'purchase', label: 'Purchase' },
-  { flow: 'prepaid', label: 'Prepaid' },
-  { flow: 'b2b2c', label: 'B2B2C' },
-];
 
 /** QA-only entry hub — not part of production consumer paths. */
 export function FlowHubScreen() {
   const navigate = useNavigate();
   const { setSelectedFlow, setPhase, updateSession } = useJourney();
+
+  const dispatchDeps = { setSelectedFlow, setPhase, navigate, updateSession };
 
   return (
     <div className="journey-home journey-home--flow-hub">
@@ -28,15 +23,15 @@ export function FlowHubScreen() {
       </AlStack>
 
       <div className="journey-home__options">
-        {flowHubCards.map((card) => (
+        {ACTIVATION_FLOW_ENTRIES.map((entry) => (
           <AlButton
-            key={card.flow}
+            key={entry.id}
             variant="secondary"
             onClick={() => {
-              selectActivationFlow(card.flow, { setSelectedFlow, setPhase, navigate, updateSession });
+              dispatchPlatformFlow({ flowId: entry.id, source: 'flowHub' }, dispatchDeps);
             }}
           >
-            {card.label}
+            {entry.id === 'purchase' ? 'Purchase' : entry.id === 'prepaid' ? 'Prepaid' : 'B2B2C'}
           </AlButton>
         ))}
       </div>

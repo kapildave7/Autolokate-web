@@ -1,5 +1,6 @@
 export { JourneyOrchestrator } from './JourneyOrchestrator.js';
 export { JourneyProvider, useJourney } from './JourneyContext.js';
+export { AutolokateRootProvider } from '../platform/AutolokateRootProvider.js';
 export { journeyPaths, flowLabels, SELECTED_FLOW_KEY, JOURNEY_STORAGE_KEY } from './constants.js';
 export {
   activationEntryByFlow,

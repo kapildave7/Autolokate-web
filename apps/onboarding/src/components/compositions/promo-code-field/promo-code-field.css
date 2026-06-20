@@ -70,8 +70,10 @@
   width: 100%;
 }
 
-.ob-promo-code-field--editable {
-  gap: 10px;
+.ob-promo-code-field--editable:focus-within,
+.ob-promo-code-field--editable.ob-promo-code-field--filled {
+  border-width: 2px;
+  border-color: var(--al-color-on-surface);
 }
 
 .ob-promo-code-field--invalid {

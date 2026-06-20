@@ -1,0 +1,51 @@
+.pwa-ios-install-sheet__steps {
+  margin: 0;
+  padding-inline-start: 20px;
+  color: var(--al-color-on-surface-muted);
+  font-family: var(--al-text-ui-family);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.pwa-ios-install-sheet__steps li + li {
+  margin-top: 8px;
+}
+
+.pwa-ios-safari-banner {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid color-mix(in srgb, var(--al-color-on-surface) 12%, transparent);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--al-color-surface) 88%, transparent);
+}
+
+.pwa-ios-safari-banner__title {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--al-color-on-surface);
+}
+
+.pwa-ios-safari-banner__description {
+  margin: 4px 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--al-color-on-surface-muted);
+}
+
+.pwa-ios-safari-banner__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pwa-ios-safari-banner__dismiss {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--al-color-on-surface-muted);
+  font-size: 0.875rem;
+  cursor: pointer;
+}

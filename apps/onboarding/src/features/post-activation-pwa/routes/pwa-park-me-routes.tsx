@@ -28,6 +28,7 @@ import { PwaScanErrorBoundary } from '../components/PwaScanErrorBoundary.js';
 import { usePwaPhotoCapture } from '../hooks/use-pwa-photo-capture.js';
 import { useGeolocationCapture, requestMediaPermissions } from '../hooks/use-geolocation.js';
 import { useResolveStoredLocationName } from '../hooks/use-resolve-stored-location-name.js';
+import { PwaPermissionRecoveryActions, queryPermissionState } from '../../../pwa/index.js';
 import { PwaScanShell } from '../components/PwaScanShell.js';
 import { PwaFade } from '../components/PwaMotion.js';
 import { formatPwaLocationDetail } from '../utils/format-pwa-location.js';
@@ -223,12 +224,52 @@ export function PwaParkMePermissionsRoute() {
   const navigate = useNavigate();
   const { session, updateSession } = usePwaScan();
   const [sheetOpen, setSheetOpen] = useState(true);
+  const [cameraBlocked, setCameraBlocked] = useState(false);
+  const [locationBlocked, setLocationBlocked] = useState(false);
+  const { requestLocation } = useGeolocationCapture();
 
-  const handleAllow = async () => {
-    const granted = await requestMediaPermissions();
-    updateSession({ permissionsGranted: granted });
+  const continueToPhotos = () => {
     setSheetOpen(false);
     void navigate(pwaScanPaths.parkMePhotos);
+  };
+
+  const handleAllow = async () => {
+    const [cameraGranted, locationResult] = await Promise.all([
+      requestMediaPermissions(),
+      requestLocation(),
+    ]);
+
+    if (!cameraGranted) {
+      const cameraState = await queryPermissionState('camera');
+      setCameraBlocked(cameraState === 'blocked');
+    } else {
+      setCameraBlocked(false);
+    }
+
+    if (locationResult) {
+      updateSession({
+        permissionsGranted: cameraGranted,
+        location: { lat: locationResult.lat, lng: locationResult.lng },
+        locationName: locationResult.name,
+        locationDenied: false,
+      });
+      setLocationBlocked(false);
+      continueToPhotos();
+      return;
+    }
+
+    const locationState = await queryPermissionState('location');
+    setLocationBlocked(locationState === 'blocked');
+    updateSession({
+      permissionsGranted: cameraGranted,
+      locationDenied: true,
+    });
+
+    if (!cameraGranted || locationState === 'blocked') {
+      return;
+    }
+
+    continueToPhotos();
   };
 
   return (
@@ -257,15 +298,21 @@ export function PwaParkMePermissionsRoute() {
           void handleAllow();
         }}
         secondaryLabel="Not now"
-        onSecondary={() => {
-          setSheetOpen(false);
-          void navigate(pwaScanPaths.parkMePhotos);
-        }}
-        onDismiss={() => {
-          setSheetOpen(false);
-          void navigate(pwaScanPaths.parkMePhotos);
-        }}
-      />
+        onSecondary={continueToPhotos}
+        onDismiss={continueToPhotos}
+      >
+        {cameraBlocked || locationBlocked ? (
+          <PwaPermissionRecoveryActions
+            kind={locationBlocked ? 'location' : 'camera'}
+            blocked
+            onRetry={() => {
+              void handleAllow();
+            }}
+            onContinue={continueToPhotos}
+            continueLabel="Continue without access"
+          />
+        ) : null}
+      </AlPermissionSheet>
     </PwaScanShell>
   );
 }
@@ -278,7 +325,7 @@ export function PwaParkMePhotosRoute() {
     'park-me/photos',
     'parkMePhotos',
   );
-  const { requestLocation, loading: geoLoading } = useGeolocationCapture();
+  const { requestLocation, loading: geoLoading, error: geoError } = useGeolocationCapture();
   useResolveStoredLocationName();
 
   const handleLocation = useCallback(async () => {
@@ -310,6 +357,10 @@ export function PwaParkMePhotosRoute() {
         routeId="park-me/photos"
         captureError={captureError}
         onDismissCaptureError={clearCaptureError}
+        onRetryCapture={() => {
+          clearCaptureError();
+        }}
+        cameraBlocked={Boolean(captureError)}
       >
         <PwaScanShell
           variant="protected"
@@ -368,11 +419,22 @@ export function PwaParkMePhotosRoute() {
                 label: hasLocation ? 'Location captured' : 'Share your location',
                 detail: formatPwaLocationDetail(session.location, session.locationName),
                 filled: hasLocation,
+                loading: geoLoading && !hasLocation,
+                loadingLabel: 'Fetching your location…',
                 onCapture: () => {
                   void handleLocation();
                 },
               }}
             />
+            {geoError === 'denied' && !hasLocation ? (
+              <PwaPermissionRecoveryActions
+                kind="location"
+                blocked
+                onRetry={() => {
+                  void handleLocation();
+                }}
+              />
+            ) : null}
           </PwaFade>
         </PwaScanShell>
       </PwaPhotoRouteGuard>

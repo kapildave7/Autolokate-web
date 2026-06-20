@@ -1,7 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { pwaScanPaths } from '../constants/pwa-scan-paths.js';
-import { PwaScanProvider } from '../context/PwaScanContext.js';
 import { PwaScanErrorBoundary } from '../components/PwaScanErrorBoundary.js';
 import {
   PwaLoadingRoute,
@@ -40,12 +39,11 @@ import {
   PwaSosContactsOnlyRoute,
 } from './pwa-sos-routes.js';
 
-/** Post-Activation PWA — all 30 frames under /pwa/scan/*. */
+/** Post-Activation PWA — all 30 frames under /pwa/scan/*. Provider mounted at AutolokateRootProvider. */
 export function PwaScanRoutes() {
   return (
-    <PwaScanProvider>
-      <PwaScanErrorBoundary routeLabel="pwa-scan">
-        <Routes>
+    <PwaScanErrorBoundary routeLabel="pwa-scan">
+      <Routes>
         <Route path="/" element={<Navigate to={pwaScanPaths.loading} replace />} />
         <Route path="loading" element={<PwaLoadingRoute />} />
         <Route path="vehicle" element={<PwaVehicleFoundRoute />} />
@@ -81,8 +79,7 @@ export function PwaScanRoutes() {
         <Route path="sos/contacts-only" element={<PwaSosContactsOnlyRoute />} />
 
         <Route path="*" element={<Navigate to={pwaScanPaths.loading} replace />} />
-        </Routes>
-      </PwaScanErrorBoundary>
-    </PwaScanProvider>
+      </Routes>
+    </PwaScanErrorBoundary>
   );
 }

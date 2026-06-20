@@ -44,7 +44,10 @@
   outline: none;
 }
 
-.al-plate-input:focus-within:not(.al-plate-input--error) {
+.al-plate-input:focus-within:not(.al-plate-input--error),
+.al-plate-input--filled:not(.al-plate-input--error) {
+  outline: 2px solid var(--al-color-on-surface);
+  outline-offset: 0;
   box-shadow: var(--al-shadow-plate);
 }
 

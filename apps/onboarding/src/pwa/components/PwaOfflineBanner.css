@@ -1,0 +1,14 @@
+.pwa-offline-banner {
+  position: fixed;
+  inset-inline: 16px;
+  top: calc(8px + env(safe-area-inset-top, 0px));
+  z-index: 1100;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--al-color-surface-elevated, #1a1a1a) 92%, transparent);
+  box-shadow: 0 4px 16px rgb(0 0 0 / 25%);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--al-color-on-surface);
+  text-align: center;
+}

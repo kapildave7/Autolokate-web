@@ -129,7 +129,9 @@ export function FlowStepShell({
   return (
     <AlScreenBg variant="protected" className={`ob-step-chrome-screen ${shellClassName}`}>
       <div className={`ob-step-chrome__frame ob-shell__frame${shellModifiers ? ` ${shellModifiers}` : ''}`}>
-        <header className="ob-step-chrome__header ob-shell__header">
+        <header
+          className={`ob-step-chrome__header ob-shell__header${resolvedProgress ? '' : ' ob-step-chrome__header--compact'}`}
+        >
           <AlIconButton
             icon={<AlIcon name="arrow-left" size={24} aria-hidden />}
             label="Go back"
@@ -149,9 +151,7 @@ export function FlowStepShell({
               showCount={resolvedProgress.showCount}
               className="ob-step-chrome__progress ob-shell__progress"
             />
-          ) : (
-            <div className="ob-shell__progress-spacer" aria-hidden />
-          )}
+          ) : null}
         </header>
 
         <div className={`ob-step-chrome__body ob-shell__body${resolvedBodyGap === 'otp' ? ' ob-shell__body--otp' : ''}`}>

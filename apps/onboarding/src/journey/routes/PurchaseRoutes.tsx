@@ -710,7 +710,7 @@ function R09bRoute() {
     };
   }, [resolveConfirming, session.purchase?.paymentStatus]);
 
-  return <R09bStillConfirmingScreen onCheckStatus={resolveConfirming} />;
+  return <R09bStillConfirmingScreen />;
 }
 
 function R10Route() {

@@ -1,0 +1,42 @@
+.pwa-install-banner {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid color-mix(in srgb, var(--al-color-on-surface) 12%, transparent);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--al-color-surface) 88%, transparent);
+}
+
+.pwa-install-banner__title {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--al-color-on-surface);
+}
+
+.pwa-install-banner__description {
+  margin: 4px 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--al-color-on-surface-muted);
+}
+
+.pwa-install-banner__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pwa-install-banner__dismiss {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--al-color-on-surface-muted);
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.pwa-install-banner__dismiss:active {
+  opacity: 0.8;
+}

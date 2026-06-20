@@ -1,6 +1,7 @@
 import { type ReactNode, useEffect } from 'react';
-import { AlButton, AlText } from '@autolokate/ui';
+import { AlText } from '@autolokate/ui';
 
+import { PwaPermissionRecoveryActions } from '../../../pwa/index.js';
 import { usePwaScan } from '../context/PwaScanContext.js';
 import { logPhotoDiagnostic } from '../utils/pwa-photo-diagnostics.js';
 
@@ -9,6 +10,8 @@ type PwaPhotoRouteGuardProps = {
   children: ReactNode;
   captureError?: string | null;
   onDismissCaptureError?: () => void;
+  onRetryCapture?: () => void;
+  cameraBlocked?: boolean;
 };
 
 /** Runtime guard for photo routes — never render an empty/black fatal state silently. */
@@ -17,6 +20,8 @@ export function PwaPhotoRouteGuard({
   children,
   captureError,
   onDismissCaptureError,
+  onRetryCapture,
+  cameraBlocked = false,
 }: PwaPhotoRouteGuardProps) {
   const { storageError, clearStorageError } = usePwaScan();
 
@@ -37,11 +42,13 @@ export function PwaPhotoRouteGuard({
       {captureError ? (
         <div className="pwa-scan-photo-alert pwa-scan-photo-alert--error" role="alert">
           <AlText tone="muted">{captureError}</AlText>
-          {onDismissCaptureError ? (
-            <AlButton variant="secondary" onClick={onDismissCaptureError}>
-              Dismiss
-            </AlButton>
-          ) : null}
+          <PwaPermissionRecoveryActions
+            kind="camera"
+            blocked={cameraBlocked}
+            onRetry={onRetryCapture}
+            onContinue={onDismissCaptureError}
+            continueLabel="Dismiss"
+          />
         </div>
       ) : null}
       {children}

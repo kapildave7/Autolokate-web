@@ -30,6 +30,7 @@ export function AlOtpInput({
   const isError = state === 'error' || Boolean(resolvedError);
   const isSuccess = state === 'success' && !isError;
   const isFilled = state === 'filled' && !isError && !isSuccess;
+  const hasPartialValue = value.replace(/\D/g, '').length > 0;
   const isDisabled = disabled || (loading && !isSuccess);
 
   useEffect(() => {
@@ -49,12 +50,19 @@ export function AlOtpInput({
         isError && 'al-otp-input--error',
         isSuccess && 'al-otp-input--success',
         isFilled && 'al-otp-input--filled',
+        hasPartialValue && 'al-otp-input--has-value',
         loading && 'is-loading',
         className,
       )}
     >
       {label ? <span className="al-otp-input__label">{label}</span> : null}
-      <div className="al-otp-input__cells" role="group" aria-label={groupLabel} aria-busy={loading || undefined}>
+      <div
+        className="al-otp-input__cells"
+        style={{ ['--al-otp-count' as string]: String(length) }}
+        role="group"
+        aria-label={groupLabel}
+        aria-busy={loading || undefined}
+      >
         {digits.map((digit, index) => (
           <input
             key={`${baseId}-${String(index)}`}

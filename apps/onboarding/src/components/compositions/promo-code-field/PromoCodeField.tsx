@@ -38,7 +38,7 @@ export function PromoCodeField({
     return (
       <div className="ob-promo-code-field-stack">
         <div
-          className={`ob-promo-code-field ob-promo-code-field--editable${isInvalid ? ' ob-promo-code-field--invalid' : ''}`}
+          className={`ob-promo-code-field ob-promo-code-field--editable${promoCode.trim() ? ' ob-promo-code-field--filled' : ''}${isInvalid ? ' ob-promo-code-field--invalid' : ''}`}
         >
           <input
             type="text"

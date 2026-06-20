@@ -28,6 +28,7 @@ import { PwaScanErrorBoundary } from '../components/PwaScanErrorBoundary.js';
 import { usePwaPhotoCapture } from '../hooks/use-pwa-photo-capture.js';
 import { useGeolocationCapture } from '../hooks/use-geolocation.js';
 import { useHoldProgressFrom } from '../hooks/use-hold-progress-from.js';
+import { PwaPermissionRecoveryActions, queryPermissionState } from '../../../pwa/index.js';
 
 import '../styles/pwa-scan.css';
 
@@ -189,6 +190,7 @@ export function PwaSosAllowLocationRoute() {
   const navigate = useNavigate();
   const { updateSession } = usePwaScan();
   const { requestLocation } = useGeolocationCapture();
+  const [locationBlocked, setLocationBlocked] = useState(false);
 
   const handleAllow = async () => {
     const result = await requestLocation();
@@ -198,11 +200,25 @@ export function PwaSosAllowLocationRoute() {
         locationName: result.name,
         locationDenied: false,
       });
+      setLocationBlocked(false);
       void navigate(pwaScanPaths.sos, { replace: true });
       return;
     }
+
+    const locationState = await queryPermissionState('location');
+    setLocationBlocked(locationState === 'blocked' || locationState === 'unknown');
     updateSession({ locationDenied: true });
+
+    if (locationState === 'blocked') {
+      return;
+    }
+
     void navigate(pwaScanPaths.sosLocationUnavailable, { replace: true });
+  };
+
+  const continueWithoutLocation = () => {
+    updateSession({ locationDenied: true, sosStatus: 'contacts-only' });
+    void navigate(pwaScanPaths.sosContactsOnly, { replace: true });
   };
 
   return (
@@ -224,10 +240,24 @@ export function PwaSosAllowLocationRoute() {
           onPrimary={() => {
             void handleAllow();
           }}
+          secondaryLabel="Alert contacts only"
+          onSecondary={continueWithoutLocation}
           onDismiss={() => {
             void navigate(pwaScanPaths.sos, { replace: true });
           }}
-        />
+        >
+          {locationBlocked ? (
+            <PwaPermissionRecoveryActions
+              kind="location"
+              blocked
+              onRetry={() => {
+                void handleAllow();
+              }}
+              onContinue={continueWithoutLocation}
+              continueLabel="Alert contacts only"
+            />
+          ) : null}
+        </AlPermissionSheet>
       }
     />
   );
@@ -293,6 +323,8 @@ export function PwaSosScenePhotosRoute() {
         routeId="sos/scene-photos"
         captureError={captureError}
         onDismissCaptureError={clearCaptureError}
+        onRetryCapture={clearCaptureError}
+        cameraBlocked={Boolean(captureError)}
       >
         <PwaScanShell
           variant="emergency"
@@ -351,6 +383,8 @@ export function PwaSosScenePhotosCapturedRoute() {
         routeId="sos/scene-photos/captured"
         captureError={captureError}
         onDismissCaptureError={clearCaptureError}
+        onRetryCapture={clearCaptureError}
+        cameraBlocked={Boolean(captureError)}
       >
         <PwaScanShell
           variant="emergency"
@@ -396,6 +430,20 @@ export function PwaSosScenePhotosCapturedRoute() {
 export function PwaSosLocationUnavailableRoute() {
   const navigate = useNavigate();
   const { updateSession } = usePwaScan();
+  const { requestLocation } = useGeolocationCapture();
+
+  const handleRetryLocation = async () => {
+    const result = await requestLocation();
+    if (!result) {
+      return;
+    }
+    updateSession({
+      location: { lat: result.lat, lng: result.lng },
+      locationName: result.name,
+      locationDenied: false,
+    });
+    void navigate(pwaScanPaths.sos, { replace: true });
+  };
 
   return (
     <PwaStatusHeroScreen
@@ -415,6 +463,13 @@ export function PwaSosLocationUnavailableRoute() {
           >
             Alert contacts only
           </button>
+          <PwaPermissionRecoveryActions
+            kind="location"
+            blocked
+            onRetry={() => {
+              void handleRetryLocation();
+            }}
+          />
           <AlButton
             variant="primary"
             onClick={() => {

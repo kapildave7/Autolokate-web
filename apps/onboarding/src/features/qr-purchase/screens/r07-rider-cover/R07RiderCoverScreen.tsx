@@ -29,10 +29,11 @@ export function R07RiderCoverScreen({
     <AuthStepShell
       hideProgress
       progressConfig={null}
-      shellClassName="ob-auth-shell--purchase"
+      shellClassName="ob-auth-shell--purchase ob-auth-shell--rider-screen"
       title="Add rider cover?"
       description="Cover whoever rides with you. Same ₹1L cover, bundled at a discount"
       footerLabel={getRiderCtaLabel(selectedRiderCount)}
+      footerCtaKey={String(selectedRiderCount)}
       showBack={showBack}
       onBack={onBack}
       onContinue={onContinue}

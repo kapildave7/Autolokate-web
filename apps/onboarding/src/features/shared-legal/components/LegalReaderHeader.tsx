@@ -10,7 +10,7 @@ export type LegalReaderHeaderProps = {
 
 export function LegalReaderHeader({ onBack, showBack = true }: LegalReaderHeaderProps) {
   return (
-    <header className="ob-step-chrome__header ob-legal-reader__header">
+    <header className="ob-step-chrome__header ob-step-chrome__header--compact ob-legal-reader__header">
       <AlIconButton
         icon={<AlIcon name="arrow-left" size={24} aria-hidden />}
         label="Go back"

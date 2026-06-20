@@ -11,6 +11,12 @@
   font-weight: var(--al-text-label-weight);
   line-height: var(--al-text-label-line-height);
   color: var(--al-color-on-surface-muted);
+  transition: color var(--al-motion-fast) var(--al-motion-ease-standard);
+}
+
+.al-field:focus-within .al-field__label,
+.al-field--filled .al-field__label {
+  color: var(--al-color-on-surface);
 }
 
 .al-field__control {
@@ -38,6 +44,7 @@
 }
 
 .al-field__input:not(:placeholder-shown),
+.al-field--filled .al-field__input,
 .al-field__input:focus {
   border-width: 2px;
   border-color: var(--al-color-on-surface);

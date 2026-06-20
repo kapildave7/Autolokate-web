@@ -550,7 +550,7 @@ const purchasePhaseCScreens: PurchaseStatusDevScreen[] = [
     id: 'r09b',
     label: 'R09b · Still confirming',
     group: 'purchase',
-    render: () => <R09bStillConfirmingScreen onCheckStatus={() => undefined} />,
+    render: () => <R09bStillConfirmingScreen />,
   },
   {
     id: 'r10',

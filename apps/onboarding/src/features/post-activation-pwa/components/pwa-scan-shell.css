@@ -56,11 +56,7 @@
 }
 
 [data-theme='light'] .pwa-scan-shell__frame--sticky-footer .pwa-scan-shell__footer {
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--al-color-background) 0%, transparent) 0%,
-    color-mix(in srgb, var(--al-color-background) 92%, transparent) 24%
-  );
+  background-color: transparent;
 }
 
 .pwa-scan-shell__main {
@@ -94,11 +90,7 @@
 .pwa-scan-shell__frame--sticky-footer .pwa-scan-shell__footer {
   flex-shrink: 0;
   padding-top: 12px;
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--al-color-background) 0%, transparent) 0%,
-    color-mix(in srgb, var(--al-color-background) 92%, transparent) 24%
-  );
+  background-color: transparent;
 }
 
 .pwa-scan-shell__frame--dimmed .pwa-scan-shell__main,

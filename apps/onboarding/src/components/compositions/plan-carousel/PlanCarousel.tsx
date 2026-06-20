@@ -14,7 +14,7 @@ export type PlanCarouselProps = {
 
 /** Figma layout_8MYIF9 — 270px card + 14px gap */
 const CARD_STEP_PX = 284;
-const SCROLL_SETTLE_MS = 150;
+const SCROLL_SETTLE_MS = 70;
 const CENTER_THRESHOLD_PX = 14;
 /** Prevent flicker when two cards are nearly equidistant from center */
 const CENTER_HYSTERESIS_PX = 24;

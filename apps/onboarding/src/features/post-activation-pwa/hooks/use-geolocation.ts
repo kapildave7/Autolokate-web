@@ -8,9 +8,11 @@ export type GeoResult = {
   name: string | null;
 };
 
+export type GeoErrorKind = 'denied' | 'unavailable' | null;
+
 export function useGeolocationCapture() {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<'denied' | 'unavailable' | null>(null);
+  const [error, setError] = useState<GeoErrorKind>(null);
   const mountedRef = useRef(true);
 
   useEffect(() => {

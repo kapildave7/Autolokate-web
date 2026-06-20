@@ -3,11 +3,12 @@
 .ob-plan-carousel {
   --ob-plan-motion-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --ob-plan-motion-ring-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
-  --ob-plan-motion-select: 850ms;
+  --ob-plan-motion-select: 600ms;
   --ob-plan-motion-ring: 950ms;
-  --ob-plan-motion-check: 420ms;
-  --ob-plan-motion-check-delay: 280ms;
-  --ob-plan-motion-tap: 180ms;
+  --ob-plan-motion-check: 320ms;
+  --ob-plan-motion-check-delay: 100ms;
+  --ob-plan-motion-tap: 140ms;
+  --ob-plan-motion-border: 100ms;
   --ob-plan-card-slot: 366px;
   --ob-plan-card-unselected-scale: 0.929; /* 340 / 366 — Figma unselected height in fixed slot */
 
@@ -95,7 +96,10 @@
   overflow: visible;
   background-color: var(--al-color-surface);
   color: var(--al-color-on-surface);
-  transition: transform var(--ob-plan-motion-tap) var(--ob-plan-motion-ease);
+  transition:
+    border-color var(--ob-plan-motion-border) var(--ob-plan-motion-ease),
+    box-shadow var(--ob-plan-motion-border) var(--ob-plan-motion-ease),
+    transform var(--ob-plan-motion-tap) var(--ob-plan-motion-ease);
 }
 
 /* Selection ring lives on the card border — no delayed ::after draw (avoids grey flash) */
@@ -121,7 +125,10 @@
   box-shadow: 0 0 18px color-mix(in srgb, var(--al-color-success) 28%, transparent);
   outline: none;
   animation: none;
-  transition: transform var(--ob-plan-motion-tap) var(--ob-plan-motion-ease);
+  transition:
+    border-color var(--ob-plan-motion-border) var(--ob-plan-motion-ease),
+    box-shadow var(--ob-plan-motion-border) var(--ob-plan-motion-ease),
+    transform var(--ob-plan-motion-tap) var(--ob-plan-motion-ease);
 }
 
 .ob-plan-carousel__card .al-plan-card__name {

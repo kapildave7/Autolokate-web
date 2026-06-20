@@ -138,7 +138,7 @@
 }
 
 .ob-emergency-name-form .ob-relationship-selector .al-relation-grid__tile--selected {
-  box-shadow: none;
+  background: var(--al-color-surface);
 }
 
 .ob-contact-summary {

@@ -125,11 +125,21 @@ export function AlPhotoGrid({
               'al-scene-photo-card--stacked',
               'al-scene-photo-card--label-first',
               'al-scene-photo-card--location',
+              locationCapture.loading && 'al-scene-photo-card--loading',
               locationCapture.filled && 'al-scene-photo-card--filled',
             )}
             onClick={locationCapture.onCapture}
+            disabled={locationCapture.loading}
+            aria-busy={locationCapture.loading || undefined}
           >
-            {locationCapture.filled && locationCapture.detail ? (
+            {locationCapture.loading ? (
+              <>
+                <span className="al-scene-photo-card__loading-spinner" aria-hidden />
+                <p className="al-scene-photo-card__label">
+                  {locationCapture.loadingLabel ?? 'Fetching your location…'}
+                </p>
+              </>
+            ) : locationCapture.filled && locationCapture.detail ? (
               <div className="al-scene-photo-card__location-copy">
                 <p className="al-scene-photo-card__label">{locationCapture.label}</p>
                 <p className="al-scene-photo-card__detail">{locationCapture.detail}</p>

@@ -1,38 +1,35 @@
 @import '../../step-shell-chrome/touch-target-layout.css';
 
-/* Figma 102:277 — row, padding-top 8, gap 12, checkbox 22×22 + 16/22 copy */
+/* Figma 102:277 — 48px tap column + 12px gap + 16/22 copy; checkbox aligns to first line */
 .ob-inline-consent {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 12px;
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr);
+  column-gap: 10px;
+  align-items: start;
   width: 100%;
   padding-top: 8px;
   overflow: visible;
 }
 
-/* Visual slot 22×22 at content gutter; tap target 48×48 centered (Figma hotspot 634:2049) */
+/*
+ * 22×22 visual box sits at y:0 of copy (first line).
+ * 48×48 control centers the box → offset control top by -(48-22)/2 = -13px.
+ */
 .ob-inline-consent__checkbox-slot {
   position: relative;
-  flex-shrink: 0;
-  width: 22px;
+  width: 48px;
   height: 22px;
   overflow: visible;
 }
 
 .ob-inline-consent__checkbox-slot .ob-inline-consent__checkbox {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 48px;
-  height: 48px;
-  min-width: 48px;
+  top: -13px;
+  left: 0;
   margin: 0;
-  transform: translate(-50%, -50%);
 }
 
 .ob-inline-consent__copy {
-  flex: 1;
   min-width: 0;
   margin: 0;
   color: var(--al-color-on-surface);

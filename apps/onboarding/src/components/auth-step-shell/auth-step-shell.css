@@ -109,14 +109,27 @@
   overflow: visible;
 }
 
-/* Figma layout_GMGXUF — CTA pulse on plan change */
-.ob-auth-shell--plan-screen .ob-auth-shell__cta {
-  animation: ob-plan-cta-pulse 320ms cubic-bezier(0.22, 1, 0.36, 1);
+/* Figma layout_GMGXUF — sequential CTA label swap on plan / rider change (R06, R07) */
+.ob-auth-shell--plan-screen .ob-auth-shell__cta-motion,
+.ob-auth-shell--rider-screen .ob-auth-shell__cta-motion {
+  display: inline-block;
+  animation: ob-plan-cta-pulse 480ms cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-.ob-auth-shell--plan-screen .ob-auth-shell__cta-label {
+.ob-auth-shell--plan-screen .ob-auth-shell__cta-label,
+.ob-auth-shell--rider-screen .ob-auth-shell__cta-label {
   display: inline-block;
-  animation: ob-plan-cta-label-in 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  text-shadow: none;
+}
+
+.ob-auth-shell--plan-screen .ob-auth-shell__cta-label--exit,
+.ob-auth-shell--rider-screen .ob-auth-shell__cta-label--exit {
+  animation: ob-plan-cta-label-out 200ms cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+.ob-auth-shell--plan-screen .ob-auth-shell__cta-label--enter,
+.ob-auth-shell--rider-screen .ob-auth-shell__cta-label--enter {
+  animation: ob-plan-cta-label-in 280ms cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
 }
 
 @keyframes ob-plan-cta-pulse {
@@ -124,8 +137,8 @@
     transform: scale(1);
   }
 
-  45% {
-    transform: scale(1.02);
+  40% {
+    transform: scale(1.015);
   }
 
   100% {
@@ -134,20 +147,37 @@
 }
 
 @keyframes ob-plan-cta-label-in {
-  from {
+  0% {
     opacity: 0;
-    transform: translateY(4px);
+    transform: translateY(8px);
   }
 
-  to {
+  100% {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
+@keyframes ob-plan-cta-label-out {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-6px);
+    visibility: hidden;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .ob-auth-shell--plan-screen .ob-auth-shell__cta,
-  .ob-auth-shell--plan-screen .ob-auth-shell__cta-label {
+  .ob-auth-shell--plan-screen .ob-auth-shell__cta-motion,
+  .ob-auth-shell--plan-screen .ob-auth-shell__cta-label--enter,
+  .ob-auth-shell--plan-screen .ob-auth-shell__cta-label--exit,
+  .ob-auth-shell--rider-screen .ob-auth-shell__cta-motion,
+  .ob-auth-shell--rider-screen .ob-auth-shell__cta-label--enter,
+  .ob-auth-shell--rider-screen .ob-auth-shell__cta-label--exit {
     animation: none;
   }
 }
@@ -245,19 +275,6 @@
   border-color: var(--al-color-on-surface);
 }
 
-.ob-auth-mobile-field .al-text-field__control:has(.al-text-field__input:not(:placeholder-shown)):not(:focus-within) {
-  border-width: 1px;
-  border-color: var(--al-color-outline);
-}
-
-.ob-auth-mobile-field.al-text-field--filled .al-text-field__control,
-.ob-auth-mobile-field.al-text-field--filled .al-text-field__control:focus-within,
-.ob-auth-mobile-field.al-text-field--filled
-  .al-text-field__control:has(.al-text-field__input:not(:placeholder-shown)) {
-  border-width: 2px;
-  border-color: var(--al-color-on-surface);
-}
-
 .ob-auth-mobile-field.al-text-field--error .al-text-field__control {
   border-color: var(--al-color-warning);
   border-width: 2px;
@@ -312,16 +329,7 @@
   background-color: var(--al-color-surface);
 }
 
-.ob-auth-name-field .al-text-field__control:focus-within,
-.ob-auth-name-field .al-text-field__control:has(.al-text-field__input:not(:placeholder-shown)) {
-  border-width: 1px;
-  border-color: var(--al-color-outline);
-}
-
-.ob-auth-name-field.al-text-field--filled .al-text-field__control,
-.ob-auth-name-field.al-text-field--filled .al-text-field__control:focus-within,
-.ob-auth-name-field.al-text-field--filled
-  .al-text-field__control:has(.al-text-field__input:not(:placeholder-shown)) {
+.ob-auth-name-field .al-text-field__control:focus-within {
   border-width: 2px;
   border-color: var(--al-color-on-surface);
 }

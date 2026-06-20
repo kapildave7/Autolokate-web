@@ -43,7 +43,7 @@ export function WelcomeActivationShell({
     >
       <div className="ob-step-chrome__frame ob-welcome-shell__frame">
         {showBack ? (
-          <header className="ob-step-chrome__header ob-welcome-shell__header">
+          <header className="ob-step-chrome__header ob-step-chrome__header--compact ob-welcome-shell__header">
             <AlIconButton
               icon={<AlIcon name="arrow-left" size={24} aria-hidden />}
               label="Go back"

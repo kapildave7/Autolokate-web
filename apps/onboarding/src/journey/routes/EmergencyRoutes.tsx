@@ -13,7 +13,7 @@ import {
   E09ContactsSummaryScreen,
   E10RidersSummaryScreen,
 } from '../../features/emergency/screens/index.js';
-import { demoPickerContact } from '../../features/emergency/data/demo-data.js';
+import { pickDeviceContact, isContactPickerSupported } from '../../utils/device-contact-picker.js';
 import { shouldSimulateRiderPromptLoadFailure } from '../../features/emergency/data/rider-prompt-demo.js';
 import {
   canAddEmergencyContact,
@@ -518,16 +518,25 @@ function E0Route() {
         void navigate(getEmergencyFlowBackPath(selectedFlow, session));
       }}
       onContinue={() => {
-        patchEmergency({
-          contactDraft: {
-            name: demoPickerContact.name,
-            mobile: demoPickerContact.mobile,
-            relation: demoPickerContact.relation,
-            fromPicker: true,
-            otpVerified: true,
-          },
-        });
-        void navigate(emergencyJourneyPaths.contactName);
+        void (async () => {
+          const picked = await pickDeviceContact();
+          if (!picked) {
+            if (!isContactPickerSupported()) {
+              patchEmergency({ contactDraft: { fromPicker: false, otpVerified: false } });
+              void navigate(emergencyJourneyPaths.contactMobile);
+            }
+            return;
+          }
+          patchEmergency({
+            contactDraft: {
+              name: picked.name,
+              mobile: picked.mobile,
+              fromPicker: true,
+              otpVerified: false,
+            },
+          });
+          void navigate(emergencyJourneyPaths.contactMobile);
+        })();
       }}
       onFooterSecondary={() => {
         patchEmergency({ contactDraft: { fromPicker: false, otpVerified: false } });
@@ -585,7 +594,6 @@ function E1Route() {
           contactDraft: {
             ...emergency.contactDraft,
             mobile: normalizeMobile(mobile),
-            fromPicker: false,
             otpVerified: false,
           },
         });
@@ -710,7 +718,9 @@ function E3Route() {
   const isOnline = useOnlineState();
   const draft = emergency.contactDraft;
   const [name, setName] = useState(draft?.name ?? '');
-  const [relation, setRelation] = useState<RelationshipId | undefined>(draft?.relation ?? 'spouse');
+  const [relation, setRelation] = useState<RelationshipId | undefined>(
+    draft?.relation ?? (draft?.fromPicker ? undefined : 'spouse'),
+  );
   const [formState, setFormState] = useState<EmergencyNameFormState>('default');
 
   return (
@@ -726,10 +736,6 @@ function E3Route() {
       onRelationChange={setRelation}
       formState={formState}
       onBack={() => {
-        if (draft?.fromPicker) {
-          void navigate(emergencyJourneyPaths.contactsEmpty);
-          return;
-        }
         void navigate(emergencyJourneyPaths.contactOtp);
       }}
       onContinue={() => {
@@ -747,7 +753,7 @@ function E3Route() {
             name: name.trim(),
             mobile,
             relation,
-            verified: Boolean(draft.otpVerified ?? draft.fromPicker),
+            verified: Boolean(draft.otpVerified),
           };
           const existing = emergency.contacts ?? [];
           patchEmergency({

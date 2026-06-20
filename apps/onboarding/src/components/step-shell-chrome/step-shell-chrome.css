@@ -29,7 +29,15 @@
   gap: var(--ob-shell-header-stack-gap);
   padding-block-start: calc(var(--ob-shell-header-top) + env(safe-area-inset-top, 0px));
   overflow: visible;
-  background-color: var(--al-color-background);
+  background-color: transparent;
+}
+
+.ob-step-chrome__header--compact {
+  gap: 0;
+}
+
+.ob-step-chrome__header--compact + .ob-step-chrome__body {
+  padding-block-start: var(--ob-shell-header-stack-gap);
 }
 
 /* Figma back — see touch-target-layout.css `.ob-shell-back` */
@@ -103,7 +111,7 @@
   gap: 10px;
   padding-block: var(--al-space-sm)
     calc(var(--al-space-lg) + env(safe-area-inset-bottom, 0px));
-  background-color: var(--al-color-background);
+  background-color: transparent;
 }
 
 .ob-step-chrome__cta {

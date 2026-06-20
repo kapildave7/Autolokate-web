@@ -14,11 +14,6 @@
   z-index: 1;
 }
 
-.ob-shell__progress-spacer {
-  flex: 1;
-  min-height: 0.375rem;
-}
-
 .ob-shell__footer-helper {
   margin: 0 0 var(--al-space-sm);
   width: 100%;

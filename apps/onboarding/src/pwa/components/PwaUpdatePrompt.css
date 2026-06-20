@@ -1,0 +1,34 @@
+.pwa-update-prompt {
+  position: fixed;
+  inset-inline: 16px;
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  z-index: 1200;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: var(--al-color-surface-elevated, #1a1a1a);
+  box-shadow: 0 8px 32px rgb(0 0 0 / 35%);
+}
+
+.pwa-update-prompt__copy {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--al-color-on-surface);
+}
+
+.pwa-update-prompt__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pwa-update-prompt__dismiss {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--al-color-on-surface-muted);
+  font-size: 0.875rem;
+  cursor: pointer;
+}

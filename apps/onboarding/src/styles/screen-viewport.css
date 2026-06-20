@@ -48,7 +48,9 @@ body,
 }
 
 [data-theme='dark'] .ob-step-chrome-screen.al-screen-bg .al-screen-bg__content,
-[data-theme='dark'] .ob-step-chrome__frame {
+[data-theme='dark'] .ob-step-chrome__frame,
+[data-theme='dark'] .ob-step-chrome__header,
+[data-theme='dark'] .ob-step-chrome__footer {
   background-color: transparent;
 }
 

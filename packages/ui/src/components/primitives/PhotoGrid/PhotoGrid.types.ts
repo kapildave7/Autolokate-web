@@ -31,6 +31,8 @@ export type AlPhotoGridProps = {
     /** Coordinate or address line when location is captured */
     detail?: string;
     filled?: boolean;
+    loading?: boolean;
+    loadingLabel?: string;
     onCapture?: () => void;
   };
   /** @deprecated Use locationCapture */

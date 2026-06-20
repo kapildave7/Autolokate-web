@@ -25,6 +25,7 @@ export function AlInput({
   const isError = variant === 'error' || Boolean(errorText);
   const isSuccess = variant === 'success' && !isError;
   const isDisabled = variant === 'disabled' || Boolean(disabled);
+  const isFilled = String(props.value ?? props.defaultValue ?? '').trim().length > 0;
   const describedBy = isError ? errorId : helperText ? hintId : undefined;
 
   return (
@@ -34,6 +35,7 @@ export function AlInput({
         isError && 'al-field--error',
         isSuccess && 'al-field--success',
         isDisabled && 'al-field--disabled',
+        isFilled && 'al-field--filled',
         className,
       )}
     >

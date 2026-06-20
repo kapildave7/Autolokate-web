@@ -3,16 +3,16 @@ import { AlButton, AlHeading, AlScreenBg, AlText } from '@autolokate/ui';
 import { useNavigate } from 'react-router-dom';
 
 import { FlowOptionCard } from '../../components/compositions/flow-entry/index.js';
-import { pwaScanPaths } from '../../features/post-activation-pwa/constants/pwa-scan-paths.js';
 import { useThemeMode } from '../../hooks/useThemeMode.js';
-import { flowLabels } from '../constants.js';
+import { PwaInstallPrompt } from '../../pwa/index.js';
+import {
+  ACTIVATION_FLOW_ENTRIES,
+  dispatchPlatformFlow,
+  POST_ACTIVATION_FLOW_ENTRY,
+} from '../../platform/index.js';
 import { useJourney } from '../JourneyContext.js';
-import { selectActivationFlow } from '../navigation/select-activation-flow.js';
-import type { ActivationFlowId } from '../types.js';
 
 import './flow-entry-screen.css';
-
-const flowOptions: ActivationFlowId[] = ['purchase', 'prepaid', 'b2b2c'];
 
 /** Production flow entry — Figma-aligned journey selector. */
 export function FlowEntryScreen() {
@@ -24,9 +24,7 @@ export function FlowEntryScreen() {
     setPhase('flow-select');
   }, [setPhase]);
 
-  const handleSelect = (flow: ActivationFlowId) => {
-    selectActivationFlow(flow, { setSelectedFlow, setPhase, navigate, updateSession });
-  };
+  const dispatchDeps = { setSelectedFlow, setPhase, navigate, updateSession };
 
   return (
     <AlScreenBg variant="protected" className="ob-flow-entry">
@@ -60,23 +58,28 @@ export function FlowEntryScreen() {
           </AlText>
         </div>
 
+        <PwaInstallPrompt />
+
         <ul className="ob-flow-entry__options">
-          {flowOptions.map((flow) => (
-            <li key={flow}>
+          {ACTIVATION_FLOW_ENTRIES.map((entry) => (
+            <li key={entry.id}>
               <FlowOptionCard
-                label={flowLabels[flow]}
+                label={entry.label}
                 onSelect={() => {
-                  handleSelect(flow);
+                  dispatchPlatformFlow({ flowId: entry.id, source: 'homeCard' }, dispatchDeps);
                 }}
               />
             </li>
           ))}
           <li>
             <FlowOptionCard
-              label="QR Scan (Post-Activation)"
-              description="Already activated vehicle"
+              label={POST_ACTIVATION_FLOW_ENTRY.label}
+              description={POST_ACTIVATION_FLOW_ENTRY.description}
               onSelect={() => {
-                void navigate(pwaScanPaths.loading);
+                dispatchPlatformFlow(
+                  { flowId: POST_ACTIVATION_FLOW_ENTRY.id, source: 'homeCard' },
+                  dispatchDeps,
+                );
               }}
             />
           </li>
