@@ -16,6 +16,8 @@
 
 .al-chip--interactive {
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  tap-highlight-color: transparent;
   transition:
     opacity var(--al-motion-fast) var(--al-motion-ease-standard),
     transform var(--al-motion-fast) var(--al-motion-ease-emphasized);
@@ -27,6 +29,10 @@
 
 .al-chip--interactive:active:not(:disabled) {
   transform: scale(var(--al-motion-scale-press));
+}
+
+.al-chip--interactive:focus:not(:focus-visible) {
+  outline: none;
 }
 
 .al-chip--interactive:focus-visible {

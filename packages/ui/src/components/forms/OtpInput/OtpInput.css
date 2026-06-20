@@ -41,14 +41,28 @@
     background-color var(--al-motion-fast) var(--al-motion-ease-standard);
 }
 
-/* Active border only after the user enters a digit in this cell — not on focus alone */
-.al-otp-input__cell--has-value {
+/* Active cell — always highlighted while focused (empty or filled) */
+.al-otp-input__cell:focus {
+  outline: none;
   border-width: 2px;
   border-color: var(--al-color-on-surface);
 }
 
-.al-otp-input__cell:focus {
-  outline: none;
+/* Partial entry — filled cells that are not focused stay neutral */
+.al-otp-input__cell--has-value:not(:focus) {
+  border-width: 1px;
+  border-color: var(--al-color-outline);
+}
+
+/* Complete entry — all cells use filled border */
+.al-otp-input--filled .al-otp-input__cell--has-value {
+  border-width: 2px;
+  border-color: var(--al-color-on-surface);
+}
+
+.al-otp-input--filled .al-otp-input__cell--has-value:focus {
+  border-width: 2px;
+  border-color: var(--al-color-on-surface);
 }
 
 .al-otp-input__cell:hover:not(:disabled):not(:focus) {
@@ -76,6 +90,10 @@
 }
 
 .al-otp-input--error .al-otp-input__cell {
+  border: var(--al-border-width-thick) solid var(--al-color-warning);
+}
+
+.al-otp-input--error .al-otp-input__cell--has-value:not(:focus) {
   border: var(--al-border-width-thick) solid var(--al-color-warning);
 }
 

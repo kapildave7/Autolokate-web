@@ -78,8 +78,9 @@
 
 .ds-core-showcase__frame[data-showcase-state='focus'] .al-field__input:first-of-type,
 .ds-core-showcase__frame[data-showcase-state='focus'] .al-text-field__control,
-.ds-core-showcase__frame[data-showcase-state='focus'] .al-otp-input__cell:first-child {
-  border-color: var(--al-color-focus);
+.ds-core-showcase__frame[data-showcase-state='focus'] .al-otp-input__cell:focus {
+  border-color: var(--al-color-on-surface);
+  border-width: 2px;
 }
 
 .ds-core-showcase__frame[data-showcase-state='selected'] .al-chip--neutral:first-of-type {

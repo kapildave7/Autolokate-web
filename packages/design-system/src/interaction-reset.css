@@ -1,0 +1,79 @@
+/**
+ * Global interaction reset — no browser default tap flash or focus fill.
+ * Imported via theme.css so all apps inherit consistently.
+ */
+
+:is(
+  button,
+  a,
+  input,
+  textarea,
+  select,
+  summary,
+  label,
+  [role='button'],
+  [role='link'],
+  [role='tab'],
+  [role='menuitem'],
+  [role='option'],
+  [role='checkbox'],
+  [role='radio'],
+  [tabindex]:not([tabindex='-1'])
+) {
+  -webkit-tap-highlight-color: transparent;
+  tap-highlight-color: transparent;
+}
+
+:is(button, a, input, textarea, select) {
+  -webkit-touch-callout: none;
+}
+
+/* Pointer/touch focus — no default ring; keyboard uses :focus-visible in components */
+:is(
+  button,
+  a,
+  input,
+  textarea,
+  select,
+  summary,
+  [role='button'],
+  [role='link'],
+  [role='tab'],
+  [role='menuitem'],
+  [role='option']
+):focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Prevent WebKit active/focus fill on buttons and links */
+:is(button, a, [role='button'], [role='link']):active {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+/* Interactive cards and tiles — no tap overlay */
+:is(
+  .al-button,
+  .al-icon-button,
+  .al-chip--interactive,
+  .al-quick-action,
+  .al-plan-card--interactive,
+  .al-scanner-hub-card,
+  .al-scene-photo-card,
+  .al-relation-grid__tile,
+  .al-photo-grid__review-retake,
+  .al-sos-hold__disc,
+  .al-toggle__input,
+  .al-checkbox__input,
+  .al-bottom-nav__item,
+  .ob-plan-carousel__card,
+  .ob-rider-cover-option
+) {
+  -webkit-tap-highlight-color: transparent;
+  tap-highlight-color: transparent;
+}

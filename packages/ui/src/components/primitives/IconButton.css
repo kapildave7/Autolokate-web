@@ -10,11 +10,17 @@
   background-color: transparent;
   color: var(--al-color-on-surface);
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  tap-highlight-color: transparent;
   transition:
     background-color var(--al-motion-fast) var(--al-motion-ease-standard),
     color var(--al-motion-fast) var(--al-motion-ease-standard),
     transform var(--al-motion-fast) var(--al-motion-ease-standard),
     opacity var(--al-motion-fast) var(--al-motion-ease-standard);
+}
+
+.al-icon-button:focus:not(:focus-visible) {
+  outline: none;
 }
 
 .al-icon-button:focus-visible {

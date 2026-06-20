@@ -217,7 +217,8 @@
 
 .ob-auth-otp-input.al-otp-input--error .al-otp-input__cell,
 .ob-auth-otp-input.al-otp-input--error .al-otp-input__cell:focus,
-.ob-auth-otp-input.al-otp-input--error .al-otp-input__cell--has-value {
+.ob-auth-otp-input.al-otp-input--error .al-otp-input__cell--has-value,
+.ob-auth-otp-input.al-otp-input--error .al-otp-input__cell--has-value:not(:focus) {
   border-width: 2px;
   border-color: var(--al-signal-amber);
 }
@@ -239,8 +240,12 @@
   background-color: var(--al-color-surface);
 }
 
-.ob-auth-mobile-field .al-text-field__control:focus-within,
-.ob-auth-mobile-field .al-text-field__control:has(.al-text-field__input:not(:placeholder-shown)) {
+.ob-auth-mobile-field .al-text-field__control:focus-within {
+  border-width: 2px;
+  border-color: var(--al-color-on-surface);
+}
+
+.ob-auth-mobile-field .al-text-field__control:has(.al-text-field__input:not(:placeholder-shown)):not(:focus-within) {
   border-width: 1px;
   border-color: var(--al-color-outline);
 }

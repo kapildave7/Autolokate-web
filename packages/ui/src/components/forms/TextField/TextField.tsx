@@ -15,6 +15,8 @@ export function AlTextField({
   className,
   id,
   disabled,
+  inputMode,
+  pattern,
   ...props
 }: AlTextFieldProps) {
   const generatedId = useId();
@@ -58,6 +60,8 @@ export function AlTextField({
           aria-invalid={isError || undefined}
           aria-describedby={describedBy}
           aria-busy={loading || undefined}
+          inputMode={inputMode}
+          pattern={pattern ?? (inputMode === 'numeric' ? '[0-9]*' : undefined)}
           {...props}
         />
         {loading ? <span className="al-text-field__spinner" aria-hidden /> : null}
