@@ -19,9 +19,13 @@ export type WelcomeViewState = 'loading' | 'default' | 'error';
 
 export type PrepaidLandingSession = {
   entitlement?: LandingEntitlement;
+  /** Set when entering via prepaid QR sticker. */
+  voucherId?: string;
 };
 
 export type B2b2cLandingSession = {
   entitlement?: LandingEntitlement;
   variant?: 'plan-only' | 'plan-rider';
+  /** Set when entering via B2B2C QR sticker. */
+  partnerId?: string;
 };

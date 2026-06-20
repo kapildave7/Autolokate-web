@@ -18,6 +18,17 @@ export type {
   PlatformFlowId,
 } from './entry/types.js';
 export {
+  applyActivatedQrToPwaSession,
+  dispatchQrPayload,
+  type QrDispatchDeps,
+} from './qr/dispatch-qr-payload.js';
+export {
+  buildQrEntryUrl,
+  DEMO_QR_ENTRY_URLS,
+  QR_ENTRY_BASE_URL,
+} from './qr/qr-entry-urls.js';
+export { isQrEntryUrl, parseQrFromSearchParams } from './qr/parse-qr-url.js';
+export {
   createQrDispatchRequest,
   mapQrPayloadToPlatformFlow,
   type QrActivatedPayload,

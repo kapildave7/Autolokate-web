@@ -1,13 +1,17 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { AlButton, AlHeading, AlScreenBg, AlText } from '@autolokate/ui';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { FlowOptionCard } from '../../components/compositions/flow-entry/index.js';
 import { useThemeMode } from '../../hooks/useThemeMode.js';
 import { PwaInstallPrompt } from '../../pwa/index.js';
+import { usePwaScan } from '../../features/post-activation-pwa/context/PwaScanContext.js';
 import {
   ACTIVATION_FLOW_ENTRIES,
   dispatchPlatformFlow,
+  dispatchQrPayload,
+  isQrEntryUrl,
+  parseQrFromSearchParams,
   POST_ACTIVATION_FLOW_ENTRY,
 } from '../../platform/index.js';
 import { useJourney } from '../JourneyContext.js';
@@ -17,14 +21,37 @@ import './flow-entry-screen.css';
 /** Production flow entry — Figma-aligned journey selector. */
 export function FlowEntryScreen() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { setSelectedFlow, setPhase, updateSession } = useJourney();
+  const { updateSession: updatePwaSession } = usePwaScan();
   const { themeMode, applyTheme } = useThemeMode();
+  const qrHandledRef = useRef(false);
 
   useEffect(() => {
     setPhase('flow-select');
   }, [setPhase]);
 
   const dispatchDeps = { setSelectedFlow, setPhase, navigate, updateSession };
+
+  useEffect(() => {
+    if (qrHandledRef.current || !isQrEntryUrl(searchParams)) {
+      return;
+    }
+
+    const result = parseQrFromSearchParams(searchParams);
+    if (!result.ok) {
+      return;
+    }
+
+    qrHandledRef.current = true;
+    dispatchQrPayload(result.payload, {
+      setSelectedFlow,
+      setPhase,
+      navigate,
+      updateSession,
+      updatePwaSession,
+    });
+  }, [navigate, searchParams, setPhase, setSelectedFlow, updatePwaSession, updateSession]);
 
   return (
     <AlScreenBg variant="protected" className="ob-flow-entry">

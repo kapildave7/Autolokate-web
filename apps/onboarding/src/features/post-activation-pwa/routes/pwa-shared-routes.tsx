@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { AlIcon } from '@autolokate/icons';
 import {
   AlButton,
@@ -34,6 +34,11 @@ import type { PwaFlowIntent } from '../context/pwa-scan-types.js';
 import { PwaScanShell } from '../components/PwaScanShell.js';
 import { PwaVerifyShell } from '../components/PwaVerifyShell.js';
 import { PwaFade, PwaSpringPress } from '../components/PwaMotion.js';
+import {
+  applyActivatedQrToPwaSession,
+  isQrEntryUrl,
+  parseQrFromSearchParams,
+} from '../../../platform/index.js';
 
 import '../styles/pwa-scan.css';
 
@@ -44,7 +49,23 @@ const SAVE_NAME_MS = 500;
 /** 01 · Opening spinner — Figma 928:2252. */
 export function PwaLoadingRoute() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { updateSession } = usePwaScan();
+  const qrHandledRef = useRef(false);
+
+  useEffect(() => {
+    if (qrHandledRef.current || !isQrEntryUrl(searchParams)) {
+      return;
+    }
+
+    const result = parseQrFromSearchParams(searchParams);
+    if (!result.ok || result.payload.type !== 'activated') {
+      return;
+    }
+
+    qrHandledRef.current = true;
+    applyActivatedQrToPwaSession(result.payload, updateSession);
+  }, [searchParams, updateSession]);
 
   const finishBootstrap = useCallback(() => {
     updateSession({ bootstrapComplete: true });

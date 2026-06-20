@@ -38,13 +38,14 @@ import {
   PwaSosAlertCancelledRoute,
   PwaSosContactsOnlyRoute,
 } from './pwa-sos-routes.js';
+import { PwaScanQrEntryRedirect } from './PwaScanQrEntry.js';
 
 /** Post-Activation PWA — all 30 frames under /pwa/scan/*. Provider mounted at AutolokateRootProvider. */
 export function PwaScanRoutes() {
   return (
     <PwaScanErrorBoundary routeLabel="pwa-scan">
       <Routes>
-        <Route path="/" element={<Navigate to={pwaScanPaths.loading} replace />} />
+        <Route path="/" element={<PwaScanQrEntryRedirect />} />
         <Route path="loading" element={<PwaLoadingRoute />} />
         <Route path="vehicle" element={<PwaVehicleFoundRoute />} />
         <Route path="verify/mobile" element={<PwaVerifyMobileRoute />} />
