@@ -102,7 +102,7 @@ export function getContactsSummaryRiderContext(
 
   return {
     ridersOwed,
-    shouldEnterRiderFlowOnContinue: ridersOwed && !Boolean(riderSkipped),
+    shouldEnterRiderFlowOnContinue: ridersOwed && !riderSkipped,
   };
 }
 

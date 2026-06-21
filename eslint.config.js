@@ -10,4 +10,14 @@ export default [
       },
     },
   },
+  {
+    files: ['apps/onboarding/scripts/**/*.mjs'],
+    languageOptions: {
+      globals: {
+        document: 'readonly',
+        window: 'readonly',
+        getComputedStyle: 'readonly',
+      },
+    },
+  },
 ];

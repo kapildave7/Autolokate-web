@@ -32,9 +32,11 @@ export const ACTIVATION_FLOW_ENTRIES = FLOW_ENTRY_REGISTRY.filter(
   (entry): entry is FlowEntryDefinition & { id: ActivationFlowId } => entry.kind === 'activation',
 );
 
-export const POST_ACTIVATION_FLOW_ENTRY = FLOW_ENTRY_REGISTRY.find(
-  (entry) => entry.id === 'postActivation',
-)!;
+const postActivationEntry = FLOW_ENTRY_REGISTRY.find((entry) => entry.id === 'postActivation');
+if (!postActivationEntry) {
+  throw new Error('postActivation entry missing from FLOW_ENTRY_REGISTRY');
+}
+export const POST_ACTIVATION_FLOW_ENTRY = postActivationEntry;
 
 export function getFlowEntryById(id: PlatformFlowId): FlowEntryDefinition | undefined {
   return FLOW_ENTRY_REGISTRY.find((entry) => entry.id === id);

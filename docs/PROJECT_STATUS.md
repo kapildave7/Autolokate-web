@@ -1,7 +1,24 @@
 # Autolokate Onboarding — Project Status
 
-**Last updated:** 2026-06-20 (Docs consolidation — PIXEL PERFECT VERIFIED)  
-**Source of truth priority:** Figma → `VISUAL_TRUTH_MATRIX_V2.md` → `FINAL_THEME_SIGNOFF.md` → `FINAL_PRODUCTION_READINESS.md` → `docs/archive/` (historical)
+**Last updated:** 2026-06-17 (Project lockdown — **BASELINE LOCKED**)  
+**Source of truth priority:** Figma → `VISUAL_TRUTH_MATRIX_V2.md` → **`PROJECT_CHARTER.md`** → `ARCHITECTURE_PRINCIPLES.md` → `DEVELOPMENT_STANDARDS.md` → `PROJECT_STATUS.md` → `docs/archive/`
+
+---
+
+## Baseline Status
+
+# BASELINE LOCKED
+
+Effective **2026-06-17**. This implementation is the **reference architecture** for all future Autolokate work.
+
+| Domain | Status |
+|--------|--------|
+| UI / Figma | PIXEL PERFECT VERIFIED |
+| Architecture | Locked — see `ARCHITECTURE_PRINCIPLES.md` |
+| Engineering | READY WITH KNOWN GAPS — see `FINAL_SANITY_REPORT.md` |
+| Device QA | Pending — see `REAL_DEVICE_EVIDENCE_REPORT.md` |
+
+Permanent charter: `PROJECT_CHARTER.md` · `ARCHITECTURE_PRINCIPLES.md` · `DEVELOPMENT_STANDARDS.md`
 
 ---
 
@@ -16,8 +33,8 @@ This repo is the **Autolokate Onboarding + Activation + Post-Activation PWA** on
 - Emergency + Rider contact setup
 - Post-Activation PWA (SOS Emergency, Park Me)
 
-**Journey entry:** `/journey`  
-**PWA entry:** `/pwa/scan/*` (isolated — no JourneyProvider, no shared session)
+**Journey entry:** `/journey` (QR query dispatch via `?type=…`)  
+**PWA entry:** `/pwa/scan/*` — separate `PwaScanContext` session; shares `AutolokateRootProvider` shell with journey
 
 ---
 
@@ -132,7 +149,10 @@ This repo is the **Autolokate Onboarding + Activation + Post-Activation PWA** on
 - Emergency handoff from Purchase: always enters at `contacts-empty` (not `rider-prompt`)
 - Auth completion: routes to `vehicle-owner`, not directly to activation
 - Session persistence: `sessionStorage` for journey state, `localStorage` for flow selection + theme
-- PWA isolation: `/pwa/scan/*` has no `JourneyProvider`, no shared session with onboarding
+- PWA session: `PwaScanProvider` + `al-pwa-scan-v1` — separate from journey emergency/purchase state
+- Root shell: `AutolokateRootProvider` wraps both `/journey/*` and `/pwa/scan/*` (JourneyProvider + PwaScanProvider)
+- iOS emergency contacts: no "Add from contacts" CTA — manual entry only (`device-contact-picker.ts`)
+- Rider skip: confirmation sheet → `riderSkipped: true` → `/journey/completed` (skips emergency entirely)
 
 ### Archived — Do Not Restore
 
@@ -159,7 +179,17 @@ This repo is the **Autolokate Onboarding + Activation + Post-Activation PWA** on
 
 ### Default Mode
 
-All future work defaults to **visual refinement and Figma parity**. Do not redesign flows, business rules, or session architecture without explicit instruction.
+All future work follows the **charter priority order** (see `PROJECT_CHARTER.md`):
+
+1. Preserve architecture
+2. Preserve flow behavior
+3. Preserve session behavior
+4. Preserve component ownership
+5. Preserve design system
+6. Preserve Figma parity
+7. Add new functionality
+
+Do not redesign flows, business rules, or session architecture without explicit architecture approval.
 
 ---
 
@@ -167,13 +197,23 @@ All future work defaults to **visual refinement and Figma parity**. Do not redes
 
 | Document | Purpose |
 |----------|---------|
-| `VISUAL_TRUTH_MATRIX_V2.md` | **Visual source of truth** — PIXEL PERFECT VERIFIED (1308 captures) |
+| **`PROJECT_CHARTER.md`** | **Baseline lock + change control** |
+| **`ARCHITECTURE_PRINCIPLES.md`** | **Locked architecture reference** |
+| **`DEVELOPMENT_STANDARDS.md`** | **Engineering + PWA standards** |
+| `FINAL_SANITY_REPORT.md` | Latest engineering verdict — READY WITH KNOWN GAPS |
+| `ENGINEERING_HARDENING_REPORT.md` | Full hardening sprint audit |
+| `VISUAL_TRUTH_MATRIX_V2.md` | Visual source of truth — PIXEL PERFECT VERIFIED |
 | `FINAL_THEME_SIGNOFF.md` | Dark + light theme signoff |
-| `FINAL_PRODUCTION_READINESS.md` | Production readiness verdict |
+| `FINAL_PRODUCTION_READINESS.md` | Production readiness baseline |
 | `CLAUDE_PROJECT_INDEX.md` | Route maps, architecture, component inventory |
-| `memory/MEMORY.md` | Agent memory index + doc locations |
+| `QR_ENTRY_STRATEGY.md` | QR encoding for four flows |
+| `IOS_CONTACT_SUPPORT_REPORT.md` | iOS contact picker policy |
+| `RIDER_SKIP_CONFIRMATION_REPORT.md` | Rider skip behaviour |
+| `REAL_DEVICE_EVIDENCE_REPORT.md` | Device matrix — no evidence attached |
+| `MEMORY_UPDATE_REPORT.md` | Lockdown changelog |
+| `memory/MEMORY.md` | Agent memory index |
 
-Historical audit, parity, and signoff reports: **`docs/archive/`** (185+ files)
+Historical sprint reports: **`docs/archive/sprint-reports-2026-06-17/`** (46 files) + **`docs/archive/`** (231+ files)
 
 Visual evidence samples: **`docs/visual-truth/samples/`** (10 PNG) · Completed reconstruction: **`docs/visual-truth/completed/`**
 

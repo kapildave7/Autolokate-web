@@ -822,7 +822,7 @@ function E3Route() {
 
 function E5Route() {
   const navigate = useNavigate();
-  const { setPhase, selectedFlow } = useJourney();
+  const { setPhase } = useJourney();
   const { emergency, patchEmergency } = useEmergencySession();
   const { planId, riderCount } = useEmergencyFoundation();
   const contacts = emergency.contacts ?? [];

@@ -30,25 +30,9 @@ async function fileOk(relPath) {
 /** Known Figma drift from screenshot + MCP comparison at 393px */
 const FIGMA_DRIFT = {};
 
-/** Regression checks from visual-truth/regression-checks.json + screenshot override */
-function regressionNotes(screenId) {
-  const notes = {
-    'e10-default': 'Add another rider row captured; DOM height 48px confirmed vs Figma 822:1980',
-    'r07': 'backX=16, ctaHeight=58 confirmed vs Figma 186:25',
-    'a1-empty': 'backX=16; checkbox visual alignment confirmed in screenshots (48dp hit target extends to x=3)',
-    'pwa-sos': 'backX=16; light location chip bg rgb(255,255,255) confirmed; SOS hold layout captured',
-    'a2-typing': 'Input field captured; focus ring present on active state',
-    'r08': 'Timeline/contact flow captured across themes',
-  };
-  return notes[screenId] ?? null;
-}
-
 async function main() {
   const measurements = JSON.parse(
     await readFile(path.join(ROOT, 'docs/visual-truth/measurements.json'), 'utf8').catch(() => '[]'),
-  );
-  const regression = JSON.parse(
-    await readFile(path.join(ROOT, 'docs/visual-truth/regression-checks.json'), 'utf8').catch(() => '[]'),
   );
 
   const rows = new Map();

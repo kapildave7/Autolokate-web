@@ -19,9 +19,9 @@ export function JourneyCompletedScreen() {
 
   const planId = resolvePurchasePlanId(session.purchase?.selectedPlanId);
   const plateDisplay = useMemo(() => {
-    const raw = session.vehicle?.plate ?? session.plate;
+    const raw = session.vehicle?.plate;
     return raw ? formatPlateInput(raw) : undefined;
-  }, [session.plate, session.vehicle?.plate]);
+  }, [session.vehicle?.plate]);
 
   const headline = getActivationCompleteTitle(planId);
   const subtitle = getActivationCompleteSubtitle(planId, plateDisplay);

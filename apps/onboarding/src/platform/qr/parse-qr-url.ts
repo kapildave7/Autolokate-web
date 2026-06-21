@@ -2,7 +2,6 @@ import type {
   QrActivatedPayload,
   QrB2b2cPayload,
   QrDecodeResult,
-  QrPayload,
   QrPayloadType,
   QrPrepaidPayload,
   QrPurchasePayload,
@@ -21,10 +20,11 @@ function parsePurchase(params: URLSearchParams): QrDecodeResult {
     return invalid('Purchase QR requires a token');
   }
 
+  const orgId = params.get('orgId')?.trim();
   const payload: QrPurchasePayload = {
     type: 'purchase',
     token,
-    ...(params.get('orgId') ? { orgId: params.get('orgId')!.trim() } : {}),
+    ...(orgId ? { orgId } : {}),
   };
 
   return { ok: true, payload };
@@ -70,11 +70,12 @@ function parseActivated(params: URLSearchParams): QrDecodeResult {
     return invalid('Activated QR requires a plate');
   }
 
+  const planLabel = params.get('planLabel')?.trim();
   const payload: QrActivatedPayload = {
     type: 'activated',
     vehicleId,
     plate,
-    ...(params.get('planLabel') ? { planLabel: params.get('planLabel')!.trim() } : {}),
+    ...(planLabel ? { planLabel } : {}),
   };
 
   return { ok: true, payload };
@@ -94,12 +95,11 @@ export function parseQrFromSearchParams(params: URLSearchParams): QrDecodeResult
     return invalid('Missing QR type');
   }
 
-  const parser = PARSERS[type];
-  if (!parser) {
+  if (!(type in PARSERS)) {
     return invalid(`Unsupported QR type: ${type}`);
   }
 
-  return parser(params);
+  return PARSERS[type](params);
 }
 
 export function isQrEntryUrl(params: URLSearchParams): boolean {

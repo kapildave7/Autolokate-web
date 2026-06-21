@@ -1,7 +1,23 @@
 # Autolokate Onboarding — Claude Project Index
 
-**Generated:** 2026-06-19  
+**Generated:** 2026-06-19 · **Updated:** 2026-06-17 (project lockdown — **BASELINE LOCKED**)  
 **Scope:** Full read-only audit of `apps/onboarding/src/journey/`, `apps/onboarding/src/features/`, `packages/ui/`, `packages/icons/`, `packages/design-system/`, `docs/`
+
+---
+
+## 0. Baseline Lock & Charter
+
+# BASELINE LOCKED
+
+This repository is the **reference implementation** for all future Autolokate projects.
+
+| Document | Purpose |
+|----------|---------|
+| `PROJECT_CHARTER.md` | Locked areas, change control, priority order |
+| `ARCHITECTURE_PRINCIPLES.md` | Provider tree, sessions, flows, PWA |
+| `DEVELOPMENT_STANDARDS.md` | TS, React, imports, components, PWA gates |
+
+**Default priority:** Preserve architecture → flow → session → components → design system → Figma → new features.
 
 ---
 
@@ -14,8 +30,8 @@ This is **not** the Consumer App. It is the **Autolokate Onboarding + Activation
 - Emergency + Rider contact setup
 - Post-Activation PWA (SOS Emergency, Park Me)
 
-**Entry point:** `/journey`  
-**PWA entry point:** `/pwa/scan/*` (isolated from journey provider)
+**Entry point:** `/journey` (supports QR query dispatch: `?type=purchase|prepaid|b2b2c`)  
+**PWA entry point:** `/pwa/scan/*` (post-activation; activated QR may also land here via dispatcher)
 
 ---
 
@@ -25,9 +41,15 @@ This is **not** the Consumer App. It is the **Autolokate Onboarding + Activation
 
 ```
 BrowserRouter
-├── /pwa/scan/*  →  PwaScanRoutes   (isolated, no JourneyProvider)
-└── *            →  JourneyProvider → JourneyRoutes
+└── AutolokateRootProvider
+    ├── JourneyProvider      (journey session: al-journey-v1)
+    └── PwaScanProvider      (PWA session: al-pwa-scan-v1)
+        └── PwaAppShell
+            ├── /pwa/scan/*  →  PwaScanRoutes
+            └── *            →  JourneyProvider routes via JourneyRoutes
 ```
+
+Note: PWA has **separate scan session storage** but shares the root provider shell. Journey purchase/emergency state is not used inside PWA flows.
 
 ### 2.2 Journey Routes (`/journey/*`)
 
@@ -112,7 +134,9 @@ Shared across all flows after activation. Entry point depends on plan + rider en
 
 **Entry logic:**
 - `shouldEnterRiderPrompt(planId, riderCount)` → enters R0 or skips to E0
-- Rider optional. Contacts mandatory (min 1).
+- Rider optional. Contacts mandatory (min 1) unless rider skipped.
+- **Rider skip (R0):** confirmation sheet → `riderSkipped: true` → `/journey/completed` (bypasses emergency contacts)
+- **iOS E0:** no "Add from contacts" CTA — `shouldShowAddFromContactsCTA()` returns false
 
 **Plan limits (single source of truth in `emergency-limits.ts`):**
 
@@ -426,9 +450,9 @@ Per project rule: if a component appears in 2+ places it must live in `@autoloka
 - **Purchase route sequence:** R03 → R04 → R05 → R06 → R07 → R08 → R09 → R10 → Emergency
 - **Emergency handoff:** Purchase always enters emergency at `contacts-empty` (not `rider-prompt`)
 - **Auth completion:** routes to `vehicle-owner` screen, not directly to activation
-- **Session persistence:** `sessionStorage` for journey, `localStorage` for flow selection
+- **Session persistence:** `sessionStorage` for journey, `localStorage` for flow selection + theme
+- **PWA session:** `PwaScanProvider` + `al-pwa-scan-v1` — separate from journey emergency/purchase state; root `AutolokateRootProvider` wraps both segments
 - **SOS hold interaction:** 4000ms hold required — tap must never trigger SOS
-- **PWA isolation:** `/pwa/scan/*` has no `JourneyProvider`; no shared state with onboarding
 - **Plan limits:** defined only in `emergency-limits.ts` — not duplicated in UI
 
 ---

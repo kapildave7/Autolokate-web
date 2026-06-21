@@ -3,7 +3,7 @@
  * Runtime measurement pass — compares captured UI metrics against Figma anchors.
  * Evidence-only: outputs JSON with measured values, not subjective labels.
  */
-import { writeFile, readFile } from 'node:fs/promises';
+import { writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright';
