@@ -1,6 +1,8 @@
 import { AlTextField } from '@autolokate/ui';
+import { useNavigate } from 'react-router-dom';
 
 import { AuthStepShell } from '@/components/auth-step-shell/index.js';
+import { authJourneyPaths } from '@/journey/auth/auth-routing.js';
 import { useAuthRouteProgress } from '@/journey/progress/index.js';
 import {
   AlOfflineChip,
@@ -49,6 +51,7 @@ export function A1MobileScreen({
   hideProgress = false,
   consentVariant = 'owner',
 }: A1MobileScreenProps) {
+  const navigate = useNavigate();
   const isOffline = mobileState === 'offline';
   const isError = mobileState === 'error';
   const isLoading = mobileState === 'loading';
@@ -57,6 +60,16 @@ export function A1MobileScreen({
 
   const ctaHelper = resolveCtaHelper(mobileState, hasMobile, consentAccepted);
   const progressConfig = useAuthRouteProgress();
+  const handlePrivacyClick =
+    onPrivacyClick ??
+    (() => {
+      void navigate(authJourneyPaths.privacy);
+    });
+  const handleTermsClick =
+    onTermsClick ??
+    (() => {
+      void navigate(authJourneyPaths.terms);
+    });
 
   return (
     <AuthStepShell
@@ -101,8 +114,8 @@ export function A1MobileScreen({
       <InlineConsentBlock
         checked={consentAccepted}
         onChange={onConsentChange ?? (() => undefined)}
-        onPrivacyClick={onPrivacyClick}
-        onTermsClick={onTermsClick}
+        onPrivacyClick={handlePrivacyClick}
+        onTermsClick={handleTermsClick}
         disabled={isOffline || isLoading || !onConsentChange}
         variant={consentVariant}
       />

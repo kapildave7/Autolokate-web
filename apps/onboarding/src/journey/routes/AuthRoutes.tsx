@@ -362,10 +362,10 @@ function PrivacyRoute() {
   return (
     <L1PrivacyPolicyScreen
       onBack={() => {
-        void navigate(authJourneyPaths.mobile);
+        void navigate(-1);
       }}
       onContinue={() => {
-        void navigate(authJourneyPaths.mobile);
+        void navigate(-1);
       }}
     />
   );
@@ -376,10 +376,10 @@ function TermsRoute() {
   return (
     <L2TermsConditionsScreen
       onBack={() => {
-        void navigate(authJourneyPaths.mobile);
+        void navigate(-1);
       }}
       onContinue={() => {
-        void navigate(authJourneyPaths.mobile);
+        void navigate(-1);
       }}
     />
   );

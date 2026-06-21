@@ -3,8 +3,8 @@
 /* Figma 102:277 — 48px tap column + 12px gap + 16/22 copy; checkbox aligns to first line */
 .ob-inline-consent {
   display: grid;
-  grid-template-columns: 36px minmax(0, 1fr);
-  column-gap: 10px;
+  grid-template-columns: 38px minmax(0, 1fr);
+  column-gap: 12px;
   align-items: start;
   width: 100%;
   padding-top: 8px;
@@ -24,7 +24,7 @@
 
 .ob-inline-consent__checkbox-slot .ob-inline-consent__checkbox {
   position: absolute;
-  top: -13px;
+  top: -9px;
   left: 0;
   margin: 0;
 }
@@ -32,6 +32,7 @@
 .ob-inline-consent__copy {
   min-width: 0;
   margin: 0;
+  padding-top: 2px;
   color: var(--al-color-on-surface);
   font-family: var(--al-text-ui-family);
   font-size: 16px;

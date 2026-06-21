@@ -1,6 +1,5 @@
 import { DEFAULT_PURCHASE_PLAN_ID } from '../qr-purchase/data/purchase-plans.js';
 import type { PurchasePlanId, PurchaseRiderCount } from '../qr-purchase/types-checkout.js';
-import type { ActivationFlowId } from '../../journey/types.js';
 
 export type EmergencyPlanLimits = {
   /** Maximum emergency contacts allowed for the purchased plan. */
@@ -88,27 +87,22 @@ export function needsRiderSetup(
   return canAddRider(currentRiderCount, planId, purchasedRiderSlots);
 }
 
-/**
- * Purchase post-payment may carry stale `riderSkipped` from legacy R10 handoff.
- * Prepaid/B2B2C explicit R0 skip must still suppress riders on E5.
- */
+/** E5 Continue — rider setup only when slots remain and user has not skipped R0. */
 export function getContactsSummaryRiderContext(
   planId: PurchasePlanId | undefined,
   purchasedRiderSlots: PurchaseRiderCount | undefined,
   currentRiderCount: number,
   riderSkipped: boolean | undefined,
-  flow: ActivationFlowId | null,
 ): {
   ridersOwed: boolean;
   shouldEnterRiderFlowOnContinue: boolean;
 } {
   const entitledSlots = getEntitledRiderSlots(planId, purchasedRiderSlots);
   const ridersOwed = entitledSlots > 0 && currentRiderCount < entitledSlots;
-  const blockedBySkip = Boolean(riderSkipped) && flow !== 'purchase';
 
   return {
     ridersOwed,
-    shouldEnterRiderFlowOnContinue: ridersOwed && !blockedBySkip,
+    shouldEnterRiderFlowOnContinue: ridersOwed && !Boolean(riderSkipped),
   };
 }
 

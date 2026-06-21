@@ -10,6 +10,8 @@ import '../../emergency.css';
 
 export type E05ContactsEmptyScreenProps = EmergencyScreenNavigationProps & {
   description?: string;
+  /** When false, hide Add from contacts — manual mobile entry only (iOS without Contact Picker API). */
+  showAddFromContacts?: boolean;
 };
 
 /** E0 · No contacts — Figma 373:37 */
@@ -20,21 +22,24 @@ export function E05ContactsEmptyScreen({
   showBack = true,
   footerSecondaryLabel = 'Enter a number instead',
   onFooterSecondary,
+  showAddFromContacts = true,
 }: E05ContactsEmptyScreenProps) {
+  const manualOnly = !showAddFromContacts;
+
   return (
     <FlowStepShell
       phase="emergency"
       step={6}
       title="Who should we call?"
       description={description}
-      footerLabel="Add from contacts"
+      footerLabel={manualOnly ? 'Enter mobile number' : 'Add from contacts'}
       hideProgress
       showBack={showBack}
       onBack={onBack}
       onContinue={onContinue}
-      footerSecondaryLabel={footerSecondaryLabel}
-      onFooterSecondary={onFooterSecondary}
-      footerSecondaryFirst
+      footerSecondaryLabel={manualOnly ? undefined : footerSecondaryLabel}
+      onFooterSecondary={manualOnly ? undefined : onFooterSecondary}
+      footerSecondaryFirst={!manualOnly}
     >
       <div className="ob-emergency-empty-state">
         <EmptyStateHero

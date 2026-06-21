@@ -35,6 +35,19 @@
   color: var(--al-color-on-surface-muted);
 }
 
+.pwa-ios-safari-banner__steps {
+  margin: 10px 0 0;
+  padding-inline-start: 20px;
+  color: var(--al-color-on-surface-muted);
+  font-family: var(--al-text-ui-family);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+}
+
+.pwa-ios-safari-banner__steps li + li {
+  margin-top: 4px;
+}
+
 .pwa-ios-safari-banner__actions {
   display: flex;
   align-items: center;

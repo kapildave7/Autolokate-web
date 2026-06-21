@@ -1,57 +1,63 @@
-# Final Signoff — Checkbox + Contact Picker Fix
+# Final Sign-Off
 
-**Date:** 2026-06-17  
-**Sprint:** P0 Checkbox Alignment + Contact Picker Flow Fix
-
----
-
-## Constraints (honored)
-
-| Constraint | Status |
-|------------|--------|
-| No route changes | ✅ |
-| No business rule changes | ✅ |
-| No session architecture changes | ✅ |
-| Component-level fixes only | ✅ |
+**Date:** 2026-06-21  
+**Sprint:** P0 iOS Contact Support + Rider Confirmation  
+**Build:** `@autolokate/onboarding` — production build verified
 
 ---
 
-## Issues
-
-| # | Issue | Verdict | Report |
-|---|-------|---------|--------|
-| 1 | Consent checkbox first-line alignment | **FIXED** | [CHECKBOX_ALIGNMENT_FIX_REPORT.md](./CHECKBOX_ALIGNMENT_FIX_REPORT.md) |
-| 2 | Contact picker flow loops / skip OTP | **FIXED** | [CONTACT_PICKER_FLOW_FIX_REPORT.md](./CONTACT_PICKER_FLOW_FIX_REPORT.md) |
-| — | Form autofill sequencing | **FIXED** | [FORM_AUTOFILL_REPORT.md](./FORM_AUTOFILL_REPORT.md) |
-
----
-
-## Files changed
-
-| File | Change |
-|------|--------|
-| `inline-consent-block.css` | Grid 48px column; `top: -13px` first-line checkbox alignment |
-| `EmergencyRoutes.tsx` | E0→E1 navigation; preserve draft; E3 back + verified fix |
-
----
-
-## Build
-
-```
-apps/onboarding — tsc + vite build — PASS
-```
-
----
-
-## Recommended device checks
-
-1. A1 consent — checkbox aligns with first line at 320–414, dark + light
-2. Emergency E0 — picker → mobile prefilled → OTP → name prefilled → save
-3. Back from E3 — returns to OTP, not E0 loop
-4. Cancel picker — stays on E0
-
----
-
-## Final verdict
+## Final Verdict
 
 # FIXED
+
+---
+
+## Issue summary
+
+| # | Issue | Verdict |
+|---|-------|---------|
+| 1 | iOS contact support — hide unsupported CTA | **FIXED** |
+| 2 | Rider skip confirmation + completed handoff | **FIXED** |
+
+---
+
+## Deliverables
+
+| Report | Verdict |
+|--------|---------|
+| `IOS_CONTACT_SUPPORT_REPORT.md` | FIXED |
+| `RIDER_SKIP_CONFIRMATION_REPORT.md` | FIXED |
+| `FINAL_SIGNOFF.md` | FIXED |
+
+---
+
+## Build evidence
+
+```
+✓ tsc -p tsconfig.json
+✓ vite build
+✓ PWA precache 26 entries
+```
+
+---
+
+## Constraints audit
+
+| Constraint | Honoured |
+|------------|----------|
+| No routing changes | ✅ Same paths; guard redirects only |
+| No session architecture changes | ✅ Existing `riderSkipped` field |
+| No business rule changes | ✅ Limits, OTP, plans unchanged |
+| Use `@autolokate/ui` sheet | ✅ `AlPermissionSheet` |
+
+---
+
+## Device QA note
+
+Code complete and build verified. Physical device matrix (Android Chrome, iPhone Safari/Chrome, PWA standalone) should confirm:
+
+- iOS E0 shows **Enter mobile number** only
+- Android E0 shows **Add from contacts** + native picker
+- R0 skip → confirmation → completed with no loop
+
+See `REAL_DEVICE_EVIDENCE_REPORT.md` for hardware evidence requirements before release marketing.

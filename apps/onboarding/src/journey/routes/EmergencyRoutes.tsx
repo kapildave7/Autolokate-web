@@ -1,5 +1,6 @@
-import { useCallback, useEffect, useLayoutEffect, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useState, type ReactNode } from 'react';
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
+import { AlPermissionSheet } from '@autolokate/ui';
 
 import {
   E01RiderPromptScreen,
@@ -13,7 +14,10 @@ import {
   E09ContactsSummaryScreen,
   E10RidersSummaryScreen,
 } from '../../features/emergency/screens/index.js';
-import { pickDeviceContact, isContactPickerSupported } from '../../utils/device-contact-picker.js';
+import {
+  pickDeviceContactWithStatus,
+  shouldShowAddFromContactsCTA,
+} from '../../utils/device-contact-picker.js';
 import { shouldSimulateRiderPromptLoadFailure } from '../../features/emergency/data/rider-prompt-demo.js';
 import {
   canAddEmergencyContact,
@@ -144,9 +148,13 @@ function resolveR0InitialViewState(
   return 'loading';
 }
 
+const RIDER_SKIP_CONFIRM_TITLE = 'Continue without adding a rider?';
+const RIDER_SKIP_CONFIRM_BODY =
+  'You can always add riders later from your vehicle profile. Adding a rider allows another trusted person to receive emergency alerts and access plan benefits.';
+
 function R0Route() {
   const navigate = useNavigate();
-  const { selectedFlow, session } = useJourney();
+  const { selectedFlow, session, setPhase } = useJourney();
   const { emergency, patchEmergency } = useEmergencySession();
   const purchase = session.purchase;
   const { planId, riderCount } = useEmergencyFoundation();
@@ -160,6 +168,7 @@ function R0Route() {
     ),
   );
   const [loadAttempt, setLoadAttempt] = useState(0);
+  const [skipConfirmOpen, setSkipConfirmOpen] = useState(false);
 
   useEffect(() => {
     if (!shouldEnterRiderPrompt(planId, riderCount)) {
@@ -206,8 +215,20 @@ function R0Route() {
     return <Navigate to={emergencyJourneyPaths.contactsEmpty} replace />;
   }
 
+  if (emergency.riderSkipped) {
+    return <Navigate to={getCompletedPath()} replace />;
+  }
+
+  const finishWithoutRider = () => {
+    setSkipConfirmOpen(false);
+    patchEmergency({ riderSkipped: true, rider: undefined });
+    setPhase('completed');
+    void navigate(getCompletedPath());
+  };
+
   return (
-    <E01RiderPromptScreen
+    <>
+      <E01RiderPromptScreen
       viewState={viewState}
       description={getRiderPromptDescription(entitledSlots)}
       onBack={() => {
@@ -228,11 +249,26 @@ function R0Route() {
         });
         void navigate(emergencyJourneyPaths.riderMobile);
       }}
+      footerSecondaryLabel="Skip for now"
       onFooterSecondary={() => {
-        patchEmergency({ riderSkipped: true, rider: undefined });
-        void navigate(emergencyJourneyPaths.contactsEmpty);
+        setSkipConfirmOpen(true);
       }}
     />
+      <AlPermissionSheet
+        open={skipConfirmOpen}
+        title={RIDER_SKIP_CONFIRM_TITLE}
+        description={RIDER_SKIP_CONFIRM_BODY}
+        primaryLabel="Add Rider"
+        onPrimary={() => {
+          setSkipConfirmOpen(false);
+        }}
+        secondaryLabel="Continue Without Rider"
+        onSecondary={finishWithoutRider}
+        onDismiss={() => {
+          setSkipConfirmOpen(false);
+        }}
+      />
+    </>
   );
 }
 
@@ -493,9 +529,49 @@ function E0Route() {
   const { selectedFlow, session } = useJourney();
   const { emergency, patchEmergency } = useEmergencySession();
   const { planId, riderCount } = useEmergencyFoundation();
+  const showAddFromContacts = shouldShowAddFromContactsCTA();
+
+  const goToManualEntry = useCallback(() => {
+    patchEmergency({ contactDraft: { fromPicker: false, otpVerified: false } });
+    void navigate(emergencyJourneyPaths.contactMobile);
+  }, [navigate, patchEmergency]);
+
+  const applyPickedContact = useCallback(
+    (picked: { name: string; mobile: string }) => {
+      patchEmergency({
+        contactDraft: {
+          name: picked.name,
+          mobile: picked.mobile,
+          fromPicker: true,
+          otpVerified: false,
+        },
+      });
+      void navigate(emergencyJourneyPaths.contactMobile);
+    },
+    [navigate, patchEmergency],
+  );
+
+  const handlePickFromContacts = useCallback(() => {
+    void (async () => {
+      const result = await pickDeviceContactWithStatus();
+      if (result.outcome === 'picked') {
+        applyPickedContact(result.contact);
+        return;
+      }
+      if (result.outcome === 'cancelled') {
+        return;
+      }
+      goToManualEntry();
+    })();
+  }, [applyPickedContact, goToManualEntry]);
+
+  if (emergency.riderSkipped) {
+    return <Navigate to={getCompletedPath()} replace />;
+  }
 
   return (
     <E05ContactsEmptyScreen
+      showAddFromContacts={showAddFromContacts}
       onBack={() => {
         const contactCount = emergency.contacts?.length ?? 0;
         if (selectedFlow === 'purchase' && contactCount === 0) {
@@ -503,7 +579,7 @@ function E0Route() {
           return;
         }
         if (emergency.riderSkipped) {
-          void navigate(getEmergencyFlowBackPath(selectedFlow, session));
+          void navigate(getCompletedPath());
           return;
         }
         const riders = emergency.riders ?? (emergency.rider ? [emergency.rider] : []);
@@ -517,31 +593,8 @@ function E0Route() {
         }
         void navigate(getEmergencyFlowBackPath(selectedFlow, session));
       }}
-      onContinue={() => {
-        void (async () => {
-          const picked = await pickDeviceContact();
-          if (!picked) {
-            if (!isContactPickerSupported()) {
-              patchEmergency({ contactDraft: { fromPicker: false, otpVerified: false } });
-              void navigate(emergencyJourneyPaths.contactMobile);
-            }
-            return;
-          }
-          patchEmergency({
-            contactDraft: {
-              name: picked.name,
-              mobile: picked.mobile,
-              fromPicker: true,
-              otpVerified: false,
-            },
-          });
-          void navigate(emergencyJourneyPaths.contactMobile);
-        })();
-      }}
-      onFooterSecondary={() => {
-        patchEmergency({ contactDraft: { fromPicker: false, otpVerified: false } });
-        void navigate(emergencyJourneyPaths.contactMobile);
-      }}
+      onContinue={showAddFromContacts ? handlePickFromContacts : goToManualEntry}
+      onFooterSecondary={goToManualEntry}
     />
   );
 }
@@ -779,19 +832,7 @@ function E5Route() {
     riderCount,
     riders.length,
     emergency.riderSkipped,
-    selectedFlow,
   );
-
-  useLayoutEffect(() => {
-    if (selectedFlow === 'purchase' && emergency.riderSkipped && riderContext.ridersOwed) {
-      patchEmergency({ riderSkipped: false });
-    }
-  }, [
-    emergency.riderSkipped,
-    patchEmergency,
-    riderContext.ridersOwed,
-    selectedFlow,
-  ]);
 
   const goToRiderSetup = () => {
     patchEmergency({ riderSkipped: false });
@@ -837,8 +878,18 @@ function E5Route() {
 
 function EmergencyWildcardRedirect() {
   const { session, selectedFlow } = useJourney();
+  const emergency = session.emergency ?? {};
+  const { planId, riderCount } = resolveEmergencyFoundationContext(session);
+
+  if (emergency.riderSkipped) {
+    return <Navigate to={getCompletedPath()} replace />;
+  }
 
   if (selectedFlow === 'purchase' && session.purchase?.paymentStatus === 'success') {
+    return <Navigate to={emergencyJourneyPaths.contactsEmpty} replace />;
+  }
+
+  if (!shouldEnterRiderPrompt(planId, riderCount)) {
     return <Navigate to={emergencyJourneyPaths.contactsEmpty} replace />;
   }
 

@@ -1,10 +1,19 @@
+import { isIosDevice } from '../pwa/device-detection.js';
+
 export type DevicePickedContact = {
   name: string;
   mobile: string;
 };
 
+export type DeviceContactPickResult =
+  | { outcome: 'picked'; contact: DevicePickedContact }
+  | { outcome: 'cancelled' }
+  | { outcome: 'unsupported' }
+  | { outcome: 'failed' };
+
 type ContactPickerNavigator = Navigator & {
   contacts?: {
+    getProperties?: () => Promise<Array<'name' | 'tel' | 'email' | 'address' | 'icon'>>;
     select: (
       properties: Array<'name' | 'tel' | 'email'>,
       options?: { multiple?: boolean },
@@ -45,31 +54,68 @@ function pickMobile(raw?: string[]): string | null {
 }
 
 export function isContactPickerSupported(): boolean {
-  return typeof (navigator as ContactPickerNavigator).contacts?.select === 'function';
+  if (typeof window === 'undefined' || !window.isSecureContext) {
+    return false;
+  }
+
+  const contactsApi = (navigator as ContactPickerNavigator).contacts;
+  return typeof contactsApi?.select === 'function';
 }
 
-/** Opens native contact picker when supported; returns null on cancel or unsupported. */
-export async function pickDeviceContact(): Promise<DevicePickedContact | null> {
+/** Document-only — for QA reports. */
+export function getContactPickerPlatformNote(): string {
+  if (isContactPickerSupported()) {
+    return 'Contact Picker API available — Add from contacts shown.';
+  }
+  if (isIosDevice()) {
+    return 'iOS (Safari, Chrome, Edge, PWA standalone): Contact Picker API not available in production — Add from contacts hidden.';
+  }
+  return 'Contact Picker API unavailable — Add from contacts hidden; manual entry only.';
+}
+
+/** E0 shows Add from contacts only when native picker is supported. */
+export function shouldShowAddFromContactsCTA(): boolean {
+  return isContactPickerSupported();
+}
+
+/** Opens native contact picker when supported. */
+export async function pickDeviceContactWithStatus(): Promise<DeviceContactPickResult> {
   const contactsApi = (navigator as ContactPickerNavigator).contacts;
   if (!contactsApi?.select) {
-    return null;
+    return { outcome: 'unsupported' };
   }
 
   try {
+    if (contactsApi.getProperties) {
+      await contactsApi.getProperties();
+    }
+
     const results = await contactsApi.select(['name', 'tel'], { multiple: false });
     const picked = results[0];
     if (!picked) {
-      return null;
+      return { outcome: 'cancelled' };
     }
 
     const name = pickName(picked.name);
     const mobile = pickMobile(picked.tel);
     if (!mobile) {
-      return null;
+      return { outcome: 'failed' };
     }
 
-    return { name, mobile };
-  } catch {
-    return null;
+    return { outcome: 'picked', contact: { name, mobile } };
+  } catch (error) {
+    if (error instanceof DOMException && error.name === 'AbortError') {
+      return { outcome: 'cancelled' };
+    }
+    if (error instanceof Error && error.name === 'AbortError') {
+      return { outcome: 'cancelled' };
+    }
+    return { outcome: 'failed' };
   }
+}
+
+/** @deprecated Use pickDeviceContactWithStatus — returns null on cancel, unsupported, or error. */
+export async function pickDeviceContact(): Promise<DevicePickedContact | null> {
+  const result = await pickDeviceContactWithStatus();
+  return result.outcome === 'picked' ? result.contact : null;
 }

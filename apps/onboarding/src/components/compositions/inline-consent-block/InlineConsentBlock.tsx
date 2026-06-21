@@ -7,6 +7,7 @@ export type InlineConsentBlockProps = {
   onChange: (checked: boolean) => void;
   onPrivacyClick?: () => void;
   onTermsClick?: () => void;
+  /** Disables only the checkbox — legal links stay tappable. */
   disabled?: boolean;
   variant?: 'owner' | 'bystander';
 };
@@ -40,7 +41,7 @@ export function InlineConsentBlock({
         {isBystander ? (
           <>
             I agree to be contacted about this vehicle, and to Autolokate&apos;s{' '}
-            <button type="button" className="ob-inline-consent__link" onClick={onTermsClick} disabled={disabled}>
+            <button type="button" className="ob-inline-consent__link" onClick={onTermsClick}>
               terms
             </button>
             .
@@ -48,11 +49,11 @@ export function InlineConsentBlock({
         ) : (
           <>
             So Autolokate can keep you safe and run your vehicle services, I agree to the{' '}
-            <button type="button" className="ob-inline-consent__link" onClick={onPrivacyClick} disabled={disabled}>
+            <button type="button" className="ob-inline-consent__link" onClick={onPrivacyClick}>
               Privacy Policy
             </button>{' '}
             and{' '}
-            <button type="button" className="ob-inline-consent__link" onClick={onTermsClick} disabled={disabled}>
+            <button type="button" className="ob-inline-consent__link" onClick={onTermsClick}>
               Terms
             </button>
             . You can withdraw anytime.

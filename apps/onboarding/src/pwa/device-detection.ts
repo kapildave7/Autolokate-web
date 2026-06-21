@@ -25,6 +25,30 @@ export function isIosNonSafariBrowser(): boolean {
   return !isIosSafari();
 }
 
+export function isIosChrome(): boolean {
+  return isIosDevice() && /CriOS/.test(navigator.userAgent);
+}
+
+export function isIosEdge(): boolean {
+  return isIosDevice() && /EdgiOS/.test(navigator.userAgent);
+}
+
+export function getIosBrowserLabel(): 'safari' | 'chrome' | 'edge' | 'other' {
+  if (!isIosDevice()) {
+    return 'other';
+  }
+  if (isIosSafari()) {
+    return 'safari';
+  }
+  if (isIosChrome()) {
+    return 'chrome';
+  }
+  if (isIosEdge()) {
+    return 'edge';
+  }
+  return 'other';
+}
+
 export function isAndroidDevice(): boolean {
   return /Android/.test(navigator.userAgent);
 }
